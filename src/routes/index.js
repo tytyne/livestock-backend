@@ -13,6 +13,6 @@ router.get("/api", (req, res) => {
 });
 
 router.use(baseUrl, api);
-router.use(api);
+
 
 export default router;

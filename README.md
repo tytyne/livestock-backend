@@ -1,5 +1,5 @@
-[![Coverage Status](https://coveralls.io/repos/github/tytyne/fimboo/badge.svg?branch=develop)](https://coveralls.io/github/tytyne/fimboo?branch=develop)
-![Coveralls github branch](https://img.shields.io/coveralls/github.com/tytyne/fimboo/develop)
+[![Coverage Status](https://coveralls.io/repos/github/tytyne/fimboo/badge.svg?branch=Develop)](https://coveralls.io/github/tytyne/fimboo?branch=Develop)
+![Coveralls github branch](https://img.shields.io/coveralls/github.com/tytyne/fimboo/Develop)
 ![Coveralls github](https://img.shields.io/coveralls/github.com/tytyne/fimboo)
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 ![Integration Tests CI](https://github.com/tytyne/fimboo/workflows/Integration%20Tests%20CI/badge.svg)
