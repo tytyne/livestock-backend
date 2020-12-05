@@ -9,5 +9,9 @@ export default {
     thisAccountVerified:"This account has  already been verified.Please log In",
     resend:"confirmation email resend succesfully!",
     signedIn: "User logged in successfully",
-  
+    noEmailAssociate:"no account associated to this email",
+    passwordReset:"The link to reset password sent succesfully to your email!",
+    passwordMatch:"password don't match",
+    passwordUpdated:"password updated succesfully!",
+    resend:"confirmation email resend succesfully!"
   };

@@ -35,6 +35,33 @@ const verifyConfirmation = async(user)=>{
 
 }
 
+const sendResetEmail=async(user,token)=>{
+  const link=`${process.env.PROTOCOL}://${process.env.APP_URL}/api/${process.env.API_VERSION}/reset_password/${token}`
+  await transport.sendMail({
+    from:`${process.env.EMAIL_SENDER}`,
+    to:`${user.fullname} <${user.email}>`,
+    subject:"Fimboo reset password",
+    text: "and easy to do anywhere, even with Node.js",
+    html:`<div>Dear <strong>${user.firstname},</strong></div><br>
+    <div>Click the link below to reset password</div><br/>
+    <div>${link}</div>`
+
+  })
+
+}
+const resetConfirmation =async(user)=>{
+
+  await transport.sendMail({
+    from:`${process.env.EMAIL_SENDER}`,
+    to:`${user.username} <${user.email}>`,
+    subject:"Fimboo reset password confirmation",
+    text: "reset password confirmation",
+    html:`<div>Dear <strong>${user.firstname},</strong></div><br>
+    <div>Thank you for resetting the password</div><br/>`
+
+  })
+
+}
 export default {
-  sendConfirmationEmail,verifyConfirmation
+  sendResetEmail,resetConfirmation,sendConfirmationEmail,verifyConfirmation
 };
