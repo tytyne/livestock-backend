@@ -46,4 +46,21 @@ export default class UserServices {
       })
     return users
   }
+  static async addUser(userData) {
+    try {
+      return await User.create(userData);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getUser(userData) {
+    try {
+      return await User.findOne({
+        where: { email: userData.email },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

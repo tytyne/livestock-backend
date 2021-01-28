@@ -7,5 +7,7 @@ export default {
     userVerification:"This user has already been verified.",
     emailAssociate:"we are unable to find a user with that email!",
     thisAccountVerified:"This account has  already been verified.Please log In",
-    resend:"confirmation email resend succesfully!"
+    resend:"confirmation email resend succesfully!",
+    signedIn: "User logged in successfully",
+  
   };
