@@ -40,27 +40,10 @@ export default class UserServices {
 
   static async updateUser(decoded){
     const users = await User.update({isVerified:true}, {
-      where: { id: decoded.userId },
+      where: { id: decoded.id },
       returning: true,
       plain: true,
       })
     return users
-  }
-  static async addUser(userData) {
-    try {
-      return await User.create(userData);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  static async getUser(userData) {
-    try {
-      return await User.findOne({
-        where: { email: userData.email },
-      });
-    } catch (error) {
-      throw error;
-    }
   }
 }

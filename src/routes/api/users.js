@@ -5,6 +5,8 @@ import{validateSignup} from "../../middlewares/validatorMiddleware.js"
 import passport from "passport";
 const { checkEmailExist,checkUsernameExist } = authMiddleware;
 import AuthControllers from "../../controllers/socialMediaController.js";
+import resetController from "../../controllers/reset.controller"
+import{validatePassword,validateEmail} from "../../middlewares//validatorMiddleware"
 
 const router = express.Router();
 
@@ -52,5 +54,8 @@ router.get("/user/logout", (req, res, next) => {
   req.logout();
   res.redirect("/api");
 });
+
+router.post("/auth/forgot_password",validateEmail,resetController.forgetPassword)
+router.post("/auth/reset_password/:token",validatePassword,resetController.resetPassword)
 
 export default router;

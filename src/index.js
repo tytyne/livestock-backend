@@ -17,7 +17,6 @@ passportFunc(passport);
 const app = express()
 app.use(cors())
 
-
 dotenv.config();
 
 const __dirname = path.resolve();
@@ -25,8 +24,6 @@ const __dirname = path.resolve();
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 app.use(bodyparser.json());
 app.use(cors());
 app.use(morgan("dev"));
