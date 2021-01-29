@@ -9,15 +9,30 @@ Fimboo
 ## Description
 An application to help small business to manage their business transactions.
 
-# Github
-## Git Repository
-https://github.com/tytyne/fimboo
 
-## Server side hosted on Heroku
+## Tools Used
+Javascript : Language used.
 
-(coming soon ...)
+NodeJS : Javascript runtime.
 
-## Getting Started
+Express : NodeJs framework.
+
+Mocha, Chai and Supertest : Testing Framework.
+
+Airbnb : Javascript style Guide.
+
+Github CI : Continuous Integration.
+
+nyc : Test coverage.
+
+Coveralls : Git badge.
+
+Heroku : Deployment.
+
+Postman : Documentation
+
+### Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites to use of API
 Postman
