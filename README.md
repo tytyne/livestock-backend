@@ -6,15 +6,62 @@
 Fimboo 
 =======
 
-### Vision
-Make companies manage their  transactions ...
+## Description
+An application to help small business to manage their business transactions.
 
----
+# Github
+## Git Repository
+https://github.com/tytyne/fimboo
 
-### This application is hosted on heroku
-Application is accessible here (coming soon ..)
+## Server side hosted on Heroku
 
-### Fimbo documentation
-Our APIs is are documented with swagger tools.
+(coming soon ...)
 
-Documentations are here(coming soon ..)
+## Getting Started
+
+### Prerequisites to use of API
+Postman
+
+Any web browser
+
+### Prerequisites to get this API running on your local system
+
+1. Node js/express/postgres DB
+
+2. Any text editor(Preferrably VS Code)
+
+3. Git
+
+### Installation
+
+1. Clone this repository into your local machine:
+```bash
+ git clone https://github.com/tytyne/fimboo
+```
+2. Install dependencies
+```bash
+- npm install
+```
+3. Start the application by running the start script
+```bash
+- npm run dev
+```
+4. Install postman to test all endpoints on port 4000.
+
+### Test
+
+run test using 'npm run test'.
+
+### Testing Framework
+Mocha - JavaScript Test Framework for API Tests
+
+
+## Built With
+NodeJs-EXPRESS: Node.js is a javascript runtime built on Chrome's V8 javascript engine.
+
+# Acknowledgement
+<ul>
+ <li> Fimboo Company</li>
+</ul>
+
+
