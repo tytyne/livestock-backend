@@ -10,9 +10,9 @@ import routes from "./routes/index.js";
 import i18n from "./utils/i18n";
 import passport from "passport";
 import dotenv from "dotenv";
-import passportFunc from "./config/passport.js";
+// import passportFunc from "./config/passport.js";
 dotenv.config();
-passportFunc(passport);
+// passportFunc(passport);
 //global ...
 const app = express()
 app.use(cors())
@@ -22,8 +22,8 @@ dotenv.config();
 const __dirname = path.resolve();
 
 // Initialize passport
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(bodyparser.json());
 app.use(cors());
 app.use(morgan("dev"));
@@ -45,7 +45,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 app.use(routes);
 
 // finally, let's start our server...
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

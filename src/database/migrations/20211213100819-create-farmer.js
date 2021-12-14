@@ -1,50 +1,38 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Businesses', {
+    await queryInterface.createTable('Farmers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      business_name: {
+      fullname: {
         type: Sequelize.STRING
       },
-      logo: {
-        type: Sequelize.STRING
-      },
-      country:{
-        type:Sequelize.STRING
-      },
-      province:{
-        type:Sequelize.STRING
-      },
-      district: {
-        type: Sequelize.STRING
-      },
-      sector: {
-        type: Sequelize.STRING
-      },
-      cell: {
-        type: Sequelize.STRING
+      userId: {
+        type: Sequelize.INTEGER
       },
       phone: {
         type: Sequelize.STRING
       },
-      currency: {
-        type:Sequelize.DataTypes.ENUM('USD','RWF', 'EURO'),
-      },
-      tin: {
+      animal_cat: {
         type: Sequelize.STRING
       },
-      website: {
+      nid: {
         type: Sequelize.STRING
       },
-      workspace: {
+      gender: {
         type: Sequelize.STRING
       },
-      about_business: {
+      farmer_cat: {
+        type: Sequelize.STRING
+      },
+      bank_acc: {
+        type: Sequelize.STRING
+      },
+      location: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -58,6 +46,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Businesses');
+    await queryInterface.dropTable('Farmers');
   }
 };
