@@ -46,4 +46,32 @@ export default class UserServices {
       })
     return users
   }
+  static async updatePassword(hash, decoded) {
+    const users = await User.update(
+      { password: hash },
+      {
+        where: { email: decoded.email },
+        returning: true,
+        plain: true,
+      }
+    );
+    return users;
+  }
+  static async changingPassword(hash,id){
+    const users = await User.update(
+      { password: hash },
+      {
+        where: { id:id },
+      returning: true,
+      plain: true,
+      }
+  );
+    return users
+  }
+  static async getUserByEmail(value) {
+    let users;
+        users = await User.findOne({ where: { email: value }});
+
+      return users;
+    }
 }

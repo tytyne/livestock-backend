@@ -32,7 +32,19 @@ module.exports = {
       bank_acc: {
         type: Sequelize.STRING
       },
-      location: {
+      province: {
+        type: Sequelize.STRING
+      },
+      district: {
+        type: Sequelize.STRING
+      },
+      cell: {
+        type: Sequelize.STRING
+      },
+      sector: {
+        type: Sequelize.STRING
+      },
+      village: {
         type: Sequelize.STRING
       },
       createdAt: {

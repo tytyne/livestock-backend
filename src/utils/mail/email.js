@@ -41,7 +41,7 @@ class Mailer{
           <div class="content">
               <div style="padding:30px 30px 29px;margin: 0px auto;">
                 <div style="position: relative; top: -30px; margin-left:10px;">
-                <img src="https://res.cloudinary.com/fimboo/image/upload/v1639380633/PMP/livestock-bank_dexvg0.png" />
+                <img src="https://res.cloudinary.com/fimboo/image/upload/c_scale,w_200/v1639380633/PMP/livestock-bank_dexvg0.png" />
                 </div>
                 <p><span class="welcome">${this.header}</span></p>
                 <ul>

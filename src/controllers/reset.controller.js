@@ -4,9 +4,9 @@ import customMessage from "../utils/customMessage.js";
 import helper from "../utils/helpers.js";
 import responses from "../utils/responses.js";
 import statusCode from "../utils/statusCode.js";
-import Mailer from "../utils/email.js";
+import Mailer from "../utils/mail/email.js";
 
-const { updatePassword, getUserByEmail } = UserService;
+const { updatePassword,getUserByIdOrEmail,getUserByEmail } = UserService;
 const { hashPassword } = helper;
 const { noEmailAssociate, passwordReset, passwordMatch, passwordUpdated } =
   customMessage;
@@ -31,13 +31,13 @@ class resetController {
   static async forgetPassword(req, res, next) {
     try {
       const { email } = req.body;
-      const user = await getUserByEmail(email);
+      const user = await getUserByIdOrEmail(email);
       if (!user) return errorResponse(res, notFound, noEmailAssociate);
       const token = jwtToken.createToken(user);
       const mail = new Mailer({
-        to: `${owner.username} <${owner.email}>`,
+        to: `${user.username} <${user.email}>`,
         header: "Forget password",
-        messageHeader: `Hi, <strong>${owner.firstname}!</strong>`,
+        messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
         messageBody:
           "You are requesting to reset your password, Click the following Button to reset your password.",
         optionLink: `${process.env.APP_URL}/api/${process.env.API_VERSION}/owner/reset_password/${token}`,
@@ -46,7 +46,7 @@ class resetController {
       });
       mail.InitButton({
         text: "Reset password",
-        link: `${process.env.FRONTEND_URL}/api/${process.env.API_VERSION}/owner/resetPassword?email=${owner.email}&token=${token} `,
+        link: `${process.env.FRONTEND_URL}/api/${process.env.API_VERSION}/owner/resetPassword?email=${user.email}&token=${token} `,
       });
       await mail.sendMail();
       return successResponse(res, ok, token, passwordReset, user);
@@ -63,17 +63,19 @@ class resetController {
    *
    */
   static async resetPassword(req, res, next) {
-    try {
+     try {
       const { password, confirmPassword } = req.body;
       if (password !== confirmPassword)
         return errorResponse(res, badRequest, passwordMatch);
       const { token } = req.params;
       const decoded = jwtToken.verifyToken(token);
       const user = await getUserByEmail(decoded.email);
+      console.log("check a usserrr",user)
+      console.log("check a email",user.email)
       const mail = new Mailer({
         to: `${user.username} <${user.email}>`,
         header: "Reset Password",
-        messageHeader: `Hi, <strong>${user.firstname}!</strong>`,
+        messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
         messageBody:
           "Thank you for Resetting your password,your password has been reset successfully.",
         browserMessage: "",

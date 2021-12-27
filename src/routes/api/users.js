@@ -18,10 +18,10 @@ router.put("/user", (req, res) => {
   res.status(200).json({ message: "successfully sent" });
 });
 
-router.post("/user/signup",validateSignup,[checkEmailExist,checkUsernameExist],userController.signup);
+router.post("/user/signup",[checkEmailExist,checkUsernameExist],userController.signup);
 router.post("/user/resend",userController.resend)
-router.post("/user/confirmation/:token",userController.confirmation);
-router.post("/login",userController.login)
+router.get("/user/confirmation/:token",userController.confirmation);
+router.post("/user/login",userController.login)
 
 router.post("/auth/forgot_password",validateEmail,resetController.forgetPassword)
 router.post("/auth/reset_password/:token",validatePassword,resetController.resetPassword)

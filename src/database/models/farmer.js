@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     gender: DataTypes.STRING,
     farmer_cat:DataTypes.STRING,
     bank_acc: DataTypes.STRING,
-    location:DataTypes.STRING,
+    province:DataTypes.STRING,
+    district:DataTypes.STRING,
+    cell:DataTypes.STRING,
+    sector:DataTypes.STRING,
+    village:DataTypes.STRING,
    
   
   }, { });

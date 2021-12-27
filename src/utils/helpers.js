@@ -4,6 +4,10 @@ const hashPassword = (password) => {
   const hash = bcrypt.hashSync(password, 15);
   return hash;
 };
+const decryptPassword = async (dataTodecrypt, dataBaseHash) => {
+  const deHashedPassword = await bcrypt.compare(dataTodecrypt, dataBaseHash);
+  return deHashedPassword;
+};
 
 const oauthCallback = (refreshToken, accessToken, profile, cb) => {
   if (profile) {
@@ -26,5 +30,6 @@ const oauthCallback = (refreshToken, accessToken, profile, cb) => {
 
 export default {
   hashPassword,
+  decryptPassword,
   oauthCallback,
 };

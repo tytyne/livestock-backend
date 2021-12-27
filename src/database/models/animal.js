@@ -17,5 +17,5 @@ module.exports = (sequelize, DataTypes) => {
   }, { });
  
 
-  return Farmer;
+  return Animal;
 };

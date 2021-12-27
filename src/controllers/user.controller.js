@@ -1,11 +1,12 @@
 import UserService from "../services/user.service.js";
 import customMessage from "../utils/customMessage.js";
 import errorMessage from "../utils/errorMessage";
-import Mailer from "../utils/email.js";
+import helper from "../utils/helpers";
+import Mailer from "../utils/mail/email.js";
 import responses from "../utils/responses.js";
 import statusCode from "../utils/statusCode.js";
 import { jwtToken } from "../utils/jwt.utils.js";
-import { hashPassword, decryptPassword } from "../utils/hash";
+const { hashPassword, decryptPassword }=helper;
 
 const { createUser, getUserByIdOrEmail, updateUser } = UserService;
 const {
@@ -43,13 +44,16 @@ export default class UserControllers {
       const formData = req.body;
       const textPassword = formData.password;
       formData.password = hashPassword(textPassword);
+      console.log("form",formData)
+      console.log("form password",formData.password)
+      formData.password = hashPassword(textPassword);
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);
 
       const mail = new Mailer({
-        to: `${owner.username} <${owner.email}>`,
+        to: `${user.username} <${user.email}>`,
         header: "Confirm your email",
-        messageHeader: `Hi, <strong>${owner.firstname}!</strong>`,
+        messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
         messageBody:
           "You are requesting to confirm your email, Click the following Button to confirm your email.",
         optionLink: `${process.env.APP_URL}/api/${process.env.API_VERSION}/user/confirmation/${token}`,
@@ -58,12 +62,12 @@ export default class UserControllers {
       });
       mail.InitButton({
         text: "Confirm Your Email",
-        link: `${process.env.FRONTEND_URL}/api/${process.env.API_VERSION}/confirmEmail?email=${owner.email}&token=${token} `,
+        link: `${process.env.FRONTEND_URL}/api/${process.env.API_VERSION}/confirmEmail?email=${user.email}&token=${token} `,
       });
       await mail.sendMail();
-      // await addEmailToMailchimp(owner.email,owner.firstname,owner.lastname)
+    
 
-      return successResponse(res, created, token, signedup, owner);
+      return successResponse(res, created, token, signedup, user);
     } catch (e) {
       return next(new Error(e));
     }
@@ -81,9 +85,9 @@ export default class UserControllers {
         return errorResponse(res, badRequest, thisAccountVerified);
       } else {
         const mail = new Mailer({
-          to: `${owner.username} <${owner.email}>`,
+          to: `${user.username} <${user.email}>`,
           header: "Thank you for confirmation",
-          messageHeader: `Hi, <strong>${owner.firstname}!</strong>`,
+          messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
           messageBody:
             "Thank you for confirming your email,your email confirmed successfully.",
           browserMessage: "",
@@ -95,7 +99,8 @@ export default class UserControllers {
         console.log(userUpdated);
         // adding thank you message
         const { id, email, isVerified } = userUpdated[1];
-        return successResponse(res, badRequest, userVerification);
+        return successResponse(res, ok,undefined,userVerification);
+      
       }
     } catch (e) {
       return next(new Error(e));
@@ -113,9 +118,9 @@ export default class UserControllers {
         return errorResponse(res, badRequest, thisAccountVerified);
       const token = jwtToken.createToken(user);
       const mail = new Mailer({
-        to: `${owner.username} <${owner.email}>`,
+        to: `${user.username} <${user.email}>`,
         header: "Confirm your email",
-        messageHeader: `Hi, <strong>${owner.fullname}!</strong>`,
+        messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
         messageBody:
           "You are requesting to confirm your email, Click the following Button to confirm your email.",
         optionLink: `${process.env.APP_URL}/api/${process.env.API_VERSION}/user/confirmation/${token}`,
@@ -144,9 +149,9 @@ export default class UserControllers {
       if (user.isVerified === false) {
         return errorResponse(res, unAuthorized, thisAccountVerified);
       }
-      if (user.status !== "active") {
-        return errorResponse(res, unAuthorized, accountNotActivated);
-      }
+      // if (user.status !== "active") {
+      //   return errorResponse(res, unAuthorized, accountNotActivated);
+      // }
       const decryptedPassword = await decryptPassword(password, user.password);
       if (!decryptedPassword) {
         return errorResponse(res, notFound, emailOrPasswordNotFound);
