@@ -11,6 +11,9 @@ module.exports = {
       farmerId: {
         type: Sequelize.INTEGER
       },
+      earring_num: {
+        type: Sequelize.STRING
+      },
       nid: {
         type: Sequelize.STRING
       },

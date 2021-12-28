@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     cell:DataTypes.STRING,
     sector:DataTypes.STRING,
     village:DataTypes.STRING,
-    status:DataTypes.INTEGER,
+    status:{
+      type:DataTypes.ENUM('active','unactive'),
+      defaultValue:'active'
+    },
     createdBy: DataTypes.INTEGER,
    
   }, { });

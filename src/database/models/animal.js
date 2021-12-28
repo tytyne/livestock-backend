@@ -2,6 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Animal = sequelize.define('Animal', {
 
     farmerId: DataTypes.STRING,
+    earring_num:DataTypes.STRING,
     nid: DataTypes.STRING,
     animal_cat: DataTypes.STRING,
     birthdate:DataTypes.DATE,
@@ -11,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     expected_exit_kgs:DataTypes.STRING,
     unexpected_exit: DataTypes.DATE,
     unexpected_cause:DataTypes.STRING,
-    status:DataTypes.ENUM,
+    status:{
+      type:DataTypes.ENUM('active','unactive'),
+      defaultValue:'active'
+    },
     createdBy:DataTypes.INTEGER,
   
   }, { });

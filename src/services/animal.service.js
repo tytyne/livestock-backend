@@ -16,6 +16,11 @@ class AnimalService{
         return animal
 
     }
+    static async getAnimalByEarring(input,vetId){
+        let animal = await Animal.findOne({where:{earring_num:input,createdBy:vetId}})
+        return animal
+
+    }
     static async getAllanimals(vetId){
         let animal = await Animal.findAll({where:{createdBy:vetId}})
         return animal

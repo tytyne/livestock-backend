@@ -1,5 +1,5 @@
 import AnimalService from "../services/animal.service"
-const{createAnimal,getAnimalById,getAllanimals,updateById,deleteById}=AnimalService
+const{createAnimal,getAnimalById,getAnimalByEarring,getAllanimals,updateById,deleteById}=AnimalService
 
 export default class AnimalController{
 //save an animal
@@ -22,6 +22,17 @@ static async getAnimal(req,res,next){
         const id=req.params.id
         const data = await getAnimalById(id,req.user.id)
         res.status(200).json({message:"get animal by Id",data})
+    }
+    catch (e) {
+        return next(new Error(e));
+      }
+}
+//animal by earing number
+static async getAnimalEaring(req,res,next){
+    try{
+        const input=req.query
+        const data = await getAnimalById(input,req.user.id)
+        res.status(200).json({message:"get animal by earring number",data})
     }
     catch (e) {
         return next(new Error(e));

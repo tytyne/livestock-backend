@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.post("/create",checkAuthorisation,animalController.storeAnimal)
 router.get("/:id",checkAuthorisation,animalController.getAnimal)
+router.get("/earring",checkAuthorisation,animalController.getAnimalEaring)
 router.get("/all",checkAuthorisation,animalController.getAnimals)
 router.put("/:id",checkAuthorisation,animalController.updateAnimal)
 router.delete("/:id",checkAuthorisation,animalController.deleteAnimal)
