@@ -11,9 +11,7 @@ module.exports = {
       fullname: {
         type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.INTEGER
-      },
+    
       phone: {
         type: Sequelize.STRING
       },
@@ -46,6 +44,13 @@ module.exports = {
       },
       village: {
         type: Sequelize.STRING
+      },
+      status:{
+        type: Sequelize.DataTypes.ENUM('active','unactive'),
+        defaultValue: 'active',
+      },
+      createdBy: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

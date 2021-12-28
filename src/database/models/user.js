@@ -15,10 +15,17 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function(models) {
     // associations can be defined here
     User.hasMany(models.Farmer, {
-      foreignKey: 'userId',
-      as: 'farmers',
+      foreignKey: 'createdBy',
+      as: 'producers',
       onDelete: 'CASCADE',
     });
+
+    User.hasMany(models.Animal, {
+      foreignKey: 'createdBy',
+      as: 'wild',
+      onDelete: 'CASCADE',
+    });
+
   }
   return User;
 };

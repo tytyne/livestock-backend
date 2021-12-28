@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
   const Farmer = sequelize.define('Farmer', {
 
     fullname: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
     phone: DataTypes.STRING,
     animal_cat: DataTypes.STRING,
     nid:DataTypes.STRING,
@@ -15,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     cell:DataTypes.STRING,
     sector:DataTypes.STRING,
     village:DataTypes.STRING,
+    status:DataTypes.INTEGER,
+    createdBy: DataTypes.INTEGER,
    
-  
   }, { });
   Farmer.associate = function(models) {
   Farmer.belongsTo(models.User, {
-    foreignKey: 'userId',
+    foreignKey: 'createdBy',
     as: 'manager',
     onDelete: 'CASCADE',
   })

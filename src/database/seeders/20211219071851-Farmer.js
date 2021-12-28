@@ -4,7 +4,7 @@ const faker = require('faker');
 const farmers = [...Array(10)].map((farmer) => (
   {
     fullname: faker.name.lastName(),
-    userId:faker.name.userId(),
+    createdBy:faker.name.userId(),
     phone: faker.phone.phoneNumber(),
     animal_cat:'cow',
     nid: faker.datatype.number({

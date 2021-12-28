@@ -1,37 +1,37 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
-const{Animal} = models;
+const{Service} = models;
 
 /**
- * @description This model deals with Animal model
+ * @description This model deals with Service model
  */
 
-class AnimalService{
-    static async createAnimal(value){
-        let animal = await Animal.create(value)
-        return animal
+class ServiceService{
+    static async createService(value){
+        let service = await Service.create(value)
+        return service
     }
-    static async getAnimalById(id){
-        let animal = await Animal.findOne({where:{id:id}})
-        return animal
+    static async getServiceById(id){
+        let service = await Service.findOne({where:{id:id}})
+        return service
 
     }
-    static async getAllanimals(){
-        let animal = await Animal.findAll()
-        return animal
+    static async getAllServices(){
+        let service = await Service.findAll()
+        return service
 
     }
     static async updateById(id,value){
-        let animal = await Animal.update(value,{where:{id:id}})
-        return animal
+        let service = await Service.update(value,{where:{id:id}})
+        return service
 
     }
 
     static async deleteById(id){
-        let animal = await Animal.destroy({where:{id:id}})
-        return animal
+        let service = await Service.destroy({where:{id:id}})
+        return service
     }
 
 
 }
-export default AnimalService
+export default ServiceService

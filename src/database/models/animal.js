@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
 
     farmerId: DataTypes.STRING,
     nid: DataTypes.STRING,
-    owner: DataTypes.STRING,
     animal_cat: DataTypes.STRING,
     birthdate:DataTypes.DATE,
     birthkgs: DataTypes.STRING,
@@ -12,10 +11,22 @@ module.exports = (sequelize, DataTypes) => {
     expected_exit_kgs:DataTypes.STRING,
     unexpected_exit: DataTypes.DATE,
     unexpected_cause:DataTypes.STRING,
-   
+    status:DataTypes.ENUM,
+    createdBy:DataTypes.INTEGER,
   
   }, { });
- 
+  Animal.associate = function(models) {
+    Animal.belongsTo(models.Farmer, {
+      foreignKey: 'farmerId',
+      as: 'owner',
+      onDelete: 'CASCADE',
+    })
+    Animal.belongsTo(models.User, {
+      foreignKey: 'createdBy',
+      as: 'creater',
+      onDelete: 'CASCADE',
+    })
+  };
 
   return Animal;
 };

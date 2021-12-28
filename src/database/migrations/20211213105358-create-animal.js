@@ -9,14 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       farmerId: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       nid: {
         type: Sequelize.STRING
       },
-      owner: {
-        type: Sequelize.STRING
-      },
+    
       animal_cat: {
         type: Sequelize.STRING
       },
@@ -42,7 +40,14 @@ module.exports = {
       unexpected_cause: {
         type: Sequelize.STRING
       },
-    
+      status:{
+        type: Sequelize.DataTypes.ENUM('active','unactive'),
+        defaultValue: 'active',
+      },
+      createdBY: {
+        type: Sequelize.INTEGER
+      },
+     
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,22 +1,25 @@
 'use strict';
+'use strict';
 
-const faker = require('faker');
-const users = [...Array(10)].map((user) => (
-  {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    userName: faker.internet.userName(),
-    jobTitle: faker.name.jobTitle(),
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-))
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Users', users, {});
+  up: async (queryInterface, Sequelize) => {
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+    */
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
+
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
   }
 };
