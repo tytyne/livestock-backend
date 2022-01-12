@@ -2,7 +2,7 @@ import express from "express";
 import userController from "../../controllers/user.controller.js";
 import authMiddleware from "../../middlewares/auth.js";
 import{validateSignup} from "../../middlewares/validatorMiddleware.js"
-import passport from "passport";
+
 const { checkEmailExist,checkUsernameExist } = authMiddleware;
 // import AuthControllers from "../../controllers/socialMediaController.js";
 import resetController from "../../controllers/reset.controller"

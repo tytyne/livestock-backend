@@ -8,11 +8,9 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDoc from "../swagger.json";
 import routes from "./routes/index.js";
 import i18n from "./utils/i18n";
-import passport from "passport";
 import dotenv from "dotenv";
-// import passportFunc from "./config/passport.js";
 dotenv.config();
-// passportFunc(passport);
+
 //global ...
 const app = express()
 app.use(cors())
@@ -21,9 +19,7 @@ dotenv.config();
 
 const __dirname = path.resolve();
 
-// Initialize passport
-// app.use(passport.initialize());
-// app.use(passport.session());
+
 app.use(bodyparser.json());
 app.use(cors());
 app.use(morgan("dev"));
@@ -36,9 +32,8 @@ app.use(i18n.init);
 app.get("/home", (req, res, next) => res.status(200).json({
   message: res.__("welcome"),
 }));
-// Initialize passport
-app.use(passport.initialize());
-app.use(passport.session());
+
+
 app.use(routes);
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
