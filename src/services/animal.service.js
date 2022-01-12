@@ -26,8 +26,9 @@ class AnimalService{
         return animal
 
     }
-    static async updateById(id,value){
-        let animal = await Animal.update(value,{where:{id:id,createdBy:vetId}})
+    static async updateById(value,id,vetId){
+        let animal = await Animal.update(value,{where:{id:id,createdBy:vetId},returning: true,
+            plain: true,})
         return animal
 
     }

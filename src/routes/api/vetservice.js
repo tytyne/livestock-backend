@@ -1,5 +1,5 @@
 import express from "express"
-import serviceController from "../../controllers/service.controller"
+import serviceController from "../../controllers/vetservice.controller"
 import checkAuthorisation from "../../middlewares/authentication"
 const router = express.Router()
 

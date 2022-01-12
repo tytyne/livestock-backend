@@ -53,7 +53,7 @@ export default class UserControllers {
       const mail = new Mailer({
         to: `${user.username} <${user.email}>`,
         header: "Confirm your email",
-        messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
+        messageHeader: `Hi, <strong>${user.firstname}!</strong>`,
         messageBody:
           "You are requesting to confirm your email, Click the following Button to confirm your email.",
         optionLink: `${process.env.APP_URL}/api/${process.env.API_VERSION}/user/confirmation/${token}`,
@@ -87,7 +87,7 @@ export default class UserControllers {
         const mail = new Mailer({
           to: `${user.username} <${user.email}>`,
           header: "Thank you for confirmation",
-          messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
+          messageHeader: `Hi, <strong>${user.firstname}!</strong>`,
           messageBody:
             "Thank you for confirming your email,your email confirmed successfully.",
           browserMessage: "",
@@ -120,7 +120,7 @@ export default class UserControllers {
       const mail = new Mailer({
         to: `${user.username} <${user.email}>`,
         header: "Confirm your email",
-        messageHeader: `Hi, <strong>${user.fullname}!</strong>`,
+        messageHeader: `Hi, <strong>${user.firstname}!</strong>`,
         messageBody:
           "You are requesting to confirm your email, Click the following Button to confirm your email.",
         optionLink: `${process.env.APP_URL}/api/${process.env.API_VERSION}/user/confirmation/${token}`,

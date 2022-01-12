@@ -47,7 +47,7 @@ module.exports = {
         type: Sequelize.DataTypes.ENUM('active','unactive'),
         defaultValue: 'active',
       },
-      createdBY: {
+      createdBy: {
         type: Sequelize.INTEGER
       },
      

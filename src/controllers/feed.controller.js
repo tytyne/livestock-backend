@@ -6,7 +6,7 @@ export default class FeedController{
 static async storeFeed(req,res,next){
 try{
     const formData = req.body;
-    const data = createFeed(formData)
+    const data = await createFeed(formData)
     console.log("check data",data)
     res.status(200).json({message:"Feed created!",data})
 }

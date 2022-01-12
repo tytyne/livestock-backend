@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Service = sequelize.define('Service', {
+  const Vetservice = sequelize.define('Vetservice', {
 
     name: DataTypes.STRING,
     price: DataTypes.STRING,
@@ -8,5 +8,5 @@ module.exports = (sequelize, DataTypes) => {
   }, { });
  
 
-  return Service;
+  return Vetservice;
 };

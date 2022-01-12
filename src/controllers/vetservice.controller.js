@@ -1,12 +1,12 @@
-import ServiceService from "../services/service.service"
+import ServiceService from "../services/vetservice.service"
 const{createService,getServiceById,getAllServices,updateById,deleteById}=ServiceService
 
-export default class ServiceController{
+export default class VetserviceController{
 //save a Service
 static async storeService(req,res,next){
 try{
     const formData = req.body;
-    const data = createService(formData)
+    const data = await createService(formData)
     console.log("check data",data)
     res.status(200).json({message:"Service created!",data})
 }

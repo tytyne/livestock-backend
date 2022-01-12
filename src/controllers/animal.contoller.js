@@ -7,7 +7,7 @@ static async storeAnimal(req,res,next){
 try{
     const formData = req.body;
     formData.createdBy =req.user.id
-    const data = createAnimal(formData)
+    const data = await createAnimal(formData)
     console.log("check data",data)
     res.status(200).json({message:"an animal created!",data})
 }
@@ -53,9 +53,8 @@ static async updateAnimal(req,res,next){
     try{
         const id=req.params.id
         const formData = req.body
-        formData.createdBy =req.user.id
-        const dbResponse = await updateById(formData,id,req.user.id)
-        res.status(200).json({message:"update an animal!!",dbResponse})
+        const data = await updateById(formData,id,req.user.id)
+        res.status(200).json({message:"update an animal!!",data})
       
     }
     catch (e) {

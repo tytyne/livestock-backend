@@ -6,7 +6,7 @@ export default class MedicineController{
 static async storeMedicine(req,res,next){
 try{
     const formData = req.body;
-    const data = createMedicine(formData)
+    const data = await createMedicine(formData)
     console.log("check data",data)
     res.status(200).json({message:"Medicine created!",data})
 }

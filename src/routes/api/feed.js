@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post("/create",checkAuthorisation,feedController.storeFeed)
 router.get("/:id",checkAuthorisation,feedController.getFeed)
-router.get("/all",checkAuthorisation,feedController.getFeeds)
+router.get("/check/all",checkAuthorisation,feedController.getFeeds)
 router.put("/:id",checkAuthorisation,feedController.updateFeed)
 router.delete("/:id",checkAuthorisation,feedController.deleteFeed)
 

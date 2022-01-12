@@ -6,8 +6,9 @@ export default class FarmerController{
 static async storeFarmer(req,res,next){
 try{
     const formData = req.body;
-    formData.userId =req.user.id
-    const data = createFarmer(formData)
+    formData.createdBy =req.user.id
+    console.log("check formdata",formData)
+    const data = await createFarmer(formData)
     console.log("check data",data)
     res.status(200).json({message:"a farmer created!",data})
 }
@@ -42,8 +43,8 @@ static async updateFarmer(req,res,next){
     try{
         const id=req.params.id
         const formData = req.body
-        const dbResponse = await updateById(formData,id,req.user.id)
-        res.status(200).json({message:"update a farmer!!",dbResponse})
+        const data = await updateById(formData,id,req.user.id)
+        res.status(200).json({message:"update a farmer!!",data})
       
     }
     catch (e) {

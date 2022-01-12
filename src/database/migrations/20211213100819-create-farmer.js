@@ -8,14 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fullname: {
+      firstname: {
+        type: Sequelize.STRING
+      },
+      lastname: {
         type: Sequelize.STRING
       },
     
       phone: {
-        type: Sequelize.STRING
-      },
-      animal_cat: {
         type: Sequelize.STRING
       },
       nid: {
@@ -36,15 +36,14 @@ module.exports = {
       district: {
         type: Sequelize.STRING
       },
-      cell: {
-        type: Sequelize.STRING
-      },
       sector: {
         type: Sequelize.STRING
       },
-      village: {
+      cell: {
         type: Sequelize.STRING
       },
+     
+     
       status:{
         type: Sequelize.DataTypes.ENUM('active','unactive'),
         defaultValue: 'active',

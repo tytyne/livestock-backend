@@ -12,11 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     expected_exit_kgs:DataTypes.STRING,
     unexpected_exit: DataTypes.DATE,
     unexpected_cause:DataTypes.STRING,
+    createdBy:DataTypes.INTEGER,
     status:{
       type:DataTypes.ENUM('active','unactive'),
       defaultValue:'active'
     },
-    createdBy:DataTypes.INTEGER,
+   
   
   }, { });
   Animal.associate = function(models) {
@@ -28,6 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     Animal.belongsTo(models.User, {
       foreignKey: 'createdBy',
       as: 'creater',
+      onDelete: 'CASCADE',
+    })
+    Animal.belongsTo(models.Operation, {
+      foreignKey: 'operationId',
+      as: 'transactions',
       onDelete: 'CASCADE',
     })
   };

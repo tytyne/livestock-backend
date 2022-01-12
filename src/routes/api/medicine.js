@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post("/create",checkAuthorisation,medicineController.storeMedicine)
 router.get("/:id",checkAuthorisation,medicineController.getMedicine)
-router.get("/all",checkAuthorisation,medicineController.getMedicines)
+router.get("/check/all",checkAuthorisation,medicineController.getMedicines)
 router.put("/:id",checkAuthorisation,medicineController.updateMedicine)
 router.delete("/:id",checkAuthorisation,medicineController.deleteMedicine)
 
