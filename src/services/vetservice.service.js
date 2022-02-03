@@ -1,38 +1,38 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
-const{Vetservice} = models;
-console.log("check service",Vetservice)
+const{VetService} = models;
+console.log("check  vetservice",VetService)
 
 /**
  * @description This model deals with Service model
  */
 
-class ServiceService{
-    static async createService(formData){
-        let service = await Vetservice.create(formData)
+class VetServices{
+    static async createVetService(formData){
+        let service = await VetService.create(formData)
         return service
     }
-    static async getServiceById(id){
-        let service = await Vetservice.findOne({where:{id:id}})
-        return service
-
-    }
-    static async getAllServices(){
-        let service = await Vetservice.findAll()
+    static async getVetServiceById(id){
+        let service = await VetService.findOne({where:{id:id}})
         return service
 
     }
-    static async updateById(id,value){
-        let service = await Vetservice.update(value,{where:{id:id}})
+    static async getAllVetServices(){
+        let service = await VetService.findAll()
+        return service
+
+    }
+    static async updateVetServiceById(id,value){
+        let service = await VetService.update(value,{where:{id:id}})
         return service
 
     }
 
-    static async deleteById(id){
-        let service = await Vetservice.destroy({where:{id:id}})
+    static async deleteVetServiceById(id){
+        let service = await VetService.destroy({where:{id:id}})
         return service
     }
 
 
 }
-export default ServiceService
+export default VetServices

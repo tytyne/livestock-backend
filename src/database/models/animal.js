@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
       as: 'creater',
       onDelete: 'CASCADE',
     })
-    Animal.belongsTo(models.Operation, {
-      foreignKey: 'operationId',
-      as: 'transactions',
-      onDelete: 'CASCADE',
-    })
+    // Animal.belongsTo(models.Operation, {
+    //   foreignKey: 'operationId',
+    //   as: 'transactions',
+    //   onDelete: 'CASCADE',
+    // })
   };
 
   return Animal;

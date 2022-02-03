@@ -14,19 +14,31 @@ module.exports = {
       animalId: {
         type: Sequelize.INTEGER
       },
+      feedId: {
+        type: Sequelize.INTEGER
+      },
       medicineId: {
         type: Sequelize.INTEGER
       },
-
-      service_cat: {
-        type: Sequelize.STRING
+     vetServiceId: {
+        type: Sequelize.INTEGER
+      },
+      serviceId: {
+        type: Sequelize.INTEGER
       },
       service_name: {
         type: Sequelize.STRING
       },
-      total: {
+       unit: {
         type: Sequelize.INTEGER
       },
+      price: {
+        type: Sequelize.INTEGER
+      },
+      sub_total: {
+        type: Sequelize.INTEGER
+      },
+     
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -42,5 +54,7 @@ module.exports = {
   }
 };
 
+  
+  
 
 

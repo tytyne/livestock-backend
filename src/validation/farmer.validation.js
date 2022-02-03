@@ -4,7 +4,8 @@ class FarmerValidation{
     static save(req,res,next){
         const Schema=Joi.object({
  
-        fullname:Joi.string().min(3).required().messages(),
+        firstname:Joi.string().min(3).required().messages(),
+        lastname:Joi.string().min(3).required().messages(),
         phone:Joi.number().min(10).required().messages(),   
         nid:Joi.number().min(3).required().messages(),
         gender:Joi.string().min(3).required().messages(),

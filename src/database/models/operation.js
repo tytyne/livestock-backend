@@ -6,11 +6,14 @@ module.exports = (sequelize, DataTypes) => {
     farmerId: DataTypes.INTEGER,
     animalId: DataTypes.INTEGER,
     medicineId: DataTypes.STRING,
-    service_cat: DataTypes.STRING,
+    feedId:DataTypes.INTEGER,
+    vetServiceId:DataTypes.INTEGER,
+    serviceId: DataTypes.STRING,
     service_name: DataTypes.STRING,
-    total:DataTypes.INTEGER
-   
-  
+    unit:DataTypes.INTEGER,
+    price:DataTypes.INTEGER,
+    sub_total:DataTypes.INTEGER
+    
   }, { });
  
   Operation.associate = function(models) {
@@ -26,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       as: 'medicines',
     });
     
-
+    Operation.hasOne(models.Service,{
+      foreignKey:'serviceId',
+      as:'service'
+    })
 
   }
 

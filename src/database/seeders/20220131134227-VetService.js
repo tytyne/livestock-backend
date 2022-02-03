@@ -2,28 +2,28 @@
 
 module.exports = {
   up: async (queryInterface) => queryInterface.bulkInsert(
-    "Medicines",
+    "VetServices",
     [
       {
-        name: "leva",
-        quantity: 100,
-        price:3000,
+        name: "gukingira",
+        quantity: 1,
+        price:300,
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
-        name: "vitamine",
-        quantity: 150,
-        price:6000,
+        name: "gutera inanga",
+        quantity: 1,
+        price:400,
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
-        name: "urukingo",
-        quantity: 100,
-        price:1000,
+        name: "kubyaza",
+        quantity: 1,
+        price:500,
         createdAt: new Date(),
         updatedAt: new Date(),
         
@@ -31,5 +31,5 @@ module.exports = {
     
     ]
   ),
-  down: async (queryInterface) => queryInterface.bulkDelete("Medicines", null, {})
+  down: async (queryInterface) => queryInterface.bulkDelete("VetServices", null, {})
 };

@@ -1,12 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Vetservice = sequelize.define('Vetservice', {
+  const VetService = sequelize.define('VetService', {
 
     name: DataTypes.STRING,
-    price: DataTypes.STRING,
+    quantity:DataTypes.INTEGER,
+    price: DataTypes.INTEGER,
  
   }, { });
  
 
-  return Vetservice;
+  return VetService;
 };

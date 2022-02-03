@@ -46,6 +46,50 @@ export default class UserServices {
       })
     return users
   }
+
+  static async upDateUserInfo(updates, id) {
+    let userNameCheck, colsAffected;
+    if (updates.username) {
+      userNameCheck = await User.findAll({
+        where: { username: updates.username },
+      });
+    }
+
+    if (
+      userNameCheck == undefined
+      || userNameCheck.length == 0
+      || (userNameCheck.length == 1 && userNameCheck[0].id == id)
+    ) {
+      colsAffected = await User.update(updates, {
+        where: { id },
+        attributes: { exclude: "email" },
+      });
+      if (colsAffected[0] != 0) {
+        return true;
+      }
+      return false;
+    }
+    return "Username has been taken";
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   static async updatePassword(hash, decoded) {
     const users = await User.update(
       { password: hash },
@@ -57,6 +101,8 @@ export default class UserServices {
     );
     return users;
   }
+
+
   static async changingPassword(hash,id){
     const users = await User.update(
       { password: hash },

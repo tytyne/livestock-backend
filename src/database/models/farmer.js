@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     as: 'manager',
     onDelete: 'CASCADE',
   })
-  Farmer.belongsTo(models.Operation, {
-    foreignKey: 'operationId',
-    as: 'operations',
-    onDelete: 'CASCADE',
-  })
+  // Farmer.belongsTo(models.Operation, {
+  //   foreignKey: 'operationId',
+  //   as: 'operations',
+  //   onDelete: 'CASCADE',
+  // })
 };
 
   return Farmer;

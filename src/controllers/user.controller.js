@@ -20,10 +20,9 @@ const {
 const {
   emailOrUsernameNotFound,
   thisAccountVerified,
-  unAuthorized,
-  accountNotActivated,
-  notFound,
+  thisAccountNotVerified,
   emailOrPasswordNotFound,
+  accountNotActivated
 } = errorMessage;
 const { created, ok, badRequest } = statusCode;
 const { successResponse, errorResponse } = responses;
@@ -43,9 +42,6 @@ export default class UserControllers {
     try {
       const formData = req.body;
       const textPassword = formData.password;
-      formData.password = hashPassword(textPassword);
-      console.log("form",formData)
-      console.log("form password",formData.password)
       formData.password = hashPassword(textPassword);
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);
@@ -147,14 +143,14 @@ export default class UserControllers {
         return errorResponse(res, badRequest, emailOrUsernameNotFound);
       }
       if (user.isVerified === false) {
-        return errorResponse(res, unAuthorized, thisAccountVerified);
+        return errorResponse(res, badRequest, thisAccountNotVerified);
       }
-      // if (user.status !== "active") {
-      //   return errorResponse(res, unAuthorized, accountNotActivated);
-      // }
+      if (user.status !== "active") {
+        return errorResponse(res, badRequest, accountNotActivated);
+      }
       const decryptedPassword = await decryptPassword(password, user.password);
       if (!decryptedPassword) {
-        return errorResponse(res, notFound, emailOrPasswordNotFound);
+        return errorResponse(res, badRequest, emailOrPasswordNotFound);
       }
       const token = jwtToken.createToken(user);
       return successResponse(res, ok, token, loggedin, user);

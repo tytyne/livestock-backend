@@ -1,12 +1,10 @@
 import express from "express";
 import userController from "../../controllers/user.controller.js";
-import authMiddleware from "../../middlewares/auth.js";
 import{validateSignup} from "../../middlewares/validatorMiddleware.js"
-
-const { checkEmailExist,checkUsernameExist } = authMiddleware;
-// import AuthControllers from "../../controllers/socialMediaController.js";
+import { checkEmailExist,checkUsernameExist } from "../../middlewares/auth.js";
 import resetController from "../../controllers/reset.controller"
-import{validatePassword,validateEmail} from "../../middlewares//validatorMiddleware"
+import{validatePassword,validateEmail} from "../../middlewares/validatorMiddleware"
+import Uservalidation from "../../validation/user.validator"
 
 const router = express.Router();
 
@@ -18,7 +16,7 @@ router.put("/user", (req, res) => {
   res.status(200).json({ message: "successfully sent" });
 });
 
-router.post("/user/signup",[checkEmailExist,checkUsernameExist],userController.signup);
+router.post("/user/signup",Uservalidation.save,[checkEmailExist,checkUsernameExist],userController.signup);
 router.post("/user/resend",userController.resend)
 router.get("/user/confirmation/:token",userController.confirmation);
 router.post("/user/login",userController.login)
