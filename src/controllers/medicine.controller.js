@@ -1,5 +1,5 @@
 import MedicineService from "../services/medicine.service"
-const{createMedicine,getMedicineById,getAllMedicines,updateById,deleteById}=MedicineService
+const{createMedicine,getMedicineById,updateById,deleteById,getAllMedicines}=MedicineService
 
 export default class MedicineController{
 //save a medicine
@@ -28,13 +28,14 @@ static async getMedicine(req,res,next){
 }
 //get all medicine
 static async getMedicines(req,res,next){
-    try{
+    // try{
         const data = await getAllMedicines()
-        res.status(200).json({message:"All Medicines",data})
-    }
-    catch (e) {
-        return next(new Error(e));
-      }
+        console.log("check data",data)
+        res.status(200).json({message:"all medicines",data})
+    // }
+    // catch (e) {
+    //     return next(new Error(e));
+    //   }
 }
 // update a medicine
 static async updateMedicine(req,res,next){

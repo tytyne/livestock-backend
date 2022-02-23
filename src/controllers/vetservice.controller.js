@@ -1,12 +1,12 @@
-import ServiceService from "../services/vetservice.service"
-const{createService,getServiceById,getAllServices,updateById,deleteById}=ServiceService
+import VetService from "../services/vetservice.service"
+const{createVetService,getAllVetServices,getVetServiceById,updateVetServiceById,deleteVetServiceById}=VetService
 
 export default class VetserviceController{
 //save a Service
-static async storeService(req,res,next){
+static async storeVetService(req,res,next){
 try{
     const formData = req.body;
-    const data = await createService(formData)
+    const data = await createVetService(formData)
     console.log("check data",data)
     res.status(200).json({message:"Service created!",data})
 }
@@ -16,10 +16,10 @@ catch (e) {
 }
 
 //get a Service by Id
-static async getService(req,res,next){
+static async getVetService(req,res,next){
     try{
         const id=req.params.id
-        const data = await getServiceById(id)
+        const data = await getVetServiceById(id)
         res.status(200).json({message:"get Service by Id",data})
     }
     catch (e) {
@@ -27,9 +27,9 @@ static async getService(req,res,next){
       }
 }
 //get all service
-static async getServices(req,res,next){
+static async getVetServices(req,res,next){
     try{
-        const data = await getAllServices()
+        const data = await getAllVetServices()
         res.status(200).json({message:"All Services",data})
     }
     catch (e) {
@@ -37,11 +37,11 @@ static async getServices(req,res,next){
       }
 }
 // update a service
-static async updateService(req,res,next){
+static async updateVetService(req,res,next){
     try{
         const id=req.params.id
         const formData = req.body
-        const dbResponse = await updateById(formData,id)
+        const dbResponse = await updateVetServiceById(formData,id)
         res.status(200).json({message:"update a Service!!",dbResponse})
       
     }
@@ -51,10 +51,10 @@ static async updateService(req,res,next){
 }
 //delete a service
 
-static async deleteService(req,res,next){
+static async deleteVetService(req,res,next){
     try{
         const id=req.params.id
-        const data = await deleteById(id)
+        const data = await deleteVetServiceById(id)
         res.status(200).json({message:"Service deleted succesfully!"})
     }
     catch (e) {

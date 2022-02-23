@@ -42,6 +42,12 @@ module.exports = {
       cell: {
         type: Sequelize.STRING
       },
+      village: {
+        type: Sequelize.STRING
+      },
+      others: {
+        type: Sequelize.STRING
+      },
      
      
       status:{

@@ -10,12 +10,5 @@ module.exports = (sequelize, DataTypes) => {
   
   }, { });
  
-  Medicine.associate = function(models) {
-    Medicine.belongsTo(models.Operation, {
-      foreignKey: 'operationId',
-      as: 'transits',
-      onDelete: 'CASCADE',
-    })
-  }
   return Medicine;
 };

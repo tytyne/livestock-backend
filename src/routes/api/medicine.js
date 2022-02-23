@@ -1,5 +1,5 @@
 import express from "express"
-import medicineController from "../../controllers/medine.controller"
+import medicineController from "../../controllers/medicine.controller"
 import checkAuthorisation from "../../middlewares/authentication"
 const router = express.Router()
 

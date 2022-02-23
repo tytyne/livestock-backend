@@ -13,11 +13,16 @@ module.exports = (sequelize, DataTypes) => {
     district:DataTypes.STRING,
     sector:DataTypes.STRING,
     cell:DataTypes.STRING,
+    village:DataTypes.STRING,
+    others:DataTypes.STRING,
     status:{
       type:DataTypes.ENUM('active','unactive'),
       defaultValue:'active'
     },
     createdBy: DataTypes.INTEGER,
+
+
+
    
   }, { });
   Farmer.associate = function(models) {

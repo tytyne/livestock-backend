@@ -5,6 +5,7 @@ import { checkEmailExist,checkUsernameExist } from "../../middlewares/auth.js";
 import resetController from "../../controllers/reset.controller"
 import{validatePassword,validateEmail} from "../../middlewares/validatorMiddleware"
 import Uservalidation from "../../validation/user.validator"
+import checkAuthorisation from "../../middlewares/authentication"
 
 const router = express.Router();
 
@@ -20,8 +21,10 @@ router.post("/user/signup",Uservalidation.save,[checkEmailExist,checkUsernameExi
 router.post("/user/resend",userController.resend)
 router.get("/user/confirmation/:token",userController.confirmation);
 router.post("/user/login",userController.login)
+router.get("/user/me",checkAuthorisation,userController.getUserInfo)
 
 router.post("/auth/forgot_password",validateEmail,resetController.forgetPassword)
 router.post("/auth/reset_password/:token",validatePassword,resetController.resetPassword)
+
 
 export default router;

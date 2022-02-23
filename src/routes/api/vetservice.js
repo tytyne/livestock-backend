@@ -1,12 +1,12 @@
 import express from "express"
-import serviceController from "../../controllers/vetservice.controller"
+import VetServiceController from "../../controllers/vetservice.controller"
 import checkAuthorisation from "../../middlewares/authentication"
 const router = express.Router()
 
-router.post("/create",checkAuthorisation,serviceController.storeService)
-router.get("/:id",checkAuthorisation,serviceController.getService)
-router.get("/all",checkAuthorisation,serviceController.getServices)
-router.put("/:id",checkAuthorisation,serviceController.updateService)
-router.delete("/:id",checkAuthorisation,serviceController.deleteService)
+router.post("/create",checkAuthorisation,VetServiceController.storeVetService)
+router.get("/:id",checkAuthorisation,VetServiceController.getVetService)
+router.get("/check/all",checkAuthorisation,VetServiceController.getVetServices)
+router.put("/:id",checkAuthorisation,VetServiceController.updateVetService)
+router.delete("/:id",checkAuthorisation,VetServiceController.deleteVetService)
 
 export default router

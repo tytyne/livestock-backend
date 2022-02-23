@@ -64,6 +64,10 @@ class FarmerService{
         let farmer = await Farmer.destroy({where:{id:id,createdBy:userId}})
         return farmer
     }
+    static async countFarmers(){
+        let farmer = await Farmer.count()
+        return farmer
+    }
 
 
 }

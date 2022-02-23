@@ -1,5 +1,5 @@
 import FarmerService from "../services/farmer.service"
-const{createFarmer,getFarmerById,getAllFarmers,updateById,deleteById}=FarmerService
+const{createFarmer,getFarmerById,getAllFarmers,updateById,deleteById,countFarmers}=FarmerService
 
 export default class FarmerController{
 //save a farmer
@@ -62,5 +62,16 @@ static async deleteFarmer(req,res,next){
     catch (e) {
         return next(new Error(e));
       }
+}
+static async countingFarmers(req,res,next){
+    try{
+        const data = await countFarmers()
+        console.log(data)
+        res.status(200).json({message:"number of farmers",data})
+    }
+    catch(e){
+        return next(new Error(e));
+    }
+
 }
 }

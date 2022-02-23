@@ -24,10 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     Operation.belongsTo(models.Animal, {
       foreignKey: 'animalId'
     });
-    Operation.hasMany(models.Medicine, {
-      foreignKey: 'medicineId',
-      as: 'medicines',
-    });
+   
     
     Operation.hasOne(models.Service,{
       foreignKey:'serviceId',

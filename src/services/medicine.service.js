@@ -27,7 +27,7 @@ class MedicineService{
 
     }
 
-    static async deleteById(id,userId){
+    static async deleteById(id){
         let medicine = await Medicine.destroy({where:{id:id}})
         return medicine
     }

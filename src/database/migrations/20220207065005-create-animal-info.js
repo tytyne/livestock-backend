@@ -1,34 +1,15 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Animals', {
+    await queryInterface.createTable('AnimalInfos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      farmerId: {
+      animalId: {
         type: Sequelize.INTEGER
-      },
-      earring_num: {
-        type: Sequelize.STRING
-      },
-      nid: {
-        type: Sequelize.STRING
-      },
-    
-      animal_cat: {
-        type: Sequelize.STRING
-      },
-      birthdate: {
-        type: Sequelize.DATE
-      },
-      birthkgs: {
-        type: Sequelize.STRING
-      },
-      parent: {
-        type: Sequelize.STRING
       },
       expected_exit: {
         type: Sequelize.DATE
@@ -43,17 +24,12 @@ module.exports = {
       unexpected_cause: {
         type: Sequelize.STRING
       },
-      status:{
-        type: Sequelize.DataTypes.ENUM('active','unactive'),
-        defaultValue: 'active',
-      },
       facteur: {
         type: Sequelize.STRING
       },
       createdBy: {
         type: Sequelize.INTEGER
       },
-     
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -65,6 +41,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Animals');
+    await queryInterface.dropTable('AnimalInfos');
   }
 };

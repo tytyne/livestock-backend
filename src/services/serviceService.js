@@ -22,6 +22,11 @@ class ServiceService{
         return service
 
     }
+    static async updateServiceById(id,value){
+        let service = await Service.update(value,{where:{id:id}})
+        return service
+
+    }
     static async deleteServiceById(id){
         let service = await Service.destroy({where:{id:id}})
         return service

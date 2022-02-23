@@ -158,4 +158,12 @@ export default class UserControllers {
       return next(new Error(err));
     }
   }
+  static async getUserInfo(req, res) {
+    const data = await getUserByIdOrEmail(req.user.id);
+    if (data != null) {
+      res.status(200).json({message:"my information",data})
+    } else {
+      errorResponse(res, notFound, res.__("userNotFound"));
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import express from "express"
-import farmerController from "../../controllers/farmer.controler"
+import farmerController from "../../controllers/farmer.controller"
 import checkAuthorisation from "../../middlewares/authentication"
 import FarmerValidation from "../../validation/farmer.validation"
 import {checkNidExist} from "../../middlewares/auth"
@@ -13,5 +13,6 @@ router.get("/:id",checkAuthorisation,farmerController.getFarmer)
 router.get("/check/all",checkAuthorisation,farmerController.getFarmers)
 router.put("/:id",checkAuthorisation,farmerController.updateFarmer)
 router.delete("/:id",checkAuthorisation,farmerController.deleteFarmer)
+router.get("/count/all",checkAuthorisation,farmerController.countingFarmers)
 
 export default router
