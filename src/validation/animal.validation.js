@@ -32,13 +32,4 @@ export  default AnimalValidation
 
 
 
-// expected_exit: DataTypes.DATE,
-// expected_exit_kgs:DataTypes.STRING,
-// unexpected_exit: DataTypes.DATE,
-// unexpected_cause:DataTypes.STRING,
-// status:{
-//   type:DataTypes.ENUM('active','unactive'),
-//   defaultValue:'active'
-// },
-
 

@@ -9,10 +9,11 @@ export default class EventController{
         const formData = req.body;
         const textStart=formData.start
         const textEnd = formData.end
-        formData.start = moment(textStart).toDate()
-        FormData.end = moment(textEnd).toDate()
+        formData.start = moment(textStart).format()
+        formData.end = moment(textEnd).format()
         console.log("check formdata",formData)
-        return  res.status(200).json({message:"create event"})
+        const data = await createEvent(formData)
+        return  res.status(200).json({message:"event created",data})
        }
        catch (e) {
         return next(new Error(e));
@@ -20,12 +21,12 @@ export default class EventController{
 
 
 }
-
-
     //get all events
     static async getEvents(req,res,next){
         try{
-            return  res.status(200).json({message:"get all events"})
+            const data = await getAllEvents()
+            console.log(data)
+            return  res.status(200).json({message:"get all events",data})
         }
         catch (e) {
          return next(new Error(e));
@@ -34,7 +35,9 @@ export default class EventController{
     //get event by Id
     static async getEvent(req,res,next){
         try{
-            return  res.status(200).json({message:"get event by Id"})
+            const id=req.params.id
+            const data = await getEventById(id)
+            return  res.status(200).json({message:"get event by Id",data})
         }
         catch (e) {
          return next(new Error(e));
@@ -45,7 +48,12 @@ export default class EventController{
 
     static async updateEvent(req,res,next){
         try{
-            return  res.status(200).json({message:"update event"})
+            const id = req.params.id
+            const formData = req.body
+            formData.start = moment(textStart).format()
+            formData.end = moment(textEnd).format()
+            const data = await updateEventById(formData,id)
+            return  res.status(200).json({message:"event updated",data})
         }
         catch (e) {
          return next(new Error(e));
@@ -55,6 +63,8 @@ export default class EventController{
 
     static async deleteEvent(req,res,next){
         try{
+            const id=req.params.id
+              await deleteEventById(id)
             return  res.status(200).json({message:"delete event"})
         }
         catch (e) {

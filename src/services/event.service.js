@@ -26,8 +26,8 @@ class EventService{
         return event
 
     }
-    static async deleteEventById(){
-        let event = await Event.destroy({where:{id:id,createdBy:userId}})
+    static async deleteEventById(id){
+        let event = await Event.destroy({where:{id:id}})
         return event
     }
 

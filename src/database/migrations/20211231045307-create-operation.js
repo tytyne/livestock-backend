@@ -14,28 +14,19 @@ module.exports = {
       animalId: {
         type: Sequelize.INTEGER
       },
-      feedId: {
+      itemId: {
         type: Sequelize.INTEGER
       },
-      medicineId: {
-        type: Sequelize.INTEGER
-      },
-     vetServiceId: {
-        type: Sequelize.INTEGER
-      },
-      serviceId: {
-        type: Sequelize.INTEGER
-      },
-      service_name: {
-        type: Sequelize.STRING
-      },
-       unit: {
+      quantity: {
         type: Sequelize.INTEGER
       },
       price: {
         type: Sequelize.INTEGER
       },
       sub_total: {
+        type: Sequelize.INTEGER
+      },
+      total_amount: {
         type: Sequelize.INTEGER
       },
      
