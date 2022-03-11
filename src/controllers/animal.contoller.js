@@ -20,7 +20,7 @@ catch (e) {
 static async getAnimal(req,res,next){
     try{
         const id=req.params.id
-        const data = await getAnimalById(id,req.user.id)
+        const data = await getAnimalById(id)
         res.status(200).json({message:"get animal by Id",data})
     }
     catch (e) {
@@ -31,7 +31,7 @@ static async getAnimal(req,res,next){
 static async getAnimalEaring(req,res,next){
     try{
         const input=req.query
-        const data = await getAnimalById(input,req.user.id)
+        const data = await getAnimalById(input)
         res.status(200).json({message:"get animal by earring number",data})
     }
     catch (e) {
@@ -53,7 +53,7 @@ static async updateAnimal(req,res,next){
     try{
         const id=req.params.id
         const formData = req.body
-        const data = await updateById(formData,id,req.user.id)
+        const data = await updateById(formData,id)
         res.status(200).json({message:"update an animal!!",data})
       
     }
@@ -66,7 +66,7 @@ static async updateAnimal(req,res,next){
 static async deleteAnimal(req,res,next){
     try{
         const id=req.params.id
-        const data = await deleteById(id,req.user.id)
+        const data = await deleteById(id)
         res.status(200).json({message:"delete a animal"})
     }
     catch (e) {

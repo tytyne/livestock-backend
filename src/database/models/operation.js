@@ -5,11 +5,12 @@ module.exports = (sequelize, DataTypes) => {
 
     farmerId: DataTypes.INTEGER,
     animalId: DataTypes.INTEGER,
+    createdBy: DataTypes.INTEGER,
     itemId:DataTypes.INTEGER,
+    item_name:DataTypes.STRING,
+    item_type:DataTypes.STRING,
     quantity:DataTypes.INTEGER,
-    price:DataTypes.INTEGER,
-    sub_total:DataTypes.INTEGER,
-    total_amount:DataTypes.INTEGER
+    amount:DataTypes.INTEGER
     
   }, { });
  
@@ -17,6 +18,15 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Operation.belongsTo(models.Item, {
       foreignKey: 'itemId'
+    });
+    Operation.belongsTo(models.Farmer, {
+      foreignKey: 'farmerId'
+    });
+    Operation.belongsTo(models.Animal, {
+      foreignKey: 'animalId'
+    });
+    Operation.belongsTo(models.User, {
+      foreignKey: 'createdBy'
     });
 
   }

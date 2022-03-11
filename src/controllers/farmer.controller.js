@@ -7,9 +7,10 @@ static async storeFarmer(req,res,next){
 try{
     const formData = req.body;
     formData.createdBy =req.user.id
-    console.log("check formdata",formData)
+    // console.log("check formdata",formData)
     const data = await createFarmer(formData)
-    console.log("check data",data)
+    // console.log("check data",data)
+    console.log("check data",data.name)
     res.status(200).json({message:"a farmer created!",data})
 }
 catch (e) {
@@ -21,7 +22,7 @@ catch (e) {
 static async getFarmer(req,res,next){
     try{
         const id=req.params.id
-        const data = await getFarmerById(id,req.user.id)
+        const data = await getFarmerById(id)
         res.status(200).json({message:"get farmer by Id",data})
     }
     catch (e) {
@@ -43,7 +44,7 @@ static async updateFarmer(req,res,next){
     try{
         const id=req.params.id
         const formData = req.body
-        const data = await updateById(formData,id,req.user.id)
+        const data = await updateById(formData,id)
         res.status(200).json({message:"update a farmer!!",data})
       
     }
@@ -56,7 +57,7 @@ static async updateFarmer(req,res,next){
 static async deleteFarmer(req,res,next){
     try{
         const id=req.params.id
-        const data = await deleteById(id,req.user.id)
+        const data = await deleteById(id)
         res.status(200).json({message:"delete a farmer"})
     }
     catch (e) {

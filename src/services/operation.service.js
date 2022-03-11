@@ -3,27 +3,28 @@ import "regenerator-runtime/runtime";
 const{Operation} = models;
 
 class OperationService{
+   
     static async createOperation(value){
-        let operation = await Operation(value)
-        return operation
 
+        let operation= await Operation.create(value)
+        return operation
     }
 
-    static async updateByIdOperation(id,value){
+    static async updateOperationById(id,value){
 
         let operation = await Operation.update(value,{where:{id:id}})
         return operation
 
     }
 
-    static async getByIdOperation(){
+    static async getOperationById(){
         let operation = await Operation.findOne({where:{id:id}})
         return operation
 
     }
 
-    static async getAllOperations(){
-        let operation = await Operation.findAll()
+    static async getAllOperations(userId){
+        let operation = await Operation.findAll({where:{createdBy:userId}})
         return operation
     }
 

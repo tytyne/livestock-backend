@@ -12,9 +12,9 @@ class FarmerService{
         let farmer = await Farmer.create(formData)
         return farmer
     }
-    static async getFarmerById(id,userId){
-        let farmer = await Farmer.findOne({where:{id:id,createdBy:userId}})
-        return farmer
+    static async getFarmerById(id){
+        let farmer = await Farmer.findOne({where:{id:id}})
+        return farmer  
 
     }
     static async getAllFarmers(userId){
@@ -27,8 +27,8 @@ class FarmerService{
           user = await Farmer.findOne({ where: {nid: value } });
           return user; 
     }
-    static async updateById(value,id,userId){
-        let farmer = await Farmer.update(value,{where:{id:id,createdBy:userId},returning: true,
+    static async updateById(value,id){
+        let farmer = await Farmer.update(value,{where:{id:id},returning: true,
             plain: true,})
 
         
@@ -61,7 +61,7 @@ class FarmerService{
     //   }
 
     static async deleteById(id,userId){
-        let farmer = await Farmer.destroy({where:{id:id,createdBy:userId}})
+        let farmer = await Farmer.destroy({where:{id:id}})
         return farmer
     }
     static async countFarmers(){

@@ -11,13 +11,13 @@ class AnimalService{
         let animal = await Animal.create(value)
         return animal
     }
-    static async getAnimalById(id,vetId){
-        let animal = await Animal.findOne({where:{id:id,createdBy:vetId}})
+    static async getAnimalById(id){
+        let animal = await Animal.findOne({where:{id:id}})
         return animal
 
     }
-    static async getAnimalByEarring(input,vetId){
-        let animal = await Animal.findOne({where:{earring_num:input,createdBy:vetId}})
+    static async getAnimalByEarring(input){
+        let animal = await Animal.findOne({where:{earring_num:input}})
         return animal
 
     }
@@ -26,15 +26,15 @@ class AnimalService{
         return animal
 
     }
-    static async updateById(value,id,vetId){
-        let animal = await Animal.update(value,{where:{id:id,createdBy:vetId},returning: true,
+    static async updateById(value,id){
+        let animal = await Animal.update(value,{where:{id:id},returning: true,
             plain: true,})
         return animal
 
     }
 
-    static async deleteById(id,vetId){
-        let animal = await Animal.destroy({where:{id:id,createdBy:vetId}})
+    static async deleteById(id){
+        let animal = await Animal.destroy({where:{id:id}})
         return animal
     }
 
