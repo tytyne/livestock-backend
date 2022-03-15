@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import api from "./api/index.js";
+import api from "./api/index";
 
 dotenv.config();
 
@@ -13,6 +13,5 @@ router.get("/api", (req, res) => {
 });
 
 router.use(baseUrl, api);
-
 
 export default router;
