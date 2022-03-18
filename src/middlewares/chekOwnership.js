@@ -1,13 +1,25 @@
 
 import FarmerService from "../services/farmer.service"
+import FarmService from "../services/farm.service"
 import AnimalService from "../services/animal.service"
 import OperationService from "../services/operation.service";
+
 const{getFarmerById}=FarmerService
 const {getAnimalById}=AnimalService
 const {getOperationById}=OperationService
+const {getFarmById}=FarmService
 
 const checkFarmerOwner= async (req,res,next)=>{
     const farmer = await getFarmerById(req.params.id)
+    if (farmer.user_id!=req.user.id)
+    {
+        return res.status(403).json({message:"you are not allowed to see this"})
+    }
+    
+    return next();
+};
+const checkFarmOwner= async (req,res,next)=>{
+    const farmer = await getFarmById(req.params.id)
     if (farmer.user_id!=req.user.id)
     {
         return res.status(403).json({message:"you are not allowed to see this"})

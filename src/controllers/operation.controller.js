@@ -41,7 +41,7 @@ export default class OperationController{
     static async getOperation(req,res,next){
         try{
 
-            const data = await getAllOperations()
+            const data = await getAllOperations(req.user.id)
             console.log("check data",data)
             return res.status(200).json({message:"get one operation",data})
 
@@ -78,11 +78,3 @@ export default class OperationController{
 
 }
 
-
-// farmerId: DataTypes.INTEGER,
-//     animalId: DataTypes.INTEGER,
-//     itemId:DataTypes.INTEGER,
-//     quantity:DataTypes.INTEGER,
-//     price:DataTypes.INTEGER,
-//     sub_total:DataTypes.INTEGER,
-//     total_amount:DataTypes.INTEGER
