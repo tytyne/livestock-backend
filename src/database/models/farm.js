@@ -13,16 +13,18 @@ module.exports = (sequelize, DataTypes) => {
     village:DataTypes.STRING,
     others:DataTypes.STRING,
     status:{
-      type:DataTypes.ENUM('active','unactive'),
+      type:DataTypes.STRING,
       defaultValue:'active'
     },
     createdBy: DataTypes.INTEGER,
-
-
-
    
   }, { });
   Farm.associate = function(models) {
+  Farm.belongsTo(models.Farmer, {
+    foreignKey: 'farmerId',
+    as: 'owners',
+    onDelete: 'CASCADE',
+  })
   Farm.belongsTo(models.User, {
     foreignKey: 'createdBy',
     as: 'manager',

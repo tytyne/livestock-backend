@@ -94,6 +94,16 @@ module.exports = {
         updatedAt: new Date(),
         
       },
+      // {
+      //   name: " ",
+      //   unit: "",
+      //   price:"",
+      //   type:"Others",
+      //   description:" ",
+      //   createdAt: new Date(),
+      //   updatedAt: new Date(),
+        
+      // },
     
     ]
   ),
