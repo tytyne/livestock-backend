@@ -8,11 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      farmerId: {
+      farmId: {
         type: Sequelize.INTEGER
       },
       animalId: {
-        type: Sequelize.INTEGER
+        type:Sequelize.INTEGER,
+        
+
       },
       createdBy: {
         type: Sequelize.INTEGER

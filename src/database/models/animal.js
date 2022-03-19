@@ -8,22 +8,22 @@ module.exports = (sequelize, DataTypes) => {
     birthdate:DataTypes.DATE,
     birthkgs: DataTypes.STRING,
     parent:DataTypes.STRING,
-    expected_exit: DataTypes.DATE,
-    expected_exit_kgs:DataTypes.STRING,
-    unexpected_exit: DataTypes.DATE,
-    unexpected_cause:DataTypes.STRING,
-    facteur:DataTypes.STRING,
+    // expected_exit: DataTypes.DATE,
+    // expected_exit_kgs:DataTypes.STRING,
+    // unexpected_exit: DataTypes.DATE,
+    // unexpected_cause:DataTypes.STRING,
+    // facteur:DataTypes.STRING,
     createdBy:DataTypes.INTEGER,
     status:{
-      type:DataTypes.ENUM('active','unactive'),
+      type:DataTypes.STRING,
       defaultValue:'active'
     },
    
   
   }, { });
   Animal.associate = function(models) {
-    Animal.belongsTo(models.Farmer, {
-      foreignKey: 'farmerId',
+    Animal.belongsTo(models.Farm, {
+      foreignKey: 'farmId',
       as: 'owner',
       onDelete: 'CASCADE',
     })

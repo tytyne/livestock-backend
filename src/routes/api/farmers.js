@@ -10,7 +10,7 @@ const router = express.Router()
 
 // router.post("/create",checkAuthorisation,FarmerValidation.save,checkNidExist,farmerController.storeFarmer)
 
-router.post("/create",checkAuthorisation,checkNidExist,farmerController.storeFarmer)
+router.post("/create",checkAuthorisation,farmerController.storeFarmer)
 router.get("/:id",checkAuthorisation,checkFarmerOwner,farmerController.getFarmer)
 router.get("/check/all",checkAuthorisation,farmerController.getFarmers)
 router.put("/:id",checkAuthorisation,checkFarmerOwner,farmerController.updateFarmer)

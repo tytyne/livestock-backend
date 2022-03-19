@@ -3,7 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Operation = sequelize.define('Operation', {
 
-    farmerId: DataTypes.INTEGER,
+    farmId: DataTypes.INTEGER,
     animalId: DataTypes.INTEGER,
     createdBy: DataTypes.INTEGER,
     itemId:DataTypes.INTEGER,
@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     Operation.belongsTo(models.Item, {
       foreignKey: 'itemId'
     });
-    Operation.belongsTo(models.Farmer, {
-      foreignKey: 'farmerId'
+    Operation.belongsTo(models.Farm, {
+      foreignKey: 'farmId'
     });
     Operation.belongsTo(models.Animal, {
       foreignKey: 'animalId'

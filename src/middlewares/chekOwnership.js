@@ -11,7 +11,7 @@ const {getFarmById}=FarmService
 
 const checkFarmerOwner= async (req,res,next)=>{
     const farmer = await getFarmerById(req.params.id)
-    if (farmer.user_id!=req.user.id)
+    if (farmer.createdBy!=req.user.id)
     {
         return res.status(403).json({message:"you are not allowed to see this"})
     }
