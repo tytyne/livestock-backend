@@ -43,6 +43,7 @@ export default class UserControllers {
       const formData = req.body;
       const textPassword = formData.password;
       formData.password = hashPassword(textPassword);
+      formData.role="vet";
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);
 

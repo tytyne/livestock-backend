@@ -12,7 +12,10 @@ module.exports = {
         type: Sequelize.STRING
       },
 
-      fullname: {
+      firstname: {
+        type: Sequelize.STRING
+      },
+      lastname: {
         type: Sequelize.STRING
       },
       email: {
@@ -24,7 +27,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-     
+      status: {
+        type: Sequelize.STRING
+      },
       isVerified:{
         type:Sequelize.BOOLEAN,
         defaultValue:false
