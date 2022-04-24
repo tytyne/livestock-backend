@@ -14,10 +14,7 @@ module.exports = {
       earring_num: {
         type: Sequelize.STRING
       },
-      nid: {
-        type: Sequelize.STRING
-      },
-    
+      
       animal_cat: {
         type: Sequelize.STRING
       },
@@ -30,26 +27,18 @@ module.exports = {
       parent: {
         type: Sequelize.STRING
       },
-      // expected_exit: {
-      //   type: Sequelize.DATE
-      // },
-      // expected_exit_kgs: {
-      //   type: Sequelize.STRING
-      // },
+      expected_exit: {
+        type: Sequelize.DATE
+      },
+      expected_exit_kgs: {
+        type: Sequelize.STRING
+      },
 
-      // unexpected_exit: {
-      //   type: Sequelize.DATE
-      // },
-      // unexpected_cause: {
-      //   type: Sequelize.STRING
-      // },
       status:{
         type: Sequelize.STRING,
         defaultValue: 'active',
       },
-      // facteur: {
-      //   type: Sequelize.STRING
-      // },
+     
       createdBy: {
         type: Sequelize.INTEGER
       },

@@ -50,4 +50,4 @@ const checkOperationOwner= async (req,res,next)=>{
 
 }
 
-export default{checkFarmerOwner,checkAnimalOwner,checkOperationOwner}
+export default{checkFarmerOwner,checkAnimalOwner,checkOperationOwner,checkFarmOwner}

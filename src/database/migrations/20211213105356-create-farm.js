@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      farmerId: {
+      farmId: {
         type: Sequelize.INTEGER
       },
       createdBy: {
