@@ -14,11 +14,7 @@ export default class FarmController {
     try {
       const formData = req.body;
       formData.createdBy = req.user.id;
-      console.log(formData);
-      // console.log("check formdata",formData)
       const data = await createFarm(formData);
-      // console.log("check data",data)
-      console.log("check data", data.name);
       res.status(200).json({ message: "a farm created!", data });
     } catch (e) {
       return next(new Error(e));
@@ -69,7 +65,6 @@ export default class FarmController {
   static async countingFarms(req, res, next) {
     try {
       const data = await countFarms();
-      console.log(data);
       res.status(200).json({ message: "number of farms", data });
     } catch (e) {
       return next(new Error(e));
