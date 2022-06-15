@@ -1,76 +1,75 @@
-import AnimalService from "../services/animal.service"
-const{createAnimal,getAnimalById,getAnimalByEarring,getAllanimals,updateById,deleteById}=AnimalService
+import AnimalService from "../services/animal.service";
+const {
+  createAnimal,
+  getAnimalById,
+  getAnimalByEarring,
+  getAllanimals,
+  updateById,
+  deleteById,
+} = AnimalService;
 
-export default class AnimalController{
-//save an animal
-static async storeAnimal(req,res,next){
-try{
-    const formData = req.body;
-    formData.createdBy =req.user.id
-    const data = await createAnimal(formData)
-    console.log("check data",data)
-    res.status(200).json({message:"an animal created!",data})
-}
-catch (e) {
-    return next(new Error(e));
+export default class AnimalController {
+  //save an animal
+  static async storeAnimal(req, res, next) {
+    try {
+      const formData = req.body;
+      formData.createdBy = req.user.id;
+      const data = await createAnimal(formData);
+      res.status(200).json({ message: "an animal created!", data });
+    } catch (e) {
+      return next(new Error(e));
+    }
   }
-}
 
-//get an animal by Id
-static async getAnimal(req,res,next){
-    try{
-        const id=req.params.id
-        const data = await getAnimalById(id)
-        res.status(200).json({message:"get animal by Id",data})
+  //get an animal by Id
+  static async getAnimal(req, res, next) {
+    try {
+      const id = req.params.id;
+      const data = await getAnimalById(id);
+      res.status(200).json({ message: "get animal by Id", data });
+    } catch (e) {
+      return next(new Error(e));
     }
-    catch (e) {
-        return next(new Error(e));
-      }
-}
-//animal by earing number
-static async getAnimalEaring(req,res,next){
-    try{
-        const input=req.query
-        const data = await getAnimalById(input)
-        res.status(200).json({message:"get animal by earring number",data})
+  }
+  //animal by earing number
+  static async getAnimalEaring(req, res, next) {
+    try {
+      const input = req.query;
+      const data = await getAnimalById(input);
+      res.status(200).json({ message: "get animal by earring number", data });
+    } catch (e) {
+      return next(new Error(e));
     }
-    catch (e) {
-        return next(new Error(e));
-      }
-}
-//get all animals
-static async getAnimals(req,res,next){
-    try{
-        const data = await getAllanimals(req.user.id)
-        res.status(200).json({message:"All animals",data})
+  }
+  //get all animals
+  static async getAnimals(req, res, next) {
+    try {
+      const data = await getAllanimals(req.user.id);
+      res.status(200).json({ message: "All animals", data });
+    } catch (e) {
+      return next(new Error(e));
     }
-    catch (e) {
-        return next(new Error(e));
-      }
-}
-// update an animal
-static async updateAnimal(req,res,next){
-    try{
-        const id=req.params.id
-        const formData = req.body
-        const data = await updateById(formData,id)
-        res.status(200).json({message:"update an animal!!",data})
-      
+  }
+  // update an animal
+  static async updateAnimal(req, res, next) {
+    try {
+      const id = req.params.id;
+      const formData = req.body;
+      const data = await updateById(formData, id);
+      res.status(200).json({ message: "update an animal!!", data });
+    } catch (e) {
+      return next(new Error(e));
     }
-    catch (e) {
-        return next(new Error(e));
-      }
-}
-//delete an animal
+  }
+  //delete an animal
 
-static async deleteAnimal(req,res,next){
-    try{
-        const id=req.params.id
-        const data = await deleteById(id)
-        res.status(200).json({message:"delete a animal"})
+  static async deleteAnimal(req, res, next) {
+    try {
+      const id = req.params.id;
+      const data = await deleteById(id);
+      res.status(200).json({ message: "delete a animal" });
+    } catch (e) {
+      return next(new Error(e));
     }
-    catch (e) {
-        return next(new Error(e));
-      }
-}
+  }
 }
