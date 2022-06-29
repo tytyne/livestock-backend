@@ -6,7 +6,7 @@ import Mailer from "../utils/mail/email.js";
 import responses from "../utils/responses.js";
 import statusCode from "../utils/statusCode.js";
 import { jwtToken } from "../utils/jwt.utils.js";
-const { hashPassword, decryptPassword }=helper;
+const { hashPassword, decryptPassword } = helper;
 
 const { createUser, getUserByIdOrEmail, updateUser } = UserService;
 const {
@@ -22,7 +22,7 @@ const {
   thisAccountVerified,
   thisAccountNotVerified,
   emailOrPasswordNotFound,
-  accountNotActivated
+  accountNotActivated,
 } = errorMessage;
 const { created, ok, badRequest } = statusCode;
 const { successResponse, errorResponse } = responses;
@@ -41,9 +41,10 @@ export default class UserControllers {
   static async signup(req, res, next) {
     try {
       const formData = req.body;
+      console.log(formData);
       const textPassword = formData.password;
       formData.password = hashPassword(textPassword);
-      formData.role="vet";
+      formData.role = "vet";
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);
 
@@ -62,7 +63,6 @@ export default class UserControllers {
         link: `${process.env.FRONTEND_URL}/api/${process.env.API_VERSION}/confirmEmail?email=${user.email}&token=${token} `,
       });
       await mail.sendMail();
-    
 
       return successResponse(res, created, token, signedup, user);
     } catch (e) {
@@ -96,8 +96,7 @@ export default class UserControllers {
         console.log(userUpdated);
         // adding thank you message
         const { id, email, isVerified } = userUpdated[1];
-        return successResponse(res, ok,undefined,userVerification);
-      
+        return successResponse(res, ok, undefined, userVerification);
       }
     } catch (e) {
       return next(new Error(e));
@@ -162,7 +161,7 @@ export default class UserControllers {
   static async getUserInfo(req, res) {
     const data = await getUserByIdOrEmail(req.user.id);
     if (data != null) {
-      res.status(200).json({message:"my information",data})
+      res.status(200).json({ message: "my information", data });
     } else {
       errorResponse(res, notFound, res.__("userNotFound"));
     }
