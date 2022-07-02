@@ -1,6 +1,7 @@
 import OperationService from "../services/operation.service"
 const{createOperation,getAllOperations}=OperationService
 import ItemService from "../services/item.service"
+import calculatePrice from "../utils/calculationHelper"
 const{createItem,getItemById}=ItemService
 
 
@@ -9,16 +10,17 @@ export default class OperationController{
 
     static async storeOperation(req,res,next){
        try{
-            const formData=req.body
-            const item= await getItemById(formData.itemId)
-            formData.item_name=item.name;
-            formData.item_type=item.type;
-            const formula= parseInt((item.price * formData.quantity)/item.unit);
-            formData.amount=formula
-            formData.userId=req.user.id
-            console.log("check formdata",formData)
-            const data = await createOperation(formData)
-            return res.status(200).json({message:"operation created!",data})
+            // const formData=req.body
+            // const item= await getItemById(formData.itemId)
+            // formData.item_name=item.name;
+            // formData.item_type=item.type;
+            // const formula= parseInt((item.price * formData.quantity)/item.unit);
+            // formData.amount=formula
+            // formData.userIDD=req.user.id
+            // console.log("check formdata",formData)
+            // const data = await createOperation(formData)
+            // return res.status(200).json({message:"operation created!",data})
+            return res.status(200).json({message:"store operation"}) 
 
         }
         catch(e){

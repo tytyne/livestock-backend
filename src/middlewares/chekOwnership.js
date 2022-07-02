@@ -1,6 +1,7 @@
 
 import FarmerService from "../services/farmer.service"
 import FarmService from "../services/farm.service"
+import EventService from "../services/event.service";
 import AnimalService from "../services/animal.service"
 import OperationService from "../services/operation.service";
 
@@ -8,10 +9,15 @@ const{getFarmerById}=FarmerService
 const {getAnimalById}=AnimalService
 const {getOperationById}=OperationService
 const {getFarmById}=FarmService
+const {getEventById}=EventService
 
 const checkFarmerOwner= async (req,res,next)=>{
     const farmer = await getFarmerById(req.params.id)
-    if (farmer.createdBy!=req.user.id)
+    
+    if(farmer==null){
+        return res.status(401).json({message:"This do not exist"})
+    }
+    else if (farmer.createdBy!=req.user.id)
     {
         return res.status(403).json({message:"you are not allowed to see this"})
     }
@@ -19,8 +25,12 @@ const checkFarmerOwner= async (req,res,next)=>{
     return next();
 };
 const checkFarmOwner= async (req,res,next)=>{
-    const farmer = await getFarmById(req.params.id)
-    if (farmer.user_id!=req.user.id)
+    const farm = await getFarmById(req.params.id)
+    console.log(farm)
+    if(farm==null){
+        return res.status(401).json({message:"This do not exist"})
+    }
+    else if (farm.createdBy!=req.user.id)
     {
         return res.status(403).json({message:"you are not allowed to see this"})
     }
@@ -29,7 +39,11 @@ const checkFarmOwner= async (req,res,next)=>{
 };
 const checkAnimalOwner= async (req,res,next)=>{
     const animal = await getAnimalById(req.params.id)
-    if (animal.user_id!=req.user.id)
+    console.log(animal)
+    if(animal ==null){
+        return res.status(401).json({message:"This do not exist"})
+    }
+    else if (animal.createdBy!=req.user.id)
     {
         return res.status(403).json({message:"you are not allowed to see this"})
     }
@@ -38,9 +52,28 @@ const checkAnimalOwner= async (req,res,next)=>{
     
 
 }
+
+
+const checkEventOwner= async (req,res,next)=>{
+    const event = await getEventById(req.params.id)
+    console.log(event)
+    if(event==null){
+        return res.status(401).json({message:"This do not exist"})
+    }
+    else if (event.userId!=req.user.id)
+    {
+        return res.status(403).json({message:"you are not allowed to see this"})
+    }
+    
+    return next();
+};
 const checkOperationOwner= async (req,res,next)=>{
     const operation = await getOperationById(req.params.id)
-    if (operation.user_id!=req.user.id)
+
+    if(operation==null){
+        return res.status(401).json({message:"This do not exist"})
+    }
+    else if (operation.user_id!=req.user.id)
     {
         return res.status(403).json({message:"you are not allowed to see this"})
     }
@@ -50,4 +83,4 @@ const checkOperationOwner= async (req,res,next)=>{
 
 }
 
-export default{checkFarmerOwner,checkAnimalOwner,checkOperationOwner,checkFarmOwner}
+export default{checkFarmerOwner,checkAnimalOwner,checkOperationOwner,checkFarmOwner,checkEventOwner}

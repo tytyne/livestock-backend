@@ -11,11 +11,12 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      farmId: {
+      farmerId: {
         type: Sequelize.INTEGER
       },
+      
       createdBy: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       province: {
         type: Sequelize.STRING

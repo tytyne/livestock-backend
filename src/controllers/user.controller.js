@@ -136,7 +136,7 @@ export default class UserControllers {
     }
   }
   static async login(req, res, next) {
-    try {
+    // try {
       const { email, password } = req.body;
       const user = await getUserByIdOrEmail(email);
 
@@ -155,9 +155,10 @@ export default class UserControllers {
       }
       const token = jwtToken.createToken(user);
       return successResponse(res, ok, token, loggedin, user);
-    } catch (err) {
-      return next(new Error(err));
-    }
+      
+    // } catch (err) {
+    //   return next(new Error(err));
+    // }
   }
   static async getUserInfo(req, res) {
     const data = await getUserByIdOrEmail(req.user.id);

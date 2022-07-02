@@ -13,6 +13,14 @@ module.exports = (sequelize, DataTypes) => {
    
   
   }, { });
- 
+  Admin.associate = function(models) {
+  
+    Admin.hasMany(models.User, {
+      foreignKey: 'adminId',
+      as: 'admin',
+      onDelete: 'CASCADE',
+    })
+   
+  };
   return Admin;
 };

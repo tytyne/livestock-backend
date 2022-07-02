@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     unexpected_exit: DataTypes.DATE,
     unexpected_cause:DataTypes.STRING,
     facteur:DataTypes.STRING,
-    createdBy:DataTypes.INTEGER,
+    // createdBy:DataTypes.INTEGER,
     status:{
       type:DataTypes.ENUM('active','unactive'),
       defaultValue:'active'
@@ -17,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
   }, { });
   Lifestyle.associate = function(models) {
    
-    Lifestyle.belongsTo(models.User, {
-      foreignKey: 'createdBy',
-      as: 'creater',
+    Lifestyle.belongsTo(models.Animal, {
+      foreignKey: 'animalId',
+      as: 'animal',
       onDelete: 'CASCADE',
     })
     

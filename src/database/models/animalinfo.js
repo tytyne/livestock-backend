@@ -13,19 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   AnimalInfo.associate = function(models) {
     AnimalInfo.belongsTo(models.Animal, {
       foreignKey: 'animalId',
-      as: 'anim',
+      as: 'info',
       onDelete: 'CASCADE',
     })
-    AnimalInfo.belongsTo(models.User, {
-      foreignKey: 'createdBy',
-      as: 'creater',
-      onDelete: 'CASCADE',
-    })
-    // Animal.belongsTo(models.Operation, {
-    //   foreignKey: 'operationId',
-    //   as: 'transactions',
-    //   onDelete: 'CASCADE',
-    // })
+   
   };
 
   return AnimalInfo;

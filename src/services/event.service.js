@@ -12,14 +12,15 @@ class EventService{
         let event= await Event.create(value)
         return event
     }
-    static async getAllEvents(){
-        let event = await Event.findAll()
+    static async getAllEvents(userId){
+        let event = await Event.findAll({where:{userId:userId}})
         return event
     }
     static async getEventById(id){
         let event = await Event.findOne({where:{id:id}})
         return event
     }
+
     static async updateEventById(value,id){
         let event = await Event.update(value,{where:{id:id},returning: true,
             plain: true,}) 

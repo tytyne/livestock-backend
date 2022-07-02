@@ -9,8 +9,9 @@ export default class EventController{
         const formData = req.body;
         const textStart=formData.start
         const textEnd = formData.end
-        formData.start = moment(textStart).format()
-        formData.end = moment(textEnd).format()
+        formData.start = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
+        formData.end = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
+        formData.userId=req.user.id
         console.log("check formdata",formData)
         const data = await createEvent(formData)
         return  res.status(200).json({message:"event created",data})
@@ -24,7 +25,7 @@ export default class EventController{
     //get all events
     static async getEvents(req,res,next){
         try{
-            const data = await getAllEvents()
+            const data = await getAllEvents(req.user.id)
             console.log(data)
             return  res.status(200).json({message:"get all events",data})
         }
@@ -50,8 +51,10 @@ export default class EventController{
         try{
             const id = req.params.id
             const formData = req.body
-            formData.start = moment(textStart).format()
-            formData.end = moment(textEnd).format()
+            const textStart=formData.start
+            const textEnd = formData.end
+            formData.start = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
+            formData.end = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
             const data = await updateEventById(formData,id)
             return  res.status(200).json({message:"event updated",data})
         }

@@ -6,6 +6,7 @@ class AnimalValidation{
  
         farmId:Joi.number().min(1).required().messages(), 
         earring_num:Joi.number().min(3).required().messages(),  
+        sex:Joi.string().required().messages(), 
         animal_cat:Joi.string().min(3).required().messages(),
         birthdate:Joi.date().required().messages(),
         birthkgs:Joi.string().min(2).required().messages(),

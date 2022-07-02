@@ -1,11 +1,8 @@
 'use strict';
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Farm = sequelize.define('Farm', {
 
     name: DataTypes.STRING,
-    farmerId: DataTypes.INTEGER,
-    createdBy: DataTypes.INTEGER,
     province:DataTypes.STRING,
     district:DataTypes.STRING,
     sector:DataTypes.STRING,
@@ -16,20 +13,21 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       defaultValue:'active'
     },
-    createdBy: DataTypes.INTEGER,
+    // createdBy: DataTypes.INTEGER,
    
   }, { });
   Farm.associate = function(models) {
   Farm.belongsTo(models.Farmer, {
     foreignKey: 'farmerId',
-    as: 'owners',
+    as: 'farmer',
     onDelete: 'CASCADE',
   })
   Farm.belongsTo(models.User, {
     foreignKey: 'createdBy',
-    as: 'manager',
+    as: 'user',
     onDelete: 'CASCADE',
   })
+ 
  
 };
 

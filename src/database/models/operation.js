@@ -3,33 +3,47 @@
 module.exports = (sequelize, DataTypes) => {
   const Operation = sequelize.define('Operation', {
 
-    farmId: DataTypes.INTEGER,
+    operationDate: DataTypes.STRING,
+    // farmId: DataTypes.INTEGER,
     animalId: DataTypes.INTEGER,
-    createdBy: DataTypes.INTEGER,
-    itemId:DataTypes.INTEGER,
-    item_name:DataTypes.STRING,
-    item_type:DataTypes.STRING,
-    quantity:DataTypes.INTEGER,
-    amount:DataTypes.INTEGER
-    
+    itemId: DataTypes.INTEGER,
+    categoryId:DataTypes.INTEGER,
+    item_name: DataTypes.INTEGER,
+    item_type: DataTypes.INTEGER,
+    quantity: DataTypes.INTEGER,
+    amount: DataTypes.INTEGER,
+  
+  
   }, { });
- 
+
   Operation.associate = function(models) {
-    // associations can be defined here
-    Operation.belongsTo(models.Item, {
-      foreignKey: 'itemId'
-    });
+   
+    // Operation.hasOne(models.User, {
+    //   foreignKey: 'createdBy',
+    //   onDelete: 'CASCADE',
+    // })
+
     Operation.belongsTo(models.Farm, {
-      foreignKey: 'farmId'
-    });
+      foreignKey: 'farmId',
+      onDelete: 'CASCADE',
+    })
     Operation.belongsTo(models.Animal, {
-      foreignKey: 'animalId'
-    });
-    Operation.belongsTo(models.User, {
-      foreignKey: 'createdBy'
-    });
+      foreignKey: 'animalId',
+      onDelete: 'CASCADE',
+    })
+    Operation.hasOne(models.Category, {
+      foreignKey: 'categoryId',
+      onDelete: 'CASCADE',
+    })
 
-  }
+    Operation.hasOne(models.Item, {
+      foreignKey: 'itemId',
+      onDelete: 'CASCADE',
+    })
+    
+  };
 
+ 
+ 
   return Operation;
 };

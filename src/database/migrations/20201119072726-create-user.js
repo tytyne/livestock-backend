@@ -18,7 +18,7 @@ module.exports = {
       lastname: {
         type: Sequelize.STRING
       },
-      createdBy: {
+      adminId: {
         type: Sequelize.INTEGER
       },
       occupation: {

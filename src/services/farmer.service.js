@@ -17,8 +17,8 @@ class FarmerService{
         return farmer  
 
     }
-    static async getAllFarmers(userId){
-        let farmer = await Farmer.findAll({where:{createdBy:userId}})
+    static async getAllFarmers(userIDD){
+        let farmer = await Farmer.findAll({where:{createdBy:userIDD}})
         return farmer
 
     }
@@ -60,7 +60,7 @@ class FarmerService{
     //     return "NID has been taken";
     //   }
 
-    static async deleteById(id,userId){
+    static async deleteById(id,userIDD){
         let farmer = await Farmer.destroy({where:{id:id}})
         return farmer
     }

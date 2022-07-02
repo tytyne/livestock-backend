@@ -11,6 +11,12 @@ module.exports = {
       farmId: {
         type: Sequelize.INTEGER
       },
+      userIDDssss: {
+        type: Sequelize.INTEGER
+      },
+      createdBy: {
+        type: Sequelize.STRING
+      },
       earring_num: {
         type: Sequelize.STRING
       },
@@ -25,6 +31,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       parent: {
+        type: Sequelize.STRING
+      },
+      sex: {
         type: Sequelize.STRING
       },
       expected_exit: {

@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      farmerId: {
+      animalId: {
         type: Sequelize.INTEGER
       },
       expected_exit: {
@@ -26,9 +26,6 @@ module.exports = {
       },
       facteur: {
         type: Sequelize.STRING
-      },
-      createdBy: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

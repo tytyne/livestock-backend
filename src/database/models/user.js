@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
 
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
-    createdBy:DataTypes.INTEGER,
     occupation: DataTypes.INTEGER,
+    adminId:DataTypes.INTEGER,
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     role:DataTypes.STRING,
@@ -21,21 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     User.associate = function(models) {
       User.belongsTo(models.Admin, {
-        foreignKey: 'createdBy',
+        foreignKey: 'adminId',
+        as:'admin',
         onDelete: 'CASCADE',
       })
     }
-    // User.hasMany(models.Farmer, {
-    //   foreignKey: 'createdBy',
-    //   as: 'producers',
-    //   onDelete: 'CASCADE',
-    // });
-
-    // User.hasMany(models.Animal, {
-    //   foreignKey: 'createdBy',
-    //   as: 'wild',
-    //   onDelete: 'CASCADE',
-    // });
+   
 
   }
   return User;

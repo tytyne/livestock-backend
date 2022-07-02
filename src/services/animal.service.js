@@ -37,7 +37,10 @@ class AnimalService{
         let animal = await Animal.destroy({where:{id:id}})
         return animal
     }
-
+    static async countAnimals(){
+        let animal= await Animal.count()
+        return animal
+    }
 
 }
 export default AnimalService

@@ -5,105 +5,95 @@ module.exports = {
     "Items",
     [
       {
+        categoryId:1,
         name: "leva",
         unit: 100,
         price:3000,
-        type:"Medicine",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:1,
         name: "vitamine",
         unit: 150,
         price:6000,
-        type:"Medicine",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:1,
         name: "gumboro",
         unit: 100,
         price:1000,
-        type:"Medicine",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:3,
         name: "gukingira",
         unit: 1,
         price:300,
-        type:"Vet_service",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:3,
         name: "gutera inanga",
         unit: 1,
         price:400,
-        type:"Vet_service",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:3,
         name: "kubyaza",
         unit: 1,
         price:500,
-        type:"Vet_service",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:2,
         name: "ibiryo by'inkoko",
         unit: 1000,
         price:300,
-        type:"Feed",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:2,
         name: "ibiryo by'ingurube",
         unit: 1000,
         price:400,
-        type:"Feed",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
+        categoryId:2,
         name: "ibiryo by'inka",
         unit: 1000,
         price:500,
-        type:"Feed",
         description:"mpbaa",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
-      // {
-      //   name: " ",
-      //   unit: "",
-      //   price:"",
-      //   type:"Others",
-      //   description:" ",
-      //   createdAt: new Date(),
-      //   updatedAt: new Date(),
-        
-      // },
     
     ]
   ),

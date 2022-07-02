@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Farmer = sequelize.define('Farmer', {
 
+    // createdBy: DataTypes.STRING,
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
     phone: DataTypes.STRING,
@@ -19,16 +20,13 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.ENUM('active','unactive'),
       defaultValue:'active'
     },
-    createdBy: DataTypes.INTEGER,
-
-
-
+ 
    
   }, { });
   Farmer.associate = function(models) {
   Farmer.belongsTo(models.User, {
     foreignKey: 'createdBy',
-    as: 'manager',
+    as: 'user',
     onDelete: 'CASCADE',
   })
   // Farmer.belongsTo(models.Operation, {

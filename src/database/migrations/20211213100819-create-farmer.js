@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+     
+      createdBy: {
+        type: Sequelize.INTEGER
+      },
       firstname: {
         type: Sequelize.STRING
       },
@@ -54,9 +58,7 @@ module.exports = {
         type: Sequelize.DataTypes.ENUM('active','unactive'),
         defaultValue: 'active',
       },
-      createdBy: {
-        type: Sequelize.INTEGER
-      },
+  
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

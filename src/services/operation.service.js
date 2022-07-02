@@ -23,8 +23,8 @@ class OperationService{
 
     }
 
-    static async getAllOperations(userId){
-        let operation = await Operation.findAll({where:{createdBy:userId}})
+    static async getAllOperations(userIDD){
+        let operation = await Operation.findAll({where:{createdBy:userIDD}})
         return operation
     }
 
@@ -32,6 +32,7 @@ class OperationService{
         let operation = await Operation.destroy({where:{id:id}})
         return operation
     }
+  
 
     
 

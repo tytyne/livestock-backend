@@ -7,10 +7,8 @@ static async storeFarm(req,res,next){
 try{
     const formData = req.body;
     formData.createdBy =req.user.id
-    // console.log("check formdata",formData)
+    console.log("check formdata",formData)
     const data = await createFarm(formData)
-    // console.log("check data",data)
-    console.log("check data",data.name)
     res.status(200).json({message:"a farm created!",data})
 }
 catch (e) {
@@ -30,14 +28,16 @@ static async getFarm(req,res,next){
       }
 }
 //get all farms
-static async getFarms(req,res,next){
+static async getFarming(req,res,next){
     try{
-        const data = await getAllFarms(req.user.id)
-        res.status(200).json({message:"All farms",data})
+        const data = await getAllFarms()
+        console.log("ghjkl")
+        return res.status(200).json({message:"All farmers",data})
     }
     catch (e) {
         return next(new Error(e));
       }
+
 }
 // update a farm
 static async updateFarm(req,res,next){

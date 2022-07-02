@@ -4,7 +4,7 @@ const{createFarmer,getFarmerById,getAllFarmers,updateById,deleteById,countFarmer
 export default class FarmerController{
 //save a farmer
 static async storeFarmer(req,res,next){
-try{
+// try{
     const formData = req.body;
     formData.createdBy =req.user.id
     // console.log("check formdata",formData)
@@ -12,10 +12,10 @@ try{
     // console.log("check data",data)
     console.log("check data",data.name)
     res.status(200).json({message:"a farmer created!",data})
-}
-catch (e) {
-    return next(new Error(e));
-  }
+// }
+// catch (e) {
+//     return next(new Error(e));
+//   }
 }
 
 //get a farmer by Id
@@ -23,7 +23,7 @@ static async getFarmer(req,res,next){
     try{
         const id=req.params.id
         const data = await getFarmerById(id)
-        res.status(200).json({message:"get farmer by Id",data})
+        return res.status(200).json({message:"get farmer by Id",data})
     }
     catch (e) {
         return next(new Error(e));
@@ -45,7 +45,7 @@ static async updateFarmer(req,res,next){
         const id=req.params.id
         const formData = req.body
         const data = await updateById(formData,id)
-        res.status(200).json({message:"update a farmer!!",data})
+        return res.status(200).json({message:"update a farmer!!",data})
       
     }
     catch (e) {

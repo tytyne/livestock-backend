@@ -1,25 +1,24 @@
+
+
 'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Event extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  Event.init({
+  const Event = sequelize.define('Event', {
+
     title: DataTypes.STRING,
     start: DataTypes.DATE,
-    end: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Event',
-  });
+    end: DataTypes.DATE,
+    userId: DataTypes.INTEGER,
+
+   
+  }, { });
+  Event.associate = function(models) {
+  Event.belongsTo(models.User, {
+    foreignKey: 'userId',
+    as: 'user',
+    onDelete: 'CASCADE',
+  })
+ 
+};
+
   return Event;
 };
