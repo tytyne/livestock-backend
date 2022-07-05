@@ -21,13 +21,8 @@ class AnimalValidation{
         next()
 
     }
-
+    next();
+  }
 }
 
-export  default AnimalValidation
-
-
-
-
-
-
+export default AnimalValidation;

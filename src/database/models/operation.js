@@ -12,6 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     item_type: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
     amount: DataTypes.INTEGER,
+    //add description
+    //change amount to total_amount
+    //is possible to add o?
+    //extended table to relate operation and animal (Id,ID)
+    //animalId ????
+    //operation--animals
+    //aperation-farms
+    //operations gusa
+    // guhitamo form ...
   
   
   }, { });
