@@ -1,5 +1,5 @@
 import AnimalExpenseService from "../services/animalExpense.service"
-const{createAnimalExpense,getAllAnimalExpenses,deleteByIdAnimalExpense,updateAnimalExpenseById}=AnimalExpenseService
+const{createAnimalExpense,getAllAnimalExpenses,deleteByIdAnimalExpense,updateAnimalExpenseById,getAnimalExpenseById}=AnimalExpenseService
 import ItemService from "../services/item.service"
 import calculationHelper from "../utils/calculationHelper"
 const{calculatePrice}=calculationHelper
@@ -36,6 +36,7 @@ export default class AnimalExpenseController{
     static async updateAnimalExpense(req,res,next){
         try{
             const id = req.params.id;
+            const formData=req.body
             const item= await getItemById(formData.itemId)
             const itemData=item.dataValues
             console.log("check item",item.dataValues.categoryId)
@@ -45,7 +46,7 @@ export default class AnimalExpenseController{
             formData.total=formula
             formData.createdBy=req.user.id
             console.log("checking formDataaa",formData)
-            const data = await updateAnimalExpenseById(formData)
+            const data = await updateAnimalExpenseById(id,formData)
             return res.status(200).json({message:"update animal expense",data})   
 
         }

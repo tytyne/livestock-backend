@@ -17,14 +17,14 @@ class FarmExpenseService{
 
     }
 
-    static async getFarmExpenseById(){
+    static async getFarmExpenseById(id){
         let expense = await FarmExpense.findOne({where:{id:id}})
         return expense
 
     }
 
-    static async getAllFarmExpenses(userIDD){
-        let expense = await FarmExpense.findAll({where:{createdBy:userIDD}})
+    static async getAllFarmExpenses(userId){
+        let expense = await FarmExpense.findAll({where:{createdBy:userId}})
         return expense
     }
 
