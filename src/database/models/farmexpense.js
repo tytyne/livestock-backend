@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     farmId: DataTypes.INTEGER,
     categoryId:DataTypes.INTEGER,
     itemId:DataTypes.INTEGER,
+    createdBy:DataTypes.INTEGER,
     item_name: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
     price: DataTypes.INTEGER,
@@ -31,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
 
     FarmExpense.belongsTo(models.Item, {
       foreignKey: 'itemId',
+      onDelete: 'CASCADE',
+    })
+    FarmExpense.belongsTo(models.User, {
+      foreignKey: 'createdBy',
       onDelete: 'CASCADE',
     })
     

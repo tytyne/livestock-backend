@@ -1,7 +1,7 @@
 
 class CalculationHelper{
 
-static  async calculatePrice (actual_price,actual_unit,new_unit){
+static  async calculatePrice (actual_price,new_unit,actual_unit){
 
     const cost =  parseInt((actual_price* new_unit)/actual_unit);
 

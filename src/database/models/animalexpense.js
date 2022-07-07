@@ -1,4 +1,3 @@
-
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
@@ -8,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     animalId: DataTypes.INTEGER,
     itemId: DataTypes.INTEGER,
     categoryId:DataTypes.INTEGER,
+    createdBy:DataTypes.INTEGER,
     item_name: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
     price: DataTypes.INTEGER,
@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
 
     AnimalExpense.belongsTo(models.Item, {
       foreignKey: 'itemId',
+      onDelete: 'CASCADE',
+    })
+    AnimalExpense.belongsTo(models.User, {
+      foreignKey: 'createdBy',
       onDelete: 'CASCADE',
     })
     

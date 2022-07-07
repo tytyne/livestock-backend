@@ -17,7 +17,11 @@ module.exports = {
       categoryId:{
         type:Sequelize.INTEGER,
       },
+     
       itemId:{
+        type:Sequelize.INTEGER,
+      },
+      createdBy:{
         type:Sequelize.INTEGER,
       },
       item_name: {

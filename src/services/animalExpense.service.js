@@ -18,14 +18,15 @@ class AnimalExpenseService{
 
     }
 
-    static async getAnimalExpenseById(){
+    static async getAnimalExpenseById(id){
         let expense = await AnimalExpense.findOne({where:{id:id}})
         return expense
 
     }
 
-    static async getAllAnimalExpenses(userIDD){
-        let expense = await AnimalExpense.findAll({where:{createdBy:userIDD}})
+    static async getAllAnimalExpenses(userId){
+        let expense = await AnimalExpense.findAll({where:{createdBy:userId}})
+        // let expense = await AnimalExpense.findAll()
         return expense
     }
 

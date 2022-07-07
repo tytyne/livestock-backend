@@ -1,25 +1,28 @@
 
 import ItemService from "../services/item.service"
-import calculatePrice from "../utils/calculationHelper"
-const{createItem,getItemById}=ItemService
+import calculationHelper from "../utils/calculationHelper"
+const{calculatePrice}=calculationHelper
+const{getItemById}=ItemService
+
 
 
 export default class FarmExpenseController{
-    //create operation
+    //create Farm expense
 
     static async storeFarmExpense(req,res,next){
        try{
-            // const formData=req.body
-            // const item= await getItemById(formData.itemId)
-            // formData.item_name=item.name;
-            // formData.item_type=item.type;
-            // const formula= parseInt((item.price * formData.quantity)/item.unit);
-            // formData.amount=formula
-            // formData.userIDD=req.user.id
-            // console.log("check formdata",formData)
-            // const data = await createOperation(formData)
-            // return res.status(200).json({message:"operation created!",data})
-            return res.status(200).json({message:"store farm expense"}) 
+        const id = req.params.id;
+        const item= await getItemById(formData.itemId)
+        const itemData=item.dataValues
+        console.log("check item",item.dataValues.categoryId)
+        formData.item_name=itemData.name;
+        formData.amount=itemData.price
+        const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+        formData.total=formula
+        formData.createdBy=req.user.id
+        console.log("checking formDataaa",formData)
+        const data = await updateAnimalExpenseById(formData)
+        return res.status(200).json({message:"store farm expense",data}) 
 
         }
         catch(e){
@@ -27,7 +30,7 @@ export default class FarmExpenseController{
         }
 
     }
-    // Edit Operation
+    // Edit Farm Expense
     static async updateFarmExpense(req,res,next){
         try{
             return res.status(200).json({message:"update farm expense"})   
@@ -38,7 +41,7 @@ export default class FarmExpenseController{
         }
 
     }
-    //get one operation
+    //get one Farm Expense
     static async getFarmExpense(req,res,next){
         try{
 
@@ -52,7 +55,7 @@ export default class FarmExpenseController{
         }
 
     }
-     //get all operations
+     //get all Farm Expenses
      static async getFarmExpenses(req,res,next){
         try{
             // const data = await getAllOperations()
@@ -65,7 +68,7 @@ export default class FarmExpenseController{
         }
 
     }
-    //delete operation
+    //delete Farm expense
     static async deleteFarmExpense(req,res,next){
         try{
 
