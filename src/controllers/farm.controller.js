@@ -53,6 +53,9 @@ static async updateFarm(req,res,next){
         res.status(200).json({message:"update a farm!!",data})
       
     }
+    catch (e) {
+      return next(new Error(e));
+    }
   }
   //delete a farm
 

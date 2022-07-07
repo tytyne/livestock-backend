@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     unit: DataTypes.INTEGER,
     price: DataTypes.INTEGER,
-    type: DataTypes.STRING,
     description: DataTypes.STRING
  
   
@@ -20,11 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       as: 'category',
       onDelete: 'CASCADE',
     })
-    Item.belongsTo(models.User, {
-      foreignKey: 'userIDD000',
-      as: 'author',
-      onDelete: 'CASCADE',
-    })
+    
     
   };
   return Item;

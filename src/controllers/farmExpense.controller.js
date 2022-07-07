@@ -4,10 +4,10 @@ import calculatePrice from "../utils/calculationHelper"
 const{createItem,getItemById}=ItemService
 
 
-export default class OperationController{
+export default class FarmExpenseController{
     //create operation
 
-    static async storeOperation(req,res,next){
+    static async storeFarmExpense(req,res,next){
        try{
             // const formData=req.body
             // const item= await getItemById(formData.itemId)
@@ -19,7 +19,7 @@ export default class OperationController{
             // console.log("check formdata",formData)
             // const data = await createOperation(formData)
             // return res.status(200).json({message:"operation created!",data})
-            return res.status(200).json({message:"store operation"}) 
+            return res.status(200).json({message:"store farm expense"}) 
 
         }
         catch(e){
@@ -28,9 +28,9 @@ export default class OperationController{
 
     }
     // Edit Operation
-    static async updateOperation(req,res,next){
+    static async updateFarmExpense(req,res,next){
         try{
-            return res.status(200).json({message:"update operation"})   
+            return res.status(200).json({message:"update farm expense"})   
 
         }
         catch(e){
@@ -39,12 +39,12 @@ export default class OperationController{
 
     }
     //get one operation
-    static async getOperation(req,res,next){
+    static async getFarmExpense(req,res,next){
         try{
 
-            const data = await getAllOperations(req.user.id)
-            console.log("check data",data)
-            return res.status(200).json({message:"get one operation",data})
+            // const data = await getAllOperations(req.user.id)
+            // console.log("check data",data)
+            return res.status(200).json({message:"get one farm expense"})
 
         }
         catch(e){
@@ -53,11 +53,11 @@ export default class OperationController{
 
     }
      //get all operations
-     static async getOperations(req,res,next){
+     static async getFarmExpenses(req,res,next){
         try{
-            const data = await getAllOperations()
-            console.log("check data",data)
-            return res.status(200).json({message:"all operations",data})
+            // const data = await getAllOperations()
+            // console.log("check data",data)
+            return res.status(200).json({message:"all farm expenses"})
 
         }
         catch(e){
@@ -66,10 +66,10 @@ export default class OperationController{
 
     }
     //delete operation
-    static async deleteOperation(req,res,next){
+    static async deleteFarmExpense(req,res,next){
         try{
 
-            return res.status(200).json({message:"delete one operation"})
+            return res.status(200).json({message:"delete one farm expense"})
         }
         catch(e){
             return next(new Error(e))
@@ -78,4 +78,3 @@ export default class OperationController{
     }
 
 }
-

@@ -2,34 +2,36 @@ import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{Item} = models;
 
+
 /**
  * @description This model deals with Item model
  */
 
 class ItemService{
     static async createItem(value){
-        let item = await Item.create(value)
-        return item
+        let items = await Item.create(value)
+        return items
     }
     static async getItemById(id){
-        let item = await Item.findOne({where:{id:id}})
-        return item
+        let items = await Item.findOne({where:{id:id}})
+        return items
 
     }
     static async getAllItems(){
-        let item = await Item.findAll()
-        return item
+        let items = await Item.findAll()
+        console.log("itemssss",items)
+        return items
 
     }
     static async updateItemById(id,value){
-        let item = await Item.update(value,{where:{id:id}})
-        return item
+        let items = await Item.update(value,{where:{id:id}})
+        return items
 
     }
 
     static async deleteItemById(id){
-        let item = await Item.destroy({where:{id:id}})
-        return item
+        let items = await Item.destroy({where:{id:id}})
+        return items
     }
 
 

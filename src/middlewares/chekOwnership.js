@@ -3,11 +3,8 @@ import FarmerService from "../services/farmer.service"
 import FarmService from "../services/farm.service"
 import EventService from "../services/event.service";
 import AnimalService from "../services/animal.service"
-import OperationService from "../services/operation.service";
-
 const{getFarmerById}=FarmerService
 const {getAnimalById}=AnimalService
-const {getOperationById}=OperationService
 const {getFarmById}=FarmService
 const {getEventById}=EventService
 

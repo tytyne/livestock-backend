@@ -4,9 +4,10 @@ import Farmer from "./farmers"
 import Farm from "./farm"
 import Animal  from "./animals"
 import Item from "./items"
-import Operation from "./operation"
 import Admin from "./admin"
 import Event from "./event"
+import FarmExpense from "./farmExpense"
+import AnimalExpense from "./animalExpense"
 
 
 const router = express.Router();
@@ -17,7 +18,8 @@ router.use("/farm",Farm)
 router.use("/animal",Animal)
 router.use("/event",Event)
 router.use("/item",Item)
-router.use("/operation",Operation)
 router.use("/admin",Admin)
+router.use("/farm-expense",FarmExpense)
+router.use("/animal-expense",AnimalExpense)
 
 export default router;

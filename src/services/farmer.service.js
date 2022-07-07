@@ -1,7 +1,7 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{Farmer} = models;
-console.log("check farmer",Farmer)
+
 
 /**
  * @description This model deals with Farmer model

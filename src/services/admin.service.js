@@ -2,7 +2,7 @@ import models from "../database/models/index.js";
 import "regenerator-runtime/runtime";
 
 const { Admin } = models;
-console.log(Admin)
+
 /**
  * @description This service deals with the Admin model
  */

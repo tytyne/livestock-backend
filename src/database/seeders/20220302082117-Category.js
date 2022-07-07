@@ -7,27 +7,23 @@ module.exports = {
     "Categories",
     [
       {
-        id:1,
         shortcode: "medicine",
         name:"Medicine",
         
       },
       {
-        id:2,
         shortcode: "feed",
         name:"Feed",
         
       },
     
       {
-        id:3,
         shortcode: "vet_service",
         name:"Vet services",
         
       },
     
       {
-        id:4,
         shortcode: "other",
         name:"Others",
         
