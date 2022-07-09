@@ -13,20 +13,21 @@ export default class FarmExpenseController{
     static async storeFarmExpense(req,res,next){
        try{
         const formData=req.body
-        const item= await getItemById(formData.itemId)
+        console.log("check data",formData)
         formData.createdBy=req.user.id
-        const itemData=item.dataValues
         if(formData.categoryId===4){
-            formData.item_name=formatData.item_name;
-            formatData.quantity=1
-            formData.amount=formData.amount
-            formData.tal=formData.amount*formData.quantity
+            formData.item_name=formData.item_name;
+            formData.quantity=formData.quantity
+            formData.price=formData.price
+            const data = await createFarmExpense(formData)
+            return res.status(200).json({message:"store farm expense",data}) 
         }else{
+            const item= await getItemById(formData.itemId)
+            const itemData=item.dataValues
             console.log("check item",item.dataValues.categoryId)
             formData.item_name=itemData.name;
-            formData.amount=itemData.price
             const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-            formData.total=formula
+            formData.price=formula
             console.log("checking formDataaa",formData)
             const data = await createFarmExpense(formData)
             return res.status(200).json({message:"store farm expense",data}) 
@@ -45,20 +46,21 @@ export default class FarmExpenseController{
         try{
             const id = req.params.id;
             const formData=req.body
-            const item= await getItemById(formData.itemId)
+            console.log("check data",formData)
             formData.createdBy=req.user.id
-            const itemData=item.dataValues
             if(formData.categoryId===4){
-                formData.item_name=formatData.item_name;
-                formatData.quantity=1
-                formData.amount=formData.amount
-                formData.tal=formData.amount*formData.quantity
+                formData.item_name=formData.item_name;
+                formData.quantity=formData.quantity
+                formData.price=formData.price
+                const data = await createFarmExpense(formData)
+                return res.status(200).json({message:"store farm expense",data}) 
             }else{
+                const item= await getItemById(formData.itemId)
+                const itemData=item.dataValues
                 console.log("check item",item.dataValues.categoryId)
                 formData.item_name=itemData.name;
-                formData.amount=itemData.price
                 const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-                formData.total=formula
+                formData.price=formula
                 console.log("checking formDataaa",formData)
                 const data = await updateFarmExpenseById(id,formData)
                 return res.status(200).json({message:"store farm expense",data}) 

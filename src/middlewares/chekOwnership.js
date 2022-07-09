@@ -64,20 +64,6 @@ const checkEventOwner= async (req,res,next)=>{
     
     return next();
 };
-const checkOperationOwner= async (req,res,next)=>{
-    const operation = await getOperationById(req.params.id)
 
-    if(operation==null){
-        return res.status(401).json({message:"This do not exist"})
-    }
-    else if (operation.user_id!=req.user.id)
-    {
-        return res.status(403).json({message:"you are not allowed to see this"})
-    }
-    
-    return next();
-    
 
-}
-
-export default{checkFarmerOwner,checkAnimalOwner,checkOperationOwner,checkFarmOwner,checkEventOwner}
+export default{checkFarmerOwner,checkAnimalOwner,checkFarmOwner,checkEventOwner}

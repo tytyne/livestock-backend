@@ -35,12 +35,6 @@ module.exports = {
   down: async (queryInterface) => queryInterface.bulkDelete("Categories", null, {})
 };
 
-//operations-categories
-//gukingira
-//gutanga ibiryo farmId   
-//imiti
-//gutera inanga 
-//otherssss
-// inka irwaye ...
+
 
 

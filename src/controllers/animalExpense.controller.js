@@ -18,9 +18,8 @@ export default class AnimalExpenseController{
             const itemData=item.dataValues
             console.log("check item",item.dataValues.categoryId)
             formData.item_name=itemData.name;
-            formData.amount=itemData.price
             const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-            formData.total=formula
+            formData.price=formula
             formData.createdBy=req.user.id
             console.log("checking formDataaa",formData)
             const data = await createAnimalExpense(formData)
@@ -41,7 +40,6 @@ export default class AnimalExpenseController{
             const itemData=item.dataValues
             console.log("check item",item.dataValues.categoryId)
             formData.item_name=itemData.name;
-            formData.amount=itemData.price
             const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
             formData.total=formula
             formData.createdBy=req.user.id
