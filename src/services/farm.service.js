@@ -17,8 +17,8 @@ class FarmService{
         return farm  
 
     }
-    static async getAllFarms(){
-        let farms = await Farm.findAll()
+    static async getAllFarms(userID){
+        let farms = await Farm.findAll({where:{createdBy:userID}})
         return farms
 
     }
@@ -36,8 +36,8 @@ class FarmService{
         let farm = await Farm.destroy({where:{id:id}})
         return farm
     }
-    static async countFarms(){
-        let farm = await Farm.count()
+    static async countFarms(userID){
+        let farm = await Farm.count({where:{createdBy:userID}})
         return farm
     }
 

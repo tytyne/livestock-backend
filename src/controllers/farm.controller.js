@@ -35,7 +35,7 @@ export default class FarmController {
 //get all farms
 static async getFarming(req,res,next){
     try{
-        const data = await getAllFarms()
+        const data = await getAllFarms(req.user.id)
         console.log("ghjkl")
         return res.status(200).json({message:"All farmers",data})
     }
@@ -70,7 +70,7 @@ static async updateFarm(req,res,next){
   }
   static async countingFarms(req, res, next) {
     try {
-      const data = await countFarms();
+      const data = await countFarms(req.user.id);
       res.status(200).json({ message: "number of farms", data });
     } catch (e) {
       return next(new Error(e));

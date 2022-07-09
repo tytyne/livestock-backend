@@ -12,5 +12,6 @@ router.get("/earring",checkAuthorisation,checkAnimalOwner,animalController.getAn
 router.get("/check/all",checkAuthorisation,animalController.getAnimals)
 router.put("/:id",checkAuthorisation,checkAnimalOwner,animalController.updateAnimal)
 router.delete("/:id",checkAuthorisation,checkAnimalOwner,animalController.deleteAnimal)
+router.get("/count/all",checkAuthorisation,animalController.countingAnimals)
 
 export default router

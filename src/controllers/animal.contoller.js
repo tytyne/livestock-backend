@@ -6,6 +6,7 @@ const {
   getAllanimals,
   updateById,
   deleteById,
+  countAnimals
 } = AnimalService;
 
 export default class AnimalController {
@@ -35,7 +36,7 @@ export default class AnimalController {
   static async getAnimalEaring(req, res, next) {
     try {
       const input = req.query;
-      const data = await getAnimalById(input);
+      const data = await getAnimalByEarring(input);
       res.status(200).json({ message: "get animal by earring number", data });
     } catch (e) {
       return next(new Error(e));
@@ -72,4 +73,16 @@ export default class AnimalController {
       return next(new Error(e));
     }
   }
+
+  // counting animals
+  
+  static async countingAnimals(req, res, next) {
+    try {
+      const data = await countAnimals(req.user.id);
+      res.status(200).json({ message: "number of animals", data });
+    } catch (e) {
+      return next(new Error(e));
+    }
+  }
+
 }

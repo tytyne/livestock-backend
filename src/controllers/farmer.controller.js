@@ -66,7 +66,7 @@ static async deleteFarmer(req,res,next){
 }
 static async countingFarmers(req,res,next){
     try{
-        const data = await countFarmers()
+        const data = await countFarmers(req.user.id)
         console.log(data)
         res.status(200).json({message:"number of farmers",data})
     }

@@ -35,37 +35,14 @@ class FarmerService{
         return farmer
 
     }
-    // static async updateById(updates, id) {
-    //     let nidCheck, colsAffected;
-    //     if (updates.nid) {
-    //       nidCheck = await Farmer.findAll({
-    //         where: { nid: updates.nid },
-    //       });
-    //     }
-    
-    //     if (
-    //       nidCheck == undefined
-    //       || nidCheck.length == 0
-    //       || (nidCheck.length == 1 && nidCheck[0].id == id)
-    //     ) {
-    //       colsAffected = await Farmer.update(updates, {
-    //         where: { id },
-    //         attributes: { exclude: "phone" },
-    //       });
-    //       if (colsAffected[0] != 0) {
-    //         return true;
-    //       }
-    //       return false;
-    //     }
-    //     return "NID has been taken";
-    //   }
 
-    static async deleteById(id,userIDD){
+
+    static async deleteById(id){
         let farmer = await Farmer.destroy({where:{id:id}})
         return farmer
     }
-    static async countFarmers(){
-        let farmer = await Farmer.count()
+    static async countFarmers(userID){
+        let farmer = await Farmer.count({where:{createdBy:userID}})
         return farmer
     }
 
