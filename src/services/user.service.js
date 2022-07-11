@@ -2,7 +2,7 @@ import models from "../database/models/index.js";
 import "regenerator-runtime/runtime";
 
 const { User } = models;
-console.log(User)
+
 /**
  * @description This service deals with the User model
  */

@@ -13,15 +13,14 @@ export default class AnimalExpenseController{
     static async storeAnimalExpense(req,res,next){
        try{
             const formData=req.body
-            console.log("check formData",formData)
             const item= await getItemById(formData.itemId)
             const itemData=item.dataValues
-            console.log("check item",item.dataValues.categoryId)
+           
             formData.item_name=itemData.name;
             const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
             formData.price=formula
             formData.createdBy=req.user.id
-            console.log("checking formDataaa",formData)
+            
             const data = await createAnimalExpense(formData)
             return res.status(200).json({message:"store animal expense",data}) 
 
@@ -38,12 +37,12 @@ export default class AnimalExpenseController{
             const formData=req.body
             const item= await getItemById(formData.itemId)
             const itemData=item.dataValues
-            console.log("check item",item.dataValues.categoryId)
+          
             formData.item_name=itemData.name;
             const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
             formData.total=formula
             formData.createdBy=req.user.id
-            console.log("checking formDataaa",formData)
+           
             const data = await updateAnimalExpenseById(id,formData)
             return res.status(200).json({message:"update animal expense",data})   
 
@@ -71,7 +70,6 @@ export default class AnimalExpenseController{
      static async getAnimalExpenses(req,res,next){
         try {
             const data = await getAllAnimalExpenses(req.user.id);
-            console.log("check expenses",data)
             res.status(200).json({ message: "Animal expenses", data });
           } catch (e) {
             return next(new Error(e));

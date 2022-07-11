@@ -9,23 +9,30 @@ module.exports = {
       {
         shortcode: "medicine",
         name:"Medicine",
+        createdAt: new Date(),
+        updatedAt: new Date(),
         
       },
       {
         shortcode: "feed",
         name:"Feed",
+        createdAt: new Date(),
+        updatedAt: new Date(),
         
       },
     
       {
         shortcode: "vet_service",
         name:"Vet services",
-        
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     
       {
         shortcode: "other",
         name:"Others",
+        createdAt: new Date(),
+        updatedAt: new Date(),
         
       },
        

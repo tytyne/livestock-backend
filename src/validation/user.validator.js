@@ -2,7 +2,7 @@ import Joi from "joi";
 
 class UserValidation {
   static save(req, res, next) {
-    console.log(req.body);
+   
     const Schema = Joi.object({
       firstname: Joi.string().min(3).required().messages(),
       lastname: Joi.string().min(3).required().messages(),

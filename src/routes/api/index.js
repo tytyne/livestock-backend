@@ -8,6 +8,7 @@ import Admin from "./admin"
 import Event from "./event"
 import FarmExpense from "./farmExpense"
 import AnimalExpense from "./animalExpense"
+import Category from "./category"
 
 
 const router = express.Router();
@@ -21,5 +22,6 @@ router.use("/item",Item)
 router.use("/admin",Admin)
 router.use("/farm-expense",FarmExpense)
 router.use("/animal-expense",AnimalExpense)
+router.use("/category",Category)
 
 export default router;

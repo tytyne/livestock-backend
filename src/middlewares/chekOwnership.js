@@ -23,7 +23,7 @@ const checkFarmerOwner= async (req,res,next)=>{
 };
 const checkFarmOwner= async (req,res,next)=>{
     const farm = await getFarmById(req.params.id)
-    console.log(farm)
+   
     if(farm==null){
         return res.status(401).json({message:"This do not exist"})
     }
@@ -36,7 +36,7 @@ const checkFarmOwner= async (req,res,next)=>{
 };
 const checkAnimalOwner= async (req,res,next)=>{
     const animal = await getAnimalById(req.params.id)
-    console.log(animal)
+   
     if(animal ==null){
         return res.status(401).json({message:"This do not exist"})
     }
@@ -53,7 +53,7 @@ const checkAnimalOwner= async (req,res,next)=>{
 
 const checkEventOwner= async (req,res,next)=>{
     const event = await getEventById(req.params.id)
-    console.log(event)
+   
     if(event==null){
         return res.status(401).json({message:"This do not exist"})
     }

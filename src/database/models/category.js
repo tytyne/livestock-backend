@@ -4,6 +4,13 @@ module.exports = (sequelize, DataTypes) => {
 
     shortcode: DataTypes.STRING,
     name: DataTypes.STRING,
+    
+
+    // If don't want createdAt
+    createdAt: false,
+
+    // If don't want updatedAt
+    updatedAt: false,
    
   }, { });
   // Category.hasMany(models.Item, {

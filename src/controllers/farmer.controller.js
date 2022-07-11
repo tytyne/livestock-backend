@@ -4,18 +4,15 @@ const{createFarmer,getFarmerById,getAllFarmers,updateById,deleteById,countFarmer
 export default class FarmerController{
 //save a farmer
 static async storeFarmer(req,res,next){
-// try{
+try{
     const formData = req.body;
     formData.createdBy =req.user.id
-    // console.log("check formdata",formData)
     const data = await createFarmer(formData)
-    // console.log("check data",data)
-    console.log("check data",data.name)
     res.status(200).json({message:"a farmer created!",data})
-// }
-// catch (e) {
-//     return next(new Error(e));
-//   }
+}
+catch (e) {
+    return next(new Error(e));
+  }
 }
 
 //get a farmer by Id
@@ -67,7 +64,6 @@ static async deleteFarmer(req,res,next){
 static async countingFarmers(req,res,next){
     try{
         const data = await countFarmers(req.user.id)
-        console.log(data)
         res.status(200).json({message:"number of farmers",data})
     }
     catch(e){

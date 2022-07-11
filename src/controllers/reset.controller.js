@@ -70,8 +70,6 @@ class resetController {
       const { token } = req.params;
       const decoded = jwtToken.verifyToken(token);
       const user = await getUserByEmail(decoded.email);
-      console.log("check a usserrr",user)
-      console.log("check a email",user.email)
       const mail = new Mailer({
         to: `${user.username} <${user.email}>`,
         header: "Reset Password",
@@ -86,7 +84,7 @@ class resetController {
       await mail.sendMail();
       const hash = hashPassword(password);
       const updatedUser = await updatePassword(hash, decoded);
-      console.log(updatedUser);
+     
       return successResponse(res, ok, undefined, passwordUpdated);
     } catch (e) {
       return next(new Error(e));

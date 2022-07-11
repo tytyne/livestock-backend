@@ -7,7 +7,6 @@ static async storeItem(req,res,next){
 try{
     const formData = req.body;
     const data = await createItem(formData)
-    console.log("check data",data)
     res.status(200).json({message:"item created!",data})
 }
 catch (e) {

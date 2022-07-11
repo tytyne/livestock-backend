@@ -13,7 +13,6 @@ export default class FarmExpenseController{
     static async storeFarmExpense(req,res,next){
        try{
         const formData=req.body
-        console.log("check data",formData)
         formData.createdBy=req.user.id
         if(formData.categoryId===4){
             formData.item_name=formData.item_name;
@@ -24,11 +23,11 @@ export default class FarmExpenseController{
         }else{
             const item= await getItemById(formData.itemId)
             const itemData=item.dataValues
-            console.log("check item",item.dataValues.categoryId)
+            
             formData.item_name=itemData.name;
             const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
             formData.price=formula
-            console.log("checking formDataaa",formData)
+            
             const data = await createFarmExpense(formData)
             return res.status(200).json({message:"store farm expense",data}) 
 
@@ -46,7 +45,6 @@ export default class FarmExpenseController{
         try{
             const id = req.params.id;
             const formData=req.body
-            console.log("check data",formData)
             formData.createdBy=req.user.id
             if(formData.categoryId===4){
                 formData.item_name=formData.item_name;
@@ -57,11 +55,9 @@ export default class FarmExpenseController{
             }else{
                 const item= await getItemById(formData.itemId)
                 const itemData=item.dataValues
-                console.log("check item",item.dataValues.categoryId)
                 formData.item_name=itemData.name;
                 const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
                 formData.price=formula
-                console.log("checking formDataaa",formData)
                 const data = await updateFarmExpenseById(id,formData)
                 return res.status(200).json({message:"store farm expense",data}) 
     
@@ -92,7 +88,6 @@ export default class FarmExpenseController{
      static async getFarmExpenses(req,res,next){
         try{
             const data = await getAllFarmExpenses(req.user.id);
-            console.log("check expenses",data)
             res.status(200).json({ message: "Farm expenses", data });
 
         }

@@ -41,7 +41,6 @@ export default class UserControllers {
   static async signup(req, res, next) {
     try {
       const formData = req.body;
-      console.log(formData);
       const textPassword = formData.password;
       formData.password = hashPassword(textPassword);
       formData.role = "vet";
@@ -93,7 +92,6 @@ export default class UserControllers {
         });
         await mail.sendMail();
         const userUpdated = await updateUser(decoded);
-        console.log(userUpdated);
         // adding thank you message
         const { id, email, isVerified } = userUpdated[1];
         return successResponse(res, ok, undefined, userVerification);

@@ -127,7 +127,6 @@ export default class UserControllers {
         });
         await mail.sendMail();
         const userUpdated = await updateAdmin(decoded);
-        console.log(userUpdated);
         // adding thank you message
         const { id, email, isVerified } = userUpdated[1];
         return successResponse(res, ok,undefined,userVerification);

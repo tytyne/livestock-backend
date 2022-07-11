@@ -19,7 +19,7 @@ class ItemService{
     }
     static async getAllItems(){
         let items = await Item.findAll()
-        console.log("itemssss",items)
+        
         return items
 
     }
