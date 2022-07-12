@@ -7,7 +7,11 @@ import envConfigs from "../config/config";
 dotenv.config();
 const basename = _basename(__filename);
 let env;
-if (process.env.NODE_ENV === "test") { env = "test"; } else {
+if (process.env.NODE_ENV === "production") {
+  sequelize = new Sequelize(process.env.DATABASE_URL);
+} 
+
+else {
   env = "development";
 }
 
