@@ -7,8 +7,12 @@ import envConfigs from "../config/config";
 dotenv.config();
 const basename = _basename(__filename);
 let env;
-if (process.env.NODE_ENV === "test") { env = "test"; } else {
-  env = "production";
+if (process.env.NODE_ENV === "test") { env = "test"; } 
+else if(process.env.NODE_ENV === "production") {
+  env = "production"
+}
+else{
+  env = "development"
 }
 
 const config = envConfigs[env];
