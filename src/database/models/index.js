@@ -8,7 +8,7 @@ dotenv.config();
 const basename = _basename(__filename);
 let env;
 if (process.env.NODE_ENV === "test") { env = "test"; } else {
-  env = "development";
+  env = "production";
 }
 
 const config = envConfigs[env];
