@@ -1,0 +1,43 @@
+/api/v1/farm/check/all:
+  get:
+    tags:
+      - Farm
+    name: Get all farms
+    summary: retrieve all farms
+    produces:
+        - application/json
+    parameters:
+      - name: Authorization
+        in: header
+        required: true
+        description: "Bearer token"
+    responses:
+      200:
+            description: ""
+      # 401:
+      #       description: unauthorized  
+
+/api/v1/farm/create:
+  post:
+    tags:
+      - Farm
+    name: Post a farm
+    summary: create a farm
+    consumes:
+        - application/json
+    parameters:
+      - name: Authorization
+        in: header
+        required: true
+        description: "Bearer token"
+      - in: "body"
+        name: "body"
+        description: "farm details"
+        required: true
+        schema:
+          $ref: "#/definitions/Farm"
+    responses:
+      200:
+        description: "a farm created!"
+      403:
+        description: Forbidden 

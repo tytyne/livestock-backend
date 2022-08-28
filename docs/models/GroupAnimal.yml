@@ -1,0 +1,29 @@
+definitions:
+  GroupAnimal:
+    type: "object"
+    properties:
+      farmId:
+        type: "number"
+      animalCategoryId:
+        type: "number"
+      purposeId:
+        type: "number"
+      name:
+        type: "string"
+      number:
+        type: "number"
+      birthdate:
+        type: "string"
+      femaleNumber:
+        type: "number"
+      maleNumber:
+        type: "number"
+      parent:
+        type: "string"
+      expected_exit:
+        type: "string"
+     
+
+
+
+

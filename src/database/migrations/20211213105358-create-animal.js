@@ -8,24 +8,35 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      farmId: {
+      farmId:{
         type: Sequelize.INTEGER
       },
-      userIDDssss: {
+      purposeId:{
         type: Sequelize.INTEGER
       },
-      createdBy: {
-        type: Sequelize.STRING
+      animalCategoryId:{
+        type: Sequelize.INTEGER
+      },
+      createdBy:{
+        type: Sequelize.INTEGER
       },
       earring_num: {
         type: Sequelize.STRING
       },
-      
-      animal_cat: {
+      birthdate: {
         type: Sequelize.STRING
       },
-      birthdate: {
-        type: Sequelize.DATE
+      ageInDays:{
+        type: Sequelize.INTEGER
+      },
+      ageInWeeks:{
+        type: Sequelize.INTEGER
+      },
+      ageInMonths:{
+        type: Sequelize.INTEGER
+      },
+      ageInYears:{
+        type: Sequelize.INTEGER
       },
       birthkgs: {
         type: Sequelize.STRING

@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     })
     FarmExpense.belongsTo(models.User, {
       foreignKey: 'createdBy',
+      as:'user',
       onDelete: 'CASCADE',
     })
     

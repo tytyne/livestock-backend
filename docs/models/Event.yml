@@ -1,0 +1,10 @@
+definitions:
+  Event:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      start:
+        type: "string"
+      end:
+        type: "string"

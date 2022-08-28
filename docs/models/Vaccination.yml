@@ -1,0 +1,14 @@
+definitions:
+  Vaccination:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      disease:
+        type: "string"
+      unit:
+        type: "number"
+      measurement:
+        type: "string"
+
+

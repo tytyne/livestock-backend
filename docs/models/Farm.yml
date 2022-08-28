@@ -1,0 +1,23 @@
+definitions:
+  Farm:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      farmerId:
+        type: "number"
+      province:
+        type: "string"
+      district:
+        type: "string"
+      cell:
+        type: "string"
+      sector:
+        type: "string"
+      village:
+        type: "string"
+      others:
+        type: "string"
+
+
+

@@ -8,6 +8,8 @@ const {
   deleteById,
   countAnimals
 } = AnimalService;
+import CalculationHelper from "../utils/calculationHelper";
+const{calculateDays,calculateWeeks,calculateMonths,calculateYears}=CalculationHelper
 
 export default class AnimalController {
   //save an animal
@@ -15,6 +17,10 @@ export default class AnimalController {
     try {
       const formData = req.body;
       formData.createdBy = req.user.id;
+      formData.ageInDays = await calculateDays(formData.birthdate);
+      formData.ageInWeeks = await calculateWeeks(formData.birthdate);
+      formData.ageInMonths = await calculateMonths(formData.birthdate);
+      formData.ageInYears = await calculateYears(formData.birthdate)
       const data = await createAnimal(formData);
       res.status(200).json({ message: "an animal created!", data });
     } catch (e) {
@@ -56,6 +62,10 @@ export default class AnimalController {
     try {
       const id = req.params.id;
       const formData = req.body;
+      formData.ageInDays = await calculateDays(formData.birthdate);
+      formData.ageInWeeks = await calculateWeeks(formData.birthdate);
+      formData.ageInMonths = await calculateMonths(formData.birthdate);
+      formData.ageInYears = await calculateYears(formData.birthdate)
       const data = await updateById(formData, id);
       res.status(200).json({ message: "update an animal!!", data });
     } catch (e) {

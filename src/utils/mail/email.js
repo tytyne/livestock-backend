@@ -91,7 +91,7 @@ class Mailer{
               );
       
             const messageObj = {
-              from: `Fimboo application ${process.env.EMAIL_SENDER}`,
+              from: `LivestockBank application ${process.env.EMAIL_SENDER}`,
               to: this.to,
               subject: this.header,
               html

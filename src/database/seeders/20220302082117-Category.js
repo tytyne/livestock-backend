@@ -1,6 +1,5 @@
 'use strict';
 
-'use strict';
 
 module.exports = {
   up: async (queryInterface) => queryInterface.bulkInsert(

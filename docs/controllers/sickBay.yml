@@ -1,0 +1,42 @@
+/api/v1/sickbay/check/all:
+  get:
+    tags:
+      - sickbay
+    name: Get all sickbays
+    summary: retrieve all sickbays
+    consumes:
+        - application/json
+    parameters:
+      - name: Authorization
+        in: header
+        required: true
+        description: "Bearer token"
+    responses:
+      200:
+            description: "All sickbays"
+
+/api/v1/sickbay/create:
+  post:
+    tags:
+      - sickbay
+    name: Post an sickbay
+    summary: create an sickbay
+    consumes:
+        - application/json
+    parameters:
+      - name: Authorization
+        in: header
+        required: true
+        description: "Bearer token"
+      - in: "body"
+        name: "body"
+        description: "sickbay details"
+        required: true
+        schema:
+          $ref: "#/definitions/SickBay"
+    responses:
+      200:
+        description: "SickBay created!"
+      403:
+        description: Forbidden
+       

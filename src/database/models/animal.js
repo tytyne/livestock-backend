@@ -1,11 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const Animal = sequelize.define('Animal', {
 
-    // farmId: DataTypes.INTEGER,
-    // userIDD:DataTypes.INTEGER,
     earring_num:DataTypes.STRING,
-    animal_cat: DataTypes.STRING,
-    birthdate:DataTypes.DATE,
+    birthdate:DataTypes.STRING,
+    ageInDays:DataTypes.INTEGER,
+    ageInWeeks:DataTypes.INTEGER,
+    ageInMonths: DataTypes.INTEGER,
+    ageInYears:DataTypes.INTEGER,
     birthkgs: DataTypes.STRING,
     parent:DataTypes.STRING,
     sex:DataTypes.STRING,
@@ -21,14 +22,24 @@ module.exports = (sequelize, DataTypes) => {
   }, { });
   Animal.associate = function(models) {
  
-    Animal.hasOne(models.AnimalInfo, {
-      foreignKey: 'AnimalInfoId',
-      as: 'info',
+    Animal.belongsTo(models.Farm, {
+      foreignKey: 'farmId',
+      as: 'farm',
       onDelete: 'CASCADE',
     })
-    Animal.hasOne(models.Lifestyle, {
-      foreignKey: 'AnimalId',
-      as: 'lifestyle',
+   Animal.belongsTo(models.PurposeList, {
+      foreignKey: 'purposeId',
+      as: 'purposeList',
+      onDelete: 'CASCADE',
+    })
+   Animal.belongsTo(models.AnimalCategory, {
+      foreignKey: 'animalCategoryId',
+      as: 'animalCategory',
+      onDelete: 'CASCADE',
+    })
+    Animal.belongsTo(models.User, {
+      foreignKey: 'createdBy',
+      as: 'user',
       onDelete: 'CASCADE',
     })
   
@@ -36,3 +47,4 @@ module.exports = (sequelize, DataTypes) => {
 
   return Animal;
 };
+

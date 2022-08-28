@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     })
     AnimalExpense.belongsTo(models.User, {
       foreignKey: 'createdBy',
+      as:'user',
       onDelete: 'CASCADE',
     })
     

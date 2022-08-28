@@ -9,6 +9,15 @@ import Event from "./event"
 import FarmExpense from "./farmExpense"
 import AnimalExpense from "./animalExpense"
 import Category from "./category"
+import AnimalCategory from "./animalcategory"
+import Vaccination from "./vaccination"
+import PurposeList from "./purposelist"
+import Sickbay from "./sickbay"
+import AnimalVaccination from "./animalVaccination"
+import AnimalFeed from "./animalFeed"
+import GroupAnimal from "./groupAnimal"
+import Medicine from "./medicine"
+import Feed from "./feed"
 
 
 const router = express.Router();
@@ -23,5 +32,14 @@ router.use("/admin",Admin)
 router.use("/farm-expense",FarmExpense)
 router.use("/animal-expense",AnimalExpense)
 router.use("/category",Category)
+router.use("/animalcategory",AnimalCategory)
+router.use("/vaccination",Vaccination)
+router.use("/purposelist",PurposeList)
+router.use("/sickbay",Sickbay)
+router.use("/animalVaccination",AnimalVaccination)
+router.use("/animalFeed",AnimalFeed)
+router.use("/groupAnimal",GroupAnimal)
+router.use("/medicine",Medicine)
+router.use("/feed",Feed)
 
 export default router;

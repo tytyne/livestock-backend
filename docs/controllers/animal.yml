@@ -1,0 +1,49 @@
+/api/v1/animal/check/all:
+  get:
+    tags:
+      - Animal
+    name: Get all animals
+    summary: retrieve all animals
+    consumes:
+        - application/json
+    parameters:
+      - name: Authorization
+        in: header
+        required: true
+        description: "Bearer token"
+    responses:
+      '200':
+        description: test
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/Animal'
+      403:
+          description: Forbidden
+
+
+/api/v1/animal/create:
+  post:
+    tags:
+      - Animal
+    name: Post an animal
+    summary: create an animal
+    consumes:
+        - application/json
+    parameters:
+      - name: Authorization
+        in: header
+        required: true
+        description: "Bearer token"
+      - in: "body"
+        name: "body"
+        description: "animal details"
+        required: true
+        schema:
+          $ref: "#/definitions/Animal"
+    responses:
+      200:
+        description: "an animal created!"
+      403:
+        description: Forbidden
+
