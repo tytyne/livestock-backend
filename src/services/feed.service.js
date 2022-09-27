@@ -14,6 +14,11 @@ class FeedService{
         return data
 
     }
+    static async getFeedByCategoryId(categoryName){
+        let data = await Feed.findOne({where:{animalCategoryId:categoryName}})
+        return data
+
+    }
     static async getAllFeeds(){
         let data = await Feed.findAll()
        

@@ -1,0 +1,15 @@
+definitions:
+  AnimalFeed:
+    type: "object"
+    properties:
+      onSetDate:
+        type: "string"
+      animalId:
+        type: "string"
+      description:
+        type: "string"
+      
+        
+
+      
+

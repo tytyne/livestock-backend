@@ -1,0 +1,39 @@
+definitions:
+  AnimalFeed:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      shortcode:
+        type: "string"
+
+
+
+
+        definitions:
+  AnimalFeed:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      shortcode:
+        type: "string"
+      onsetDate:
+        type: "string"
+      animalId:
+        type: "number"
+      description:
+        type: "string"
+      feed_name:
+        type: "string"
+      quantity:
+        type: "number"
+      price:
+        type: "number"
+      feedId:
+        type: "number"
+      groupAnimalId:
+        type: "number"
+      animalId:
+        type: "number"
+      

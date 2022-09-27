@@ -1,0 +1,42 @@
+/api/v1/animalfeed/check/all:
+get:
+  tags:
+    - animalfeed
+  name: Get all animalfeed
+  summary: retrieve all sickbays
+  consumes:
+      - application/json
+  parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: "Bearer token"
+  responses:
+    200:
+          description: "All AnimalFeeds"
+
+/api/v1/animalfeed/create:
+post:
+  tags:
+    - animalfeed
+  name: Post an animalfeed
+  summary: create an sickbay
+  consumes:
+      - application/json
+  parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: "Bearer token"
+    - in: "body"
+      name: "body"
+      description: "sickbay details"
+      required: true
+      schema:
+        $ref: "#/definitions/AnimalFeed"
+  responses:
+    200:
+      description: "SickBay created!"
+    403:
+      description: Forbidden
+      

@@ -1,4 +1,6 @@
 import AnimalFeedService from "../services/animalFeed.service";
+import calculationHelper from "../utils/calculationHelper"
+const{calculatePrice}=calculationHelper
 const {
   createAnimalFeed,
   getAnimalFeedById,
@@ -6,6 +8,8 @@ const {
   updateAnimalFeedById,
   deleteAnimalFeedById,
 } = AnimalFeedService;
+import FeedService from "../services/feed.service";
+const{getFeedById,getFeedByCategoryId}=FeedService
 
 export default class AnimalFeedController {
   //save an AnimalFeed
@@ -13,6 +17,31 @@ export default class AnimalFeedController {
     try {
       const formData = req.body;
       formData.createdBy = req.user.id;
+      
+      if(formData.animalCategoryId===2){
+        formData.animalId=0
+        if(formData.feedId!=0){
+          const item= await getFeedById(formData.feedId)
+          const itemData=item.dataValues
+          formData.feed_name=itemData.name;
+          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+          formData.price=formula
+          
+        }
+        
+      }else{
+        formData.groupAnimalId = 0
+        if(formData.feedId!=0){
+          const item= await getFeedById(formData.feedId)
+          const itemData=item.dataValues
+          formData.feed_name=itemData.name;
+          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+          formData.price=formula
+          
+
+        }
+
+      }
       const data = await createAnimalFeed(formData);
       res.status(200).json({ message: "an AnimalFeed created!", data });
     } catch (e) {
@@ -45,6 +74,31 @@ export default class AnimalFeedController {
     try {
       const id = req.params.id;
       const formData = req.body;
+      if(formData.animalCategoryId===2){
+        formData.animalId=0
+        if(formData.feedId!=0){
+          
+          const item= await getFeedById(formData.feedId)
+          const itemData=item.dataValues
+          formData.feed_name=itemData.name;
+          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+          formData.price=formula
+          
+        }
+        
+      }else{
+        formData.groupAnimalId = 0
+        if(formData.feedId!=0){
+          const item= await getFeedById(formData.feedId)
+          const itemData=item.dataValues
+          formData.feed_name=itemData.name;
+          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+          formData.price=formula
+          
+
+        }
+
+      }
       const data = await updateAnimalFeedById(formData, id);
       res.status(200).json({ message: "update an AnimalFeed!!", data });
     } catch (e) {

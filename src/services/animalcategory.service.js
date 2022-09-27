@@ -8,6 +8,12 @@ const{AnimalCategory} = models;
  */
 
 class AnimalCategoryService{
+
+    static async createAnimalCategory(value){
+
+        let item = await AnimalCategory.create(value)
+        return item
+    }
    
     static async getAnimalCategoryById(id){
         let items = await AnimalCategory.findOne({where:{id:id}})
@@ -19,6 +25,21 @@ class AnimalCategoryService{
        
         return items
 
+    }
+
+    // update animalCategory
+
+    static async updateAnimalCategoryId(value,id){
+
+        let item = await AnimalCategory.update(value,{where:{id:id}})
+        return item
+
+    }
+    //delete animal category
+
+    static async deleteAnimalCategoryById(id){
+        let item = await AnimalCategory.destroy({where:{id:id}})
+        return item
     }
    
 
