@@ -33,6 +33,16 @@ class GroupAnimalService{
         let data = await GroupAnimal.destroy({where:{id:id}})
         return data
     }
+
+    static async updateGroupAnimalStatus(fvalue,mvalue,id){
+        let data = await GroupAnimal.literal(`femaleNumber`-fvalue,`maleNumber`- mvalue,{where:{id:id},returning: true,
+            plain: true,})
+        return data
+
+
+    }
+
+    
   
 
 }

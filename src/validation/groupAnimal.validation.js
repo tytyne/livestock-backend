@@ -14,6 +14,8 @@ class GroupAnimalValidation{
         ageInWeeks:Joi.string().required().messages(),
         ageInMonths:Joi.string().required().messages(),
         expected_exit:Joi.date().required().messages(),
+        groupAnimalCost:Joi.number().required().messages()
+
          })
         const result=Schema.validate(req.body);
         if(result.error){

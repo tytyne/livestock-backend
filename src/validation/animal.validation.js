@@ -13,8 +13,10 @@ class AnimalValidation{
         birthkgs:Joi.string().min(2).required().messages(),
         parent:Joi.string().min(3).required().messages(),
         expected_exit:Joi.date().required().messages(),
-        expected_exit_kgs:Joi.number().required().messages()
-         })
+        expected_exit_kgs:Joi.number().required().messages(),
+        animalCost:Joi.number().required().messages()
+
+        })
         const result=Schema.validate(req.body);
         if(result.error){
             return res.status(400).json({ message: result.error.details[0].message }); 

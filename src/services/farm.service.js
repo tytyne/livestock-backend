@@ -13,12 +13,30 @@ class FarmService{
         return farm
     }
     static async getFarmById(id){
-        let farm = await Farm.findOne({where:{id:id}})
+        let farm = await Farm.findOne({include: [
+            {
+              model: models.Farmer,
+              as: "farmer"
+            },
+            {
+              model: models.User,
+              as: "user"
+            }
+          ],where:{id:id}});
         return farm  
 
     }
     static async getAllFarms(userID){
-        let farms = await Farm.findAll({where:{createdBy:userID}})
+        let farms = await Farm.findAll({include: [
+            {
+              model: models.Farmer,
+              as: "farmer"
+            },
+            {
+              model: models.User,
+              as: "user"
+            }
+          ],where:{createdBy:userID}})
         return farms
 
     }

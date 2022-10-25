@@ -11,6 +11,12 @@ module.exports = {
       animalId: {
         type: Sequelize.INTEGER
       },
+      groupAnimalId: {
+        type: Sequelize.INTEGER
+      },
+      animalCategoryId: {
+        type: Sequelize.INTEGER
+      },
       expected_exit: {
         type: Sequelize.DATE
       },
@@ -25,6 +31,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       facteur: {
+        type: Sequelize.STRING
+      },
+      status: {
         type: Sequelize.STRING
       },
       createdAt: {

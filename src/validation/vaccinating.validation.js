@@ -1,13 +1,13 @@
 import Joi from "joi"
 
-class EventValidation{
+class VaccinatingValidation{
     static save(req,res,next){
         const Schema=Joi.object({
-   
-        title:Joi.string().required().messages(),
-        description:Joi.string().required().messages(),
-        start: Joi.date().required().messages(),
-        end:  Joi.date().greater(Joi.ref('start')).messages(),
+ 
+        onsetDate: Joi.date().required().messages(),
+        description:Joi.string().messages(),
+        quantity:Joi.number().required().messages(),
+        nextAppointment:Joi.date().greater(Joi.ref('onsetDate')).messages(),
       
          })
         const result=Schema.validate(req.body);
@@ -20,7 +20,7 @@ class EventValidation{
 
 }
 
-export  default EventValidation
+export  default VaccinatingValidation
 
 
 

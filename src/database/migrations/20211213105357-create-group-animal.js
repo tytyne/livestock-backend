@@ -48,6 +48,12 @@ module.exports = {
       ageInYears:{
         type: Sequelize.INTEGER
       },
+      groupAnimalCost:{
+        type: Sequelize.INTEGER
+      },
+      deathReason:{
+        type: Sequelize.STRING
+      },
       status:{
         type: Sequelize.INTEGER
       },

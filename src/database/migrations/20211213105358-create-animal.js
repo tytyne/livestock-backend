@@ -54,6 +54,12 @@ module.exports = {
         type: Sequelize.STRING
       },
 
+      animalCost: {
+        type: Sequelize.INTEGER
+      },
+      deathReason:{
+        type: Sequelize.STRING
+      },
       status:{
         type: Sequelize.STRING,
         defaultValue: 'active',

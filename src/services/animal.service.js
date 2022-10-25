@@ -42,5 +42,12 @@ class AnimalService{
         return animal
     }
 
+    static async updateAnimalStatus(value,id){
+        let data = await Animal.update(value, {status:'dead' },{where:{id:id},returning: true,
+            plain: true,})
+        return data
+
+    }
+
 }
 export default AnimalService

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('AnimalVaccinations', {
+    await queryInterface.createTable('Vaccinatings', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,6 +12,13 @@ module.exports = {
         type: Sequelize.DATE
       },
       groupAnimalId: {
+        type: Sequelize.INTEGER
+      },
+     
+      vaccinationId: {
+        type: Sequelize.INTEGER
+      },
+      createdBy: {
         type: Sequelize.INTEGER
       },
       description: {
@@ -37,7 +44,7 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('AnimalVaccinations');
+    await queryInterface.dropTable('Vaccinatings');
   }
 };
 

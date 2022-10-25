@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     expected_exit: DataTypes.DATE,
     expected_exit_kgs:DataTypes.STRING,
     createdBy:DataTypes.INTEGER,
+    animalCost:DataTypes.INTEGER,
+    deathReason:DataTypes.STRING,
     status:{
       type:DataTypes.STRING,
       defaultValue:'active'

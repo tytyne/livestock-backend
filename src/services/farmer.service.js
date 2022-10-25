@@ -13,18 +13,18 @@ class FarmerService{
         return farmer
     }
     static async getFarmerById(id){
-        let farmer = await Farmer.findOne({where:{id:id}})
+        let farmer = await Farmer.findOne({include:'user'},{where:{id:id}})
         return farmer  
 
     }
-    static async getAllFarmers(userIDD){
-        let farmer = await Farmer.findAll({where:{createdBy:userIDD}})
+    static async getAllFarmers(userId){
+        let farmer = await Farmer.findAll({include:'user'},{where:{createdBy:userId}})
         return farmer
 
     }
     static async checkNID(value) {
         let user;
-          user = await Farmer.findOne({ where: {nid: value } });
+          user = await Farmer.findOne({include:'user'},{ where: {nid: value } });
           return user; 
     }
     static async updateById(value,id){

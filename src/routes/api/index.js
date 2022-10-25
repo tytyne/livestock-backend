@@ -13,11 +13,11 @@ import AnimalCategory from "./animalcategory"
 import Vaccination from "./vaccination"
 import PurposeList from "./purposelist"
 import Sickbay from "./sickbay"
-import AnimalVaccination from "./animalVaccination"
 import AnimalFeed from "./animalFeed"
 import GroupAnimal from "./groupAnimal"
 import Medicine from "./medicine"
 import Feed from "./feed"
+import Vaccinating from "./vaccinating"
 
 
 const router = express.Router();
@@ -36,10 +36,10 @@ router.use("/animalcategory",AnimalCategory)
 router.use("/vaccination",Vaccination)
 router.use("/purposelist",PurposeList)
 router.use("/sickbay",Sickbay)
-router.use("/animalVaccination",AnimalVaccination)
 router.use("/animalFeed",AnimalFeed)
 router.use("/groupAnimal",GroupAnimal)
 router.use("/medicine",Medicine)
 router.use("/feed",Feed)
+router.use("/vaccinating",Vaccinating)
 
 export default router;

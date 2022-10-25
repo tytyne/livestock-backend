@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     ageInWeeks:DataTypes.INTEGER,
     ageInMonths: DataTypes.INTEGER,
     ageInYears:DataTypes.INTEGER,
+    groupAnimalCost:DataTypes.INTEGER,
+    deathReason:DataTypes.STRING,
     status:{
       type:DataTypes.STRING,
       defaultValue:'active'

@@ -9,14 +9,14 @@ module.exports = {
     [
       {
         name:"Market Ready",
-        shortcode: "market-read",
+        shortcode: "market-ready",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
-        name:"Processing Purpose",
-        shortcode: "processing-purpose",
+        name:"Parent Stock",
+        shortcode: "parent-stock-purpose",
         createdAt: new Date(),
         updatedAt: new Date(),
         
