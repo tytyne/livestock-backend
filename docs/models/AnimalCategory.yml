@@ -1,8 +1,0 @@
-definitions:
-  AnimalCategory:
-    type: "object"
-    properties:
-      name:
-        type: "string"
-      shortcode:
-        type: "string"

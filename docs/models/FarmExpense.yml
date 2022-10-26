@@ -1,8 +1,0 @@
-definitions:
-  FarmExpense:
-    type: "object"
-    properties:
-      password:
-        type: "string"
-      confirmPassword:
-        type: "string"
