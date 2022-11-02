@@ -1,6 +1,9 @@
-import models from "../database/models/index"
+import Models from "../database/models/index"
 import "regenerator-runtime/runtime";
-const{Farmer} = models;
+const{Farmer} = Models;
+import {
+    Op, where, cast, col
+  } from 'sequelize';
 
 
 /**
@@ -44,6 +47,21 @@ class FarmerService{
     static async countFarmers(userID){
         let farmer = await Farmer.count({where:{createdBy:userID}})
         return farmer
+    }
+
+    static async farmerGroupByDistrictReports(){
+        let farmer = await Farmer.findAll({ attributes: ["district","gender",[Models.sequelize.fn("COUNT",Models.sequelize.col("nid")),'farmers',
+     
+    
+    ], 
+        [Models.sequelize.fn("COUNT",Models.sequelize.col("gender",{where:{gender:'male'}})),'gender_male'],
+        [Models.sequelize.fn("COUNT",Models.sequelize.col("gender",{where:{gender:'female'}})),'gender_female']
+           
+    
+    ],
+        group:["district","gender"] , })
+        return farmer
+  
     }
 
 

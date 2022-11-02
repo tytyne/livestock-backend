@@ -18,6 +18,9 @@ import GroupAnimal from "./groupAnimal"
 import Medicine from "./medicine"
 import Feed from "./feed"
 import Vaccinating from "./vaccinating"
+import Report from "./reports"
+// console.log(Vaccinating)
+// console.log(Report)
 
 
 const router = express.Router();
@@ -41,5 +44,6 @@ router.use("/groupAnimal",GroupAnimal)
 router.use("/medicine",Medicine)
 router.use("/feed",Feed)
 router.use("/vaccinating",Vaccinating)
+router.use("/reports",Report)
 
 export default router;

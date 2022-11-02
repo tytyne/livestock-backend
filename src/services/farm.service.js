@@ -58,6 +58,12 @@ class FarmService{
         let farm = await Farm.count({where:{createdBy:userID}})
         return farm
     }
+  
+    static async getAllFarmReports(){
+      let farm = await Farm.findAll({ group: 'district' })
+      return farm
+
+  }
 
 
 }

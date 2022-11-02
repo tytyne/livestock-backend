@@ -48,6 +48,74 @@ class AnimalService{
         return data
 
     }
+    static async getAllAnimalReports(){
+        let animal = await Animal.findAll(
+
+            {attributes:["earring_num","status","sex","ageInDays"],
+
+            include: [
+                {
+                  model: models.Farm,
+                  as: "farm",
+                  include: [
+                    {
+                      model: models.Farmer,
+                      as: "farmer"
+                    },
+                    
+                
+                ]
+                },
+                {
+                    model: models.PurposeList,
+                    as: "purposeList"
+                },
+                {
+                    model: models.AnimalCategory,
+                    as: "animalCategory"
+                },
+                {
+                    model: models.User,
+                    as: "user"
+                },
+            
+            ]
+              }
+            );
+        
+        return animal
+
+    }
+
+    static async getAllanimalss(){
+        let animal = await Animal.findAll()
+        return animal
+
+    }
 
 }
 export default AnimalService
+
+
+
+// "id": 1,
+// "earring_num": "1245",
+// "birthdate": "2022-08-29",
+// "ageInDays": 58,
+// "ageInWeeks": 8,
+// "ageInMonths": 1,
+// "ageInYears": 0,
+// "birthkgs": "34",
+// "parent": "124351234",
+// "sex": "Male",
+// "expected_exit": "2022-09-05T00:00:00.000Z",
+// "expected_exit_kgs": "56",
+// "createdBy": 2,
+// "animalCost": 20000,
+// "deathReason": null,
+// "status": "active",
+// "createdAt": "2022-10-25T23:01:13.941Z",
+// "updatedAt": "2022-10-25T23:01:13.941Z",
+// "farmId": 1,
+// "purposeId": 1,
+// "animalCategoryId": 1,
