@@ -1,93 +1,114 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
-const{Animal} = models;
+const { Animal } = models;
 
 /**
  * @description This model deals with Animal model
  */
 
-class AnimalService{
-    static async createAnimal(value){
+class AnimalService {
+    static async createAnimal(value) {
         let animal = await Animal.create(value)
         return animal
     }
-    static async getAnimalById(id){
-        let animal = await Animal.findOne({where:{id:id}})
+    static async getAnimalById(id) {
+        let animal = await Animal.findOne({ where: { id: id } })
         return animal
 
     }
-    static async getAnimalByEarring(input){
-        let animal = await Animal.findOne({where:{earring_num:input}})
+    static async getAnimalByEarring(input) {
+        let animal = await Animal.findOne({ where: { earring_num: input } })
         return animal
 
     }
-    static async getAllanimals(vetId){
-        let animal = await Animal.findAll({where:{createdBy:vetId}})
+    static async getAllanimals(vetId) {
+        let animal = await Animal.findAll({ where: { createdBy: vetId } })
         return animal
 
     }
-    static async updateById(value,id){
-        let animal = await Animal.update(value,{where:{id:id},returning: true,
-            plain: true,})
+    static async updateById(value, id) {
+        let animal = await Animal.update(value, {
+            where: { id: id }, returning: true,
+            plain: true,
+        })
         return animal
 
     }
 
-    static async deleteById(id){
-        let animal = await Animal.destroy({where:{id:id}})
+    static async deleteById(id) {
+        let animal = await Animal.destroy({ where: { id: id } })
         return animal
     }
-    static async countAnimals(vetId){
-        let animal= await Animal.count({where:{createdBy:vetId}})
+    static async countAnimals(vetId) {
+        let animal = await Animal.count({ where: { createdBy: vetId } })
         return animal
     }
 
-    static async updateAnimalStatus(value,id){
-        let data = await Animal.update(value, {status:'dead' },{where:{id:id},returning: true,
-            plain: true,})
+    static async updateAnimalStatus(value, id) {
+        let data = await Animal.update(value, { status: 'dead' }, {
+            where: { id: id }, returning: true,
+            plain: true,
+        })
         return data
 
     }
-    static async getAllAnimalReports(){
+    static async getAllAnimalReports() {
         let animal = await Animal.findAll(
 
-            {attributes:["earring_num","status","sex","ageInDays"],
+            {
+                attributes: ["earring_num", "status", "sex", "ageInDays"],
 
-            include: [
-                {
-                  model: models.Farm,
-                  as: "farm",
-                  include: [
+                include: [
                     {
-                      model: models.Farmer,
-                      as: "farmer"
+                        model: models.Farm,
+                        as: "farm",
+                        attributes: {
+                            exclude: ['createdAt', 'updatedAt', "phone","nid","gender","farmer_cat","bank_acc","province","district","sector","cell","village","others","status","createdBy"
+
+                        ]
+                        },
+
+                        include: [
+                            {
+                                model: models.Farmer,
+                                as: "farmer",
+                                attributes: {
+                                    exclude: ['createdAt', 'updatedAt', "phone","nid","gender","farmer_cat","bank_acc","province","district","sector","cell","village","others","status","createdBy"
+
+                                    ]
+                                },
+
+                            },
+
+
+                        ]
                     },
-                    
-                
+                    {
+                        model: models.PurposeList,
+                        as: "purposeList",
+                        attributes: { exclude: ['shortcode', 'createdAt', 'updatedAt'] },
+                    },
+                    {
+                        model: models.AnimalCategory,
+                        as: "animalCategory",
+                        attributes: { exclude: ['shortcode', 'createdAt', 'updatedAt'] },
+                    },
+                    {
+                        model: models.User,
+                        as: "user",
+                        attributes: { exclude: ['password', 'occupation', 'adminId', 'username', 'email', 'role', 'isVerified', 'status', 'createdAt', 'updatedAt'] },
+
+                    },
+
                 ]
-                },
-                {
-                    model: models.PurposeList,
-                    as: "purposeList"
-                },
-                {
-                    model: models.AnimalCategory,
-                    as: "animalCategory"
-                },
-                {
-                    model: models.User,
-                    as: "user"
-                },
-            
-            ]
-              }
-            );
-        
+            }
+        );
+
         return animal
 
     }
 
-    static async getAllanimalss(){
+    static async getAllanimalss() {
         let animal = await Animal.findAll()
         return animal
 

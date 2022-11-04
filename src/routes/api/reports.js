@@ -13,6 +13,7 @@ const router = express.Router()
 
 router.get("/animal-farm-farmer",checkAuthorisation,animalReport.animalsReports)
 router.get("/farmers-district",checkAuthorisation,farmerReport.farmersReports)
-router.get("/farms-district",checkAuthorisation,farmReport.farmsReports)
+router.get("/farm-farmers",checkAuthorisation,farmReport.farmsReports)
+router.get("/parent-animals",checkAuthorisation,farmReport.farmsReports)
 
 export default router
