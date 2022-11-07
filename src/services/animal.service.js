@@ -68,20 +68,20 @@ class AnimalService {
                         ]
                         },
 
-                        // include: [
-                        //     {
-                        //         model: models.Farmer,
-                        //         as: "farmer",
-                        //         attributes: {
-                        //             exclude: ['createdAt', 'updatedAt', "phone","nid","gender","farmer_cat","bank_acc","province","district","sector","cell","village","others","status","createdBy"
+                        include: [
+                            {
+                                model: models.Farmer,
+                                as: "farmer",
+                                attributes: {
+                                    exclude: ['createdAt', 'updatedAt', "phone","nid","gender","farmer_cat","bank_acc","province","district","sector","cell","village","others","status","createdBy"
 
-                        //             ]
-                        //         },
+                                    ]
+                                },
 
-                        //     },
+                            },
 
 
-                        // ]
+                        ]
                     },
                     {
                         model: models.PurposeList,
