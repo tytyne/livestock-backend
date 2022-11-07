@@ -50,16 +50,19 @@ class FarmerService{
     }
 
     static async farmerGroupByDistrictReports(){
-    //     let farmer = await Farmer.findAll({ attributes: ["district","gender",[Models.sequelize.fn("COUNT",Models.sequelize.col("nid")),'farmers',
+        let farmer = await Farmer.findAll({ attributes: ["district","gender",[Models.sequelize.fn("COUNT",Models.sequelize.col("nid")),'farmers',
      
     
-    //    group:["district"] , })
+    ], 
+        [Models.sequelize.fn("COUNT",Models.sequelize.col("gender",{where:{gender:'male'}})),'gender_male'],
+        [Models.sequelize.fn("COUNT",Models.sequelize.col("gender",{where:{gender:'female'}})),'gender_female']
+           
+    
+    ],
+    group:["district","gender"] , })
+    return farmer
 
-
-    let farmer=Farmer.findAll({group: ['district']})
-        return farmer
-  
-    }
+}
 
     
 

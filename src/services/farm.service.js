@@ -2,6 +2,11 @@ import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{Farm} = models;
 
+import {
+  Op, where, cast, col
+} from 'sequelize';
+
+
 
 /**
  * @description This model deals with Farm model
@@ -60,11 +65,19 @@ class FarmService{
     }
   
     static async getAllFarmReports(){
-      let farm = await Farm.findAll({ group: 'district' })
-      return farm
+      let farmer = await Farm.findAll({ attributes: ["farmerId",[models.sequelize.fn("COUNT",models.sequelize.col("id")),'count_farm',
+     
+    
+    ], 
+        
+           
+    
+    ],
+    group:["farmerId"] , })
+    return farmer
+     
 
   }
-
 
 }
 export default FarmService
