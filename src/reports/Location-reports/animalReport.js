@@ -12,27 +12,26 @@ export default class AnimalReport{
     static async animalsReports(req,res,next){
         try {
             const data = await getAllAnimalReports();
-            const hihi= data[0].dataValues
-  
-            console.log(hihi)
-            const animal={
-              "earring_num ": hihi.earring_num,
-              "status": hihi.status,
-              "sex":hihi.gender,
-              "ageInDays":hihi.ageInDays,
-              "farm_name":hihi.farm.farm_name,
-              "farmer_firstname":hihi.farm.farmer.firstname,
-              "farmer_lastname":hihi.farm.farmer.lastname,
-              "purposeList_name":hihi.purposeList.name,
-              "animalCategory":hihi.animalCategory.name
-  
-            }
-            // console.log(holla)
-              
+            
+            var result = data.map(animal => ({ id: animal.id, 
+              earring_num: animal.earring_num,
+              status: animal.status, 
+              sex: animal.sex,
+              ageInDays: animal.ageInDays,
+              farm_name: animal.farm.name,
+              farmer_firstname:animal.farm.farmer.firstname,
+              farmer_lastname:animal.farm.farmer.lastname,
+              purposeList_name:animal.purposeList.name,
+              animalCategory:animal.animalCategory.name
+            
+            
+            
+            
+            }));
 
 
             
-            res.status(200).json({ message: "All animals", animal });
+            res.status(200).json({ message: "All animals", result });
           } catch (e) {
             return next(new Error(e));
           }

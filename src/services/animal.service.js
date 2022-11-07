@@ -56,7 +56,7 @@ class AnimalService {
         let animal = await Animal.findAll(
 
             {
-                attributes: ["earring_num", "status", "sex", "ageInDays"],
+                attributes: ["id","earring_num", "status", "sex", "ageInDays"],
 
                 include: [
                     {
