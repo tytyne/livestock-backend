@@ -11,58 +11,26 @@ module.exports = {
       name:{
         type: Sequelize.STRING
       },
-      number:{
+      description:{
+        type: Sequelize.STRING
+      },
+      farm_id:{
         type: Sequelize.INTEGER
       },
-      farmId:{
+      groupType_id:{
         type: Sequelize.INTEGER
       },
-      purposeId:{
-        type: Sequelize.INTEGER
+      active_only:{
+        type: Sequelize.BOOLEAN
       },
-      animalCategoryId:{
+      type:{
+        type: Sequelize.STRING
+      },
+      records:{
         type: Sequelize.INTEGER
       },
       createdBy:{
         type: Sequelize.INTEGER
-      },
-  
-      femaleNumber:{
-        type: Sequelize.INTEGER
-      },
-      maleNumber:{
-        type: Sequelize.INTEGER
-      },
-      birthdate:{
-        type: Sequelize.STRING
-      },
-      ageInDays:{
-        type: Sequelize.INTEGER
-      },
-      ageInWeeks:{
-        type: Sequelize.INTEGER
-      },
-      ageInMonths:{
-        type: Sequelize.INTEGER
-      },
-      ageInYears:{
-        type: Sequelize.INTEGER
-      },
-      groupAnimalCost:{
-        type: Sequelize.INTEGER
-      },
-      deathReason:{
-        type: Sequelize.STRING
-      },
-      status:{
-        type: Sequelize.INTEGER
-      },
-      expected_exit:{
-        type: Sequelize.DATE
-      },
-      status:{
-        type: Sequelize.STRING,
-        defaultValue: 'active',
       },
       createdAt: {
         allowNull: false,

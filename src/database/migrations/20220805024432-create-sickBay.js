@@ -20,10 +20,10 @@ module.exports = {
       animalId: {
         type: Sequelize.INTEGER
       },
-      animalCategoryId: {
+      groupAnimalId: {
         type: Sequelize.INTEGER
       },
-      groupAnimalId: {
+      animalCategoryId: {
         type: Sequelize.INTEGER
       },
       intervention: {
@@ -40,6 +40,12 @@ module.exports = {
       },
       price: {
         type: Sequelize.INTEGER
+      },
+      withdrawal_date: {
+        type: Sequelize.DATE
+      },
+      measurement: {
+        type: Sequelize.STRING
       },
      
       createdAt: {

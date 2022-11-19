@@ -3,40 +3,24 @@ module.exports = (sequelize, DataTypes) => {
   const GroupAnimal = sequelize.define('GroupAnimal', {
 
     name:DataTypes.STRING,
-    number: DataTypes.INTEGER,
-    femaleNumber:DataTypes.INTEGER,
-    maleNumber: DataTypes.INTEGER,
-    birthdate:DataTypes.STRING,
-    ageInDays:DataTypes.INTEGER,
-    ageInWeeks:DataTypes.INTEGER,
-    ageInMonths: DataTypes.INTEGER,
-    ageInYears:DataTypes.INTEGER,
-    groupAnimalCost:DataTypes.INTEGER,
-    deathReason:DataTypes.STRING,
-    status:{
-      type:DataTypes.STRING,
-      defaultValue:'active'
-    },
-    expected_exit:DataTypes.DATE,
-   
-  
+    description:DataTypes.STRING,
+    active_only:DataTypes.BOOLEAN,
+    type:DataTypes.STRING,
+    records:DataTypes.INTEGER,
+
   }, { });
   GroupAnimal.associate = function(models) {
       GroupAnimal.belongsTo(models.Farm, {
-        foreignKey: 'farmId',
+        foreignKey: 'farm_id',
         as: 'farm',
         onDelete: 'CASCADE',
       })
-      GroupAnimal.belongsTo(models.PurposeList, {
-        foreignKey: 'purposeId',
-        as: 'purposeList',
+      GroupAnimal.belongsTo(models.GroupType, {
+        foreignKey: 'groupType_id',
+        as: 'groupType',
         onDelete: 'CASCADE',
       })
-      GroupAnimal.belongsTo(models.AnimalCategory, {
-        foreignKey: 'animalCategoryId',
-        as: 'animalCategory',
-        onDelete: 'CASCADE',
-      })
+      
       GroupAnimal.belongsTo(models.User, {
         foreignKey: 'createdBy',
         as: 'user',

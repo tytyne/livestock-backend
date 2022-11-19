@@ -6,7 +6,7 @@ import checkOwnership from "../../middlewares/chekOwnership"
 const{checkEventOwner}= checkOwnership
 
 const router = express.Router()
-router.post("/create",checkAuthorisation,EventValidation.save,EventController.storeEvent)
+router.post("/:resource_name/:resource_id/create",checkAuthorisation,EventValidation.save,EventController.storeEvent)
 router.get("/check/all",checkAuthorisation,EventController.getEvents)
 router.delete("/:id",checkAuthorisation,checkEventOwner,EventController.deleteEvent)
 router.get("/:id",checkAuthorisation,checkEventOwner,EventController.getEvent)

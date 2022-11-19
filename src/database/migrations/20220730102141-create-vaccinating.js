@@ -11,11 +11,16 @@ module.exports = {
       onsetDate: {
         type: Sequelize.DATE
       },
-      groupAnimalId: {
+      vaccinationId: {
         type: Sequelize.INTEGER
       },
-     
-      vaccinationId: {
+      treatmentMethodId: {
+        type: Sequelize.INTEGER
+      },
+      animalId: {
+        type: Sequelize.INTEGER
+      },
+      groupAnimalId: {
         type: Sequelize.INTEGER
       },
       createdBy: {
@@ -30,6 +35,13 @@ module.exports = {
       price: {
         type: Sequelize.STRING
       },
+      unit: {
+        type: Sequelize.STRING
+      },
+      measurement: {
+        type: Sequelize.STRING
+      },
+      
       nextAppointment: {
         type: Sequelize.STRING
       },

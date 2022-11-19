@@ -15,35 +15,24 @@ export default class SickBayController {
   //save an SickBay
   static async storeSickBay(req, res, next) {
     try {
+      const {resource_name,resource_id}= req.params
       const formData = req.body;
-      formData.createdBy = req.user.id;
       
-
-      if(formData.animalCategoryId===2){
-        formData.animalId=0
-        if(formData.medicineId!=0){
-          const item= await getMedicineById(formData.medicineId)
-          const itemData=item.dataValues
-          formData.medicine_name=itemData.name;
-          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-          formData.price=formula
-          
-        }
-        
-      }else{
-        formData.groupAnimalId = 0
-        if(formData.medicineId!=0){
-          const item= await getMedicineById(formData.medicineId)
-          const itemData=item.dataValues
-          formData.medicine_name=itemData.name;
-          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-          formData.price=formula
-          
-
-        }
-
+     
+      formData.createdBy = req.user.id;
+      if(resource_name ==="animal"){
+        formData.animalId= resource_id
       }
-       
+      else if(resource_name==="animal_group"){
+        formData.groupAnimalId= resource_id
+      }
+      
+      const item= await getMedicineById(formData.medicineId)
+      const itemData=item.dataValues
+      formData.medicine_name=itemData.name;
+      const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+      formData.price=formula
+      formData.measurement = itemData.measurement
       const data = await createSickBay(formData);
       return res.status(200).json({ message: "SickBay created!", data });
 
@@ -56,6 +45,14 @@ export default class SickBayController {
   //get an SickBay by Id
   static async getSickBay(req, res, next) {
     try {
+      const {resource_name,resource_id}= req.params
+
+      if(resource_name==="animal"){
+        formData.animalId= resource_id
+      }
+      if(resource_name==="animal"){
+        formData.groupAnimalId= resource_id
+      }
       const id = req.params.id;
       const data = await getSickBayById(id);
       res.status(200).json({ message: "get SickBay by Id", data });
@@ -67,6 +64,14 @@ export default class SickBayController {
   //get all SickBays
   static async getSickBays(req, res, next) {
     try {
+      const {resource_name,resource_id}= req.params
+
+      if(resource_name==="animal"){
+        formData.animalId= resource_id
+      }
+      if(resource_name==="animal"){
+        formData.groupAnimalId= resource_id
+      }
       const data = await getAllSickBay(req.user.id);
       res.status(200).json({ message: "All SickBays", data });
     } catch (e) {
@@ -76,33 +81,25 @@ export default class SickBayController {
   // update an SickBay
   static async updateSickBay(req, res, next) {
     try {
+
+      const {resource_name,resource_id}= req.params
+
+      if(resource_name==="animal"){
+        formData.animalId= resource_id
+      }
+      if(resource_name==="animal"){
+        formData.groupAnimalId= resource_id
+      }
       const id = req.params.id;
       const formData = req.body;
-      if(formData.animalCategoryId===2){
-        formData.animalId=0
-        if(formData.medicineId!=0){
-          
-          const item= await getMedicineById(formData.medicineId)
-          const itemData=item.dataValues
-          formData.medicine_name=itemData.name;
-          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-          formData.price=formula
-          
-        }
-        
-      }else{
-        formData.groupAnimalId = 0
-        if(formData.medicineId!=0){
-          const item= await getMedicineById(formData.medicineId)
-          const itemData=item.dataValues
-          formData.medicine_name=itemData.name;
-          const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-          formData.price=formula
-          
 
-        }
+      const item= await getMedicineById(formData.medicineId)
+      const itemData=item.dataValues
+      formData.medicine_name=itemData.name;
+      const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+      formData.price=formula
+      formData.measurement = itemData.measurement
 
-      }
       const data = await updateSickBayById(formData, id);
       res.status(200).json({ message: "update an SickBay!!", data });
     } catch (e) {
@@ -113,6 +110,13 @@ export default class SickBayController {
 
   static async deleteSickBay(req, res, next) {
     try {
+      const {resource_name,resource_id}= req.params
+      if(resource_name==="animal"){
+        formData.animalId= resource_id
+      }
+      if(resource_name==="animal"){
+        formData.groupAnimalId= resource_id
+      }
       const id = req.params.id;
       const data = await deleteSickBayById(id);
       res.status(200).json({ message: "delete a SickBay" });

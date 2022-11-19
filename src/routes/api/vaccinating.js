@@ -5,7 +5,7 @@ import checkOwnership from "../../middlewares/chekOwnership"
 const {checkAnimalOwner}=checkOwnership
 const router = express.Router()
 
-router.post("/create",checkAuthorisation,vaccinatingController.storeVaccinating)
+router.post("/:resource_name/:resource_id/create",checkAuthorisation,vaccinatingController.storeVaccinating)
 router.get("/:id",checkAuthorisation,vaccinatingController.getVaccinating)
 // router.get("/check/all",checkAuthorisation,checkAnimalOwner,vaccinatingController.getVaccinatings)
 router.get("/check/all",checkAuthorisation,vaccinatingController.getVaccinatings)

@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     medicine_name:DataTypes.STRING,
     quantity: DataTypes.STRING,
     price: DataTypes.STRING,
+    withdrawal_date: DataTypes.DATE,
+    measurement:DataTypes.STRING
    
   }, { });
   SickBay.associate = function(models) {
@@ -15,11 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     as: 'animal',
     onDelete: 'CASCADE',
   })
+ 
   SickBay.belongsTo(models.GroupAnimal, {
     foreignKey: 'groupAnimalId',
     as: 'groupAnimal',
     onDelete: 'CASCADE',
   })
+
   SickBay.belongsTo(models.AnimalCategory, {
     foreignKey: 'animalCategoryId',
     as: 'animalCategory',

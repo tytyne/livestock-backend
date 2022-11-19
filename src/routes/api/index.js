@@ -13,12 +13,14 @@ import AnimalCategory from "./animalcategory"
 import Vaccination from "./vaccination"
 import PurposeList from "./purposelist"
 import Sickbay from "./sickbay"
-import AnimalFeed from "./animalFeed"
+import Feeding from "./feeding"
 import GroupAnimal from "./groupAnimal"
 import Medicine from "./medicine"
 import Feed from "./feed"
 import Vaccinating from "./vaccinating"
 import Report from "./reports"
+import Treatment from "./treatment"
+import General from "./general"
 // console.log(Vaccinating)
 // console.log(Report)
 
@@ -29,7 +31,7 @@ router.use("/", User);
 router.use("/farmer",Farmer)
 router.use("/farm",Farm)
 router.use("/animal",Animal)
-router.use("/event",Event)
+router.use("/task",Event)
 router.use("/item",Item)
 router.use("/admin",Admin)
 router.use("/farm-expense",FarmExpense)
@@ -39,11 +41,13 @@ router.use("/animalcategory",AnimalCategory)
 router.use("/vaccination",Vaccination)
 router.use("/purposelist",PurposeList)
 router.use("/sickbay",Sickbay)
-router.use("/animalFeed",AnimalFeed)
+router.use("/feeding",Feeding)
 router.use("/groupAnimal",GroupAnimal)
 router.use("/medicine",Medicine)
 router.use("/feed",Feed)
 router.use("/vaccinating",Vaccinating)
 router.use("/reports",Report)
+router.use("/treatment",Treatment)
+router.use("/general",General)
 
 export default router;

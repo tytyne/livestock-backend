@@ -6,30 +6,30 @@ module.exports = {
     "Categories",
     [
       {
-        shortcode: "medicine",
-        name:"Medicine",
+        shortcode: "Car-and-truck-expenses",
+        name:"Car and truck expenses",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
-        shortcode: "feed",
-        name:"Feed",
+        shortcode: "chemicals",
+        name:"Chemicals",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
     
       {
-        shortcode: "vet_service",
-        name:"Vet services",
+        shortcode: "conservation-expenses",
+        name:"Conservation expenses",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
     
       {
-        shortcode: "other",
-        name:"Others",
+        shortcode: "custom-hire",
+        name:"Custom hire(machine work)",
         createdAt: new Date(),
         updatedAt: new Date(),
         

@@ -8,20 +8,66 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      assigned_to_id: {
         type: Sequelize.INTEGER
       },
-      title: {
+      reference_id: {
+        type: Sequelize.INTEGER
+      },
+      priority_id: {
+        type: Sequelize.INTEGER
+      },
+      animal_id: {
+        type: Sequelize.INTEGER
+      },
+      groupAnimal_id: {
+        type: Sequelize.INTEGER
+      },
+      title:{
         type: Sequelize.STRING
+      },
+      status: {
+        type: Sequelize.INTEGER
+     },
+      hours_spent: {
+        type: Sequelize.INTEGER
+      },
+      todo: {
+        type: Sequelize.STRING
+      },
+      period:{
+        type: Sequelize.STRING
+      },
+      color:{
+        type: Sequelize.STRING
+      },
+      checklist:{
+        type: Sequelize.STRING
+      },
+      start_time: {
+        type: Sequelize.DATE
+      },
+      end_time: {
+        type: Sequelize.DATE
+      },
+      all_day: {
+        type: Sequelize.BOOLEAN
       },
       description: {
         type: Sequelize.STRING
       },
-      start: {
-        type: Sequelize.DATE
+      reference_type: {
+        type: Sequelize.INTEGER
       },
-      end: {
-        type: Sequelize.DATE
+      created_by: {
+        type: Sequelize.STRING
+      },
+      created_by_id: {
+        type: Sequelize.INTEGER
+      },
+      complete:{
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
       },
       createdAt: {
         allowNull: false,
@@ -37,3 +83,5 @@ module.exports = {
     await queryInterface.dropTable('Events');
   }
 };
+
+

@@ -8,67 +8,163 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      farmId:{
+      farm_id:{
         type: Sequelize.INTEGER
       },
-      purposeId:{
+      purpose_id:{
         type: Sequelize.INTEGER
       },
-      animalCategoryId:{
+      animalCategory_id:{
         type: Sequelize.INTEGER
       },
       createdBy:{
         type: Sequelize.INTEGER
       },
-      earring_num: {
+      birth_date:{
+      type: Sequelize.DATE
+      },
+      birth_weight:{
         type: Sequelize.STRING
       },
-      birthdate: {
-        type: Sequelize.STRING
-      },
-      ageInDays:{
-        type: Sequelize.INTEGER
-      },
-      ageInWeeks:{
-        type: Sequelize.INTEGER
-      },
-      ageInMonths:{
-        type: Sequelize.INTEGER
-      },
-      ageInYears:{
-        type: Sequelize.INTEGER
-      },
-      birthkgs: {
-        type: Sequelize.STRING
-      },
-      parent: {
-        type: Sequelize.STRING
-      },
-      sex: {
-        type: Sequelize.STRING
-      },
-      expected_exit: {
+      bred_date:{
         type: Sequelize.DATE
       },
-      expected_exit_kgs: {
+      breed:{
         type: Sequelize.STRING
       },
-
-      animalCost: {
-        type: Sequelize.INTEGER
+      breed_id:{
+        type: Sequelize.STRING
       },
-      deathReason:{
+      breeding_status:{
+        type: Sequelize.STRING
+      },
+      breeding_stock:{
+        type: Sequelize.STRING
+      },
+      coloring:{
+        type: Sequelize.STRING
+      },
+      condition_score:{
+        type: Sequelize.STRING,
+        defaultValue:0
+      },
+      contact_id:{
+        type: Sequelize.STRING
+      },
+      death_date:{
+        type: Sequelize.DATE
+      },
+      deceased_reason:{
+        type: Sequelize.STRING
+      },
+      description:{
+        type: Sequelize.STRING
+      },
+      electronic_id:{
+        type: Sequelize.STRING
+      },
+      estimated_value:{
+        type: Sequelize.STRING
+      },
+      father_id:{
+        type: Sequelize.STRING
+      },
+      feed:{
+        type: Sequelize.STRING
+      },
+      gender:{
+        type: Sequelize.STRING
+      },
+      group_id:{
+        type: Sequelize.STRING
+      },
+      group_qty:{
+        type: Sequelize.STRING
+      },
+      harvest_label:{
+        type: Sequelize.STRING
+      },
+      harvest_unit:{
+        type: Sequelize.STRING
+      },
+      height:{
+        type: Sequelize.STRING
+      },
+      internal_id:{
+        type: Sequelize.STRING
+      },
+      is_group:{
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      is_neutered:{
+        type: Sequelize.BOOLEAN
+      },
+      keywords:{
+        type: Sequelize.STRING
+      },
+      market_price:{
+        type: Sequelize.STRING
+      },
+      measurement_date:{
+        type: Sequelize.DATE
+      },
+      mother_id:{
+        type: Sequelize.STRING
+      },
+      name:{
+        type: Sequelize.STRING
+      },
+      on_feed:{
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
+      other_tag_number:{
+        type: Sequelize.STRING
+      },
+      purchase_date:{
+        type: Sequelize.DATE
+      },
+      purchase_price:{
+        type: Sequelize.STRING
+      },
+      purchased:{
+        type: Sequelize.BOOLEAN
+      },
+      purchased_from_id:{
+        type: Sequelize.STRING
+      },
+      registry_number:{
+        type: Sequelize.STRING
+      },
+      retention_score:{
+        type: Sequelize.STRING
+      },
+      sale_date:{
+        type: Sequelize.DATE
+      },
+      sale_price:{
+        type: Sequelize.STRING
+      },
+      sold_to:{
         type: Sequelize.STRING
       },
       status:{
-        type: Sequelize.STRING,
-        defaultValue: 'active',
+        type: Sequelize.STRING
       },
-     
-      createdBy: {
-        type: Sequelize.INTEGER
+      tag_color:{
+        type: Sequelize.STRING
       },
-     
+      tag_number:{
+        type: Sequelize.STRING
+      },
+      weight:{
+        type: Sequelize.STRING
+      },
+      earring_num:{
+        type: Sequelize.STRING
+      },
+      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -83,3 +179,5 @@ module.exports = {
     await queryInterface.dropTable('Animals');
   }
 };
+
+

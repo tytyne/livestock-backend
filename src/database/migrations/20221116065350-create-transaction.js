@@ -1,42 +1,45 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('AnimalFeeds', {
+    await queryInterface.createTable('Transactions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      onsetDate: {
+      type: {
+        type: Sequelize.STRING
+      },
+      amount: {
+        type: Sequelize.STRING
+      },
+      date: {
         type: Sequelize.DATE
       },
-      createdBy: {
+      reporting_year: {
+        type: Sequelize.STRING
+      },
+      vendor: {
+        type: Sequelize.STRING
+      },
+      category: {
         type: Sequelize.INTEGER
       },
-      animalCategoryId: {
-        type: Sequelize.INTEGER
+      ref_Id: {
+        type: Sequelize.STRING
       },
-      groupAnimalId: {
-        type: Sequelize.INTEGER
+      ref_type: {
+        type: Sequelize.STRING
       },
-      animalId: {
-        type: Sequelize.INTEGER
+      check_number: {
+        type: Sequelize.STRING
       },
-      feedId: {
-        type: Sequelize.INTEGER
+      keywords: {
+        type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
-      },
-      feed_name: {
-        type: Sequelize.STRING
-      },
-      quantity: {
-        type: Sequelize.INTEGER
-      },
-      price: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +52,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('AnimalFeeds');
+    await queryInterface.dropTable('Transactions');
   }
 };
