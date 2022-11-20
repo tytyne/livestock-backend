@@ -7,7 +7,7 @@ const {checkAnimalOwner}=checkOwnership
 const router = express.Router()
 
 router.post("/create",AnimalValidation.save,checkAuthorisation,animalController.storeAnimal)
-router.get("/:id",checkAuthorisation,checkAnimalOwner,animalController.getAnimal)
+router.get("/:id",checkAuthorisation,animalController.getAnimal)
 router.get("/earring",checkAuthorisation,checkAnimalOwner,animalController.getAnimalEaring)
 router.get("/check/all",checkAuthorisation,animalController.getAnimals)
 router.put("/:id",checkAuthorisation,checkAnimalOwner,animalController.updateAnimal)

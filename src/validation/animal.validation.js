@@ -1,10 +1,18 @@
 import Joi from "joi"
+import moment from "moment"
+
+const today = moment().format("YYYY-MM-DD");
+console.log("check todat",today)
+
+
+// const hell = new Date().format("YYYY-MM-DD")
 
 class AnimalValidation{
     static save(req,res,next){
         const Schema=Joi.object({ 
         earring_num:Joi.number().min(3).required().messages(),  
-        birth_date:Joi.date().required().messages(),
+        // birth_date:Joi.date().required().messages(),
+        birth_date:Joi.date().required().less(`${today}`).messages(),
         birth_weight:Joi.string().min(2).messages(),
         animalCategory_id:Joi.number().messages(),
         farm_id:Joi.number().messages(),

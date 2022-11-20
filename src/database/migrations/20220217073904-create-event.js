@@ -17,12 +17,6 @@ module.exports = {
       priority_id: {
         type: Sequelize.INTEGER
       },
-      animal_id: {
-        type: Sequelize.INTEGER
-      },
-      groupAnimal_id: {
-        type: Sequelize.INTEGER
-      },
       title:{
         type: Sequelize.STRING
       },
@@ -42,7 +36,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       checklist:{
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       start_time: {
         type: Sequelize.DATE

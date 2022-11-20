@@ -5,8 +5,9 @@ const{getUserByIdOrEmail}=UserService
 const{createEvent,updateEventById,getAllEvents,deleteEventById,getEventById}=EventService
 
 export default class EventController{
-    // store Event
-    static async storeEvent(req,res,next){
+
+    // store Event with resource
+    static async storeEventWithResource(req,res,next){
        try{
 
         const {resource_name,resource_id}= req.params
@@ -15,10 +16,10 @@ export default class EventController{
         const name = await getUserByIdOrEmail(req.user.id)
         formData.created_by= `${name.dataValues.firstname} ${name.dataValues.lastname}`
         if(resource_name==="animal"){
-          formData.animal_id= resource_id
+          formData.reference_id= resource_id
         }
         else if(resource_name==="animal_group"){
-          formData.group_id= resource_id
+          formData.reference_id= resource_id
         }
         const textStart=formData.start_time
         const textEnd = formData.end_time
@@ -32,8 +33,27 @@ export default class EventController{
         return next(new Error(e));
     }
 
-
-}
+    }
+    // store task
+    static async storeEvent(req,res,next){
+        try{
+ 
+         const formData = req.body;
+         formData.created_by_id = req.user.id;
+         const name = await getUserByIdOrEmail(req.user.id)
+         formData.created_by= `${name.dataValues.firstname} ${name.dataValues.lastname}`
+         const textStart=formData.start_time
+         const textEnd = formData.end_time
+         formData.start_time = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
+         formData.end_time = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
+         formData.userId=req.user.id
+         const data = await createEvent(formData)
+         return  res.status(200).json({message:"task created",data})
+        }
+        catch (e) {
+         return next(new Error(e));
+     }
+    }
     //get all events
     static async getEvents(req,res,next){
         try{

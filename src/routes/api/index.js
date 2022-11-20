@@ -21,8 +21,7 @@ import Vaccinating from "./vaccinating"
 import Report from "./reports"
 import Treatment from "./treatment"
 import General from "./general"
-// console.log(Vaccinating)
-// console.log(Report)
+import Transaction from "./transaction"
 
 
 const router = express.Router();
@@ -49,5 +48,6 @@ router.use("/vaccinating",Vaccinating)
 router.use("/reports",Report)
 router.use("/treatment",Treatment)
 router.use("/general",General)
+router.use ("/transaction",Transaction)
 
 export default router;

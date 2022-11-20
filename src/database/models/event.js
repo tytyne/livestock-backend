@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     todo: DataTypes.STRING,
     period:DataTypes.STRING,
     color:DataTypes.STRING,
-    checklist:DataTypes.STRING,
+    checklist:DataTypes.ARRAY(DataTypes.STRING),
     start_time: DataTypes.DATE,
     end_time: DataTypes.DATE,
     all_day: DataTypes.BOOLEAN,

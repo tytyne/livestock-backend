@@ -9,27 +9,16 @@ class CalculationHelper {
         return cost;
 
     }
-    static async calculateDays(birthdate) {
 
-        const data = moment().diff(birthdate, 'days', false);
+    static async gettingAge(birthdate){
+
+        const data = moment().diff(birthdate, 'months', true);
+                
         return data
 
     }
 
-    static async calculateWeeks(birthdate) {
-
-        const data = moment().diff(birthdate,'weeks', false);
-        return data
-    }
-
-    static async calculateMonths(borndate) {
-        const data = moment().diff(borndate, 'months', false);
-        return data
-    }
-    static async calculateYears(borndate) {
-        const data = moment().diff(borndate, 'years', false);
-        return data
-    }
+    
     static async getDatesInRange(startDate, endDate) {
         const date = new Date(startDate.getTime());
       

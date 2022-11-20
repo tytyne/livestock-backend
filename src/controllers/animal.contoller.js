@@ -9,7 +9,7 @@ const {
   countAnimals
 } = AnimalService;
 import CalculationHelper from "../utils/calculationHelper";
-const{calculateDays,calculateWeeks,calculateMonths,calculateYears}=CalculationHelper
+const { calculateDays, calculateWeeks, calculateMonths, calculateYears, gettingAge } = CalculationHelper
 
 export default class AnimalController {
   //save an animal
@@ -17,7 +17,6 @@ export default class AnimalController {
     try {
       const formData = req.body;
       formData.createdBy = req.user.id;
-      console.log("formadataaa",formData)
       const data = await createAnimal(formData);
       res.status(200).json({ message: "an animal created!", data });
     } catch (e) {
@@ -29,65 +28,131 @@ export default class AnimalController {
   static async getAnimal(req, res, next) {
     try {
       const id = req.params.id;
-      const data = await getAnimalById(id);
-      res.status(200).json({ message: "get animal by Id", data });
-    } catch (e) {
-      return next(new Error(e));
-    }
+      const checkdata = await getAnimalById(id);
+      const data = checkdata.dataValues
+
+      const checking = await gettingAge(data.birth_date)
+      
+
+      if (checking > 1) {
+
+        data.age = `${Math.round(parseFloat(checking))} months`;
+      }
+      else if (checking === 1) {
+        data.age = `${Math.round(parseFloat(checking))} month`;
+      }
+      else if (checking < 1) {
+
+        const checkingdata = Math.round(parseFloat(checking * 30))
+       
+        if (checkingdata > 1) {
+          data.age = `${checkingdata} days`;
+        }
+        else if (checkingdata === 1) {
+          data.age = `${checkingdata} day `;
+
+        }
+        else{
+          data.age = `0 day`;
+        }
+      }
+      
+      else{
+        data.age = `0 day`;
+      }
+      
+    res.status(200).json({ message: "get animal by Id", data });
+  } catch(e) {
+    return next(new Error(e));
   }
+}
   //animal by earing number
   static async getAnimalEaring(req, res, next) {
-    try {
-      const input = req.query;
-      const data = await getAnimalByEarring(input);
-      res.status(200).json({ message: "get animal by earring number", data });
-    } catch (e) {
-      return next(new Error(e));
-    }
+  try {
+    const input = req.query;
+    const data = await getAnimalByEarring(input);
+    res.status(200).json({ message: "get animal by earring number", data });
+  } catch (e) {
+    return next(new Error(e));
   }
+}
   //get all animals
   static async getAnimals(req, res, next) {
-    try {
-      const data = await getAllanimals(req.user.id);
-      res.status(200).json({ message: "All animals", data });
-    } catch (e) {
-      return next(new Error(e));
-    }
+  try {
+    const data = await getAllanimals(req.user.id);
+   
+    for (let index = 0; index < data.length; index++) {
+    
+      const checking = await gettingAge(data[index].birth_date)
+   
+      data[index] = data[index].toJSON();
+     
+        if (checking > 1) {
+
+          data[index].age = `${Math.round(parseFloat(checking))} months`;
+      }
+      else if (checking === 1) {
+        data[index].age = `${Math.round(parseFloat(checking))} month`;
+      }
+      else if (checking < 1) {
+
+        const checkingdata = Math.round(parseFloat(checking * 30))
+       
+        if (checkingdata > 1) {
+          data[index].age = `${checkingdata} days`;
+        }
+        else if (checkingdata === 1) {
+          data[index].age = `${checkingdata} day `;
+
+        }
+        else{
+          data[index].age = `0 day`;
+        }
+      }
+      
+      else{
+        data[index].age = `0 day`;
+      }
+      
+   }
+   
+    res.status(200).json({ message: "All animals", data });
+  } catch (e) {
+    return next(new Error(e));
   }
+}
   // update an animal
   static async updateAnimal(req, res, next) {
-    try {
-      const id = req.params.id;
-      const formData = req.body;
-      const data = await updateById(formData, id);
-      res.status(200).json({ message: "update an animal!!", data });
-    } catch (e) {
-      return next(new Error(e));
-    }
+  try {
+    const id = req.params.id;
+    const formData = req.body;
+    const data = await updateById(formData, id);
+    res.status(200).json({ message: "update an animal!!", data });
+  } catch (e) {
+    return next(new Error(e));
   }
+}
   //delete an animal
 
   static async deleteAnimal(req, res, next) {
-    try {
-      const id = req.params.id;
-      const data = await deleteById(id);
-      res.status(200).json({ message: "delete a animal" });
-    } catch (e) {
-      return next(new Error(e));
-    }
+  try {
+    const id = req.params.id;
+    const data = await deleteById(id);
+    res.status(200).json({ message: "delete a animal" });
+  } catch (e) {
+    return next(new Error(e));
   }
+}
 
   // counting animals
   
   static async countingAnimals(req, res, next) {
-    try {
-      const data = await countAnimals(req.user.id);
-      res.status(200).json({ message: "number of animals", data });
-    } catch (e) {
-      return next(new Error(e));
-    }
+  try {
+    const data = await countAnimals(req.user.id);
+    res.status(200).json({ message: "number of animals", data });
+  } catch (e) {
+    return next(new Error(e));
   }
-
-// update 
+}
 
 }
