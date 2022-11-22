@@ -6,10 +6,10 @@ const {checkAnimalOwner}=checkOwnership
 const router = express.Router()
 
 router.post("/:resource_name/:resource_id/create",checkAuthorisation,vaccinatingController.storeVaccinating)
-router.get("/:id",checkAuthorisation,vaccinatingController.getVaccinating)
+router.get("/:resource_name/:resource_id/:id",checkAuthorisation,vaccinatingController.getVaccinating)
 // router.get("/check/all",checkAuthorisation,checkAnimalOwner,vaccinatingController.getVaccinatings)
-router.get("/check/all",checkAuthorisation,vaccinatingController.getVaccinatings)
-router.put("/:id",checkAuthorisation,vaccinatingController.updateVaccinating)
-router.delete("/:id",checkAuthorisation,vaccinatingController.deleteVaccinating)
+router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,vaccinatingController.getVaccinatings)
+router.put("/:resource_name/:resource_id/:id",checkAuthorisation,vaccinatingController.updateVaccinating)
+router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,vaccinatingController.deleteVaccinating)
 
 export default router

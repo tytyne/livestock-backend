@@ -17,8 +17,8 @@ class VaccinatingService{
 
     }
    
-    static async getAllVaccinatingProcess(){
-        let data = await Vaccinating.findAll()
+    static async getAllVaccinatingProcess(animal_id){
+        let data = await Vaccinating.findAll({where:{animalId:animal_id}})
         return data
 
     }

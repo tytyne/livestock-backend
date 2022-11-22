@@ -76,7 +76,8 @@ export default class VaccinatingController {
   //get all AnimalVaccinations
   static async getVaccinatings(req, res, next) {
     try {
-      const data = await getAllVaccinatingProcess();
+      const {resource_name,resource_id}= req.params
+      const data = await getAllVaccinatingProcess(resource_id);
       res.status(200).json({ message: "All Vaccinating Process", data });
     } catch (e) {
       return next(new Error(e));
