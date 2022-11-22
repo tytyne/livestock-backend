@@ -18,8 +18,8 @@ class GroupAnimalVaccinationService{
 
     }
    
-    static async getAllGroupAnimalVaccination(vetId){
-        let data = await GroupAnimalVaccination.findAll({where:{createdBy:vetId}})
+    static async getAllGroupAnimalVaccination(animal_id){
+        let data = await GroupAnimalVaccination.findAll({where:{animalId:animal_id}})
         return data
 
     }

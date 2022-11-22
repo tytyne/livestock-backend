@@ -18,7 +18,6 @@ export default class SickBayController {
       const {resource_name,resource_id}= req.params
       const formData = req.body;
       
-     
       formData.createdBy = req.user.id;
       if(resource_name ==="animal"){
         formData.animalId= resource_id
@@ -46,13 +45,6 @@ export default class SickBayController {
   static async getSickBay(req, res, next) {
     try {
       const {resource_name,resource_id}= req.params
-
-      if(resource_name==="animal"){
-        formData.animalId= resource_id
-      }
-      if(resource_name==="animal"){
-        formData.groupAnimalId= resource_id
-      }
       const id = req.params.id;
       const data = await getSickBayById(id);
       res.status(200).json({ message: "get SickBay by Id", data });
@@ -65,14 +57,7 @@ export default class SickBayController {
   static async getSickBays(req, res, next) {
     try {
       const {resource_name,resource_id}= req.params
-
-      if(resource_name==="animal"){
-        formData.animalId= resource_id
-      }
-      if(resource_name==="animal"){
-        formData.groupAnimalId= resource_id
-      }
-      const data = await getAllSickBay(req.user.id);
+      const data = await getAllSickBay(resource_id);
       res.status(200).json({ message: "All SickBays", data });
     } catch (e) {
       return next(new Error(e));
@@ -84,12 +69,6 @@ export default class SickBayController {
 
       const {resource_name,resource_id}= req.params
 
-      if(resource_name==="animal"){
-        formData.animalId= resource_id
-      }
-      if(resource_name==="animal"){
-        formData.groupAnimalId= resource_id
-      }
       const id = req.params.id;
       const formData = req.body;
 
@@ -111,10 +90,10 @@ export default class SickBayController {
   static async deleteSickBay(req, res, next) {
     try {
       const {resource_name,resource_id}= req.params
-      if(resource_name==="animal"){
+      if(resource_name ==="animal"){
         formData.animalId= resource_id
       }
-      if(resource_name==="animal"){
+      else if(resource_name==="animal_group"){
         formData.groupAnimalId= resource_id
       }
       const id = req.params.id;

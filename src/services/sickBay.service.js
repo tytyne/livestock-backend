@@ -17,30 +17,8 @@ class SickBayService{
 
     }
    
-    static async getAllSickBay(vetId){
-        let data = await SickBay.findAll({include: [
-            // {
-            //   model: models.AnimalCategory,
-            //   as: "animalCategory"
-            // },
-            {
-                model: models.GroupAnimal,
-                as: "groupAnimal"
-            },
-            // {
-            //     model: models.User,
-            //     as: "user"
-            //   },
-            //   {
-            //       model: models.Medicine,
-            //       as: "medicine"
-            //   },
-            //   {
-            //       model: models.Animal,
-            //       as: "animal"
-            //   }
-            
-          ],where:{createdBy:vetId}})
+    static async getAllSickBay(animal_id){
+        let data = await SickBay.findAll({where:{animalId:animal_id}})
         return data
 
     }

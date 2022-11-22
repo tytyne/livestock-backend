@@ -7,7 +7,7 @@ const{calculatePrice,getDatesInRange}=calculationHelper
 import FeedService from "../services/feed.service"
 const{getAllFeeds,getFeedByCategoryId,getFeedById} = FeedService
 
-import FeedingService from "../services/feeding";
+import FeedingService from "../services/feeding.service";
 const{createFeeding,getFeedigById,getAllFeeding,updateFeedingById,deleteFeedingById}=FeedingService
 
 export default class FeedingController {
@@ -68,7 +68,7 @@ export default class FeedingController {
   static async getFeeding(req, res, next) {
     try {
       const id = req.params.id;
-      const data = await getAnimalFeedById(id);
+      const data = await getFeedigById(id);
       res.status(200).json({ message: "get AnimalFeed by Id", data });
     } catch (e) {
       return next(new Error(e));
@@ -78,7 +78,8 @@ export default class FeedingController {
   //get all AnimalFeeds
   static async getFeedings(req, res, next) {
     try {
-      const data = await getAllAnimalFeed(req.user.id);
+      const {resource_name,resource_id}= req.params
+      const data = await getAllFeeding(resource_id);
       res.status(200).json({ message: "All AnimalFeeds", data });
     } catch (e) {
       return next(new Error(e));

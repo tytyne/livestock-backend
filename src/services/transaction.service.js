@@ -22,6 +22,11 @@ class TransactionService{
         return data
 
     }
+    static async getAllTransactionByAnimal(animal_id){
+        let data = await Transaction.findAll({where:{ref_Id:animal_id}})
+        return data
+
+    }
     static async updateTransactionById(value,id){
         let data = await Transaction.update(value,{where:{id:id},returning: true,
             plain: true,})

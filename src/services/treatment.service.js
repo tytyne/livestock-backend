@@ -17,8 +17,8 @@ class TreatmentService{
 
     }
    
-    static async getAllTreatments(){
-        let data = await Treatment.findAll()
+    static async getAllTreatments(animal_id){
+        let data = await Treatment.findAll({where:{animalId:animal_id}})
         return data
 
     }
