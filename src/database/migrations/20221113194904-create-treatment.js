@@ -45,7 +45,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       record_transaction: {
-        type: Sequelize.STRING
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
       },
       description: {
         type: Sequelize.STRING

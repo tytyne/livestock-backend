@@ -10,10 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     site:DataTypes.STRING,
     withdrawal_date:DataTypes.DATE,
     retreat_date:DataTypes.DATE,
-
     technician:DataTypes.STRING,
     cost:DataTypes.STRING,
-    record_transaction:DataTypes.STRING,
+    record_transaction:DataTypes.BOOLEAN,
     description:DataTypes.STRING,
     date:DataTypes.DATE,
     keywords:DataTypes.STRING,
@@ -31,16 +30,16 @@ module.exports = (sequelize, DataTypes) => {
       as: 'groupAnimal',
       onDelete: 'CASCADE',
     })
-    Treatment.belongsTo(models.Animal, {
-      foreignKey: 'treatmentTypeId',
-      as: 'treatmentType',
-      onDelete: 'CASCADE',
-    })
-    Treatment.belongsTo(models.Animal, {
-      foreignKey: 'treatmentMethodId',
-      as: 'treatmentMethod',
-      onDelete: 'CASCADE',
-    })
+    // Treatment.belongsTo(models.Animal, {
+    //   foreignKey: 'treatmentTypeId',
+    //   as: 'treatmentType',
+    //   onDelete: 'CASCADE',
+    // })
+    // Treatment.belongsTo(models.Animal, {
+    //   foreignKey: 'treatmentMethodId',
+    //   as: 'treatmentMethod',
+    //   onDelete: 'CASCADE',
+    // })
   }
 
   return Treatment;

@@ -38,7 +38,7 @@ static async getTreatment(req,res,next){
 static async getTreatments(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
-        const data = await getAllTreatments()
+        const data = await getAllTreatments(resource_id)
         res.status(200).json({message:"All Treatments",data})
     }
     catch (e) {

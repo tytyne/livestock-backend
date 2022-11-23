@@ -2,7 +2,7 @@ import moment from "moment"
 import EventService from "../services/event.service"
 import UserService from "../services/user.service"
 const{getUserByIdOrEmail}=UserService
-const{createEvent,updateEventById,getAllEvents,deleteEventById,getEventById}=EventService
+const{createEvent,updateEventById,getAllEventsWithReference,deleteEventById,getEventById}=EventService
 
 export default class EventController{
 
@@ -57,7 +57,8 @@ export default class EventController{
     //get all events
     static async getEvents(req,res,next){
         try{
-            const data = await getAllEvents(req.user.id)
+            const {resource_name,resource_id}= req.params
+            const data = await getAllEventsWithReference(resource_id)
             return  res.status(200).json({message:"get all events",data})
         }
         catch (e) {

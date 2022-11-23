@@ -22,6 +22,8 @@ import Report from "./reports"
 import Treatment from "./treatment"
 import General from "./general"
 import Transaction from "./transaction"
+import Accounting from "./accounting"
+import Measurement from "./measurement"
 
 
 const router = express.Router();
@@ -49,5 +51,7 @@ router.use("/reports",Report)
 router.use("/treatment",Treatment)
 router.use("/general",General)
 router.use ("/transaction",Transaction)
+router.use("/accounting",Accounting)
+router.use("/measurement",Measurement)
 
 export default router;

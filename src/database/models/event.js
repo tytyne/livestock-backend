@@ -8,8 +8,6 @@ module.exports = (sequelize, DataTypes) => {
     title:DataTypes.STRING,
     status: DataTypes.STRING,
     hours_spent: DataTypes.INTEGER,
-    animal_id: DataTypes.INTEGER,
-    groupAnimal_id: DataTypes.INTEGER,
     todo: DataTypes.STRING,
     period:DataTypes.STRING,
     color:DataTypes.STRING,

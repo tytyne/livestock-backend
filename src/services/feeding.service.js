@@ -14,7 +14,7 @@ class FeedingService{
              value
             ],
             {
-              ignoreDuplicates: false,
+              ignoreDuplicates: true,
             }
         )
         return data

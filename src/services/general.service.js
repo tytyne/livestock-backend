@@ -1,10 +1,10 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
-const{TreatmentMethod,TreatmentType} = models;
+const{TreatmentMethod,TreatmentType,ListExpense,ListIncome} = models;
 
 
 /**
- * @description This model deals with  two models
+ * @description This model deals with  four models
  */
 
 class generalService{
@@ -28,6 +28,30 @@ class generalService{
     static async getAllTreatmentTypes(){
         let data = await TreatmentType.findAll()
        
+        return data
+
+    }
+    //expenses
+    static async getExpenseById(id){
+        let data = await ListExpense.findOne({where:{id:id}})
+        return data
+
+    }
+    static async getAllExpenses(){
+        let data = await ListExpense.findAll()
+       
+        return data
+
+    }
+
+    //income
+    static async getIncomeById(id){
+        let data = await ListIncome.findOne({where:{id:id}})
+        return data
+
+    }
+    static async getAllIncomes(){
+        let data = await ListIncome.findAll()
         return data
 
     }

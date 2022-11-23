@@ -24,8 +24,9 @@ const { createEvent } = EventService
 
 export default class VaccinatingController {
   //save an vaccinating animal or group-animal
+
   static async storeVaccinating(req, res, next) {
-    try {
+    // try {
       const {resource_name,resource_id}= req.params
       const formData = req.body;
       console.log(req.user.id)
@@ -50,16 +51,19 @@ export default class VaccinatingController {
         start_time: `${formData.nextAppointment}`,
         end_time: `${formData.nextAppointment}`,
         assigned_to_id: `${req.user.id}`,
-        reference_id:`${resource_id}`
+        animal_id:`${resource_id}`
 
       })
       
       const data = await createVaccinatingProcess(formData);
 
       return res.status(200).json({ message: "a Vaccinating Process created!", data });
-    } catch (e) {
-      return next(new Error(e));
-    }
+    // } 
+    
+    
+    // catch (e) {
+    //   return next(new Error(e));
+    // }
   }
 
   //get an AnimalVaccination by Id

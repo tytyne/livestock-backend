@@ -17,6 +17,9 @@ module.exports = {
       fec: {
         type: Sequelize.INTEGER
       },
+      animalId: {
+        type: Sequelize.INTEGER
+      },
       height: {
         type: Sequelize.INTEGER
       },
