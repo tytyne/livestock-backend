@@ -21,7 +21,7 @@ try{
     const data = await createTreatment(formData)
     await createTransaction({
       type: "expense",
-      amount:`- ${formData.cost}`,
+      amount:`- RWF${formData.cost}`,
       date: `${formData.date}`,
       vendor: " ",
       category:`${formData.type}`,

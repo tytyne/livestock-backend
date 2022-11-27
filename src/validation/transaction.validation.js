@@ -9,7 +9,7 @@ class transactionValidation {
    
     const Schema = Joi.object({
       type: Joi.string().valid('expense', 'income').messages(),
-      amount: Joi.number().min(3).messages(),
+      amount: Joi.string().min(3).messages(),
       date: Joi.date().min(3).messages(),
       reporting_year: Joi.number().email().messages(),
       vendor: Joi.string().min(3).messages(),

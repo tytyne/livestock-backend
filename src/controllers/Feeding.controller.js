@@ -44,8 +44,8 @@ export default class FeedingController {
               const data = await createFeeding(formData);
               await createTransaction({
                type: "expense",
-               amount:`- ${formula}`,
-               date: `- ${formData.onsetDate}`,
+               amount:`- RWF${formula}`,
+               date: `${formData.onsetDate}`,
                vendor: " ",
                category: "feeding",
                check_number:"",
@@ -71,7 +71,7 @@ export default class FeedingController {
       const data = await createFeeding(formData);
        await createTransaction({
         type: "expense",
-        amount:`- ${formula}`,
+        amount:`- RWF${formula}`,
         date: `${formData.onsetDate}`,
         vendor: " ",
         category: "feeding",

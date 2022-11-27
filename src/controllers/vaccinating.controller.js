@@ -61,7 +61,7 @@ export default class VaccinatingController {
 
       await createTransaction({
         type: "expense",
-        amount:`- ${formula}`,
+        amount:`- RWF ${formula}`,
         date: `${formData.onsetDate}`,
         vendor: " ",
         category: `Vaccination`,
