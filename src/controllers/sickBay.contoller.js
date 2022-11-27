@@ -37,7 +37,7 @@ export default class SickBayController {
       const data = await createSickBay(formData);
       await createTransaction({
         type: "expense",
-        amount:`${formula}`,
+        amount:`- ${formula}`,
         date: `${formData.onsetDate}`,
         vendor: " ",
         category: `Medicine`,
