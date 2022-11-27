@@ -9,8 +9,8 @@ module.exports = {
         name: "vitamin starter",
         unit: 1,
         price:400,
-        description:"mpbaa",
-        measurement:"litre",
+        description:"boost growth",
+        measurement:"milliliter",
         createdAt: new Date(),
         updatedAt: new Date(),
         
@@ -21,7 +21,7 @@ module.exports = {
         unit: 10,
         price:500,
         description:"mpbaa",
-        measurement:"litre",
+        measurement:"milliliter",
         createdAt: new Date(),
         updatedAt: new Date(),
         
@@ -32,7 +32,7 @@ module.exports = {
         unit: 10,
         price:3000,
         description:"mpbaa",
-        measurement:"litre",
+        measurement:"milliliter",
         createdAt: new Date(),
         updatedAt: new Date(),
         
@@ -43,7 +43,7 @@ module.exports = {
         unit: 15,
         price:6000,
         description:"mpbaa",
-        measurement:"litre",
+        measurement:"milliliter",
         createdAt: new Date(),
         updatedAt: new Date(),
         

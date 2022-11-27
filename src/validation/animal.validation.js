@@ -54,7 +54,10 @@ class AnimalValidation{
         internal_id:Joi.string().messages(),
         weight: Joi.number().messages(),
         height:Joi.number().messages(),
-        electronic_id: Joi.string().min(2).messages()
+        electronic_id: Joi.string().min(2).messages(),
+        insured:Joi.boolean().messages(),
+        insuranceDate:Joi.date().messages(),
+        insuranceExpiration:Joi.date().greater(Joi.ref('insuranceDate')).messages(),
 
         })
         const result=Schema.validate(req.body);

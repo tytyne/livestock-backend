@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      type: {
+        type: Sequelize.STRING
+      },
       key: {
         type: Sequelize.STRING
       },
@@ -28,3 +31,10 @@ module.exports = {
     await queryInterface.dropTable('ListExpenses');
   }
 };
+
+
+// npx sequelize-cli db:migrate:undo --name 20221122173955-create-list-income.js
+
+// npx sequelize-cli db:migrate:undo --name 20221122173928-create-list-expense.js
+
+// npx sequelize-cli db:migrate:undo --name 20211213105358-create-animal.js

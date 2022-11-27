@@ -8,7 +8,14 @@ const{Transaction} = models;
 
 class TransactionService{
     static async createTransaction(value){
-        let data = await Transaction.create(value)
+        let data = Transaction.bulkCreate(
+            [
+             value
+            ],
+            {
+              ignoreDuplicates: true,
+            }
+        )
         return data
     }
     static async getTransactionById(id){
@@ -22,6 +29,7 @@ class TransactionService{
         return data
 
     }
+    
     static async getAllTransactionsByAnimal(animal_id){
         let data = await Transaction.findAll({where:{ref_Id:animal_id}})
         return data

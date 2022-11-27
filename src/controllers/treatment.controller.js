@@ -1,5 +1,9 @@
 import TreatmentService from "../services/treatment.service"
 const{createTreatment,getTreatmentById,getAllTreatments,updateTreatmentById,deleteTreatmentById}=TreatmentService
+import TransactionService from "../services/transaction.service"
+const {createTransaction}=TransactionService
+import EventService from "../services/event.service";
+const { createEvent } = EventService
 
 export default class TreatmentController{
 //save Treatment
@@ -15,6 +19,31 @@ try{
       formData.groupAnimalId= resource_id
     }
     const data = await createTreatment(formData)
+    await createTransaction({
+      type: "expense",
+      amount:`${formData.cost}`,
+      date: `${formData.date}`,
+      vendor: " ",
+      category:`${formData.type}`,
+      check_number:"",
+      ref_Id: `${resource_id}`,
+      ref_type: "animal",
+      reporting_year:"2022",
+      keywords: "",
+      description: ""
+
+    })
+    await createEvent({
+      title: `treat ${resource_id}`,
+      description: `${formData.type}`,
+      start_time: `${formData.date}`,
+      end_time: `${formData.retreat_date}`,
+      assigned_to_id: `${req.user.id}`,
+      animal_id:`${resource_id}`
+
+    })
+
+
     res.status(200).json({message:"Treatment created!",data})
 }
 catch (e) {

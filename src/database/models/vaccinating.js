@@ -23,16 +23,16 @@ module.exports = (sequelize, DataTypes) => {
     as: 'animal',
     onDelete: 'CASCADE',
   })
-  Vaccinating.belongsTo(models.Animal, {
-    foreignKey: 'groupAnimalId',
-    as: 'groupAnimal',
-    onDelete: 'CASCADE',
-  })
-  Vaccinating.belongsTo(models.Animal, {
-    foreignKey: 'treatmentMethodId',
-    as: 'treatmentId',
-    onDelete: 'CASCADE',
-  })
+  // Vaccinating.belongsTo(models.Animal, {
+  //   foreignKey: 'groupAnimalId',
+  //   as: 'groupAnimal',
+  //   onDelete: 'CASCADE',
+  // })
+  // Vaccinating.belongsTo(models.Animal, {
+  //   foreignKey: 'treatmentMethodId',
+  //   as: 'treatmentId',
+  //   onDelete: 'CASCADE',
+  // })
   }
   
  

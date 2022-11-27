@@ -1,5 +1,5 @@
 import generalService from "../services/general.service"
-const{getAllTreatmentMethods,getAllTreatmentTypes,getTreatmentTypeById,getTreatmentMethodById,getAllExpenses,getExpenseById,getAllIncomes,getIncomeById}= generalService
+const{getAllTreatmentMethods,getAllTreatmentTypes,getTreatmentTypeById,getTreatmentMethodById,getAllExpenses,getExpenseById}= generalService
 
 export default class PurposeListController{
 
@@ -66,7 +66,8 @@ static async getExpense(req,res,next){
 //get all expenses
 static async getExpenses(req,res,next){
     try{
-        const data = await getAllExpenses()
+        const type = req.query.type
+        const data = await getAllExpenses(type)
         res.status(200).json({message:"All expenses Type",data})
     }
     catch (e) {
@@ -74,28 +75,5 @@ static async getExpenses(req,res,next){
       }
 }
 
-//incomes
-
-//get  by Id income category
-static async getIncome(req,res,next){
-    try{
-        const id=req.params.id
-        const data = await getIncomeById(id)
-        res.status(200).json({message:"expense by Id",data})
-    }
-    catch (e) {
-        return next(new Error(e));
-      }
-}
-//get all income categories
-static async getIncomes(req,res,next){
-    try{
-        const data = await getAllIncomes ()
-        res.status(200).json({message:"All expenses",data})
-    }
-    catch (e) {
-        return next(new Error(e));
-      }
-}
 
 }

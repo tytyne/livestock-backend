@@ -32,7 +32,14 @@ class CalculationHelper {
         return dates;
       }
       
+    static async electronicId (earring){
 
+        const randomNumber = Math.floor(Math.random() * 16) + 23
+        const data = 'RWA-'.concat(randomNumber).concat(`-`).concat(earring);
+        return data
+      
+      }
+      
 
 
 }

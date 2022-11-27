@@ -10,6 +10,8 @@ const {
   updateSickBayById,
   deleteSickBayById,
 } = SickBayService;
+import TransactionService from "../services/transaction.service"
+const {createTransaction}=TransactionService
 
 export default class SickBayController {
   //save an SickBay
@@ -33,6 +35,21 @@ export default class SickBayController {
       formData.price=formula
       formData.measurement = itemData.measurement
       const data = await createSickBay(formData);
+      await createTransaction({
+        type: "expense",
+        amount:`${formula}`,
+        date: `${formData.onsetDate}`,
+        vendor: " ",
+        category: `Medicine`,
+        check_number:"",
+        ref_Id: `${resource_id}`,
+        ref_type: "animal",
+        reporting_year:"2022",
+        keywords: "",
+        description: ""
+
+      })
+      
       return res.status(200).json({ message: "SickBay created!", data });
 
     

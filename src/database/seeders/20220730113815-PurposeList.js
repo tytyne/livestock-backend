@@ -8,15 +8,15 @@ module.exports = {
     "PurposeLists",
     [
       {
-        name:"Market Ready",
-        shortcode: "market-ready",
+        name:"Market Purpose",
+        shortcode: "market-purpose",
         createdAt: new Date(),
         updatedAt: new Date(),
         
       },
       {
-        name:"Parent Stock",
-        shortcode: "parent-stock-purpose",
+        name:"Breeding Purpose",
+        shortcode: "breeding-purpose",
         createdAt: new Date(),
         updatedAt: new Date(),
         

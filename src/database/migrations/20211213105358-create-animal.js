@@ -164,6 +164,15 @@ module.exports = {
       earring_num:{
         type: Sequelize.STRING
       },
+      insured:{
+        type: Sequelize.BOOLEAN
+      },
+      insuranceDate:{
+        type: Sequelize.DATE
+      },
+      insuranceExpiration:{
+        type: Sequelize.DATE
+      },
       
       createdAt: {
         allowNull: false,

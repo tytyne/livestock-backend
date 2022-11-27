@@ -47,7 +47,10 @@ module.exports = (sequelize, DataTypes) => {
     tag_color: DataTypes.STRING,
     tag_number: DataTypes.STRING,
     weight: DataTypes.STRING,
-    earring_num:DataTypes.STRING
+    earring_num:DataTypes.STRING,
+    insured:DataTypes.BOOLEAN,
+    insuranceDate:DataTypes.DATE,
+    insuranceExpiration:DataTypes.DATE
   
   }, { });
   Animal.associate = function(models) {

@@ -21,6 +21,10 @@ const {
 import EventService from "../services/event.service";
 
 const { createEvent } = EventService
+import TransactionService from "../services/transaction.service"
+const {createTransaction}=TransactionService
+
+
 
 export default class VaccinatingController {
   //save an vaccinating animal or group-animal
@@ -52,6 +56,21 @@ export default class VaccinatingController {
         end_time: `${formData.nextAppointment}`,
         assigned_to_id: `${req.user.id}`,
         animal_id:`${resource_id}`
+
+      })
+
+      await createTransaction({
+        type: "expense",
+        amount:`${formula}`,
+        date: `${formData.onsetDate}`,
+        vendor: " ",
+        category: `Vaccination`,
+        check_number:"",
+        ref_Id: `${resource_id}`,
+        ref_type: "animal",
+        reporting_year:"2022",
+        keywords: "",
+        description: ""
 
       })
       

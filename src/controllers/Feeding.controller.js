@@ -1,14 +1,13 @@
 
 import calculationHelper from "../utils/calculationHelper"
 const{calculatePrice,getDatesInRange}=calculationHelper
-
-
-
 import FeedService from "../services/feed.service"
-const{getAllFeeds,getFeedByCategoryId,getFeedById} = FeedService
+const{getFeedById} = FeedService
 
 import FeedingService from "../services/feeding.service";
 const{createFeeding,getFeedigById,getAllFeeding,updateFeedingById,deleteFeedingById}=FeedingService
+import TransactionService from "../services/transaction.service"
+const {createTransaction}=TransactionService
 
 export default class FeedingController {
   //save an AnimalFeed
@@ -40,11 +39,25 @@ export default class FeedingController {
         for (let i = 0; i < checkdata.length; i++) {
           {
             
-              formData.onsetDate=checkdata[i],
-              console.log("check fm",formData);
-             
-               await createFeeding(formData);
-              return res.status(200).json({ message: "array feed ...!" });
+              formData.onsetDate=checkdata[i];
+            
+              const data = await createFeeding(formData);
+              await createTransaction({
+               type: "expense",
+               amount:`${formula}`,
+               date: `${formData.onsetDate}`,
+               vendor: " ",
+               category: "feeding",
+               check_number:"",
+               ref_Id: `${resource_id}`,
+               ref_type: "animal",
+               reporting_year:"2022",
+               keywords: "",
+               description: ""
+       
+             })
+               
+              return res.status(200).json({ message: "feeding array created ...!",data});
                
          
           }
@@ -54,11 +67,27 @@ export default class FeedingController {
        
  
       }
-    
-    
+      
       const data = await createFeeding(formData);
-      console.log("checking data",data)
-      return res.status(200).json({ message: "feeding created!", data });
+       await createTransaction({
+        type: "expense",
+        amount:`${formula}`,
+        date: `${formData.onsetDate}`,
+        vendor: " ",
+        category: "feeding",
+        check_number:"",
+        ref_Id: `${resource_id}`,
+        ref_type: "animal",
+        reporting_year:"2022",
+        keywords: "",
+        description: ""
+
+      })
+    
+    
+    return  res.status(200).json({ message: "feeding created!", data });
+     
+
     } catch (e) {
       return next(new Error(e));
     }
