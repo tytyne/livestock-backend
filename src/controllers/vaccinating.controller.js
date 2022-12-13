@@ -90,6 +90,13 @@ export default class VaccinatingController {
     try {
       const id = req.params.id;
       const data = await getVaccinatingProcessById(id);
+      // for (let index = 0; index < data.length; index++) {
+
+      //   data[index].createdBy = `holla`;
+      //   data[index].createdBy = `holla`;
+      //   data[index].createdBy = `holla`;
+
+      // }
       res.status(200).json({ message: "get Vaccinating Process by Id", data });
     } catch (e) {
       return next(new Error(e));

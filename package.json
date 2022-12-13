@@ -1,4 +1,6 @@
 {
+
+  "type": "module",
   "name": "livestock-bank",
   "version": "1.0.0",
   "description": "",

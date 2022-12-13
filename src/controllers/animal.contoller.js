@@ -16,7 +16,8 @@ export default class AnimalController {
   static async storeAnimal(req, res, next) {
     try {
       const formData = req.body;
-      formData.electronic_id = await electronicId(formData.earring_num)
+      formData.harvest_label="lbs";
+      formData.electronic_id = await electronicId(formData.earring_num);
       formData.createdBy = req.user.id;
       const data = await createAnimal(formData);
       res.status(200).json({ message: "an animal created!", data });
