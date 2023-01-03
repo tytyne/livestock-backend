@@ -1,23 +1,23 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  class Yield extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
+  const Yield = sequelize.define('Yield', {
+    qty: DataTypes.STRING,
+    date: DataTypes.STRING,
+    batch_number: DataTypes.INTEGER,
+    grade: DataTypes.INTEGER,
+    price:DataTypes.STRING,
+    description:DataTypes.STRING
+
+  
+  }, { });
+  Yield.associate = function(models) {
+    Yield.belongsTo(models.Animal, {
+      foreignKey: 'animal_id',
+      as: 'animal',
+      onDelete: 'CASCADE',
+    })
   }
-  Yield.init({
-    name: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Yield',
-  });
+ 
   return Yield;
 };

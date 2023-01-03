@@ -25,6 +25,8 @@ import Transaction from "./transaction"
 import Accounting from "./accounting"
 import Measurement from "./measurement"
 import Activity from "./activities"
+import Yield from "./yield"
+import Note from "./note"
 
 
 const router = express.Router();
@@ -55,5 +57,7 @@ router.use ("/transaction",Transaction)
 router.use("/accounting",Accounting)
 router.use("/measurement",Measurement)
 router.use("/activities",Activity)
+router.use("/yield",Yield)
+router.use("/notes",Note)
 
 export default router;

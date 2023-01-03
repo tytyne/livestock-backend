@@ -4,7 +4,7 @@ const{Feed} = models;
 
 
 /**
- * @description This model deals with PurposeList model
+ * @description This model deals with Feed model
  */
 
 class FeedService{
