@@ -6,10 +6,10 @@ import checkOwnership from "../../middlewares/chekOwnership"
 const {checkAnimalOwner}=checkOwnership
 const router = express.Router()
 
-router.post("/:animal_id/create",checkAuthorisation,yieldController.storeYield)
-router.get("/:animal_id/:id",checkAuthorisation,yieldController.getYield)
-router.get("/:animal_id/check/all",checkAuthorisation,yieldController.getYields)
-router.put("/:animal_id/:id",checkAuthorisation,yieldController.updateYield)
-router.delete("/:animal_id/:id",checkAuthorisation,yieldController.deleteYield)
+router.post("/:resource_name/:resource_id/create",checkAuthorisation,yieldController.storeYield)
+router.get("/:resource_name/:resource_id/:id",checkAuthorisation,yieldController.getYield)
+router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,yieldController.getYields)
+router.put("/:resource_name/:resource_id/:id",checkAuthorisation,yieldController.updateYield)
+router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,yieldController.deleteYield)
 
 export default router

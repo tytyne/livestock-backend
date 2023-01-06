@@ -14,6 +14,9 @@ module.exports = {
       groupAnimalId: {
         type: Sequelize.INTEGER
       },
+      createdBy: {
+        type: Sequelize.INTEGER,
+      },
       type: {
         type: Sequelize.STRING
       },

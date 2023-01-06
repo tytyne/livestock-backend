@@ -8,8 +8,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      animal_id: {
         type: Sequelize.STRING
+      },
+      createdBy: {
+        type: Sequelize.STRING
+      },
+      amount: {
+        type: Sequelize.STRING
+      },
+      unit: {
+        type: Sequelize.STRING
+      },
+      type: {
+        type: Sequelize.STRING
+      },
+      cost: {
+        type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.STRING
+      },
+      date: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -25,3 +46,5 @@ module.exports = {
     await queryInterface.dropTable('Inputs');
   }
 };
+
+

@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
       as: 'animal',
       onDelete: 'CASCADE',
     })
+    Measurement.belongsTo(models.User, {
+      foreignKey: 'createdBy',
+      as: 'user',
+      onDelete: 'CASCADE',
+    })
   }
  
   return Measurement;

@@ -20,8 +20,8 @@ class NoteService{
 
     }
    
-    static async getAllNotes(){
-        let data = await Note.findAll()
+    static async getAllNotes(animal){
+        let data = await Note.findAll({where:{animalId:animal}})
        
         return data
 

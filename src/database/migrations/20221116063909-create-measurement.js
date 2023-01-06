@@ -14,6 +14,9 @@ module.exports = {
       date: {
         type: Sequelize.DATE
       },
+      createdBy: {
+        type: Sequelize.INTEGER,
+      },
       fec: {
         type: Sequelize.INTEGER
       },

@@ -43,6 +43,7 @@
     "nodemon": "^2.0.19",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
+    "qr": "^0.2.4",
     "qrcode": "^1.5.1",
     "regenerator-runtime": "^0.13.9",
     "sequelize": "^6.21.3",

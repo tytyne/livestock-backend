@@ -12,18 +12,24 @@ module.exports = {
         type: Sequelize.INTEGER
             
       },
+      createdBy: {
+        type: Sequelize.INTEGER,
+      },
       qty: {
         type: Sequelize.STRING
       },
 
       date: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
 
       batch_number: {
         type: Sequelize.STRING
       },
 
+      trace_number: {
+        type: Sequelize.STRING
+      },
       grade: {
         type: Sequelize.STRING
       },
@@ -50,3 +56,13 @@ module.exports = {
     await queryInterface.dropTable('Yields');
   }
 };
+
+
+// harvest[qty]: 234
+// harvest[date]: 2023-01-06
+// harvest[batch_number]: 
+// harvest[trace_number]: 
+// harvest[grade]: 
+// harvest[price]: 210.00
+// harvest[description]: 
+// commit: Save

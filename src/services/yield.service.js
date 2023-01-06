@@ -17,8 +17,8 @@ class YieldService{
 
     }
    
-    static async getAllYields(animal_id){
-        let data = await Yield.findAll({where:{animalId:animal_id}})
+    static async getAllYields(animal){
+        let data = await Yield.findAll({where:{animal_id:animal}})
         return data
 
     }

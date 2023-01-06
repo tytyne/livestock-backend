@@ -7,13 +7,18 @@ export default class YieldController{
 //save Yield
 static async storeYield(req,res,next){
 try{
-    const {animal_id}= req.params
+    const {resource_name,resource_id}= req.params
     const formData = req.body;
-    const animalDetails = await getAnimalById(animal_id)
-    formData.animal_id = animal_id;
+    formData.createdBy = req.user.id;
+    if(resource_name==="animal"){
+        formData.animal_id= resource_id
+      }
+      else if(resource_name==="animal_group"){
+        formData.groupAnimalId= resource_id
+      }
     const data = await createYield(formData)
     console.log("check data",data)
-    res.status(200).json({message:"Yield created!"})
+    res.status(200).json({message:"Yield created!",data})
 }
 catch (e) {
     return next(new Error(e));
@@ -34,8 +39,8 @@ static async getYield(req,res,next){
 //get all Yield
 static async getYields(req,res,next){
     try{
-        const {animal_id}= req.params
-        const data = await getAllYields(animal_id)
+        const {resource_name,resource_id}= req.params
+        const data = await getAllYields(resource_id)
         res.status(200).json({message:"All Yields",data})
     }
     catch (e) {
@@ -45,6 +50,7 @@ static async getYields(req,res,next){
 // update Yield
 static async updateYield(req,res,next){
     try{
+        const {resource_name,resource_id}= req.params
         const id=req.params.id
         const formData = req.body
         const dbResponse = await updateYieldById(formData,id)
@@ -59,6 +65,7 @@ static async updateYield(req,res,next){
 
 static async deleteYield(req,res,next){
     try{
+        const {resource_name,resource_id}= req.params
         const id=req.params.id
         const data = await deleteYieldById(id)
         res.status(200).json({message:"Yield deleted succesfully!"})
