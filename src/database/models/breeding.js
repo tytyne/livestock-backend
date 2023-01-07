@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     bred_with_id:DataTypes.STRING,
     technicial: DataTypes.STRING,
     amount: DataTypes.STRING,
-    unit: DataTypes.DATE,
+    unit: DataTypes.STRING,
     cost:DataTypes.STRING,
     description:DataTypes.STRING
    
