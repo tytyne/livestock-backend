@@ -15,10 +15,10 @@ export default class GroupAnimalController {
     try {
       const formData = req.body;
       formData.createdBy = req.user.id;
-      formData.ageInDays = await calculateDays(formData.birthdate);
-      formData.ageInWeeks = await calculateWeeks(formData.birthdate);
-      formData.ageInMonths = await calculateMonths(formData.birthdate);
-      formData.ageInYears = await calculateYears(formData.birthdate)
+      // formData.ageInDays = await calculateDays(formData.birthdate);
+      // formData.ageInWeeks = await calculateWeeks(formData.birthdate);
+      // formData.ageInMonths = await calculateMonths(formData.birthdate);
+      // formData.ageInYears = await calculateYears(formData.birthdate)
       const data = await createGroupAnimal(formData);
       res.status(200).json({ message: "an GroupAnimal created!", data });
     } catch (e) {
@@ -27,11 +27,12 @@ export default class GroupAnimalController {
   }
 
   //get an GroupAnimal by Id
-  static async getGroupAnimal(req, res, next) {
+  static async getGroupAnimalIdCheck(req, res, next) {
     try {
       const id = req.params.id;
       const data = await getGroupAnimalById(id);
-      res.status(200).json({ message: "get GroupAnimal by Id", data });
+      console.log("check dataaaa",data)
+      res.status(200).json({ message: "get GroupAnimal by Id",data});
     } catch (e) {
       return next(new Error(e));
     }
@@ -53,10 +54,10 @@ export default class GroupAnimalController {
       
       const formData = req.body;
       formData.createdBy = req.user.id;
-      formData.ageInDays = await calculateDays(formData.birthdate);
-      formData.ageInWeeks = await calculateWeeks(formData.birthdate);
-      formData.ageInMonths = await calculateMonths(formData.birthdate);
-      formData.ageInYears = await calculateYears(formData.birthdate)
+      // formData.ageInDays = await calculateDays(formData.birthdate);
+      // formData.ageInWeeks = await calculateWeeks(formData.birthdate);
+      // formData.ageInMonths = await calculateMonths(formData.birthdate);
+      // formData.ageInYears = await calculateYears(formData.birthdate)
       const data = await updateGroupAnimalById(formData, id);
       res.status(200).json({ message: "update an GroupAnimal!!", data });
     } catch (e) {

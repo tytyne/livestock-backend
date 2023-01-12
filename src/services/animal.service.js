@@ -26,6 +26,15 @@ class AnimalService {
         return animal
 
     }
+
+
+
+
+    static async getA() {
+        let data = await Animal.findAll()
+        return data
+
+    }
     static async updateById(value, id) {
         let animal = await Animal.update(value, {
             where: { id: id }, returning: true,
@@ -135,6 +144,11 @@ class AnimalService {
         let animal = await Animal.findAll()
         return animal
 
+    }
+
+    static async searchAnimals(sss){
+        let data = await Animal.findAll({ where: { name: sss } })
+        return data
     }
 
 }

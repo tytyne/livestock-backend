@@ -21,11 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     onDelete: 'CASCADE',
   })
  
-  // Feeding.belongsTo(models.GroupAnimal, {
-  //   foreignKey: 'groupAnimalId',
-  //   as: 'groupAnimal',
-  //   onDelete: 'CASCADE',
-  // })
   Feeding.belongsTo(models.User, {
     foreignKey: 'createdBy',
     as: 'user',

@@ -6,7 +6,9 @@ const {
   getAllanimals,
   updateById,
   deleteById,
-  countAnimals
+  countAnimals,
+  searchAnimals,
+  getA
 } = AnimalService;
 import CalculationHelper from "../utils/calculationHelper";
 const { electronicId, gettingAge } = CalculationHelper
@@ -153,6 +155,20 @@ export default class AnimalController {
     const data = await countAnimals(req.user.id);
     res.status(200).json({ message: "number of animals", data });
   } catch (e) {
+    return next(new Error(e));
+  }
+
+ 
+}
+static async searchingAnimal(req,res,next){
+
+  try{
+    const {name} = req.query;
+    const data = await searchAnimals(name);
+    console.log(data)
+    return res.status(200).json({ message: "number of animals",data});
+  }
+  catch(e){
     return next(new Error(e));
   }
 }

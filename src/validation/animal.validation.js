@@ -10,7 +10,7 @@ console.log("check todat",today)
 class AnimalValidation{
     static save(req,res,next){
         const Schema=Joi.object({ 
-        earring_num:Joi.number().min(3).required().messages(),  
+        earring_num:Joi.number().min(3).messages(),  
         // birth_date:Joi.date().required().messages(),
         birth_date:Joi.date().required().less(`${today}`).messages(),
         birth_weight:Joi.string().min(2).messages(),

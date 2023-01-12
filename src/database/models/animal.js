@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     father_id: DataTypes.STRING,
     feed: DataTypes.STRING,
     gender: DataTypes.STRING,
-    group_id: DataTypes.STRING,
+    // group_id: DataTypes.STRING,
     group_qty: DataTypes.STRING,
     harvest_label: DataTypes.STRING,
     harvest_unit: DataTypes.STRING,
@@ -70,6 +70,12 @@ module.exports = (sequelize, DataTypes) => {
       as: 'animalCategory',
       onDelete: 'CASCADE',
     })
+    // Animal.belongsTo(models.GroupAnimal, {
+    // foreignKey: 'group_id',
+    // as: 'group',
+    // onDelete: 'CASCADE',
+    // });
+    
     Animal.belongsTo(models.User, {
       foreignKey: 'createdBy',
       as: 'user',

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.STRING,
     active_only:DataTypes.BOOLEAN,
     type:DataTypes.STRING,
-    records:DataTypes.INTEGER,
+    
 
   }, { });
   GroupAnimal.associate = function(models) {
@@ -15,11 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         as: 'farm',
         onDelete: 'CASCADE',
       })
-      GroupAnimal.belongsTo(models.GroupType, {
-        foreignKey: 'groupType_id',
-        as: 'groupType',
-        onDelete: 'CASCADE',
-      })
+     
+      // GroupAnimal.hasMany(models.Animal, {
+      //   foreignKey: 'animalId',
+      //   as: 'records',
+      //   onDelete: 'CASCADE',
+      // });
       
       GroupAnimal.belongsTo(models.User, {
         foreignKey: 'createdBy',
