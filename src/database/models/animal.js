@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     father_id: DataTypes.STRING,
     feed: DataTypes.STRING,
     gender: DataTypes.STRING,
-    // group_id: DataTypes.STRING,
+    group_id: DataTypes.STRING,
     group_qty: DataTypes.STRING,
     harvest_label: DataTypes.STRING,
     harvest_unit: DataTypes.STRING,

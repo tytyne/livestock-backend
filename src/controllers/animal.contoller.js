@@ -8,7 +8,7 @@ const {
   deleteById,
   countAnimals,
   searchAnimals,
-  getA
+  updateAnimalByGroupId
 } = AnimalService;
 import CalculationHelper from "../utils/calculationHelper";
 const { electronicId, gettingAge } = CalculationHelper
@@ -57,12 +57,12 @@ export default class AnimalController {
 
         }
         else{
-          data.age = `0 day`;
+          data.age = ` `;
         }
       }
       
       else{
-        data.age = `0 day`;
+        data.age = ` `;
       }
       
     res.status(200).json({ message: "get animal by Id", data });
@@ -170,6 +170,22 @@ static async searchingAnimal(req,res,next){
   }
   catch(e){
     return next(new Error(e));
+  }
+}
+
+static async  EditGroupAnimal(req,res,next){
+  try{
+    const id = req.params.id
+    const {add_group}=req.query
+    console.log("check add group",add_group)
+    const data  = await updateAnimalByGroupId(add_group,id)
+
+    console.log("check dataaaa",data)
+    return res.status(200).json({message:"The animal is added!"})
+
+  }
+  catch(e){
+    return next(new Error(e))
   }
 }
 

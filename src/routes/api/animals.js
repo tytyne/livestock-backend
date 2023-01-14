@@ -14,5 +14,6 @@ router.put("/:id",checkAuthorisation,checkAnimalOwner,animalController.updateAni
 router.delete("/:id",checkAuthorisation,checkAnimalOwner,animalController.deleteAnimal)
 router.get("/count/all",checkAuthorisation,animalController.countingAnimals)
 router.get("/",checkAuthorisation,animalController.searchingAnimal)
+router.put("/:id/:add_group",checkAuthorisation,animalController.EditGroupAnimal)
 
 export default router

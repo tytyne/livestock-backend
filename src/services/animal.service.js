@@ -27,14 +27,6 @@ class AnimalService {
 
     }
 
-
-
-
-    static async getA() {
-        let data = await Animal.findAll()
-        return data
-
-    }
     static async updateById(value, id) {
         let animal = await Animal.update(value, {
             where: { id: id }, returning: true,
@@ -43,6 +35,20 @@ class AnimalService {
         return animal
 
     }
+
+    // update group ...
+
+    static async updateAnimalByGroupId(value,checkid) {
+        let animal = await Animal.update({group_id:value}, {
+            where: { id:checkid },
+            returning: true,
+            plain: true,
+            })
+        return animal
+
+    }
+
+
     // update father
 
     static async updateAnimalFather(ressource_id,fatherId){

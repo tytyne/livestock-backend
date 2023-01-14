@@ -1,3 +1,4 @@
+import AnimalService from "../services/animal.service";
 import GroupAnimalService from "../services/groupAnimal.service";
 const {
   createGroupAnimal,
@@ -5,7 +6,10 @@ const {
   getAllGroupAnimals,
   updateGroupAnimalById,
   deleteGroupAnimalById,
+
 } = GroupAnimalService;
+const {updateAnimalByGroupId,createAnimal} = AnimalService
+
 import CalculationHelper from "../utils/calculationHelper";
 const{calculateDays,calculateWeeks,calculateMonths,calculateYears}=CalculationHelper
 
@@ -15,12 +19,17 @@ export default class GroupAnimalController {
     try {
       const formData = req.body;
       formData.createdBy = req.user.id;
-      // formData.ageInDays = await calculateDays(formData.birthdate);
-      // formData.ageInWeeks = await calculateWeeks(formData.birthdate);
-      // formData.ageInMonths = await calculateMonths(formData.birthdate);
-      // formData.ageInYears = await calculateYears(formData.birthdate)
-      const data = await createGroupAnimal(formData);
-      res.status(200).json({ message: "an GroupAnimal created!", data });
+     if (formData.type ==='set')
+     {
+      formData.is_group=true;
+      const data = await createAnimal(formData);
+      res.status(200).json({ message: "an animal created!", data });
+     }
+      else{
+        const data = await createGroupAnimal(formData);
+        res.status(200).json({ message: "an GroupAnimal created!", data });
+      }
+     
     } catch (e) {
       return next(new Error(e));
     }
@@ -54,12 +63,8 @@ export default class GroupAnimalController {
       
       const formData = req.body;
       formData.createdBy = req.user.id;
-      // formData.ageInDays = await calculateDays(formData.birthdate);
-      // formData.ageInWeeks = await calculateWeeks(formData.birthdate);
-      // formData.ageInMonths = await calculateMonths(formData.birthdate);
-      // formData.ageInYears = await calculateYears(formData.birthdate)
       const data = await updateGroupAnimalById(formData, id);
-      res.status(200).json({ message: "update an GroupAnimal!!", data });
+      return res.status(200).json({ message: "update an GroupAnimal!!", data });
     } catch (e) {
       return next(new Error(e));
     }
@@ -70,12 +75,27 @@ export default class GroupAnimalController {
     try {
       const id = req.params.id;
       const data = await deleteGroupAnimalById(id);
-      res.status(200).json({ message: "delete a GroupAnimal" });
+      return res.status(200).json({ message: "delete a GroupAnimal" });
     } catch (e) {
       return next(new Error(e));
     }
   }
 
+  // update animal group
+
+  static async  EditGroupAnimal(req,res,next){
+    try{
+      const rid = req.params.id
+      const {add_animal}=req.query
+      const data  = await updateAnimalByGroupId(add_animal)
+      console.log("check dataaaa",data)
+      return res.status(200).json({message:"The animal is added!",data})
+
+    }
+    catch(e){
+      return next(new Error(e))
+    }
+  }
  
 
 }
