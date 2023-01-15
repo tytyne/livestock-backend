@@ -42,6 +42,14 @@ class GroupAnimalService{
 
     }
 
+    static async AllTypes(){
+        
+        let data = await  GroupAnimal.findAll()
+        return data
+        
+
+    }
+
     
   
 

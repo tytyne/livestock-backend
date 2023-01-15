@@ -10,7 +10,7 @@ router.post("/create",AnimalValidation.save,checkAuthorisation,animalController.
 router.get("/:id",checkAuthorisation,animalController.getAnimal)
 router.get("/earring",checkAuthorisation,checkAnimalOwner,animalController.getAnimalEaring)
 router.get("/check/all",checkAuthorisation,animalController.getAnimals)
-router.put("/:id",checkAuthorisation,checkAnimalOwner,animalController.updateAnimal)
+// router.put("/:id",checkAuthorisation,checkAnimalOwner,animalController.updateAnimal)
 router.delete("/:id",checkAuthorisation,checkAnimalOwner,animalController.deleteAnimal)
 router.get("/count/all",checkAuthorisation,animalController.countingAnimals)
 router.get("/",checkAuthorisation,animalController.searchingAnimal)

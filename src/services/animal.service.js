@@ -39,14 +39,18 @@ class AnimalService {
     // update group ...
 
     static async updateAnimalByGroupId(value,checkid) {
-        let animal = await Animal.update({group_id:value}, {
-            where: { id:checkid },
+        let data= await Animal.update(
+            { group_id:value },
+            { where: { id: checkid },
             returning: true,
             plain: true,
-            })
-        return animal
+        }
+          )
+        return data;
 
     }
+
+    
 
 
     // update father
@@ -154,6 +158,11 @@ class AnimalService {
 
     static async searchAnimals(sss){
         let data = await Animal.findAll({ where: { name: sss } })
+        return data
+    }
+
+    static async countingAnimals(number){
+        let data = await Animal.count({ where: { group_id: number } })
         return data
     }
 

@@ -8,7 +8,7 @@ const {
   deleteGroupAnimalById,
 
 } = GroupAnimalService;
-const {updateAnimalByGroupId,createAnimal} = AnimalService
+const {updateAnimalByGroupId,createAnimal,countingAnimals} = AnimalService
 
 import CalculationHelper from "../utils/calculationHelper";
 const{calculateDays,calculateWeeks,calculateMonths,calculateYears}=CalculationHelper
@@ -50,7 +50,27 @@ export default class GroupAnimalController {
   //get all GroupAnimals
   static async getGroupAnimals(req, res, next) {
     try {
+
+
       const data = await getAllGroupAnimals(req.user.id);
+      for (let index = 0; index < data.length; index++) {
+    
+        const checking = await countingAnimals(data[index].id)
+        data[index] = data[index].toJSON();
+        // if(checking){
+        console.log("checking data",checking)
+          data[index].group_qty = checking;
+        // }
+
+
+      }
+  
+
+
+
+
+
+
       res.status(200).json({ message: "All GroupAnimals", data });
     } catch (e) {
       return next(new Error(e));
@@ -85,17 +105,22 @@ export default class GroupAnimalController {
 
   static async  EditGroupAnimal(req,res,next){
     try{
-      const rid = req.params.id
-      const {add_animal}=req.query
-      const data  = await updateAnimalByGroupId(add_animal)
-      console.log("check dataaaa",data)
-      return res.status(200).json({message:"The animal is added!",data})
+      
+      const {add_group,id}=req.params
+     
+      const data  = await updateAnimalByGroupId(add_group,id)
 
+      return res.status(200).json({message:"animal is added",data})
+  
     }
     catch(e){
       return next(new Error(e))
     }
   }
+
+  // static async AllTypesGroupAnimals(req,res,next){
+
+  // }
  
 
 }
