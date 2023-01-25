@@ -4,9 +4,9 @@ module.exports = {
     await queryInterface.createTable('GroupAnimals', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       name:{
         type: Sequelize.STRING
@@ -15,22 +15,22 @@ module.exports = {
         type: Sequelize.STRING
       },
       farm_id:{
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
-      groupType_id:{
-        type: Sequelize.INTEGER
-      },
+      // groupType_id:{
+      //   type: Sequelize.INTEGER
+      // },
       active_only:{
         type: Sequelize.BOOLEAN
       },
       type:{
         type: Sequelize.STRING
       },
-      records:{
-        type: Sequelize.INTEGER
-      },
+      // records:{
+      //   type: Sequelize.INTEGER
+      // },
       createdBy:{
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       createdAt: {
         allowNull: false,

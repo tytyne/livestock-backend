@@ -3,6 +3,7 @@ import EventService from "../services/event.service"
 import UserService from "../services/user.service"
 const{getUserByIdOrEmail}=UserService
 const{createEvent,updateEventById,getAllEventsWithReference,deleteEventById,getEventById}=EventService
+const { v4: uuidv4 } = require('uuid');
 
 export default class EventController{
 
@@ -12,9 +13,13 @@ export default class EventController{
 
         const {resource_name,resource_id}= req.params
         const formData = req.body;
+        formData.id = uuidv4()
         formData.created_by_id = req.user.id;
+        // console.log("userrrr",req.user.id)
+        
         const name = await getUserByIdOrEmail(req.user.id)
-        formData.created_by= `${name.dataValues.firstname} ${name.dataValues.lastname}`
+        console.log("userrrr nameeee",name)
+        // formData.created_by= `${name.dataValues.firstname} ${name.dataValues.lastname}`
         if(resource_name==="animal"){
           formData.reference_id= resource_id
         }
@@ -26,8 +31,10 @@ export default class EventController{
         formData.start_time = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
         formData.end_time = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
         formData.userId=req.user.id
+        console.log("checking dataaa",formData)
         const data = await createEvent(formData)
-        return  res.status(200).json({message:"task created",data})
+        console.log("checking dataaa",data)
+        return  res.status(200).json({message:"task created"})
        }
        catch (e) {
         return next(new Error(e));
@@ -39,6 +46,7 @@ export default class EventController{
         try{
  
          const formData = req.body;
+         formData.id = uuidv4()
          formData.created_by_id = req.user.id;
          const name = await getUserByIdOrEmail(req.user.id)
          formData.created_by= `${name.dataValues.firstname} ${name.dataValues.lastname}`

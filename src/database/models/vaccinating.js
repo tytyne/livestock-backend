@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.STRING,
     price: DataTypes.STRING,
     measurement: DataTypes.STRING,
-    createdBy:DataTypes.STRING,
     nextAppointment: DataTypes.STRING,
 
   }, { });

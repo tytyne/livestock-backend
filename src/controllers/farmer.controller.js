@@ -1,11 +1,13 @@
 import FarmerService from "../services/farmer.service"
 const{createFarmer,getFarmerById,getAllFarmers,updateById,deleteById,countFarmers}=FarmerService
+const { v4: uuidv4 } = require('uuid');
 
 export default class FarmerController{
 //save a farmer
 static async storeFarmer(req,res,next){
 try{
     const formData = req.body;
+    formData.id = uuidv4()
     formData.createdBy =req.user.id
     const data = await createFarmer(formData)
     res.status(200).json({message:"a farmer created!",data})

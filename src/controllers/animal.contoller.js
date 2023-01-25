@@ -12,13 +12,15 @@ const {
 } = AnimalService;
 import CalculationHelper from "../utils/calculationHelper";
 const { electronicId, gettingAge } = CalculationHelper
+const { v4: uuidv4 } = require('uuid');
 
 export default class AnimalController {
   //save an animal
   static async storeAnimal(req, res, next) {
     try {
       const formData = req.body;
-      formData.harvest_label="lbs";
+      // formData.harvest_label="lbs";
+      formData.id = uuidv4()
       formData.electronic_id = await electronicId(formData.earring_num);
       formData.createdBy = req.user.id;
       const data = await createAnimal(formData);

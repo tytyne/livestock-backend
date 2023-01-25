@@ -4,15 +4,15 @@ module.exports = {
     await queryInterface.createTable('Inputs', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       animal_id: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID,
       },
       createdBy: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       amount: {
         type: Sequelize.STRING

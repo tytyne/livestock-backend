@@ -12,6 +12,7 @@ const {
 } = SickBayService;
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
+const { v4: uuidv4 } = require('uuid');
 
 export default class SickBayController {
   //save an SickBay
@@ -19,7 +20,7 @@ export default class SickBayController {
     try {
       const {resource_name,resource_id}= req.params
       const formData = req.body;
-      
+      formData.id = uuidv4()
       formData.createdBy = req.user.id;
       if(resource_name ==="animal"){
         formData.animalId= resource_id
@@ -35,20 +36,20 @@ export default class SickBayController {
       formData.price=formula
       formData.measurement = itemData.measurement
       const data = await createSickBay(formData);
-      await createTransaction({
-        type: "expense",
-        amount:`- RWF ${formula}`,
-        date: `${formData.onsetDate}`,
-        vendor: " ",
-        category: `Medicine`,
-        check_number:"",
-        ref_Id: `${resource_id}`,
-        ref_type: "animal",
-        reporting_year:"2022",
-        keywords: "",
-        description: ""
+      // await createTransaction({
+      //   type: "expense",
+      //   amount:`- RWF ${formula}`,
+      //   date: `${formData.onsetDate}`,
+      //   vendor: " ",
+      //   category: `Medicine`,
+      //   check_number:"",
+      //   ref_Id: `${resource_id}`,
+      //   ref_type: "animal",
+      //   reporting_year:"2022",
+      //   keywords: "",
+      //   description: ""
 
-      })
+      // })
       
       return res.status(200).json({ message: "SickBay created!", data });
 

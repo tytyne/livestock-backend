@@ -1,5 +1,6 @@
 import TransactionService from "../services/transaction.service"
 const{getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,getAllTransactionsByAnimal}=TransactionService
+const { v4: uuidv4 } = require('uuid');
 
 export default class ActivityController{
 
@@ -7,6 +8,7 @@ export default class ActivityController{
 static async getTransaction(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
+        formData.id = uuidv4()
         const id=req.params.id
         const data = await getTransactionById(id)
         res.status(200).json({message:"get Activity by Id",data})

@@ -1,12 +1,15 @@
 import TransactionService from "../services/transaction.service"
 const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById}=TransactionService
+const { v4: uuidv4 } = require('uuid');
 
 export default class TransactionController{
 //save Transaction
 static async storeTransaction(req,res,next){
 try{
     const formData = req.body;
+    formData.id = uuidv4()
     formData.createdBy = req.user.id;
+    console.log("data",formData)
     const data = await createTransaction(formData)
     res.status(200).json({message:"Transaction created!",data})
 }

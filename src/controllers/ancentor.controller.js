@@ -2,6 +2,7 @@
 import AncentorService from "../services/Ancentor.service"
 const{createAncentor,getAncentorById,getAllAncentors,updateAncentorById,deleteAncentorById}=AncentorService
 import TransactionService from "../services/transaction.service"
+const { v4: uuidv4 } = require('uuid');
 
 
 export default class AncentorController{
@@ -10,6 +11,7 @@ static async storeAncentor(req,res,next){
 try{
     const formData = req.body;
     const {resource_name,resource_id}= req.params
+    formData.id = uuidv4()
     formData.createdBy = req.user.id;
     if(resource_name==="animal"){
       formData.animalId= resource_id

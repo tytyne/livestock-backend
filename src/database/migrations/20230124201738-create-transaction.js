@@ -4,9 +4,12 @@ module.exports = {
     await queryInterface.createTable('Transactions', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+      },
+      createdBy: {
+        type: Sequelize.UUID,
       },
       type: {
         type: Sequelize.STRING
@@ -27,7 +30,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       ref_Id: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       ref_type: {
         type: Sequelize.STRING
@@ -55,3 +58,4 @@ module.exports = {
     await queryInterface.dropTable('Transactions');
   }
 };
+

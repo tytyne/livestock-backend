@@ -12,22 +12,28 @@ const {updateAnimalByGroupId,createAnimal,countingAnimals} = AnimalService
 
 import CalculationHelper from "../utils/calculationHelper";
 const{calculateDays,calculateWeeks,calculateMonths,calculateYears}=CalculationHelper
+const { v4: uuidv4 } = require('uuid');
 
 export default class GroupAnimalController {
   //save an GroupAnimal
   static async storeGroupAnimal(req, res, next) {
     try {
       const formData = req.body;
+      formData.id = uuidv4()
       formData.createdBy = req.user.id;
      if (formData.type ==='set')
      {
       formData.is_group=true;
+      console.log("check data",formData)
       const data = await createAnimal(formData);
+
+      
       res.status(200).json({ message: "an animal created!", data });
      }
       else{
+        console.log("check data",formData)
         const data = await createGroupAnimal(formData);
-        res.status(200).json({ message: "an GroupAnimal created!", data });
+        returnres.status(200).json({ message: "an GroupAnimal created!", data });
       }
      
     } catch (e) {
@@ -64,11 +70,6 @@ export default class GroupAnimalController {
 
 
       }
-  
-
-
-
-
 
 
       res.status(200).json({ message: "All GroupAnimals", data });

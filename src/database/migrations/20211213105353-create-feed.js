@@ -8,15 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      animalCategoryId: {
-        type: Sequelize.INTEGER
-      },
       name: {
         type: Sequelize.STRING
       },
-      age: {
-        type: Sequelize.STRING
-      },
+      
       unit: {
         type: Sequelize.INTEGER
       },

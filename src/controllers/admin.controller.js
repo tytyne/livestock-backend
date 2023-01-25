@@ -8,6 +8,7 @@ import responses from "../utils/responses.js";
 import statusCode from "../utils/statusCode.js";
 import { jwtToken } from "../utils/jwt.utils.js";
 const { hashPassword, decryptPassword }=helper;
+const { v4: uuidv4 } = require('uuid');
 
 const { createAdmin, getAdminByIdOrEmail, updateAdmin } = AdminService;
 const {createUser}=UserService
@@ -44,6 +45,7 @@ export default class UserControllers {
     try {
       const formData = req.body;
       const textPassword = "uhr5zw4r!";
+      formData.id = uuidv4()
       formData.password = hashPassword(textPassword);
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);

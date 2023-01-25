@@ -1,17 +1,19 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Feeding = sequelize.define('Feeding', {
-    onsetDate: DataTypes.STRING,
+    onsetDate: DataTypes.DATE,
     description: DataTypes.STRING,
     feed_name: DataTypes.STRING,
-    quantity: DataTypes.INTEGER,
-    price: DataTypes.INTEGER,
-    repeat_until_date:DataTypes.DATE
+    quantity: DataTypes.STRING,
+    price: DataTypes.STRING,
+    measurement:DataTypes.STRING,
+    repeat_until_date:DataTypes.DATE,
     
   }, { });
   Feeding.associate = function(models) {
   Feeding.belongsTo(models.Feed, {
     foreignKey: 'feedId',
+    as: 'feed',
     onDelete: 'CASCADE',
   })
 
@@ -26,12 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     as: 'user',
     onDelete: 'CASCADE',
   })
-  Feeding.belongsTo(models.Inventory, {
-    foreignKey: 'inventory_location_id',
-    as: 'inventory',
-    onDelete: 'CASCADE',
-  })
-  }
+
+  };
   
  
   return Feeding;

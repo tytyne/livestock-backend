@@ -1,16 +1,17 @@
 'use strict';
+// const {UUIDV4} = require('uuid');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Farmers', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
      
       createdBy: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       firstname: {
         type: Sequelize.STRING

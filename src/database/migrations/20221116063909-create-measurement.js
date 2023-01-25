@@ -4,9 +4,9 @@ module.exports = {
     await queryInterface.createTable('Measurements', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       condition_score: {
         type: Sequelize.INTEGER
@@ -15,13 +15,13 @@ module.exports = {
         type: Sequelize.DATE
       },
       createdBy: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       fec: {
         type: Sequelize.INTEGER
       },
       animalId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       height: {
         type: Sequelize.INTEGER
@@ -48,16 +48,3 @@ module.exports = {
 };
 
 
-
-
-
-// "id": "GUID",
-// "condition_score": null,
-// "created_at": "2022-01-14 21:48:19",
-// "created_by": "User",
-// "date": "2022-01-14",
-// "fec": null,
-// "height": null,
-// "temp": null,
-// "updated_at": "2022-01-14 21:48:19",
-// "weight": 1600

@@ -7,6 +7,7 @@ import responses from "../utils/responses.js";
 import statusCode from "../utils/statusCode.js";
 import { jwtToken } from "../utils/jwt.utils.js";
 const { hashPassword, decryptPassword } = helper;
+const { v4: uuidv4 } = require('uuid');
 
 const { createUser, getUserByIdOrEmail, updateUser } = UserService;
 const {
@@ -41,6 +42,7 @@ export default class UserControllers {
   static async signup(req, res, next) {
     try {
       const formData = req.body;
+      formData.id = uuidv4()
       const textPassword = formData.password;
       formData.password = hashPassword(textPassword);
       formData.role = "vet";

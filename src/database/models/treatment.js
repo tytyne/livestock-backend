@@ -25,11 +25,11 @@ module.exports = (sequelize, DataTypes) => {
       as: 'animal',
       onDelete: 'CASCADE',
     })
-    Treatment.belongsTo(models.Animal, {
-      foreignKey: 'groupAnimalId',
-      as: 'groupAnimal',
-      onDelete: 'CASCADE',
-    })
+    // Treatment.belongsTo(models.Animal, {
+    //   foreignKey: 'groupAnimalId',
+    //   as: 'groupAnimal',
+    //   onDelete: 'CASCADE',
+    // })
     Treatment.belongsTo(models.User, {
       foreignKey: 'createdBy',
       as: 'user',

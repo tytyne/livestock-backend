@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     reporting_year:DataTypes.STRING,
     vendor:DataTypes.STRING,
     category:DataTypes.STRING,
-    ref_Id:DataTypes.STRING,
+    // ref_Id:DataTypes.UUID,
     ref_type:DataTypes.STRING,
     check_number:DataTypes.STRING,
     keywords:DataTypes.STRING,
@@ -16,6 +16,21 @@ module.exports = (sequelize, DataTypes) => {
    
    
   }, { });
+  Transaction.associate = function(models) {
+
+    Transaction.belongsTo(models.User, {
+      foreignKey: 'createdBy',
+      as: 'user',
+      onDelete: 'CASCADE',
+    })
+    Transaction.belongsTo(models.Animal, {
+      foreignKey: 'ref_Id',
+      as: 'reference',
+      onDelete: 'CASCADE',
+    })
+   
+   
+  };
  
 
   return Transaction;

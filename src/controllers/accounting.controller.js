@@ -1,11 +1,13 @@
 import TransactionService from "../services/transaction.service"
 const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById}=TransactionService
+const { v4: uuidv4 } = require('uuid');
 
 export default class AccountingController{
 //save Transaction
 static async storeTransaction(req,res,next){
 try{
     const formData = req.body;
+    formData.id = uuidv4()
     const {resource_name,resource_id}= req.params
     formData.createdBy = req.user.id;
     if(resource_name!==null){
@@ -15,6 +17,8 @@ try{
     if (formData.type=="expense"){
         formData.amount= `-`.concat(formData.amount);
     }
+    
+    console.log("check formData",formData)
     const data = await createTransaction(formData)
     res.status(200).json({message:"Transaction created!",data})
 }

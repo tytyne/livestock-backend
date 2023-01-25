@@ -8,14 +8,7 @@ const{Transaction} = models;
 
 class TransactionService{
     static async createTransaction(value){
-        let data = Transaction.bulkCreate(
-            [
-             value
-            ],
-            {
-              ignoreDuplicates: true,
-            }
-        )
+        let data = await Transaction.create(value)
         return data
     }
     static async getTransactionById(id){

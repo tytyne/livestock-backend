@@ -4,6 +4,7 @@ import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
 import EventService from "../services/event.service";
 const { createEvent } = EventService
+const { v4: uuidv4 } = require('uuid');
 
 export default class TreatmentController{
 //save Treatment
@@ -11,6 +12,7 @@ static async storeTreatment(req,res,next){
 try{
     const formData = req.body;
     const {resource_name,resource_id}= req.params
+    formData.id = uuidv4()
     formData.createdBy = req.user.id;
     if(resource_name==="animal"){
       formData.animalId= resource_id
@@ -19,29 +21,29 @@ try{
       formData.groupAnimalId= resource_id
     }
     const data = await createTreatment(formData)
-    await createTransaction({
-      type: "expense",
-      amount:`- RWF${formData.cost}`,
-      date: `${formData.date}`,
-      vendor: " ",
-      category:`${formData.type}`,
-      check_number:"",
-      ref_Id: `${resource_id}`,
-      ref_type: "animal",
-      reporting_year:"2022",
-      keywords: "",
-      description: ""
+    // await createTransaction({
+    //   type: "expense",
+    //   amount:`- RWF${formData.cost}`,
+    //   date: `${formData.date}`,
+    //   vendor: " ",
+    //   category:`${formData.type}`,
+    //   check_number:"",
+    //   ref_Id: `${resource_id}`,
+    //   ref_type: "animal",
+    //   reporting_year:"2022",
+    //   keywords: "",
+    //   description: ""
 
-    })
-    await createEvent({
-      title: `treat ${resource_id}`,
-      description: `${formData.type}`,
-      start_time: `${formData.date}`,
-      end_time: `${formData.retreat_date}`,
-      assigned_to_id: `${req.user.id}`,
-      animal_id:`${resource_id}`
+    // })
+    // await createEvent({
+    //   title: `treat ${resource_id}`,
+    //   description: `${formData.type}`,
+    //   start_time: `${formData.date}`,
+    //   end_time: `${formData.retreat_date}`,
+    //   assigned_to_id: `${req.user.id}`,
+    //   animal_id:`${resource_id}`
 
-    })
+    // })
 
 
     res.status(200).json({message:"Treatment created!",data})

@@ -4,6 +4,7 @@ import ItemService from "../services/item.service"
 import calculationHelper from "../utils/calculationHelper"
 const{calculatePrice}=calculationHelper
 const{getItemById}=ItemService
+const { v4: uuidv4 } = require('uuid');
 
 
 
@@ -13,6 +14,7 @@ export default class FarmExpenseController{
     static async storeFarmExpense(req,res,next){
        try{
         const formData=req.body
+        formData.id = uuidv4()
         formData.createdBy=req.user.id
         if(formData.categoryId===4){
             formData.item_name=formData.item_name;

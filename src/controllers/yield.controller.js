@@ -2,6 +2,7 @@ import YieldService from "../services/yield.service"
 import AnimalService from "../services/animal.service";
 const{createYield,getYieldById,getAllYields,updateYieldById,deleteYieldById}=YieldService
 const {getAnimalById} = AnimalService
+const { v4: uuidv4 } = require('uuid');
 
 export default class YieldController{
 //save Yield
@@ -9,6 +10,7 @@ static async storeYield(req,res,next){
 try{
     const {resource_name,resource_id}= req.params
     const formData = req.body;
+    formData.id = uuidv4()
     formData.createdBy = req.user.id;
     if(resource_name==="animal"){
         formData.animal_id= resource_id

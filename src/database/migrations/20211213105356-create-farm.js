@@ -4,19 +4,18 @@ module.exports = {
     await queryInterface.createTable("Farms", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       name: {
         type: Sequelize.STRING,
       },
       farmerId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
-      
       createdBy: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID
       },
       province: {
         type: Sequelize.STRING,

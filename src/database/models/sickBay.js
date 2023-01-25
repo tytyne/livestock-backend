@@ -18,17 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     onDelete: 'CASCADE',
   })
  
-  SickBay.belongsTo(models.GroupAnimal, {
-    foreignKey: 'groupAnimalId',
-    as: 'groupAnimal',
-    onDelete: 'CASCADE',
-  })
-
-  SickBay.belongsTo(models.AnimalCategory, {
-    foreignKey: 'animalCategoryId',
-    as: 'animalCategory',
-    onDelete: 'CASCADE',
-  })
   SickBay.belongsTo(models.Medicine, {
     foreignKey: 'medicineId',
     as: 'medicine',

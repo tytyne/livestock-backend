@@ -5,9 +5,9 @@ module.exports = {
     await queryInterface.createTable('Breedings', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       status: {
         type: Sequelize.STRING
@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       animalId: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID,
       },
       technicial: {
         type: Sequelize.STRING
@@ -43,7 +43,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       createdBy: {
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       createdAt: {
         allowNull: false,

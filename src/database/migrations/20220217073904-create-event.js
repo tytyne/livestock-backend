@@ -4,15 +4,15 @@ module.exports = {
     await queryInterface.createTable('Events', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       assigned_to_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       reference_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       priority_id: {
         type: Sequelize.INTEGER
@@ -57,7 +57,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       created_by_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       complete:{
         type: Sequelize.BOOLEAN,

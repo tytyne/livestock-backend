@@ -2,8 +2,6 @@ definitions:
   Feed:
     type: "object"
     properties:
-      animalCategoryId:
-        type: "number"
       name:
         type: "string"
       age:

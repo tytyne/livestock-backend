@@ -4,16 +4,16 @@ module.exports = {
     await queryInterface.createTable('Yields', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       animal_id:{
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
             
       },
       createdBy: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
       },
       qty: {
         type: Sequelize.STRING

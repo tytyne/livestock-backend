@@ -25,6 +25,7 @@
     "@babel/cli": "^7.18.6",
     "@babel/preset-env": "^7.18.6",
     "@babel/register": "^7.16.0",
+    "axios": "^1.2.3",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "caniuse-lite": "^1.0.30001365",
@@ -49,7 +50,9 @@
     "sequelize": "^6.21.3",
     "sequelize-cli": "^6.4.1",
     "swagger-jsdoc": "^6.2.1",
-    "swagger-ui-express": "^4.4.0"
+    "swagger-ui-express": "^4.4.0",
+    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

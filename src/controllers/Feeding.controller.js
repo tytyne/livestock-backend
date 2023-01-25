@@ -5,9 +5,12 @@ import FeedService from "../services/feed.service"
 const{getFeedById} = FeedService
 
 import FeedingService from "../services/feeding.service";
-const{createFeeding,getFeedigById,getAllFeeding,updateFeedingById,deleteFeedingById}=FeedingService
+import MedicineService from "../services/medicine.service"
+const {getMedicineById }=MedicineService
+const{createFeeding,getFeedingById,getAllFeeding,updateFeedingById,deleteFeedingById}=FeedingService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
+const { v4: uuidv4 } = require('uuid');
 
 export default class FeedingController {
   //save an AnimalFeed
@@ -25,7 +28,9 @@ export default class FeedingController {
         formData.groupAnimalId= resource_id
       }
       const item= await getFeedById(formData.feedId)
+      console.log("check item food",item)
       const itemData=item.dataValues
+      console.log("check item food",itemData.name)
       formData.feed_name=itemData.name;
       const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
       formData.price=formula
@@ -35,14 +40,15 @@ export default class FeedingController {
         const checkdata = await getDatesInRange(d1, d2);
       
 
-        // console.log("check holllaaaa",checkdata )
+        console.log("check holllaaaa",checkdata )
         for (let i = 0; i < checkdata.length; i++) {
           {
-            
+            formData.id = uuidv4()
               formData.onsetDate=checkdata[i];
             
               const data = await createFeeding(formData);
               await createTransaction({
+                id:uuidv4(),
                type: "expense",
                amount:`- RWF${formula}`,
                date: `${formData.onsetDate}`,
@@ -67,9 +73,10 @@ export default class FeedingController {
        
  
       }
-      
+      formData.id = uuidv4()
       const data = await createFeeding(formData);
        await createTransaction({
+        id:uuidv4(),
         type: "expense",
         amount:`- RWF${formula}`,
         date: `${formData.onsetDate}`,
@@ -85,7 +92,7 @@ export default class FeedingController {
       })
     
     
-    return  res.status(200).json({ message: "feeding created!", data });
+    return  res.status(200).json({ message: "feeding created!",});
      
 
     } catch (e) {
@@ -97,7 +104,7 @@ export default class FeedingController {
   static async getFeeding(req, res, next) {
     try {
       const id = req.params.id;
-      const data = await getFeedigById(id);
+      const data = await getFeedingById(id);
       res.status(200).json({ message: "get AnimalFeed by Id", data });
     } catch (e) {
       return next(new Error(e));

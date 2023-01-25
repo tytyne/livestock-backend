@@ -1,7 +1,7 @@
 import AnimalService from "../services/animal.service"
 const{updateAnimalMother,updateAnimalFather,createAnimal,getAnimalById,getAllanimals,updateById,deleteById}=AnimalService
 
-
+const { v4: uuidv4 } = require('uuid');
 
 export default class genealogyController{
 //save genealogy
@@ -10,6 +10,7 @@ try{
 
   const {resource_name,resource_id}= req.params
     const formData = req.body;
+    formData.id = uuidv4()
     const {gender}=req.query
     if(gender ==="Female"){
       const data = await createAnimal(formData)

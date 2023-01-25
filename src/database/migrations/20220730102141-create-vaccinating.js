@@ -4,9 +4,10 @@ module.exports = {
     await queryInterface.createTable('Vaccinatings', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+       
       },
       onsetDate: {
         type: Sequelize.DATE
@@ -18,13 +19,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       animalId: {
-        type: Sequelize.INTEGER
-      },
-      groupAnimalId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       createdBy: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       description: {
         type: Sequelize.STRING

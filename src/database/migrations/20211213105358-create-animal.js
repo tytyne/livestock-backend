@@ -4,21 +4,21 @@ module.exports = {
     await queryInterface.createTable('Animals', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       farm_id:{
-        type: Sequelize.INTEGER
+        type:Sequelize.UUID,
       },
       purpose_id:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       animalCategory_id:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdBy:{
-        type: Sequelize.INTEGER
+        type:Sequelize.UUID,
       },
       birth_date:{
       type: Sequelize.DATE
@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       breed_id:{
-        type: Sequelize.STRING
+        type: Sequelize.UUID,
       },
       breeding_status:{
         type: Sequelize.STRING
@@ -67,7 +67,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       father_id:{
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       feed:{
         type: Sequelize.STRING
@@ -76,7 +76,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       group_id:{
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       group_qty:{
         type: Sequelize.STRING
@@ -110,7 +110,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       mother_id:{
-        type: Sequelize.STRING
+        type: Sequelize.UUID
       },
       name:{
         type: Sequelize.STRING

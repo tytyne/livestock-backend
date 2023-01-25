@@ -1,6 +1,7 @@
 import BreedingService from "../services/breeding.service"
 const{createBreeding,getBreedingById,getAllBreedings,updateBreedingById,deleteBreedingById}=BreedingService
 import TransactionService from "../services/transaction.service"
+const { v4: uuidv4 } = require('uuid');
 
 
 export default class BreedingController{
@@ -9,6 +10,7 @@ static async storeBreeding(req,res,next){
 try{
     const formData = req.body;
     const {resource_name,resource_id}= req.params
+    formData.id = uuidv4()
     formData.createdBy = req.user.id;
     if(resource_name==="animal"){
       formData.animalId= resource_id

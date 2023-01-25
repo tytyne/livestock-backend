@@ -8,18 +8,23 @@ const{Feeding} = models;
 
 class FeedingService{
     static async createFeeding(value){
-        // let data = await Feeding.create(value)
-        let data =Feeding.bulkCreate(
-            [
-             value
-            ],
-            {
-              ignoreDuplicates: true,
-            }
-        )
+        let data = await Feeding.create(value)
+        // let data = await Nourish.bulkCreate(
+        //     [
+        //      value
+        //     ],
+        //     {
+        //       ignoreDuplicates: true,
+        //     }
+        // )
         return data
     }
-    static async getFeedigById(id){
+
+
+
+
+
+    static async getFeedingById(id){
         let data = await Feeding.findOne({where:{id:id}})
         return data
 

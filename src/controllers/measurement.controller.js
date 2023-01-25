@@ -1,5 +1,6 @@
 import MeasurementService from "../services/measurement.service"
 const{createMeasurement,getMeasurementById,getAllMeasurements,updateMeasurementById,deleteMeasurementById}=MeasurementService
+const { v4: uuidv4 } = require('uuid');
 
 export default class MeasurementController{
 //save Measurement
@@ -7,11 +8,12 @@ static async storeMeasurement(req,res,next){
 try{
     const formData = req.body;
     const {animal_id}= req.params
+    formData.id = uuidv4()
     formData.createdBy = req.user.id;
     if(animal_id){
       formData.animalId=animal_id
     }
-   
+   console.log("check formData",formData)
     const data = await createMeasurement(formData)
     res.status(200).json({message:"Measurement created!",data})
 }

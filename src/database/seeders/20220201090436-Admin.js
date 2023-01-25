@@ -2,10 +2,13 @@
 
 "use strict";
 const { hashPassword } = require("../../utils/hash");
+const { v4: uuidv4 } = require('uuid');
+
 module.exports = {
   up: async (queryInterface) =>
     queryInterface.bulkInsert("Admins", [
       {
+        id: uuidv4(),
         firstname: "adminstration",
         lastname: "admin123",
         username: "admin",
@@ -19,6 +22,7 @@ module.exports = {
        
       },
       {
+        id: uuidv4(),
         username: "gatytyne",
         email: "admin@gmail.com",
         firstname: "adminstration",
@@ -31,6 +35,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        id: uuidv4(),
         username: "umuhozakeke",
         firstname: "umuhoza",
         lastname: "kelly",
@@ -43,6 +48,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        id: uuidv4(),
         username: "yvesk",
         firstname: "kalinijabo",
         lastname: "yves",

@@ -15,7 +15,7 @@ class AnimalValidation{
         birth_date:Joi.date().required().less(`${today}`).messages(),
         birth_weight:Joi.string().min(2).messages(),
         animalCategory_id:Joi.number().messages(),
-        farm_id:Joi.number().messages(),
+        farm_id:Joi.string().messages(),
         purpose_id:Joi.number().messages(),  
         birth_date: Joi.date().messages(),
         birth_weight:Joi.number().min(2).messages(),

@@ -2,34 +2,29 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Feedings', {
+     
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
       },
       onsetDate: {
         type: Sequelize.DATE
       },
+      feedId: {
+        type: Sequelize.INTEGER,
+      },
       createdBy: {
-        type: Sequelize.INTEGER
-      },
-      animalCategoryId: {
-        type: Sequelize.INTEGER
-      },
-      inventory_location_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       animalId: {
-        type: Sequelize.INTEGER
-      },
-      groupAnimalId: {
-        type: Sequelize.INTEGER
-      },
-      feedId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID
       },
       description: {
+        type: Sequelize.STRING
+      },
+      observation:{
         type: Sequelize.STRING
       },
       feed_name: {
@@ -44,6 +39,10 @@ module.exports = {
       repeat_until_date: {
         type: Sequelize.DATE
       },
+      measurement: {
+        type: Sequelize.STRING
+      },
+     
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -52,9 +51,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('AnimalFeeds');
+    await queryInterface.dropTable('Feedings');
   }
 };

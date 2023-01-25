@@ -7,15 +7,19 @@ const {
   deleteFarmById,
   countFarms,
 } = FarmService;
+const { v4: uuidv4 } = require('uuid');
 
 export default class FarmController {
   //save a farm
   static async storeFarm(req, res, next) {
     try {
       const formData = req.body;
+      formData.id = uuidv4()
       formData.createdBy = req.user.id;
+      console.log("checkingggg",req.user.id)
       const data = await createFarm(formData);
-      res.status(200).json({ message: "a farm created!", data });
+      console.log("checkingggg",)
+      res.status(200).json({ message: "a farm created!",data});
     } catch (e) {
       return next(new Error(e));
     }

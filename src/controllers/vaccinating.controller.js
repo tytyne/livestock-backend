@@ -23,6 +23,8 @@ import EventService from "../services/event.service";
 const { createEvent } = EventService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
+const { v4: uuidv4 } = require('uuid');
+
 
 
 
@@ -34,6 +36,7 @@ export default class VaccinatingController {
       const {resource_name,resource_id}= req.params
       const formData = req.body;
       console.log(req.user.id)
+      formData.id = uuidv4()
       formData.createdBy = req.user.id;
       if(resource_name==="animal"){
         formData.animalId= resource_id
@@ -50,6 +53,7 @@ export default class VaccinatingController {
       formData.price = formula
      
       await createEvent({
+        id:uuidv4(),
         title: `vaccinating ${resource_id}`,
         description: `vaccinating `,
         start_time: `${formData.nextAppointment}`,
@@ -59,20 +63,20 @@ export default class VaccinatingController {
 
       })
 
-      await createTransaction({
-        type: "expense",
-        amount:`- RWF ${formula}`,
-        date: `${formData.onsetDate}`,
-        vendor: " ",
-        category: `Vaccination`,
-        check_number:"",
-        ref_Id: `${resource_id}`,
-        ref_type: "animal",
-        reporting_year:"2022",
-        keywords: "",
-        description: ""
+      // await createTransaction({
+      //   type: "expense",
+      //   amount:`- RWF ${formula}`,
+      //   date: `${formData.onsetDate}`,
+      //   vendor: " ",
+      //   category: `Vaccination`,
+      //   check_number:"",
+      //   ref_Id: `${resource_id}`,
+      //   ref_type: "animal",
+      //   reporting_year:"2022",
+      //   keywords: "",
+      //   description: ""
 
-      })
+      // })
       
       const data = await createVaccinatingProcess(formData);
 
