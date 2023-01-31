@@ -6,6 +6,7 @@ const {
   updateFarmById,
   deleteFarmById,
   countFarms,
+  searchFarm
 } = FarmService;
 const { v4: uuidv4 } = require('uuid');
 
@@ -76,6 +77,19 @@ static async updateFarm(req,res,next){
       const data = await countFarms(req.user.id);
       res.status(200).json({ message: "number of farms", data });
     } catch (e) {
+      return next(new Error(e));
+    }
+  }
+
+  static async searchingFarm(req,res,next){
+
+    try{
+      const {name} = req.query;
+      const data = await searchFarm(name);
+      console.log(data)
+      return res.status(200).json({ message: "searched farm",data});
+    }
+    catch(e){
       return next(new Error(e));
     }
   }

@@ -168,7 +168,7 @@ static async searchingAnimal(req,res,next){
     const {name} = req.query;
     const data = await searchAnimals(name);
     console.log(data)
-    return res.status(200).json({ message: "number of animals",data});
+    return res.status(200).json({ message: "searched animals",data});
   }
   catch(e){
     return next(new Error(e));

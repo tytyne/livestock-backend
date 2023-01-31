@@ -46,6 +46,11 @@ class FeedingService{
         let data = await Feeding.destroy({where:{id:id}})
         return data
     }
+
+    static async searchFeeding(sss){
+        let data = await Feeding.findAll({ where: {description: sss } })
+        return data
+    }
   
 
 }

@@ -50,6 +50,11 @@ class GroupAnimalService{
 
     }
 
+    static async searchGroupAnimals(sss){
+        let data = await GroupAnimal.findAll({ where: { name: sss } })
+        return data
+    }
+
     
   
 

@@ -1,6 +1,13 @@
 import models from "../database/models/index"
 const {Event}=models
 
+import moment from "moment"
+const { Op } = require("sequelize");
+
+var a = moment();
+const today = moment(a.toISOString()).format("YYY-MM-DD HH:MM");
+console.log("check today today today",today)
+
 
 /**
  * @description This model deals with Event model
@@ -35,6 +42,23 @@ class EventService{
     static async deleteEventById(id){
         let event = await Event.destroy({where:{id:id}})
         return event
+    }
+
+    static async dueDateEvent(){
+
+        // let event = await Event.findAll()
+        let event = await Event.findAll({
+            where: {
+                start_time: { 
+                    [Op.gte]: moment().subtract(7, 'days').toDate()
+                }
+            }
+          })
+        return event
+    }
+    static async searchEvents(sss){
+        let data = await Event.findAll({ where: { title: sss } })
+        return data
     }
 
 }

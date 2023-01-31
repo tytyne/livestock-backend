@@ -1,5 +1,5 @@
 import FarmerService from "../services/farmer.service"
-const{createFarmer,getFarmerById,getAllFarmers,updateById,deleteById,countFarmers}=FarmerService
+const{createFarmer,getFarmerById,getAllFarmers,updateById,deleteById,countFarmers,searchFarmer}=FarmerService
 const { v4: uuidv4 } = require('uuid');
 
 export default class FarmerController{
@@ -72,5 +72,17 @@ static async countingFarmers(req,res,next){
         return next(new Error(e));
     }
 
+}
+static async searchingFarmer(req,res,next){
+
+    try{
+      const {name} = req.query;
+      const data = await searchFarmer(name);
+      console.log(data)
+      return res.status(200).json({ message: "searched farmers",data});
+    }
+    catch(e){
+      return next(new Error(e));
+    }
 }
 }

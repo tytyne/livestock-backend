@@ -5,6 +5,7 @@ const {
   getAllVaccinatingProcess,
   updateVaccinatingProcessById,
   deleteVaccinatingProcessById,
+  searchingzz
 } = VaccinatingService;
 
 import calculationHelper from "../utils/calculationHelper"
@@ -63,20 +64,21 @@ export default class VaccinatingController {
 
       })
 
-      // await createTransaction({
-      //   type: "expense",
-      //   amount:`- RWF ${formula}`,
-      //   date: `${formData.onsetDate}`,
-      //   vendor: " ",
-      //   category: `Vaccination`,
-      //   check_number:"",
-      //   ref_Id: `${resource_id}`,
-      //   ref_type: "animal",
-      //   reporting_year:"2022",
-      //   keywords: "",
-      //   description: ""
+      await createTransaction({
+        id:uuidv4(),
+        type: "expense",
+        amount:`- RWF ${formula}`,
+        date: `${formData.onsetDate}`,
+        vendor: " ",
+        category: `Vaccination`,
+        check_number:"",
+        ref_Id: `${resource_id}`,
+        ref_type: "animal",
+        reporting_year:"2022",
+        keywords: "",
+        description: ""
 
-      // })
+      })
       
       const data = await createVaccinatingProcess(formData);
 
@@ -159,6 +161,19 @@ export default class VaccinatingController {
       const data = await deleteVaccinatingProcessById(id);
       res.status(200).json({ message: "delete a Vaccinating Process" });
     } catch (e) {
+      return next(new Error(e));
+    }
+  }
+
+  static async searchingVaccinating(req,res,next){
+
+    try{
+      const {description} = req.query;
+      const data = await searchGroupAnimals(description);
+      console.log(data)
+      return res.status(200).json({ message: "searched vaccinating",data});
+    }
+    catch(e){
       return next(new Error(e));
     }
   }

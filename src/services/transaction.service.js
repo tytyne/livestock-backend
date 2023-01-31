@@ -44,6 +44,11 @@ class TransactionService{
         let data = await Transaction.destroy({where:{id:id}})
         return data
     }
+
+    static async searchTransactions(sss){
+        let data = await Transaction.findAll({ where: {description: sss } })
+        return data
+    }
   
 
 }

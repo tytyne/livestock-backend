@@ -33,6 +33,11 @@ class SickBayService{
         let data = await SickBay.destroy({where:{id:id}})
         return data
     }
+
+    static async searchSickbay(sss){
+        let data = await SickBay.findAll({ where: {interventions: sss } })
+        return data
+    }
   
 
 }

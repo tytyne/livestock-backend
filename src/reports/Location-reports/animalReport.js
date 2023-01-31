@@ -17,12 +17,11 @@ export default class AnimalReport{
               earring_num: animal.earring_num,
               status: animal.status, 
               sex: animal.sex,
-              ageInDays: animal.ageInDays,
               farm_name: animal.farm.name,
               farmer_firstname:animal.farm.farmer.firstname,
               farmer_lastname:animal.farm.farmer.lastname,
-              purposeList_name:animal.purposeList.name,
-              animalCategory:animal.animalCategory.name
+              // purposeList_name:animal.purposeList.name,
+              // animalCategory:animal.animalCategory.name
             
             
             

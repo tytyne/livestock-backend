@@ -41,6 +41,10 @@ class BreedingService{
         let data = await Breeding.destroy({where:{id:id}})
         return data
     }
+    static async searchBreeding(sss){
+        let data = await Breeding.findAll({ where: {description: sss } })
+        return data
+    }
    
 
 

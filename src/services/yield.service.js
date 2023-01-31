@@ -33,6 +33,11 @@ class YieldService{
         let data = await Yield.destroy({where:{id:id}})
         return data
     }
+
+    static async searchYield(sss){
+        let data = await Yield.findAll({ where: {description: sss } })
+        return data
+    }
   
 
 }

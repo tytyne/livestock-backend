@@ -36,20 +36,21 @@ export default class SickBayController {
       formData.price=formula
       formData.measurement = itemData.measurement
       const data = await createSickBay(formData);
-      // await createTransaction({
-      //   type: "expense",
-      //   amount:`- RWF ${formula}`,
-      //   date: `${formData.onsetDate}`,
-      //   vendor: " ",
-      //   category: `Medicine`,
-      //   check_number:"",
-      //   ref_Id: `${resource_id}`,
-      //   ref_type: "animal",
-      //   reporting_year:"2022",
-      //   keywords: "",
-      //   description: ""
+      await createTransaction({
+        id:uuidv4(),
+        type: "expense",
+        amount:`- RWF ${formula}`,
+        date: `${formData.onsetDate}`,
+        vendor: " ",
+        category: `Medicine`,
+        check_number:"",
+        ref_Id: `${resource_id}`,
+        ref_type: "animal",
+        reporting_year:"2022",
+        keywords: "",
+        description: ""
 
-      // })
+      })
       
       return res.status(200).json({ message: "SickBay created!", data });
 

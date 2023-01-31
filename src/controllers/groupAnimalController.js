@@ -6,6 +6,7 @@ const {
   getAllGroupAnimals,
   updateGroupAnimalById,
   deleteGroupAnimalById,
+  searchGroupAnimals
 
 } = GroupAnimalService;
 const {updateAnimalByGroupId,createAnimal,countingAnimals} = AnimalService
@@ -118,10 +119,18 @@ export default class GroupAnimalController {
       return next(new Error(e))
     }
   }
+  static async searchingGroupAnimal(req,res,next){
 
-  // static async AllTypesGroupAnimals(req,res,next){
-
-  // }
+    try{
+      const {name} = req.query;
+      const data = await searchGroupAnimals(name);
+      console.log(data)
+      return res.status(200).json({ message: "searched group animals",data});
+    }
+    catch(e){
+      return next(new Error(e));
+    }
+  }
  
 
 }

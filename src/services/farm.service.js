@@ -79,5 +79,10 @@ class FarmService{
 
   }
 
+  static async searchFarm(sss){
+    let data = await Farm.findAll({ where: { name: sss } })
+    return data
+}
+
 }
 export default FarmService

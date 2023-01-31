@@ -1,5 +1,5 @@
 import TreatmentService from "../services/treatment.service"
-const{createTreatment,getTreatmentById,getAllTreatments,updateTreatmentById,deleteTreatmentById}=TreatmentService
+const{createTreatment,getTreatmentById,getAllTreatments,updateTreatmentById,deleteTreatmentById,upcomingTreatments}=TreatmentService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
 import EventService from "../services/event.service";
@@ -21,29 +21,31 @@ try{
       formData.groupAnimalId= resource_id
     }
     const data = await createTreatment(formData)
-    // await createTransaction({
-    //   type: "expense",
-    //   amount:`- RWF${formData.cost}`,
-    //   date: `${formData.date}`,
-    //   vendor: " ",
-    //   category:`${formData.type}`,
-    //   check_number:"",
-    //   ref_Id: `${resource_id}`,
-    //   ref_type: "animal",
-    //   reporting_year:"2022",
-    //   keywords: "",
-    //   description: ""
+    await createTransaction({
+      id:uuidv4(),
+      type: "expense",
+      amount:`- RWF${formData.cost}`,
+      date: `${formData.date}`,
+      vendor: " ",
+      category:`${formData.type}`,
+      check_number:"",
+      ref_Id: `${resource_id}`,
+      ref_type: "animal",
+      reporting_year:"2022",
+      keywords: "",
+      description: ""
 
-    // })
-    // await createEvent({
-    //   title: `treat ${resource_id}`,
-    //   description: `${formData.type}`,
-    //   start_time: `${formData.date}`,
-    //   end_time: `${formData.retreat_date}`,
-    //   assigned_to_id: `${req.user.id}`,
-    //   animal_id:`${resource_id}`
+    })
+    await createEvent({
+      id:uuidv4(),
+      title: `treat ${resource_id}`,
+      description: `${formData.type}`,
+      start_time: `${formData.date}`,
+      end_time: `${formData.retreat_date}`,
+      assigned_to_id: `${req.user.id}`,
+      animal_id:`${resource_id}`
 
-    // })
+    })
 
 
     res.status(200).json({message:"Treatment created!",data})
@@ -70,12 +72,14 @@ static async getTreatments(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
         const data = await getAllTreatments(resource_id)
-        res.status(200).json({message:"All Treatments",data})
+        return res.status(200).json({message:"All Treatments",data})
     }
     catch (e) {
         return next(new Error(e));
       }
 }
+
+
 // update Treatment
 static async updateTreatment(req,res,next){
     try{

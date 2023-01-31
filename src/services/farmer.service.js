@@ -49,6 +49,11 @@ class FarmerService{
         return farmer
     }
 
+
+    static async searchFarmer(sss){
+        let data = await Farmer.findAll({ where: {firstname: sss } })
+        return data
+    }
     static async farmerGroupByDistrictReports(){
         let farmer = await Farmer.findAll({ attributes: ["district","gender",[Models.sequelize.fn("COUNT",Models.sequelize.col("nid")),'farmers',
      

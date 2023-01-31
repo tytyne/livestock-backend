@@ -58,6 +58,10 @@ class VaccinatingService{
         let data = await Vaccinating.destroy({where:{id:id}})
         return data
     }
+    static async searchVaccinating(sss){
+        let data = await Vaccinating.findAll({ where: {description: sss } })
+        return data
+    }
   
 
 }

@@ -2,7 +2,7 @@ import moment from "moment"
 import EventService from "../services/event.service"
 import UserService from "../services/user.service"
 const{getUserByIdOrEmail}=UserService
-const{createEvent,updateEventById,getAllEventsWithReference,deleteEventById,getEventById}=EventService
+const{createEvent,updateEventById,getAllEventsWithReference,deleteEventById,getEventById,searchEvents}=EventService
 const { v4: uuidv4 } = require('uuid');
 
 export default class EventController{
@@ -31,10 +31,8 @@ export default class EventController{
         formData.start_time = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
         formData.end_time = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
         formData.userId=req.user.id
-        console.log("checking dataaa",formData)
         const data = await createEvent(formData)
-        console.log("checking dataaa",data)
-        return  res.status(200).json({message:"task created"})
+        return  res.status(200).json({message:"task created",data})
        }
        catch (e) {
         return next(new Error(e));
@@ -54,6 +52,9 @@ export default class EventController{
          const textEnd = formData.end_time
          formData.start_time = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
          formData.end_time = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
+         if(formData.end_time==null){
+            formData.end_time = formData.start_time
+         }
          formData.userId=req.user.id
          const data = await createEvent(formData)
          return  res.status(200).json({message:"task created",data})
@@ -114,6 +115,18 @@ export default class EventController{
          return next(new Error(e));
      }
     }
+
+    static async searchingEvent(req,res,next){
+
+        try{
+          const {title} = req.query;
+          const data = await searchEvents(title);
+          return res.status(200).json({ message: "searched event",data});
+        }
+        catch(e){
+          return next(new Error(e));
+        }
+      }
 
 
 }

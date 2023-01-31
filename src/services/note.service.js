@@ -41,6 +41,11 @@ class NoteService{
         let data = await Note.destroy({where:{id:id}})
         return data
     }
+
+    static async searchNote(sss){
+        let data = await Note.findAll({ where: {description: sss } })
+        return data
+    }
    
 
 
