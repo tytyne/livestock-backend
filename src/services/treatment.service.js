@@ -60,7 +60,7 @@ class TreatmentService{
         let data = await Treatment.findAll({ 
             include:[
                 {
-                    model:models.Animal,
+                    model:Models.Animal,
                     as:"animal"
                 
                 }] })

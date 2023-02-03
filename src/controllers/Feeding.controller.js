@@ -47,21 +47,21 @@ export default class FeedingController {
               formData.onsetDate=checkdata[i];
             
               const data = await createFeeding(formData);
-              await createTransaction({
-                id:uuidv4(),
-               type: "expense",
-               amount:`- RWF${formula}`,
-               date: `${formData.onsetDate}`,
-               vendor: " ",
-               category: "feeding",
-               check_number:"",
-               ref_Id: `${resource_id}`,
-               ref_type: "animal",
-               reporting_year:"2022",
-               keywords: "",
-               description: ""
+            //   await createTransaction({
+            //     id:uuidv4(),
+            //    type: "expense",
+            //    amount:`- RWF${formula}`,
+            //    date: `${formData.onsetDate}`,
+            //    vendor: " ",
+            //    category: "feeding",
+            //    check_number:"",
+            //    ref_Id: `${resource_id}`,
+            //    ref_type: "animal",
+            //    reporting_year:"2022",
+            //    keywords: "",
+            //    description: ""
        
-             })
+            //  })
                
               return res.status(200).json({ message: "feeding array created ...!",data});
                
@@ -75,21 +75,21 @@ export default class FeedingController {
       }
       formData.id = uuidv4()
       const data = await createFeeding(formData);
-       await createTransaction({
-        id:uuidv4(),
-        type: "expense",
-        amount:`- RWF${formula}`,
-        date: `${formData.onsetDate}`,
-        vendor: " ",
-        category: "feeding",
-        check_number:"",
-        ref_Id: `${resource_id}`,
-        ref_type: "animal",
-        reporting_year:"2022",
-        keywords: "",
-        description: ""
+      //  await createTransaction({
+      //   id:uuidv4(),
+      //   type: "expense",
+      //   amount:`- RWF${formula}`,
+      //   date: `${formData.onsetDate}`,
+      //   vendor: " ",
+      //   category: "feeding",
+      //   check_number:"",
+      //   ref_Id: `${resource_id}`,
+      //   ref_type: "animal",
+      //   reporting_year:"2022",
+      //   keywords: "",
+      //   description: ""
 
-      })
+      // })
     
     
     return  res.status(200).json({ message: "feeding created!",});

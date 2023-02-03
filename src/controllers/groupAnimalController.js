@@ -34,7 +34,7 @@ export default class GroupAnimalController {
       else{
         console.log("check data",formData)
         const data = await createGroupAnimal(formData);
-        returnres.status(200).json({ message: "an GroupAnimal created!", data });
+        return res.status(200).json({ message: "an GroupAnimal created!", data });
       }
      
     } catch (e) {

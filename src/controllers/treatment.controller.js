@@ -27,13 +27,13 @@ try{
       amount:`- RWF${formData.cost}`,
       date: `${formData.date}`,
       vendor: " ",
-      category:`${formData.type}`,
+      category:`Veterinary, breeding, and medicine`,
       check_number:"",
       ref_Id: `${resource_id}`,
       ref_type: "animal",
-      reporting_year:"2022",
+      reporting_year:new Date().getFullYear(),
       keywords: "",
-      description: ""
+      description: `${formData.description}`
 
     })
     await createEvent({

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       })
      
       // GroupAnimal.hasMany(models.Animal, {
-      //   foreignKey: 'animalId',
+      //   foreignKey: 'group_id',
       //   as: 'records',
       //   onDelete: 'CASCADE',
       // });
