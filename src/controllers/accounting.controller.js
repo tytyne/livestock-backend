@@ -1,5 +1,5 @@
 import TransactionService from "../services/transaction.service"
-const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById}=TransactionService
+const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,allRangeTransactionsCount}=TransactionService
 const { v4: uuidv4 } = require('uuid');
 
 export default class AccountingController{
@@ -76,5 +76,19 @@ static async deleteTransaction(req,res,next){
     catch (e) {
         return next(new Error(e));
       }
+}
+
+
+static async RangeTransactions(req,res,next){
+
+    try{
+        const {resource_name,resource_id}= req.params
+        const data = await allRangeTransactionsCount()
+        res.status(200).json({message:"All Transactions",data})
+    }
+    catch (e) {
+        return next(new Error(e));
+      }
+
 }
 }

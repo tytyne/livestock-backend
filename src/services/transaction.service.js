@@ -1,6 +1,7 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{Transaction} = models;
+const { Op,sequelize } = require("sequelize");
 
 /**
  * @description This model deals with Transaction model
@@ -55,7 +56,7 @@ class TransactionService{
     // This is assuming you have 2 different types of transaction like income money and expense money
 // so it will retun two sums separately
 
-async allRangeTransactionsCount(options = {}) {
+static async allRangeTransactionsCount(options = {}) {
     try {
       const requests = await sequelize.query(
           `SELECT 
@@ -64,12 +65,12 @@ async allRangeTransactionsCount(options = {}) {
             COALESCE(SUM("transaction_total") FILTER (WHERE "type" = 'expense'),0)  AS outtotal
         FROM "Accountings"
         
-        WHERE ("createdAt"::date BETWEEN :fromdate AND :todate);`, // Fetching by range is only at here at WHERE part
+        WHERE ("createdAt"::date BETWEEN :date AND :todate);`, // Fetching by range is only at here at WHERE part
         {
           replacements:
           {
-            fromdate: options.fromdate,
-            todate: options.todate,
+            date: options.date,
+            date: options.todate,
             // user_id: options.user_id,
             // product_id: options.product_id
           }

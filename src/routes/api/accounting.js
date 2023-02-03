@@ -11,5 +11,6 @@ router.get("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwne
 router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,accountingController.getTransactions)
 router.put("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,accountingController.updateTransaction)
 router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,accountingController.deleteTransaction)
+router.get("/:resource_name/:resource_id/check/all/range",checkAuthorisation,accountingController.RangeTransactions)
 
 export default router

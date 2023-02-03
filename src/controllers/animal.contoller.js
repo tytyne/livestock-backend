@@ -179,13 +179,14 @@ static async  EditGroupAnimal(req,res,next){
   try{
     // const id = req.params.id
     const {add_group,id}=req.params
-   
+    console.log("check add group",add_group)
+
+    console.log("check idddddddddddd",id)
+
     const data  = await updateAnimalByGroupId(add_group,id)
-    // add animal id to record
 
-    // await
-
-    return res.status(200).json({message:"Animal Added Succesfully!",data})
+    console.log("check dataaaa",data)
+    return res.status(200).json({message:"ooooopsss",data})
 
   }
   catch(e){
