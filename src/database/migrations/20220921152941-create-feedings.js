@@ -15,6 +15,7 @@ module.exports = {
       feedId: {
         type: Sequelize.INTEGER,
       },
+      
       createdBy: {
         type: Sequelize.UUID
       },
@@ -31,10 +32,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       quantity: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       repeat_until_date: {
         type: Sequelize.DATE

@@ -24,6 +24,8 @@ import EventService from "../services/event.service";
 const { createEvent } = EventService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
+import AnimalService from "../services/animal.service";
+const{getAnimalById}=AnimalService
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -39,12 +41,7 @@ export default class VaccinatingController {
       console.log(req.user.id)
       formData.id = uuidv4()
       formData.createdBy = req.user.id;
-      if(resource_name==="animal"){
-        formData.animalId= resource_id
-      }
-      else if(resource_name==="animal_group"){
-        formData.groupId= resource_id
-      }
+    
 
       const item = await getVaccinationById(formData.vaccinationId)
       const itemData = item.dataValues
@@ -52,6 +49,64 @@ export default class VaccinatingController {
       formData.measurement = itemData.measurement;
       const formula = await calculatePrice(itemData.price, formData.quantity, itemData.unit);
       formData.price = formula
+
+      if(resource_name==='livestock_group'){
+        const checking = await getGroupAnimalById(resource_id)
+        const hello=checking.dataValues.farm_id
+       
+        formData.animalId= resource_id
+        const data = await createVaccinatingProcess(formData);
+        if(formData.record_transaction === true){
+          await createTransaction({
+            id:uuidv4(),
+            type: "expense",
+            amount:`${formData.cost}`,
+            date: `${formData.date}`,
+            vendor: " ",
+            category:`Veterinary, breeding, and medicine`,
+            check_number:"",
+            ref_Id: `${resource_id}`,
+            farmId:`${hello}`,
+            ref_type: `${resource_name}`,
+            reporting_year:new Date().getFullYear(),
+            keywords: "",
+            description: `${formData.description}`
+      
+          })
+        }
+      
+        
+        return res.status(200).json({ message: "vaccinating created!", data });
+  
+      }
+
+      if(resource_name==='animal'){
+        const checking = await getAnimalById(resource_id)
+        const hello =checking.dataValues.farm_id
+        formData.animalId= resource_id
+        const data = await createVaccinatingProcess(formData);
+        if(formData.record_transaction === true){
+          await createTransaction({
+            id:uuidv4(),
+            type: "expense",
+            amount:`${formData.cost}`,
+            date: `${formData.date}`,
+            vendor: " ",
+            category:`Veterinary, breeding, and medicine`,
+            check_number:"",
+            ref_Id: `${resource_id}`,
+            farmId:`${hello}`,
+            ref_type: `${resource_name}`,
+            reporting_year:new Date().getFullYear(),
+            keywords: "",
+            description: `${formData.description}`
+      
+          })
+        }
+
+
+      return res.status(200).json({ message: "a Vaccinating Process created!", data });
+      }
      
       await createEvent({
         id:uuidv4(),
@@ -64,25 +119,8 @@ export default class VaccinatingController {
 
       })
 
-      await createTransaction({
-        id:uuidv4(),
-        type: "expense",
-        amount:`- RWF ${formula}`,
-        date: `${formData.onsetDate}`,
-        vendor: " ",
-        category: `Vaccination`,
-        check_number:"",
-        ref_Id: `${resource_id}`,
-        ref_type: "animal",
-        reporting_year:"2022",
-        keywords: "",
-        description: ""
-
-      })
-      
-      const data = await createVaccinatingProcess(formData);
-
-      return res.status(200).json({ message: "a Vaccinating Process created!", data });
+    
+    
     // } 
     
     

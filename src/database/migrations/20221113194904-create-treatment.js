@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       amount: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       mode: {
         type: Sequelize.STRING
@@ -52,7 +52,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
       },
       keywords: {
         type: Sequelize.STRING

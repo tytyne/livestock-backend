@@ -15,6 +15,9 @@ module.exports = {
       vaccinationId: {
         type: Sequelize.INTEGER
       },
+      farmId: {
+        type: Sequelize.STRING
+      },
       treatmentMethodId: {
         type: Sequelize.INTEGER
       },
@@ -28,13 +31,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       quantity: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       price: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       unit: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       measurement: {
         type: Sequelize.STRING
@@ -42,6 +45,10 @@ module.exports = {
       
       nextAppointment: {
         type: Sequelize.STRING
+      },
+      record_transaction: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
       },
       createdAt: {
         allowNull: false,

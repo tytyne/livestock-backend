@@ -1,7 +1,7 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{Transaction} = models;
-const { Op,sequelize } = require("sequelize");
+const { Op,sequelize ,literal} = require("sequelize");
 
 /**
  * @description This model deals with Transaction model
@@ -51,12 +51,51 @@ class TransactionService{
         return data
     }
   
+    static async getIncomeExpenseFarm(farm_id){
+    
+    let farm =Transaction.findAll({
+      group: ['category',models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
+      raw: true,
+      attributes: [
+          'category',
 
+          [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
+          [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'] 
+
+         
+      ],   
+      
+  },{where:{farmId:farm_id}});
+
+      return farm
+    }
+
+    static async getIncomeExpenseFarmTotal(farm_id){
+    
+      let farm =Transaction.findAll({
+        group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
+        attributes: [
+           
+            [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
+            [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'],
+            [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END - CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'profit_amount'],
+            
+            
+
+           
+        ],   
+        
+    },{where:{farmId:farm_id}});
+  
+        return farm
+      }
+
+   
 
     // This is assuming you have 2 different types of transaction like income money and expense money
 // so it will retun two sums separately
 
-static async allRangeTransactionsCount(options = {}) {
+static async getIncomeExpenseFarmy(options = {}) {
     try {
       const requests = await sequelize.query(
           `SELECT 

@@ -1,5 +1,9 @@
 import TransactionService from "../services/transaction.service"
 const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,allRangeTransactionsCount}=TransactionService
+import AnimalService from "../services/animal.service";
+const{getAnimalById}=AnimalService
+import  GroupAnimalService from "../services/groupAnimal.service"
+const{getGroupAnimalById}=GroupAnimalService
 const { v4: uuidv4 } = require('uuid');
 
 export default class AccountingController{
@@ -8,19 +12,35 @@ static async storeTransaction(req,res,next){
 try{
     const formData = req.body;
     formData.id = uuidv4()
-    const {resource_name,resource_id}= req.params
+    const {ressource_name,ressource_id}= req.params
     formData.createdBy = req.user.id;
-    if(resource_name!==null){
-      formData.ref_Id= resource_id
-      formData.ref_type= resource_name
+    console.log("checking name",ressource_name)
+    if(ressource_name!==null){
+
+      if(ressource_name==='livestock_group'){
+        const checking = await getGroupAnimalById(ressource_id)
+        console.log("check farmId",checking)
+        formData.farmId=checking.dataValues.farm_id
+       
+        formData.ref_Id= ressource_id
+        formData.ref_type= ressource_name
+      }
+      else if(ressource_name==='animal'){
+        const checking = await getAnimalById(ressource_id)
+        console.log("check farmId",checking)
+        formData.farmId=checking.dataValues.farm_id
+        formData.ref_Id= ressource_id
+        formData.ref_type= ressource_name
+      }
+      else{
+        formData.farmId=ressource_id
+        
+      }
+     
+
     }
-    if (formData.type=="expense"){
-        formData.amount= `-`.concat(formData.amount);
-    }
-    
-    console.log("check formData",formData)
     const data = await createTransaction(formData)
-    res.status(200).json({message:"Transaction created!",data})
+   return res.status(200).json({message:"Transaction created!",data})
 }
 catch (e) {
     return next(new Error(e));

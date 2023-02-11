@@ -3,7 +3,7 @@ import "regenerator-runtime/runtime";
 const{Farm} = models;
 
 import {
-  Op, where, cast, col
+  Op, where, cast, col,db,sequelize
 } from 'sequelize';
 
 
@@ -79,10 +79,16 @@ class FarmService{
 
   }
 
+
+
+
+
   static async searchFarm(sss){
     let data = await Farm.findAll({ where: { name: sss } })
     return data
 }
+
+
 
 }
 export default FarmService

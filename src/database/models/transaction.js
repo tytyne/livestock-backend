@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define('Transaction', {
 
     type: DataTypes.STRING,
-    amount:DataTypes.STRING,
+    amount:DataTypes.DECIMAL,
     date:DataTypes.DATE,
     reporting_year:DataTypes.STRING,
     vendor:DataTypes.STRING,
@@ -23,11 +23,17 @@ module.exports = (sequelize, DataTypes) => {
       as: 'user',
       onDelete: 'CASCADE',
     })
-    Transaction.belongsTo(models.Animal, {
-      foreignKey: 'ref_Id',
-      as: 'reference',
+
+    Transaction.belongsTo(models.Farm, {
+      foreignKey: 'farmId',
+      as: 'farm',
       onDelete: 'CASCADE',
     })
+    // Transaction.belongsTo(models.Animal, {
+    //   foreignKey: 'ref_Id',
+    //   as: 'reference',
+    //   onDelete: 'CASCADE',
+    // })
    
    
   };

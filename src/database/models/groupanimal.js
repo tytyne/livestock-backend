@@ -6,6 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.STRING,
     active_only:DataTypes.BOOLEAN,
     type:DataTypes.STRING,
+    records:{
+      type:DataTypes.ARRAY(DataTypes.JSONB),
+    },
     
 
   }, { });

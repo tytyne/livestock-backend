@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       records:{
-        type: Sequelize.INTEGER
+        type: Sequelize.ARRAY(Sequelize.JSON),
       },
       createdBy:{
         type: Sequelize.UUID,

@@ -14,6 +14,9 @@ module.exports = {
       medicineId: {
         type: Sequelize.INTEGER,
       },
+      farmId: {
+        type: Sequelize.STRING,
+      },
       createdBy: {
         type: Sequelize.UUID
       },
@@ -30,16 +33,20 @@ module.exports = {
         type: Sequelize.STRING
       },
       quantity: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       withdrawal_date: {
         type: Sequelize.DATE
       },
       measurement: {
         type: Sequelize.STRING
+      },
+      record_transaction: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
       },
      
       createdAt: {

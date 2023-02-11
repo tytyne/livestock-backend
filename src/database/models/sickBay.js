@@ -5,18 +5,23 @@ module.exports = (sequelize, DataTypes) => {
     intervention: DataTypes.STRING,
     observation:DataTypes.STRING,
     medicine_name:DataTypes.STRING,
-    quantity: DataTypes.STRING,
-    price: DataTypes.STRING,
+    quantity: DataTypes.DECIMAL,
+    price: DataTypes.DECIMAL,
     withdrawal_date: DataTypes.DATE,
-    measurement:DataTypes.STRING
+    measurement:DataTypes.STRING,
+    animalId:DataTypes.STRING,
+    record_transaction:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
    
   }, { });
   SickBay.associate = function(models) {
-  SickBay.belongsTo(models.Animal, {
-    foreignKey: 'animalId',
-    as: 'animal',
-    onDelete: 'CASCADE',
-  })
+  // SickBay.belongsTo(models.Animal, {
+  //   foreignKey: 'animalId',
+  //   as: 'animal',
+  //   onDelete: 'CASCADE',
+  // })
  
   SickBay.belongsTo(models.Medicine, {
     foreignKey: 'medicineId',

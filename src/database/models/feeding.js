@@ -4,10 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     onsetDate: DataTypes.DATE,
     description: DataTypes.STRING,
     feed_name: DataTypes.STRING,
-    quantity: DataTypes.STRING,
-    price: DataTypes.STRING,
+    quantity: DataTypes.DECIMAL,
+    price: DataTypes.DECIMAL,
     measurement:DataTypes.STRING,
     repeat_until_date:DataTypes.DATE,
+    animalId:DataTypes.UUID
     
   }, { });
   Feeding.associate = function(models) {
@@ -17,11 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     onDelete: 'CASCADE',
   })
 
-  Feeding.belongsTo(models.Animal, {
-    foreignKey: 'animalId',
-    as: 'animal',
-    onDelete: 'CASCADE',
-  })
+  // Feeding.belongsTo(models.Animal, {
+  //   foreignKey: 'animalId',
+  //   as: 'animal',
+  //   onDelete: 'CASCADE',
+  // })
  
   Feeding.belongsTo(models.User, {
     foreignKey: 'createdBy',

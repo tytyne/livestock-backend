@@ -76,7 +76,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       group_id:{
-        type: Sequelize.UUID
+        type: Sequelize.STRING
       },
       group_qty:{
         type: Sequelize.STRING

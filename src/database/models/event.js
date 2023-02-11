@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     end_time: DataTypes.DATE,
     all_day: DataTypes.BOOLEAN,
     description: DataTypes.STRING,
-    // reference_id: DataTypes.STRING,
+    reference_id: DataTypes.STRING,
     reference_type: DataTypes.INTEGER,
     created_by: DataTypes.STRING,
     created_by_id: DataTypes.STRING,
@@ -35,11 +35,11 @@ module.exports = (sequelize, DataTypes) => {
     as: 'priority',
     onDelete: 'CASCADE',
   })
-  Event.belongsTo(models.Animal, {
-    foreignKey: 'reference_id',
-    as: 'animal',
-    onDelete: 'CASCADE',
-  })
+  // Event.belongsTo(models.Animal, {
+  //   foreignKey: 'reference_id',
+  //   as: 'animal',
+  //   onDelete: 'CASCADE',
+  // })
   
 };
 

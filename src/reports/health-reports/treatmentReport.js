@@ -1,5 +1,7 @@
 import TreatmentService from "../../services/treatment.service"
 const{upcomingTreatments,AllTreatmentsReports,TreatmentTypes}=TreatmentService
+import AnimalService from "../../services/animal.service"
+const {getAnimalById,getAllanimals} = AnimalService
 
 export default class TreatmentReport{
    
@@ -22,21 +24,23 @@ static async getUpcommingTreatments(req,res,next){
 static async holla(req,res,next){
   try{
       const data = await AllTreatmentsReports()
+      // const dataa = await getAllanimals()
 
-
-      const result = data.map(treatment => ({ id: treatment.id, 
+      // const resuly = data.map(treatment => ({ id: treatment.id, 
        
-        name:treatment.animal.name,
-        // type:treatment.animal
-        breed:treatment.animal.breed,
-        tag:treatment.animal.tag,
-        treatment_type:treatment.type,
-        mode:treatment.mode,
-        Description:treatment.description,
-        Site:treatment.site,
-        Batch:treatment.batch,
-        date:treatment.date
-      }))
+      //   name:treatment.animal.name,
+      //   // type:treatment.animal
+      //   breed:treatment.animal.breed,
+      //   tag:treatment.animal.tag,
+      //   treatment_type:treatment.type,
+      //   mode:treatment.mode,
+      //   Description:treatment.description,
+      //   Site:treatment.site,
+      //   Batch:treatment.batch,
+      //   date:treatment.date
+      // }))
+      const graph = await TreatmentTypes()
+      const result={data,graph}
 
 
       return res.status(200).json({message:"All Treatments Reports",result})

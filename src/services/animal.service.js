@@ -166,6 +166,7 @@ class AnimalService {
         return data
     }
 
+
 }
 export default AnimalService
 

@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       amount: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       date: {
         type: Sequelize.DATE
@@ -28,6 +28,9 @@ module.exports = {
       },
       category: {
         type: Sequelize.STRING
+      },
+      farmId: {
+        type: Sequelize.UUID
       },
       ref_Id: {
         type: Sequelize.UUID
