@@ -11,6 +11,9 @@ module.exports = {
       animalId: {
         type: Sequelize.UUID
       },
+      groupId: {
+        type: Sequelize.UUID
+      },
       createdBy: {
         type: Sequelize.UUID,
       },

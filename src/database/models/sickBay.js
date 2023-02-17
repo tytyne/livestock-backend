@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
     withdrawal_date: DataTypes.DATE,
     measurement:DataTypes.STRING,
-    animalId:DataTypes.STRING,
+    // animalId:DataTypes.STRING,
     record_transaction:{
       type: DataTypes.BOOLEAN,
       defaultValue: true
@@ -17,17 +17,25 @@ module.exports = (sequelize, DataTypes) => {
    
   }, { });
   SickBay.associate = function(models) {
-  // SickBay.belongsTo(models.Animal, {
-  //   foreignKey: 'animalId',
-  //   as: 'animal',
-  //   onDelete: 'CASCADE',
-  // })
- 
+
   SickBay.belongsTo(models.Medicine, {
     foreignKey: 'medicineId',
     as: 'medicine',
     onDelete: 'CASCADE',
   })
+
+  SickBay.belongsTo(models.Animal, {
+    foreignKey: 'animalId',
+    as: 'animal',
+    onDelete: 'CASCADE',
+  })
+
+  SickBay.belongsTo(models.GroupAnimal, {
+    foreignKey: 'groupId',
+    as: 'group',
+    onDelete: 'CASCADE',
+  })
+
   SickBay.belongsTo(models.User, {
     foreignKey: 'createdBy',
     as: 'user',

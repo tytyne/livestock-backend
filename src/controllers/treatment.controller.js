@@ -1,5 +1,5 @@
 import TreatmentService from "../services/treatment.service"
-const{createTreatment,getTreatmentById,getAllTreatments,updateTreatmentById,deleteTreatmentById,upcomingTreatments}=TreatmentService
+const{createTreatment,getTreatmentById,getAllTreatmentsAnimal,getAllTreatmentsGroup,updateTreatmentById,deleteTreatmentById,upcomingTreatments}=TreatmentService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
 import EventService from "../services/event.service";
@@ -24,9 +24,9 @@ try{
       // console.log("check farmId",checking)
       const hello=checking.dataValues.farm_id
      
-      formData.animalId= resource_id
+      formData.groupId= resource_id
       const data = await createTreatment(formData);
-      if(fformData.record_transaction === true){
+      if(formData.record_transaction === true){
         await createTransaction({
           id:uuidv4(),
           type: "expense",
@@ -112,8 +112,14 @@ static async getTreatment(req,res,next){
 static async getTreatments(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
-        const data = await getAllTreatments(resource_id)
-        return res.status(200).json({message:"All Treatments",data})
+        if(resource_name==="animal"){
+          const data = await getAllTreatmentsAnimal(resource_id);
+          return res.status(200).json({ message: "All treatments", data });
+        }
+        else if(resource_name==="livestock_animal"){
+          const data = await getAllTreatmentsGroup(resource_id);
+          return res.status(200).json({ message: "All treatments", data });
+        }
     }
     catch (e) {
         return next(new Error(e));

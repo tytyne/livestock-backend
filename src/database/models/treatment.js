@@ -19,24 +19,25 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.STRING,
     date:DataTypes.DATE,
     keywords:DataTypes.STRING,
-    animalId:DataTypes.UUID
+    // animalId:DataTypes.UUID
    
    
   }, { });
   Treatment.associate = function(models) {
-    // Treatment.belongsTo(models.Animal, {
-    //   foreignKey: 'animalId',
-    //   as: 'animal',
-    //   onDelete: 'CASCADE',
-    // })
-    // Treatment.belongsTo(models.Animal, {
-    //   foreignKey: 'groupAnimalId',
-    //   as: 'groupAnimal',
-    //   onDelete: 'CASCADE',
-    // })
+  
     Treatment.belongsTo(models.User, {
       foreignKey: 'createdBy',
       as: 'user',
+      onDelete: 'CASCADE',
+    })
+    Treatment.belongsTo(models.Animal, {
+      foreignKey: 'animalId',
+      as: 'animal',
+      onDelete: 'CASCADE',
+    })
+    Treatment.belongsTo(models.GroupAnimal, {
+      foreignKey: 'groupId',
+      as: 'group',
       onDelete: 'CASCADE',
     })
   }

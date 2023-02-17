@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     active_only:DataTypes.BOOLEAN,
     type:DataTypes.STRING,
     records:{
-      type:DataTypes.ARRAY(DataTypes.JSONB),
+      type:DataTypes.ARRAY(DataTypes.JSON),
     },
     
 

@@ -2,7 +2,8 @@ import VaccinatingService from "../services/vaccinating.service";
 const {
   createVaccinatingProcess,
   getVaccinatingProcessById,
-  getAllVaccinatingProcess,
+  getAllVaccinatingProcessAnimal,
+  getAllVaccinatingProcessGroup,
   updateVaccinatingProcessById,
   deleteVaccinatingProcessById,
   searchingzz
@@ -54,7 +55,7 @@ export default class VaccinatingController {
         const checking = await getGroupAnimalById(resource_id)
         const hello=checking.dataValues.farm_id
        
-        formData.animalId= resource_id
+        formData.groupId= resource_id
         const data = await createVaccinatingProcess(formData);
         if(formData.record_transaction === true){
           await createTransaction({
@@ -151,8 +152,14 @@ export default class VaccinatingController {
   static async getVaccinatings(req, res, next) {
     try {
       const {resource_name,resource_id}= req.params
-      const data = await getAllVaccinatingProcess(resource_id);
-      res.status(200).json({ message: "All Vaccinating Process", data });
+      if(resource_name==="animal"){
+        const data = await getAllVaccinatingProcessAnimal(resource_id);
+        return res.status(200).json({ message: "All vaccinatting", data });
+      }
+      else if(resource_name==="livestock_animal"){
+        const data = await getAllVaccinatingProcessGroup(resource_id);
+        return res.status(200).json({ message: "All vaccinattings", data });
+      }
     } catch (e) {
       return next(new Error(e));
     }

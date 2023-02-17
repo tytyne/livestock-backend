@@ -23,6 +23,9 @@ module.exports = {
       animalId: {
         type: Sequelize.UUID
       },
+      groupId: {
+        type: Sequelize.UUID
+      },
       intervention: {
         type: Sequelize.STRING
       },

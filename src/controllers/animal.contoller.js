@@ -13,7 +13,7 @@ const {
 import CalculationHelper from "../utils/calculationHelper";
 const { electronicId, gettingAge } = CalculationHelper
 import GroupAnimalService from "../services/groupAnimal.service";
-const{PushRecords}=GroupAnimalService
+const{pushingNewRecords,addNewRecords}=GroupAnimalService
 const { v4: uuidv4 } = require('uuid');
 
 export default class AnimalController {
@@ -180,10 +180,10 @@ static async searchingAnimal(req,res,next){
 static async  EditGroupAnimal(req,res,next){
   try{
     // const id = req.params.id
-    const {add_group,id}=req.params
+    const {id,add_group}=req.params
    
     const animal = await getAnimalById(id)
-    console.log("check animal data",id)
+    console.log("check animal data",animal)
     const animalData = animal.dataValues
     console.log("check animalData",animalData)
     const records = {
@@ -193,10 +193,10 @@ static async  EditGroupAnimal(req,res,next){
     // console.log("check records",records.animalData)
     console.log("check group ",add_group)
    
-    const koko = await PushRecords(records,add_group)
+    const koko = await addNewRecords(records,add_group)
     console.log("check koko",koko)
-    const data  = await updateAnimalByGroupId(add_group,id)
-    return res.status(200).json({message:"animal updated!"})
+    const data  = await updateAnimalByGroupId(id,add_group)
+    return res.status(200).json({message:"animal updated!",data})
 
   }
   catch(e){

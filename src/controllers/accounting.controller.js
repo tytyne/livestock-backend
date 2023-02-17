@@ -1,5 +1,5 @@
 import TransactionService from "../services/transaction.service"
-const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,allRangeTransactionsCount}=TransactionService
+const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,getIncomeExpenseAnimalTotal,allRangeTransactionsCount}=TransactionService
 import AnimalService from "../services/animal.service";
 const{getAnimalById}=AnimalService
 import  GroupAnimalService from "../services/groupAnimal.service"
@@ -51,8 +51,8 @@ catch (e) {
 static async getTransaction(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
-        const id=req.params.id
-        const data = await getTransactionById(id)
+        // const id=req.params.id
+        const data = await getTransactionById(resource_id)
         res.status(200).json({message:"get Transaction by Id",data})
     }
     catch (e) {
@@ -91,7 +91,7 @@ static async deleteTransaction(req,res,next){
         const {resource_name,resource_id}= req.params
         const id=req.params.id
         const data = await deleteTransactionById(id)
-        res.status(200).json({message:"Transaction deleted succesfully!"})
+        return res.status(200).json({message:"Transaction deleted succesfully!"})
     }
     catch (e) {
         return next(new Error(e));
@@ -104,7 +104,7 @@ static async RangeTransactions(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
         const data = await allRangeTransactionsCount()
-        res.status(200).json({message:"All Transactions",data})
+        return res.status(200).json({message:"All Transactions",data})
     }
     catch (e) {
         return next(new Error(e));

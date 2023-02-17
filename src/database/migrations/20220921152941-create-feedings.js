@@ -15,11 +15,13 @@ module.exports = {
       feedId: {
         type: Sequelize.INTEGER,
       },
-      
       createdBy: {
         type: Sequelize.UUID
       },
       animalId: {
+        type: Sequelize.UUID
+      },
+      groupId: {
         type: Sequelize.UUID
       },
       description: {
@@ -42,6 +44,10 @@ module.exports = {
       },
       measurement: {
         type: Sequelize.STRING
+      },
+      shared: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
       },
      
       createdAt: {

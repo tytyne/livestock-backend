@@ -11,11 +11,18 @@ class AnimalService {
         let animal = await Animal.create(value)
         return animal
     }
-    static async getAnimalById(id) {
-        let animal = await Animal.findOne({ where: { id: id } })
+    static async getAnimalById(animalId) {
+        let animal = await Animal.findOne({ where: { id: animalId } })
         return animal
 
     }
+
+    static async getAnimalDetailsById(animalId) {
+        let animal = await Animal.findOne({ where: { id: animalId } })
+        return animal
+
+    }
+
     static async getAnimalByEarring(input) {
         let animal = await Animal.findOne({ where: { earring_num: input } })
         return animal
@@ -38,7 +45,7 @@ class AnimalService {
 
     // update group ...
 
-    static async updateAnimalByGroupId(value,checkid) {
+    static async updateAnimalByGroupId(checkid,value) {
         let data= await Animal.update(
             { group_id:value },
             { where: { id: checkid },

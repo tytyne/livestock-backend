@@ -17,8 +17,38 @@ class VaccinatingService{
 
     }
    
-    static async getAllVaccinatingProcess(animal_id){
+    static async getAllVaccinatingProcessAnimal(animal_id){
         let data = await Vaccinating.findAll({where:{animalId:animal_id},
+            include: [
+                {
+                    model: models.Vaccination,
+                    as: "vaccination",
+                    attributes: ['name'],
+                
+            },
+            {
+                model: models.User,
+                as: "user",
+                attributes: ['firstname', 'lastname'],
+            
+            },
+            {
+                model: models.Animal,
+                as: "animal",
+                attributes: ['name'],
+            
+            }
+            ],
+            // attributes: [{ exclude: "createdBy","vaccinationId" }]
+            attributes: { exclude: "createdBy" },
+            attributes: { exclude: "vaccinationId" },
+            attributes: { exclude: "animalId" },
+        })
+        return data
+
+    }
+    static async getAllVaccinatingProcessGroup(animal_id){
+        let data = await Vaccinating.findAll({where:{groupId:animal_id},
             include: [
                 {
                     model: models.Vaccination,

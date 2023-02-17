@@ -54,10 +54,10 @@ class TransactionService{
     static async getIncomeExpenseFarm(farm_id){
     
     let farm =Transaction.findAll({
-      group: ['category',models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
+      group: ['category','type',models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
       raw: true,
       attributes: [
-          'category',
+          'category','type'
 
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'] 
@@ -88,14 +88,34 @@ class TransactionService{
     },{where:{farmId:farm_id}});
   
         return farm
-      }
+  }
+
+  static async getIncomeExpenseAnimalTotal(animal_id){
+    
+    let animal =Transaction.findAll({
+      group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
+      attributes: [
+         
+          [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
+          [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'],
+          [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END - CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'profit_amount'],
+          
+          
+
+         
+      ],   
+      
+  },{where:{animalId:animal_id}});
+
+      return animal
+    }
 
    
 
     // This is assuming you have 2 different types of transaction like income money and expense money
 // so it will retun two sums separately
 
-static async getIncomeExpenseFarmy(options = {}) {
+static async allRangeTransactionsCount(options = {}) {
     try {
       const requests = await sequelize.query(
           `SELECT 

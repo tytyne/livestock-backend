@@ -30,8 +30,13 @@ class FeedingService{
 
     }
    
-    static async getAllFeeding(animal_id){
+    static async getAllFeedingAnimal(animal_id){
         let data = await Feeding.findAll({where:{animalId:animal_id}})
+        return data
+
+    }
+    static async getAllFeedingGroup(animal_id){
+        let data = await Feeding.findAll({where:{groupId:animal_id}})
         return data
 
     }

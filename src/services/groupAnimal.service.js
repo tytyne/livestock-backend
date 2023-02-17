@@ -1,7 +1,7 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{GroupAnimal} = models;
-const { Op,sequelize } = require("sequelize");
+const { Op,sequelize,literal,fn} = require("sequelize");
 
 /**
  * @description This model deals with GroupAnimal model
@@ -72,16 +72,23 @@ class GroupAnimalService{
         return trial 
     }
 
-    static async pushingNewRecords(newrev,fid){
+    static async pushingNewRecords(newdata,fid){
 
         var newrev = JSON.stringify({data: newdata, created: new Date() });
-        let data = await Thing.update({
-            revisions: sequelize.fn( 'array_append',  models.sequelize.col('revisions'), newrev ,{where: {
+        let data = await GroupAnimal.upsert({
+            records: models.sequelize.fn( 'array_append',  models.sequelize.col('records'), newrev ,{where: {
                 id:fid
         }})
         })
 
         return data
+    }
+
+
+    static async addNewRecords(newdata,gid){
+        let newrev = JSON.stringify({data: newdata, created: new Date() });
+        await GroupAnimal.update({ records: models.sequelize.literal(`'${JSON.stringify(newrev)}'::json|| records`) }, { where: { id:gid} });
+        return newrev
     }
 
     

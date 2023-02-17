@@ -3,11 +3,8 @@ import calculationHelper from "../utils/calculationHelper"
 const{calculatePrice,getDatesInRange}=calculationHelper
 import FeedService from "../services/feed.service"
 const{getFeedById} = FeedService
-
 import FeedingService from "../services/feeding.service";
-import MedicineService from "../services/medicine.service"
-const {getMedicineById }=MedicineService
-const{createFeeding,getFeedingById,getAllFeeding,updateFeedingById,deleteFeedingById}=FeedingService
+const{createFeeding,getFeedingById,getAllFeedingAnimal,getAllFeedingGroup,updateFeedingById,deleteFeedingById}=FeedingService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
 const { v4: uuidv4 } = require('uuid');
@@ -47,21 +44,24 @@ export default class FeedingController {
               formData.onsetDate=checkdata[i];
             
               const data = await createFeeding(formData);
-            //   await createTransaction({
-            //     id:uuidv4(),
-            //    type: "expense",
-            //    amount:`- RWF${formula}`,
-            //    date: `${formData.onsetDate}`,
-            //    vendor: " ",
-            //    category: "feeding",
-            //    check_number:"",
-            //    ref_Id: `${resource_id}`,
-            //    ref_type: "animal",
-            //    reporting_year:"2022",
-            //    keywords: "",
-            //    description: ""
+              if(formData.record_transaction === true){
+                     await createTransaction({
+                id:uuidv4(),
+               type: "expense",
+               amount:`- RWF${formula}`,
+               date: `${formData.onsetDate}`,
+               vendor: " ",
+               category: "feeding",
+               check_number:"",
+               ref_Id: `${resource_id}`,
+               ref_type: "animal",
+               reporting_year:"2022",
+               keywords: "",
+               description: ""
        
-            //  })
+             })
+            }
+         
                
               return res.status(200).json({ message: "feeding array created ...!",data});
                
@@ -74,24 +74,25 @@ export default class FeedingController {
  
       }
       formData.id = uuidv4()
-      const data = await createFeeding(formData);
-      //  await createTransaction({
-      //   id:uuidv4(),
-      //   type: "expense",
-      //   amount:`- RWF${formula}`,
-      //   date: `${formData.onsetDate}`,
-      //   vendor: " ",
-      //   category: "feeding",
-      //   check_number:"",
-      //   ref_Id: `${resource_id}`,
-      //   ref_type: "animal",
-      //   reporting_year:"2022",
-      //   keywords: "",
-      //   description: ""
+      
+      if(formData.record_transaction === true){
+        await createTransaction({
+        id:uuidv4(),
+        type: "expense",
+        amount:`- RWF${formula}`,
+        date: `${formData.onsetDate}`,
+        vendor: " ",
+        category: "feeding",
+        check_number:"",
+        ref_Id: `${resource_id}`,
+        ref_type: "animal",
+        reporting_year:"2022",
+        keywords: "",
+        description: ""
 
-      // })
-    
-    
+      })
+      }
+      const data = await createFeeding(formData);
     return  res.status(200).json({ message: "feeding created!",});
      
 
@@ -115,8 +116,15 @@ export default class FeedingController {
   static async getFeedings(req, res, next) {
     try {
       const {resource_name,resource_id}= req.params
-      const data = await getAllFeeding(resource_id);
-      res.status(200).json({ message: "All AnimalFeeds", data });
+      if(resource_name==="animal"){
+        const data = await getAllFeedingAnimal(resource_id);
+        return res.status(200).json({ message: "All AnimalFeeds", data });
+      }
+      else if(resource_name==="livestock_animal"){
+        const data = await getAllFeedingGroup(resource_id);
+        return res.status(200).json({ message: "All AnimalFeeds", data });
+      }
+      
     } catch (e) {
       return next(new Error(e));
     }

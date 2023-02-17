@@ -6,7 +6,8 @@ import SickBayService from "../services/sickBay.service";
 const {
   createSickBay,
   getSickBayById,
-  getAllSickBay,
+  getAllSickBayAnimal,
+  getAllSickBayGroup,
   updateSickBayById,
   deleteSickBayById,
 } = SickBayService;
@@ -40,7 +41,7 @@ export default class SickBayController {
         // console.log("check farmId",checking)
         const hello=checking.dataValues.farm_id
        
-        formData.animalId= resource_id
+        formData.groupId= resource_id
        
         if(formData.record_transaction === true){
          await createTransaction({
@@ -121,9 +122,16 @@ export default class SickBayController {
   //get all SickBays
   static async getSickBays(req, res, next) {
     try {
+  
       const {resource_name,resource_id}= req.params
-      const data = await getAllSickBay(resource_id);
-      res.status(200).json({ message: "All SickBays", data });
+      if(resource_name==="animal"){
+        const data = await getAllSickBayAnimal(resource_id);
+        return res.status(200).json({ message: "All sickbays", data });
+      }
+      else if(resource_name==="livestock_animal"){
+        const data = await getAllSickBayGroup(resource_id);
+        return res.status(200).json({ message: "All sickbays", data });
+      }
     } catch (e) {
       return next(new Error(e));
     }

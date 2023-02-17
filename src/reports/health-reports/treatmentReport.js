@@ -40,7 +40,7 @@ static async holla(req,res,next){
       //   date:treatment.date
       // }))
       const graph = await TreatmentTypes()
-      const result={data,graph}
+      const result={...data,graph}
 
 
       return res.status(200).json({message:"All Treatments Reports",result})

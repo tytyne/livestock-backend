@@ -17,8 +17,14 @@ class SickBayService{
 
     }
    
-    static async getAllSickBay(animal_id){
+    static async getAllSickBayAnimal(animal_id){
         let data = await SickBay.findAll({where:{animalId:animal_id}})
+        return data
+
+    }
+
+    static async getAllSickBayGroup(animal_id){
+        let data = await SickBay.findAll({where:{groupId:animal_id}})
         return data
 
     }

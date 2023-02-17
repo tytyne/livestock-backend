@@ -17,9 +17,6 @@ module.exports = {
       farm_id:{
         type: Sequelize.UUID
       },
-      // groupType_id:{
-      //   type: Sequelize.INTEGER
-      // },
       active_only:{
         type: Sequelize.BOOLEAN
       },
@@ -27,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       records:{
-        type:Sequelize.ARRAY(Sequelize.JSONB)
+        type:Sequelize.ARRAY(Sequelize.JSON)
       },
       createdBy:{
         type: Sequelize.UUID
