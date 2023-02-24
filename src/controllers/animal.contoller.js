@@ -183,17 +183,17 @@ static async  EditGroupAnimal(req,res,next){
     const {id,add_group}=req.params
    
     const animal = await getAnimalById(id)
-    console.log("check animal data",animal)
+    // console.log("check animal data",animal)
     const animalData = animal.dataValues
-    console.log("check animalData",animalData)
+    // console.log("check animalData",animalData)
     const records = {
         ...records,
       animalData
     }
-    // console.log("check records",records.animalData)
-    console.log("check group ",add_group)
+    console.log("check records",records)
+    // console.log("check group ",add_group)
    
-    const koko = await addNewRecords(records,add_group)
+    const koko = await addNewRecords(records.animalData,add_group)
     console.log("check koko",koko)
     const data  = await updateAnimalByGroupId(id,add_group)
     return res.status(200).json({message:"animal updated!",data})

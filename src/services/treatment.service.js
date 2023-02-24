@@ -69,7 +69,10 @@ class TreatmentService{
                     model:Models.Animal,
                     as:"animal"
                 
-                }] })
+                }
+                
+            
+            ] })
         return data
 
     }
@@ -90,15 +93,12 @@ class TreatmentService{
      
     
     ], 
-        // [Models.sequelize.fn("COUNT",Models.sequelize.col("gender",{where:{gender:'male'}})),'gender_male'],
-        // [Models.sequelize.fn("COUNT",Models.sequelize.col("gender",{where:{gender:'female'}})),'gender_female']
-           
-    
+   
     ],
     group:["type"] , })
     return data
 
-}
+    }
 
 
   

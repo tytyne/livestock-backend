@@ -26,21 +26,21 @@ static async holla(req,res,next){
       const data = await AllTreatmentsReports()
       // const dataa = await getAllanimals()
 
-      // const resuly = data.map(treatment => ({ id: treatment.id, 
+      const data_result = data.map(treatment => ({ id: treatment.id, 
        
-      //   name:treatment.animal.name,
-      //   // type:treatment.animal
-      //   breed:treatment.animal.breed,
-      //   tag:treatment.animal.tag,
-      //   treatment_type:treatment.type,
-      //   mode:treatment.mode,
-      //   Description:treatment.description,
-      //   Site:treatment.site,
-      //   Batch:treatment.batch,
-      //   date:treatment.date
-      // }))
+        name:treatment.animal.name,
+        // type:treatment.animal,
+        breed:treatment.animal.breed,
+        tag:treatment.animal.tag,
+        treatment_type:treatment.type,
+        mode:treatment.mode,
+        Description:treatment.description,
+        Site:treatment.site,
+        Batch:treatment.batch,
+        date:treatment.date
+      }))
       const graph = await TreatmentTypes()
-      const result={...data,graph}
+      const result={data_result,graph}
 
 
       return res.status(200).json({message:"All Treatments Reports",result})

@@ -53,17 +53,17 @@ class TransactionService{
   
     static async getIncomeExpenseFarm(farm_id){
     
-    let farm =Transaction.findAll({
-      group: ['category','type',models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
-      raw: true,
+    let farm = await Transaction.findAll({
+    
       attributes: [
-          'category','type'
+          'type'
 
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'] 
 
          
-      ],   
+      ], 
+      group: ['type'],  
       
   },{where:{farmId:farm_id}});
 
@@ -72,7 +72,7 @@ class TransactionService{
 
     static async getIncomeExpenseFarmTotal(farm_id){
     
-      let farm =Transaction.findAll({
+      let farm = await Transaction.findAll({
         group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
         attributes: [
            
@@ -140,6 +140,14 @@ static async allRangeTransactionsCount(options = {}) {
       throw new Error(error);
     }
   }
+
+static async TransactionsCategories(){
+    let data = await Transaction.findAll({ attributes: ["category",[models.sequelize.fn("COUNT",models.sequelize.col("category")),'categories',]],
+    
+group:["category"] , })
+return data
+
+}
 
 }
 export default TransactionService

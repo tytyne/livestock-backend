@@ -9,13 +9,11 @@ const{Feeding} = models;
 class FeedingService{
     static async createFeeding(value){
         let data = await Feeding.create(value)
-        // let data = await Nourish.bulkCreate(
+        // let data = await Feeding.bulkCreate(
         //     [
         //      value
         //     ],
-        //     {
-        //       ignoreDuplicates: true,
-        //     }
+        
         // )
         return data
     }

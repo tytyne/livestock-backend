@@ -23,6 +23,26 @@ class GroupAnimalService{
         return data
 
     }
+
+    static async getAllGroupAnimalss(){
+
+
+        let data = await GroupAnimal.findAll({
+            where: models.sequelize.where(models.sequelize.fn('ISJSON', models.sequelize.col('records')), 1)
+          })
+
+        // let data = await GroupAnimal.findAll<GroupAnimal>({
+        //     where: { '$bar.jsonb_field$': {
+        //       $contains: sequelize.literal(`'{ "inner_field1": "text to find" }'::json`)
+        //     },
+        //     include: [{ model: Animal }]
+        // }});
+    
+          return data;
+    }
+
+
+
     static async updateGroupAnimalById(value,id){
         let data = await GroupAnimal.update(value,{where:{id:id},returning: true,
             plain: true,})
@@ -72,23 +92,24 @@ class GroupAnimalService{
         return trial 
     }
 
-    static async pushingNewRecords(newdata,fid){
+    // static async pushingNewRecords(newdata,fid){
 
-        var newrev = JSON.stringify({data: newdata, created: new Date() });
-        let data = await GroupAnimal.upsert({
-            records: models.sequelize.fn( 'array_append',  models.sequelize.col('records'), newrev ,{where: {
-                id:fid
-        }})
-        })
+    //     var newrev = JSON.stringify({data: newdata, created: new Date() });
+    //     let data = await GroupAnimal.upsert({
+    //         records: models.sequelize.fn( 'array_append',  models.sequelize.col('records'), newrev ,{where: {
+    //             id:fid
+    //     }})
+    //     })
 
-        return data
-    }
+    //     return data
+    // }
 
 
     static async addNewRecords(newdata,gid){
-        let newrev = JSON.stringify({data: newdata, created: new Date() });
-        await GroupAnimal.update({ records: models.sequelize.literal(`'${JSON.stringify(newrev)}'::json|| records`) }, { where: { id:gid} });
-        return newrev
+       ;
+        let data = await GroupAnimal.update({ records: models.sequelize.literal(`'${JSON.stringify(newdata)}'::jsonb|| records`) }, { where: { id:gid} });
+
+        return data
     }
 
     

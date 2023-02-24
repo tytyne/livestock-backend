@@ -4,6 +4,7 @@ const {
   createGroupAnimal,
   getGroupAnimalById,
   getAllGroupAnimals,
+  getAllGroupAnimalss,
   updateGroupAnimalById,
   deleteGroupAnimalById,
   searchGroupAnimals
@@ -47,7 +48,7 @@ export default class GroupAnimalController {
     try {
       const id = req.params.id;
       const data = await getGroupAnimalById(id);
-      console.log("check dataaaa",data)
+      console.log("records",JSON.parse(data.dataValues.records))
       res.status(200).json({ message: "get GroupAnimal by Id",data});
     } catch (e) {
       return next(new Error(e));

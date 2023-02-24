@@ -26,6 +26,7 @@ try{
      
       formData.groupId= resource_id
       const data = await createTreatment(formData);
+      console.log("check data values",formData)
       if(formData.record_transaction === true){
         await createTransaction({
           id:uuidv4(),
