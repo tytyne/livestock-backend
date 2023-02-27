@@ -26,8 +26,8 @@ export default class FarmReport {
             const data = await getIncomeExpenseFarm(ressource_id);
             // console.log("check data",data)
             const total =  await getIncomeExpenseFarmTotal(ressource_id);
-            const result ={...data,total}
-            return res.status(200).json({ message: "All expenses!",total});
+            // const result ={...data,total}
+            return res.status(200).json({ message: "All expenses!",data});
       }
       catch(e){
         return next(new Error(e));

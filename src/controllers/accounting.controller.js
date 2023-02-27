@@ -64,12 +64,16 @@ static async getTransaction(req,res,next){
 static async getTransactions(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
-        // if(resource_name==='livestock_group'){
-        //   const data = await getAllTransactions
-        // }
+  
         const data = await getAllTransactionsByAnimal(resource_id)
+      
         const result = await getIncomeExpenseAnimalTotal(resource_id)
-        let results = [ ...data, ...result]
+        
+        
+        let trial = {...result}
+        trial['result2'] = trial['0'];
+        delete trial['0'];
+        let results = { data,...trial}
        
        return  res.status(200).json({message:"All Transactions",results})
     }
