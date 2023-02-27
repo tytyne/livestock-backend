@@ -1,5 +1,5 @@
 import TransactionService from "../services/transaction.service"
-const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,getIncomeExpenseAnimalTotal,allRangeTransactionsCount}=TransactionService
+const{createTransaction,getTransactionById,getAllTransactions,getAllTransactionsByAnimal,updateTransactionById,deleteTransactionById,getIncomeExpenseAnimalTotal,allRangeTransactionsCount}=TransactionService
 import AnimalService from "../services/animal.service";
 const{getAnimalById}=AnimalService
 import  GroupAnimalService from "../services/groupAnimal.service"
@@ -53,7 +53,8 @@ static async getTransaction(req,res,next){
         const {resource_name,resource_id}= req.params
         // const id=req.params.id
         const data = await getTransactionById(resource_id)
-        res.status(200).json({message:"get Transaction by Id",data})
+        const result = await getIncomeExpenseAnimalTotal(resource_id)
+        res.status(200).json({message:"get Transaction by Id",result})
     }
     catch (e) {
         return next(new Error(e));
@@ -63,8 +64,14 @@ static async getTransaction(req,res,next){
 static async getTransactions(req,res,next){
     try{
         const {resource_name,resource_id}= req.params
-        const data = await getAllTransactions()
-        res.status(200).json({message:"All Transactions",data})
+        // if(resource_name==='livestock_group'){
+        //   const data = await getAllTransactions
+        // }
+        const data = await getAllTransactionsByAnimal(resource_id)
+        const result = await getIncomeExpenseAnimalTotal(resource_id)
+        let results = [ ...data, ...result]
+       
+       return  res.status(200).json({message:"All Transactions",results})
     }
     catch (e) {
         return next(new Error(e));

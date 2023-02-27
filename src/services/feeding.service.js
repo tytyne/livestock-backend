@@ -7,19 +7,18 @@ const{Feeding} = models;
  */
 
 class FeedingService{
-    static async createFeeding(value){
-        let data = await Feeding.create(value)
-        // let data = await Feeding.bulkCreate(
-        //     [
-        //      value
-        //     ],
-        
-        // )
+    static async createBulkFeeding(allAnimals){
+        let data = await Feeding.bulkCreate(allAnimals,{returning:true})
+        console.log("valentineeee",data)
         return data
     }
 
 
-
+    static async createOneFeeding(value){
+        let data = await Feeding.create(value)
+        // let data = await Feeding.bulkCreate(allFans,{returning:true})
+        return data
+    }
 
 
     static async getFeedingById(id){

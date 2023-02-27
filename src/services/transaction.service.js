@@ -29,6 +29,13 @@ class TransactionService{
         return data
 
     }
+
+    static async getAllTransactionsByGroup_animal(group_id){
+      let data = await Transaction.findAll({where:{ref_Id:group_id}})
+      return data
+
+  }
+
     static async getAllTransactionByAnimal(animal_id){
         let data = await Transaction.findAll({where:{ref_Id:animal_id}})
         return data
@@ -56,14 +63,14 @@ class TransactionService{
     let farm = await Transaction.findAll({
     
       attributes: [
-          'type'
+          'category'
 
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'] 
 
          
       ], 
-      group: ['type'],  
+      group: ['category'],  
       
   },{where:{farmId:farm_id}});
 
@@ -105,7 +112,7 @@ class TransactionService{
          
       ],   
       
-  },{where:{animalId:animal_id}});
+  },{where:{ref_Id:animal_id}});
 
       return animal
     }

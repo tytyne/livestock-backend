@@ -4,7 +4,7 @@ const{calculatePrice,getDatesInRange}=calculationHelper
 import FeedService from "../services/feed.service"
 const{getFeedById} = FeedService
 import FeedingService from "../services/feeding.service";
-const{createFeeding,getFeedingById,getAllFeedingAnimal,getAllFeedingGroup,updateFeedingById,deleteFeedingById}=FeedingService
+const{createOneFeeding,createBulkFeeding,getFeedingById,getAllFeedingAnimal,getAllFeedingGroup,updateFeedingById,deleteFeedingById}=FeedingService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
 const { v4: uuidv4 } = require('uuid');
@@ -17,7 +17,6 @@ export default class FeedingController {
       const {resource_name,resource_id}= req.params
       const formData = req.body;
       formData.id = uuidv4()
-      console.log("check formData",formData)
       formData.createdBy = req.user.id;
       if(resource_name ==="animal"){
         formData.animalId= resource_id
@@ -26,63 +25,41 @@ export default class FeedingController {
         formData.groupAnimalId= resource_id
       }
       const item= await getFeedById(formData.feedId)
-      // console.log("check item food",item)
       const itemData=item.dataValues
-      // console.log("check item food",itemData.name)
       formData.feed_name=itemData.name;
       const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
       formData.price=formula
-
-
 
       if (formData.repeat_until_date!=null){
         const d1 = new Date(formData.onsetDate)
         const d2 = new Date(formData.repeat_until_date)
         const checkdata = await getDatesInRange(d1, d2);
-      
-
-        // console.log("check holllaaaa",checkdata )
-        for (let i = 0; i < checkdata.length; i++) {
-          {
-            // formData.id = uuidv4()
-            formData.onsetDate=checkdata[i];
-
-        console.log("formData.....",formData.onsetDate )
-            
-              const data = await createFeeding(formData);
-  
-         
-               
-              return res.status(200).json({ message: "feeding array created ...!",data});
-               
-         
-          }
-         
-        
-        }
+        console.log("dates",checkdata.length)
        
+
+        for (let i = 0; i <checkdata.length; i++) {
+          checkdata[i]
+          // formData.id = uuidv4()
+
+          // let trial=[{
+          //   "id":formData.id,
+          //   "onsetDate":checkdata[i],
+          //   "quantity":formData.quantity,
+          //   "feedId":formData.feedId,
+          //   "desc":formData.desc,
+          //   "repeat_until_date":formData.repeat_until_date
+          // }]
+          console.log("trial",checkdata[i])
+          // const data = await createBulkFeeding(trial);
+          return res.status(200).json({ message: "feeding array created ...!"});
+         
+        }
+     
+        
  
       }
-      // formData.id = uuidv4()
-      
-      // if(formData.record_transaction === true){
-      //   await createTransaction({
-      //   id:uuidv4(),
-      //   type: "expense",
-      //   amount:`- RWF${formula}`,
-      //   date: `${formData.onsetDate}`,
-      //   vendor: " ",
-      //   category: "feeding",
-      //   check_number:"",
-      //   ref_Id: `${resource_id}`,
-      //   ref_type: "animal",
-      //   reporting_year:"2022",
-      //   keywords: "",
-      //   description: ""
 
-      // })
-      // }
-      const data = await createFeeding(formData);
+      const data = await createOneFeeding(formData);
     return  res.status(200).json({ message: "feeding created!",data});
      
 
@@ -108,7 +85,7 @@ export default class FeedingController {
       const {resource_name,resource_id}= req.params
       if(resource_name==="animal"){
         const data = await getAllFeedingAnimal(resource_id);
-        return res.status(200).json({ message: "All AnimalFeeds", data });
+        return res.status(200).json({ message: "All AnimalFeeds by animal", data });
       }
       else if(resource_name==="livestock_animal"){
         const data = await getAllFeedingGroup(resource_id);
