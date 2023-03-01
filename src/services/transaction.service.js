@@ -3,6 +3,7 @@ import "regenerator-runtime/runtime";
 const{Transaction} = models;
 const { Op,sequelize ,literal} = require("sequelize");
 
+
 /**
  * @description This model deals with Transaction model
  */
@@ -41,6 +42,12 @@ class TransactionService{
         return data
 
     }
+
+    static async getAllTransactionByFarm(farm_id){
+      let data = await Transaction.findAll({where:{farmId:farm_id}})
+      return data
+
+  }
     static async updateTransactionById(value,id){
         let data = await Transaction.update(value,{where:{id:id},returning: true,
             plain: true,})
@@ -58,28 +65,50 @@ class TransactionService{
         return data
     }
   
-    static async getIncomeExpenseFarm(farm_id){
+    static async getExpenseFarm(farm_id){
     
-    let farm = await Transaction.findAll({
+        let farm = await Transaction.findAll({ 
+       where: {
+       farmId:farm_id,
+      //  type: {
+      //   [Op.like]: '%expense%'
+      // }
+       
+    } }
     
-      attributes: [
-          'category'
+    )
+    return farm
+  }
 
-          [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
-          [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'] 
 
-         
-      ], 
-      group: ['category'],  
+
+  static async getIncomeFarm(farm_id){
+    
+    let farm = await Transaction.findAll({ 
+      group: ['category','type'],
       
-  },{where:{farmId:farm_id}});
+      attributes: ["category",'type',[models.sequelize.fn("SUM",models.sequelize.col("amount")),'amount',]],
+    
+    },{ where: {
+      
+      [Op.and]: [
+        { farmId:farm_id},
+        { type: 'income' }
+      ] 
+      
+      
+    } }
 
-      return farm
+    )
+    return farm
     }
+    
+
+
+    
 
     static async getIncomeExpenseFarmTotal(farm_id){
-    
-      let farm = await Transaction.findAll({
+      let farm =Transaction.findAll({
         group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
         attributes: [
            
@@ -87,8 +116,6 @@ class TransactionService{
             [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'],
             [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END - CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'profit_amount'],
             
-            
-
            
         ],   
         
@@ -149,7 +176,7 @@ static async allRangeTransactionsCount(options = {}) {
   }
 
 static async TransactionsCategories(){
-    let data = await Transaction.findAll({ attributes: ["category",[models.sequelize.fn("COUNT",models.sequelize.col("category")),'categories',]],
+    let data = await Transaction.findAll({ attributes: ["category",[models.sequelize.fn("SUM",models.sequelize.col("amount")),'amount',]],
     
 group:["category"] , })
 return data
