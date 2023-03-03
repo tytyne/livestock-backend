@@ -35,36 +35,27 @@ export default class FarmReport {
 
     static async IncomeExpenseReports(req,res,next){
       try{
-
-      const{ressource_id} =req.params
-
-
-
-
-      // const data = await getAllTransactionsByAnimal(resource_id)
-      
-      // const result = await getIncomeExpenseAnimalTotal(resource_id)
-      
-      
-      // let trial = {...result}
-      // trial['result2'] = trial['0'];
-      // delete trial['0'];
-      // let results = { data,...trial}
+        const{id} =req.params
      
-            const dataExpense = await getExpenseFarm(ressource_id);
-            const dataIncome = await getIncomeFarm(ressource_id);
-            // console.log("check data",data)
-            const total =  await getIncomeExpenseFarmTotal(ressource_id);
+        const dataExpense = await getExpenseFarm(id);
+        const dataIncome = await getIncomeFarm(id);
+        // console.log("check data",data)
+        const total =  await getIncomeExpenseFarmTotal(id);
+
+            let trial = {...total}
+            trial['pl-result'] = trial['0'];
+            delete trial['0'];
+                
+
+
+            const pl = {dataExpense,dataIncome,...trial}
+            
             // const result ={...data,total}
-            return res.status(200).json({ message: "All expenses!",dataExpense });
+            return res.status(200).json({ message: "pl report!",pl});
       }
       catch(e){
         return next(new Error(e));
       }
-
-      
-
-
-
     }
+
 }

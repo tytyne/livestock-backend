@@ -68,66 +68,47 @@ class TransactionService{
     static async getExpenseFarm(farm_id){
     
         let farm = await Transaction.findAll({ 
-       where: {
-       farmId:farm_id,
-      //  type: {
-      //   [Op.like]: '%expense%'
-      // }
-       
-    } }
-    
-    )
+       where: {farmId:farm_id,type:'expense'},
+       group: ['category','type'],
+      
+      attributes: ["category",'type',[models.sequelize.fn("SUM",models.sequelize.col("amount")),'amount',]],
+
+       })
     return farm
   }
 
 
 
   static async getIncomeFarm(farm_id){
-    
     let farm = await Transaction.findAll({ 
+      where: {farmId:farm_id,type:'income'},
       group: ['category','type'],
-      
-      attributes: ["category",'type',[models.sequelize.fn("SUM",models.sequelize.col("amount")),'amount',]],
-    
-    },{ where: {
-      
-      [Op.and]: [
-        { farmId:farm_id},
-        { type: 'income' }
-      ] 
-      
-      
-    } }
+     
+     attributes: ["category",'type',[models.sequelize.fn("SUM",models.sequelize.col("amount")),'amount',]],
 
-    )
+      })
     return farm
     }
     
 
-
-    
-
-    static async getIncomeExpenseFarmTotal(farm_id){
+  static async getIncomeExpenseFarmTotal(farm_id){
       let farm =Transaction.findAll({
-        group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
+        where:{farmId:farm_id},
         attributes: [
            
             [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
             [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'expense_amount'],
-            [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END - CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'profit_amount'],
-            
-           
+            [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END - CASE WHEN type = 'expense'  THEN amount ELSE 0 END`)), 'profit_amount'],   
         ],   
-        
-    },{where:{farmId:farm_id}});
+  });
   
-        return farm
+    return farm
   }
 
   static async getIncomeExpenseAnimalTotal(animal_id){
     
     let animal =Transaction.findAll({
-      group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
+      // group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
       attributes: [
          
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
@@ -148,6 +129,19 @@ class TransactionService{
 
     // This is assuming you have 2 different types of transaction like income money and expense money
 // so it will retun two sums separately
+
+  // Promise.all([getExpenseFarm, getIncomeFarm, getIncomeExpenseAnimalTotal])
+  //   .then(responses => {
+  //       console.log('**********COMPLETE RESULTS****************');
+  //       console.log(responses[0]); // user profile
+  //       console.log(responses[1]); // all reports
+  //       console.log(responses[2]); // report details
+  //   })
+  //   .catch(err => {
+  //       console.log('**********ERROR RESULT****************');
+  //       console.log(err);
+  //   });
+
 
 static async allRangeTransactionsCount(options = {}) {
     try {
