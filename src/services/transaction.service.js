@@ -44,7 +44,9 @@ class TransactionService{
     }
 
     static async getAllTransactionByFarm(farm_id){
-      let data = await Transaction.findAll({where:{farmId:farm_id}})
+      let data = await Transaction.findAll({where:{farmId:farm_id},
+        attributes:['date','vendor','category','description','type','amount'],
+      })
       return data
 
   }

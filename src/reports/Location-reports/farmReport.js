@@ -32,25 +32,17 @@ export default class FarmReport {
 
   }
 
-
     static async IncomeExpenseReports(req,res,next){
       try{
         const{id} =req.params
      
         const dataExpense = await getExpenseFarm(id);
         const dataIncome = await getIncomeFarm(id);
-        // console.log("check data",data)
         const total =  await getIncomeExpenseFarmTotal(id);
-
             let trial = {...total}
             trial['pl-result'] = trial['0'];
             delete trial['0'];
-                
-
-
             const pl = {dataExpense,dataIncome,...trial}
-            
-            // const result ={...data,total}
             return res.status(200).json({ message: "pl report!",pl});
       }
       catch(e){
