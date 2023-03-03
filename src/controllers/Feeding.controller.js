@@ -36,20 +36,22 @@ export default class FeedingController {
         const checkdata = await getDatesInRange(d1, d2);
         console.log("dates",checkdata.length)
        
-
-        for (let i = 0; i <checkdata.length; i++) {
-          checkdata[i]
+        const windowList = [];
+        for (let i = 0; i < 10; i++) {
+        //  const window = {
+        //  windowId:uuidv4()
+        //  }
+        //  windowList.push(window)
+        
+          
           // formData.id = uuidv4()
 
-          // let trial=[{
-          //   "id":formData.id,
-          //   "onsetDate":checkdata[i],
-          //   "quantity":formData.quantity,
-          //   "feedId":formData.feedId,
-          //   "desc":formData.desc,
-          //   "repeat_until_date":formData.repeat_until_date
-          // }]
-          console.log("trial",checkdata[i])
+          let trial={
+           
+            "onsetDate":checkdata[i],
+           
+          }
+          console.log("trial",trial)
           // const data = await createBulkFeeding(trial);
           return res.status(200).json({ message: "feeding array created ...!"});
          

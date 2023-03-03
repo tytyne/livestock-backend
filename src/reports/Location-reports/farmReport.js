@@ -46,7 +46,7 @@ export default class FarmReport {
         const dataIncome = await getIncomeFarm(id);
         const total =  await getIncomeExpenseFarmTotal(id);
             let trial = {...total}
-            trial['cashflow-result'] = trial['0'];
+            trial['cashflow'] = trial['0'];
             delete trial['0'];
             const cashflow = {dataExpense,dataIncome,...trial}
             return res.status(200).json({ message: "casflow report!",cashflow});
