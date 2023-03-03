@@ -48,8 +48,8 @@ export default class FarmReport {
             let trial = {...total}
             trial['cashflow-result'] = trial['0'];
             delete trial['0'];
-            const pl = {dataExpense,dataIncome,...trial}
-            return res.status(200).json({ message: "pl report!",pl});
+            const cashflow = {dataExpense,dataIncome,...trial}
+            return res.status(200).json({ message: "casflow report!",cashflow});
       }
       catch(e){
         return next(new Error(e));
