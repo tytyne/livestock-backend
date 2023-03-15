@@ -1,16 +1,18 @@
 import TreatmentService from "../../services/treatment.service"
-const{upcomingTreatments,AllTreatmentsReports,TreatmentTypes}=TreatmentService
+const{upcomingTreatments,AllTreatmentsReports,TreatmentTypes,allTreatments,allTreatmentss}=TreatmentService
 import AnimalService from "../../services/animal.service"
 const {getAnimalById,getAllanimals} = AnimalService
+import moment from "moment"
 
 export default class TreatmentReport{
    
 //upcomming treatments
 
-static async getUpcommingTreatments(req,res,next){
+static async holla(req,res,next){
     try{
   
       const {start_date,end_date}=req.query
+
       const data = await upcomingTreatments(start_date,end_date)
       return res.status(200).json({message:"upcomming treatmentssss",data})
   
@@ -21,11 +23,15 @@ static async getUpcommingTreatments(req,res,next){
 }
 //get all Treatments
 
-static async holla(req,res,next){
+static async getUpcommingTreatments(req,res,next){
   try{
-      const data = await AllTreatmentsReports()
-      // const dataa = await getAllanimals()
 
+   
+      let {startDate,endDate}=req.query
+      // startDate = moment().format("YYYY-MM-DD")
+      // endDate = moment(startDate).add(3, 'M').format("YYYY-MM-DD");
+
+      const data = await allTreatments(startDate,endDate)
       const data_result = data.map(treatment => ({ id: treatment.id, 
        
         name:treatment.animal.name,

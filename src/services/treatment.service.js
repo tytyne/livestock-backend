@@ -2,7 +2,7 @@ import Models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{Treatment} = Models;
 import {
-    Op, where, cast, col
+    Op, where, cast, col,sequelize
   } from 'sequelize';
 
 /**
@@ -44,11 +44,51 @@ class TreatmentService{
     }
     static async upcomingTreatments(startDate,endDate){
         let data = await Treatment.findAll({
-            from: {
+            where:{
                 $between: [startDate, endDate]
-            }
+            }   
         }
         )
+        return data
+    }
+    
+  //
+
+    static async allTreatmentss(options = {}) {
+        try {
+        const requests = await Models.sequelize.query(
+            `SELECT * FROM "Treatments"
+            WHERE ("createdAt"::date BETWEEN :startDate AND :endDate);`, // Fetching by range is only at here at WHERE part
+            {
+            replacements:
+            {
+                startDate: options.startDate,
+                endDate: options.endDate,
+                
+            }
+            }
+        );
+        return requests;
+        } catch (error) {
+        throw new Error(error);
+        }
+    }
+    
+    static async allTreatments(startDate,endDate){
+
+        const data = await Treatment.findAll({
+            where: {
+                date: { [Op.between]: [startDate, endDate] },
+            },
+            include:[
+                {
+                    model:Models.Animal,
+                    as:"animal"
+                
+                }    
+            
+            ]
+        });
         return data
     }
 
@@ -62,15 +102,17 @@ class TreatmentService{
         return data
     }
     
-    static async AllTreatmentsReports(){
+    static async AllTreatmentsReports(startDate,endDate){
         let data = await Treatment.findAll({ 
+            where:{
+                $between: [startDate, endDate]
+            },
             include:[
                 {
                     model:Models.Animal,
                     as:"animal"
                 
-                }
-                
+                }    
             
             ] })
         return data

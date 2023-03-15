@@ -38,7 +38,7 @@ export default class FarmReport {
 
   }
 
-    static async IncomeExpenseReports(req,res,next){
+    static async CashflowReports(req,res,next){
       try{
         const{id} =req.params
      
@@ -49,7 +49,26 @@ export default class FarmReport {
             trial['cashflow'] = trial['0'];
             delete trial['0'];
             const cashflow = {dataExpense,dataIncome,...trial}
-            return res.status(200).json({ message: "casflow report!",cashflow});
+            return res.status(200).json({ message: "cashflow report!",cashflow});
+      }
+      catch(e){
+        return next(new Error(e));
+      }
+    }
+
+
+    static async PLReports(req,res,next){
+      try{
+        const{id} =req.params
+     
+        const dataExpense = await getExpenseFarm(id);
+        const dataIncome = await getIncomeFarm(id);
+        const total =  await getIncomeExpenseFarmTotal(id);
+            let trial = {...total}
+            trial['pl'] = trial['0'];
+            delete trial['0'];
+            const pl = {dataExpense,dataIncome,...trial}
+            return res.status(200).json({ message: "PL report!",pl});
       }
       catch(e){
         return next(new Error(e));
