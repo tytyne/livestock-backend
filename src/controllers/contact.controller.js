@@ -10,7 +10,7 @@ static async storecontact(req,res,next){
     try{
         const formData = req.body;
         const data = await getCreateContact(formData)
-        res.status(200).json({message:"get contact by Id",data})
+        res.status(200).json({message:"contact created!",data})
     }
     catch (e) {
         return next(new Error(e));
