@@ -28,6 +28,7 @@ import Activity from "./activities"
 import Yield from "./yield"
 import Note from "./note"
 import Breeding from "./breeding"
+import Contact from "./contact"
 
 
 const router = express.Router();
@@ -61,5 +62,7 @@ router.use("/activities",Activity)
 router.use("/yield",Yield)
 router.use("/notes",Note)
 router.use("/breeding",Breeding)
+
+router.use("/contact",Contact)
 
 export default router;

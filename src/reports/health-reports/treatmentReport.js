@@ -1,5 +1,5 @@
 import TreatmentService from "../../services/treatment.service"
-const{upcomingTreatments,AllTreatmentsReports,TreatmentTypes,allTreatments,allTreatmentss}=TreatmentService
+const{upcomingTreatments,AllTreatmentsReports,TreatmentTypes,allTreatments}=TreatmentService
 import AnimalService from "../../services/animal.service"
 const {getAnimalById,getAllanimals} = AnimalService
 import moment from "moment"

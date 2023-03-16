@@ -54,25 +54,6 @@ class TreatmentService{
     
   //
 
-    static async allTreatmentss(options = {}) {
-        try {
-        const requests = await Models.sequelize.query(
-            `SELECT * FROM "Treatments"
-            WHERE ("createdAt"::date BETWEEN :startDate AND :endDate);`, // Fetching by range is only at here at WHERE part
-            {
-            replacements:
-            {
-                startDate: options.startDate,
-                endDate: options.endDate,
-                
-            }
-            }
-        );
-        return requests;
-        } catch (error) {
-        throw new Error(error);
-        }
-    }
     
     static async allTreatments(startDate,endDate){
 
