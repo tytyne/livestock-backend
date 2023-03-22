@@ -8,7 +8,12 @@ const {
   deleteById,
   countAnimals,
   searchAnimals,
-  updateAnimalByGroupId
+  updateAnimalByGroupId,
+  updateAnimalFather,
+  updateAnimalMother,
+  getAllAncentors,
+  getAllOffstrings
+  
 } = AnimalService;
 import CalculationHelper from "../utils/calculationHelper";
 const { electronicId, gettingAge } = CalculationHelper
@@ -203,5 +208,70 @@ static async  EditGroupAnimal(req,res,next){
     return next(new Error(e))
   }
 }
+// adding mother or father
+static async addingParenting(req,res,next){
+  try{
+    const{gender,parent_of} = req.query
+    if(gender=="male"){
+      const formData = req.body;
+      formData.id = uuidv4()
+      formData.electronic_id = await electronicId(formData.earring_num);
+      formData.createdBy = req.user.id;
+      formData.gender=gender;
+      const data = await createAnimal(formData);
+      console.log("check dataaaa",data.dataValues.id)
+      // return res.status(200).json({message:"giiii!"})
+      const newParent = await updateAnimalFather(parent_of,data.dataValues.id)
+      return res.status(200).json({message:"parent added successfully!",newParent})
+
+    }
+    else if(gender=="female"){
+      const formData = req.body;
+      formData.id = uuidv4()
+      formData.electronic_id = await electronicId(formData.earring_num);
+      formData.createdBy = req.user.id;
+      formData.gender=gender;
+      const data = await createAnimal(formData);
+      console.log("check dataaaa",data.dataValues.id)
+      // return res.status(200).json({message:"female!"})
+      const newParent = await updateAnimalMother(parent_of,data.dataValues.id)
+      return res.status(200).json({message:"parent added successfully!",newParent})
+
+    }
+    else{
+      return res.status(400).json({message:"gender not specified"})
+    }
+  }
+  catch(e){
+    return next(new Error(e))
+  }
+}
+//view offstring
+static async getOffstring(req,res,next){
+  try{
+    const{id}=req.params
+    const data = await getAllOffstrings(id)
+    return res.status(200).json({message:"offstrings are",data})
+  }
+  catch(e){
+    return next(new Error(e))
+  }
+}
+
+
+// view ancestory
+static async getAnceStory(req,res,next){
+  try{
+    const{id}=req.params
+    const data = await getAllAncentors(id)
+    return res.status(200).json({message:"ancestory are",data})
+  }
+  catch(e){
+    return next(new Error(e))
+  }
+
+
+}
+
 
 }

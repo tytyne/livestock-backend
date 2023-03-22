@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.STRING,
     date:DataTypes.DATE,
     keywords:DataTypes.STRING,
-    // animalId:DataTypes.UUID
+    per_head: DataTypes.BOOLEAN,
    
    
   }, { });

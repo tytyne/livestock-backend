@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     reference_id: DataTypes.STRING,
     reference_type: DataTypes.INTEGER,
+    per_head: DataTypes.BOOLEAN,
     created_by: DataTypes.STRING,
     created_by_id: DataTypes.STRING,
     complete: DataTypes.BOOLEAN,

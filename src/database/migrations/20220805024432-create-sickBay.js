@@ -51,7 +51,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue:true
       },
-     
+      per_head: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     cost: DataTypes.STRING,
     description: DataTypes.STRING,
-    date: DataTypes.DATE
+    date: DataTypes.DATE,
+    per_head: DataTypes.BOOLEAN,
   
   }, { });
 
@@ -28,15 +29,3 @@ module.exports = (sequelize, DataTypes) => {
   return Input;
 };
 
-
-
-
-
-
-
-// input[amount]: 56
-// input[unit]: kilograms
-// input[type]: hjkl
-// input[cost]: 78
-// input[description]: fghujio fghjk fghj
-// input[date]: 2023-01-06

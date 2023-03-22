@@ -17,6 +17,9 @@ module.exports = {
       priority_id: {
         type: Sequelize.INTEGER
       },
+      reference_type: {
+        type: Sequelize.STRING
+      },
       title:{
         type: Sequelize.STRING
       },

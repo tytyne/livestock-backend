@@ -61,6 +61,10 @@ module.exports = {
       keywords: {
         type: Sequelize.STRING
       },
+      per_head: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

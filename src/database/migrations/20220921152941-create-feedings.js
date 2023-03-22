@@ -45,11 +45,14 @@ module.exports = {
       measurement: {
         type: Sequelize.STRING
       },
-      shared: {
+      // shared: {
+      //   type: Sequelize.BOOLEAN,
+      //   defaultValue:true
+      // },
+      per_head: {
         type: Sequelize.BOOLEAN,
-        defaultValue:true
+        defaultValue:false
       },
-     
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

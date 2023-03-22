@@ -6,7 +6,7 @@ import checkOwnership from "../../middlewares/chekOwnership"
 const {checkAnimalOwner}=checkOwnership
 const router = express.Router()
 
-router.post("/create",AnimalValidation.save,checkAuthorisation,animalController.storeAnimal)
+router.post("/create",checkAuthorisation,animalController.storeAnimal)
 router.get("/:id",checkAuthorisation,animalController.getAnimal)
 router.get("/earring",checkAuthorisation,checkAnimalOwner,animalController.getAnimalEaring)
 router.get("/check/all",checkAuthorisation,animalController.getAnimals)
@@ -15,5 +15,8 @@ router.delete("/:id",checkAuthorisation,checkAnimalOwner,animalController.delete
 router.get("/count/all",checkAuthorisation,animalController.countingAnimals)
 router.get("/",checkAuthorisation,animalController.searchingAnimal)
 router.put("/:id/:add_group",checkAuthorisation,animalController.EditGroupAnimal)
+router.post("/new",checkAuthorisation,animalController.addingParenting)
+router.get("/:id/ancestory",checkAuthorisation,animalController.getAnceStory)
+router.get("/:id/offstring",checkAuthorisation,animalController.getOffstring)
 
 export default router

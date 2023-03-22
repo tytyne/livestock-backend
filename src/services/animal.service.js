@@ -1,6 +1,9 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const { Animal } = models;
+import {
+    Op, where, cast, col,sequelize
+  } from 'sequelize';
 
 /**
  * @description This model deals with Animal model
@@ -29,7 +32,7 @@ class AnimalService {
 
     }
     static async getAllanimals(vetId) {
-        let animal = await Animal.findAll({ where: { createdBy: vetId } })
+        let animal = await Animal.findAll({ where: { createdBy: vetId,status:"active" } })
         return animal
 
     }
@@ -37,8 +40,34 @@ class AnimalService {
     static async updateById(value, id) {
         let animal = await Animal.update(value, {
             where: { id: id }, returning: true,
-            plain: true,
         })
+        return animal
+
+    }
+    //check  offstring
+    static async getAllOffstrings(animalId) {
+        let animal = await Animal.findAll({  where: {
+            [Op.or]: [
+              { mother_id:animalId},
+              { father_id:animalId}
+            ]
+          } })
+        return animal
+
+    }
+    //check ancentors
+
+    static async getAllAncentors(animalId) {
+        let animal = await Animal.findAll(
+
+            {
+                where:{
+                    id:animalId
+
+                },
+                attributes: ['mother_id', 'father_id']
+                
+            })
         return animal
 
     }
@@ -50,7 +79,7 @@ class AnimalService {
             { group_id:value },
             { where: { id: checkid },
             returning: true,
-            plain: true,
+            // plain: true,
         }
           )
         return data;
@@ -66,7 +95,6 @@ class AnimalService {
         const animal = await Animal.update({father_id:fatherId}, {
           where: { id: ressource_id },
           returning: true,
-          plain: true,
           })
         return animal
       }
@@ -78,7 +106,6 @@ class AnimalService {
         const animal = await Animal.update({mother_id:motherId}, {
           where: { id: ressource_id },
           returning: true,
-          plain: true,
           })
         return animal
       }
@@ -89,14 +116,13 @@ class AnimalService {
         return animal
     }
     static async countAnimals(vetId) {
-        let animal = await Animal.count({ where: { createdBy: vetId } })
+        let animal = await Animal.count({ where: { createdBy: vetId,status:"active"} })
         return animal
     }
 
     static async updateAnimalStatus(value, id) {
         let data = await Animal.update(value, { status: 'dead' }, {
             where: { id: id }, returning: true,
-            plain: true,
         })
         return data
 
@@ -158,18 +184,28 @@ class AnimalService {
     }
 
     static async getAllanimalss() {
-        let animal = await Animal.findAll()
+        let animal = await Animal.findAll({where:{status:"active"}})
+        return animal
+
+    }
+    static async getAllFemaleanimals() {
+        let animal = await Animal.findAll({where:{gender:"female",status:"active"}})
+        return animal
+
+    }
+    static async getAllMaleanimals() {
+        let animal = await Animal.findAll({where:{gender:"male",status:"active"}})
         return animal
 
     }
 
     static async searchAnimals(sss){
-        let data = await Animal.findAll({ where: { name: sss } })
+        let data = await Animal.findAll({ where: { name: sss,status:"active" } })
         return data
     }
 
     static async countingAnimals(number){
-        let data = await Animal.count({ where: { group_id: number } })
+        let data = await Animal.count({ where: { group_id: number,status:"active" } })
         return data
     }
 

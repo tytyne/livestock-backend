@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
     measurement:DataTypes.STRING,
     repeat_until_date:DataTypes.DATE,
-    shared:DataTypes.BOOLEAN,
-    // groupId:DataTypes.UUID
+    // shared:DataTypes.BOOLEAN,
+    per_head: DataTypes.BOOLEAN,
     
   }, { });
   Feeding.associate = function(models) {

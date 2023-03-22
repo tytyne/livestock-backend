@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const Animal = sequelize.define('Animal', {
-
     birth_date: DataTypes.DATE,
     birth_weight: DataTypes.STRING,
     bred_date: DataTypes.DATE,
@@ -16,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.STRING,
     electronic_id: DataTypes.STRING,
     estimated_value:DataTypes.STRING,
-    father_id: DataTypes.STRING,
+    father_id: DataTypes.UUID,
     feed: DataTypes.STRING,
     gender: DataTypes.STRING,
     group_id: DataTypes.STRING,
@@ -30,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     keywords: DataTypes.STRING,
     market_price:DataTypes.STRING,
     measurement_date: DataTypes.DATE,
-    mother_id: DataTypes.STRING,
+    mother_id: DataTypes.UUID,
     name: DataTypes.STRING,
     on_feed: DataTypes.STRING,
     other_tag_number: DataTypes.STRING,
@@ -50,9 +49,12 @@ module.exports = (sequelize, DataTypes) => {
     earring_num:DataTypes.STRING,
     insured:DataTypes.BOOLEAN,
     insuranceDate:DataTypes.DATE,
-    insuranceExpiration:DataTypes.DATE
+    insuranceExpiration:DataTypes.DATE,
+    // hierarchyLevel:DataTypes.INTEGER
   
-  }, { });
+  }, { 
+  
+  });
   Animal.associate = function(models) {
  
     Animal.belongsTo(models.Farm, {
@@ -81,6 +83,16 @@ module.exports = (sequelize, DataTypes) => {
       as: 'user',
       onDelete: 'CASCADE',
     })
+    // Animal.belongsTo(models.Animal, {
+    //   foreignKey: "mother_id",
+    //   as:'mother',
+    //   onDelete: 'CASCADE',
+    // });
+    // Animal.belongsTo(models.Animal, {
+    //   foreignKey: "father_id",
+    //   as:'father',
+    //   onDelete: 'CASCADE',
+    // });
   
   };
 

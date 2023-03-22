@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },
+    per_head: DataTypes.BOOLEAN,
    
   }, { });
   SickBay.associate = function(models) {
