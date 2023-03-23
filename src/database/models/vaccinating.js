@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },
+    per_head: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
 
   }, { });
   Vaccinating.associate = function(models) {

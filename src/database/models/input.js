@@ -2,13 +2,16 @@
 
 module.exports = (sequelize, DataTypes) => {
   const Input = sequelize.define('Input', {
-    amount: DataTypes.STRING,
-    unit: DataTypes.STRING,
+    amount: DataTypes.DECIMAL,
+    unit: DataTypes.DECIMAL,
     type: DataTypes.STRING,
     cost: DataTypes.STRING,
     description: DataTypes.STRING,
     date: DataTypes.DATE,
-    per_head: DataTypes.BOOLEAN,
+    per_head: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   
   }, { });
 
@@ -16,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     Input.belongsTo(models.Animal, {
       foreignKey: 'animal_id',
       as: 'animal',
+      onDelete: 'CASCADE',
+    })
+    Input.belongsTo(models.Animal, {
+      foreignKey: 'groupId',
+      as: 'group',
       onDelete: 'CASCADE',
     })
     

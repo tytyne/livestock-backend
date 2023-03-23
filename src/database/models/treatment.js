@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     withdrawal_date:DataTypes.DATE,
     retreat_date:DataTypes.DATE,
     technician:DataTypes.STRING,
-    cost:DataTypes.STRING,
+    cost:DataTypes.DECIMAL,
     record_transaction:{
       type: DataTypes.BOOLEAN,
       defaultValue: true
@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.STRING,
     date:DataTypes.DATE,
     keywords:DataTypes.STRING,
-    per_head: DataTypes.BOOLEAN,
+    per_head: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
    
    
   }, { });

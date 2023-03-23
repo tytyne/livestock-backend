@@ -17,8 +17,13 @@ class InputService{
 
     }
    
-    static async getAllInputs(animal_id){
+    static async getAllInputsAnimal(animal_id){
         let data = await Input.findAll({where:{animalId:animal_id}})
+        return data
+
+    }
+    static async getAllInputsGroup(group_id){
+        let data = await Input.findAll({where:{groupId:group_id}})
         return data
 
     }

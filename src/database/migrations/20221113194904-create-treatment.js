@@ -45,7 +45,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       cost: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       record_transaction: {
         type: Sequelize.BOOLEAN,

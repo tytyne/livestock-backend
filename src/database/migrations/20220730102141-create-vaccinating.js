@@ -39,9 +39,9 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
-      unit: {
-        type: Sequelize.DECIMAL
-      },
+      // unit: {
+      //   type: Sequelize.DECIMAL
+      // },
       measurement: {
         type: Sequelize.STRING
       },
@@ -52,6 +52,10 @@ module.exports = {
       record_transaction: {
         type: Sequelize.BOOLEAN,
         defaultValue:true
+      },
+      per_head: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
       },
       createdAt: {
         allowNull: false,

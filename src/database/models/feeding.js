@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     measurement:DataTypes.STRING,
     repeat_until_date:DataTypes.DATE,
     // shared:DataTypes.BOOLEAN,
-    per_head: DataTypes.BOOLEAN,
+    per_head: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
     
   }, { });
   Feeding.associate = function(models) {

@@ -14,6 +14,11 @@ class TreatmentService{
         let data = await Treatment.create(value)
         return data
     }
+    static async createBulkTreatment(values){
+        let data = await Treatment.bulkCreate(values, {returning: true})
+        console.log("valentineeee",data)
+        return data
+    }
     static async getTreatmentById(id){
         let data = await Treatment.findOne({where:{id:id}})
         return data

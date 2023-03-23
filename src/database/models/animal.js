@@ -83,16 +83,16 @@ module.exports = (sequelize, DataTypes) => {
       as: 'user',
       onDelete: 'CASCADE',
     })
-    // Animal.belongsTo(models.Animal, {
-    //   foreignKey: "mother_id",
-    //   as:'mother',
-    //   onDelete: 'CASCADE',
-    // });
-    // Animal.belongsTo(models.Animal, {
-    //   foreignKey: "father_id",
-    //   as:'father',
-    //   onDelete: 'CASCADE',
-    // });
+    Animal.belongsTo(models.Animal, {
+      foreignKey: "mother_id",
+      as:'mother',
+      onDelete: 'CASCADE',
+    });
+    Animal.belongsTo(models.Animal, {
+      foreignKey: "father_id",
+      as:'father',
+      onDelete: 'CASCADE',
+    });
   
   };
 

@@ -16,10 +16,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       unit: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       measurement: {
         type: Sequelize.STRING

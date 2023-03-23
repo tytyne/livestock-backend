@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.UUID
       },
       amount: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       unit: {
         type: Sequelize.STRING
@@ -23,8 +23,11 @@ module.exports = {
       type: {
         type: Sequelize.STRING
       },
+      groupId: {
+        type: Sequelize.UUID
+      },
       cost: {
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL
       },
       description: {
         type: Sequelize.STRING

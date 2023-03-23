@@ -65,7 +65,21 @@ class AnimalService {
                     id:animalId
 
                 },
-                attributes: ['mother_id', 'father_id']
+                // attributes: ['name','coloring','weight','birth_date'],
+                include:[
+                    
+                    {   attributes: ['id','name','coloring','weight','birth_date'],
+                        model:models.Animal,
+                        as:"mother"
+                    
+                    },
+                    {   attributes: ['id','name','coloring','weight','birth_date'],
+                        model:models.Animal,
+                        as:"father"
+                    
+                    }     
+                
+                ]
                 
             })
         return animal
@@ -205,7 +219,7 @@ class AnimalService {
     }
 
     static async countingAnimals(number){
-        let data = await Animal.count({ where: { group_id: number,status:"active" } })
+        let data = await Animal.count({ where: { group_id: number} })
         return data
     }
 

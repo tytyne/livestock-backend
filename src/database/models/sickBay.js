@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     },
-    per_head: DataTypes.BOOLEAN,
+    per_head: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
    
   }, { });
   SickBay.associate = function(models) {

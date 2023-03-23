@@ -25,55 +25,83 @@ export default class SickBayController {
     try {
       const {resource_name,resource_id}= req.params
       const formData = req.body;
+      console.log("formdata",formData)
       formData.id = uuidv4()
       formData.createdBy = req.user.id;
-  
+      let bunchSickBay;
 
-      
-      const item= await getMedicineById(formData.medicineId)
-      const itemData=item.dataValues
-      formData.medicine_name=itemData.name;
-      const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-      formData.price=formula
-      formData.measurement = itemData.measurement
+     
       if(resource_name==='livestock_group'){
-        const checking = await getGroupAnimalById(resource_id)
-        // console.log("check farmId",checking)
-        const hello=checking.dataValues.farm_id
-       
+        const item= await getMedicineById(formData.feedId)
+        const itemData=item.dataValues
+        formData.feed_name=itemData.name;
+        const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+        formData.price=formula
         formData.groupId= resource_id
-       
-        if(formData.record_transaction === true){
-         await createTransaction({
-            id:uuidv4(),
-            type: "expense",
-            amount:`${formData.cost}`,
-            date: `${formData.date}`,
-            vendor: " ",
-            category:`Veterinary, breeding, and medicine`,
-            check_number:"",
-            ref_Id: `${resource_id}`,
-            farmId:`${hello}`,
-            ref_type: `${resource_name}`,
-            reporting_year:new Date().getFullYear(),
-            keywords: "",
-            description: `${formData.description}`
-      
-          })
-       
-        }
         const data = await createSickBay(formData);
-        return res.status(200).json({ message: "SickBay created!", data });
-  
+        const checking = await getGroupAnimalById(resource_id)
+        const allAnimals=checking.dataValues.records
+        const response = allAnimals.map(s=>s.id)
+        if(formData.per_head){
+          //means i have to divide
+          for (let i = 0; i < response.length; i++) {
+            bunchSickBay={
+              "id":uuidv4(),
+              "onsetDate":`${formData.onsetDate}`,
+              "intervention":`${formData.intervention}`,
+              "observation":`${formData.observation}`,
+              "quantity":`${parseFloat(formData.quantinty)/response.length}`,
+              "medicineId":`${formData.medicineId}`,
+              "price":`${parseFloat(formula)/response.length}`,
+              // "record_transaction":`${formData.record_transaction}`,
+              "animalId":response[i]
+              
+          }
+          console.log("check bunch",bunchSickBay)
+          // await createSickBay(bunchSickBay);
+            
+            
+          }
+          return res.status(200).json({message:"hello sweetie!"})
+        }
+        else{
+          //send as it is 
+          
+          for (let i = 0; i < response.length; i++) {
+            bunchSickBay={
+                "id":uuidv4(),
+                "onsetDate":`${formData.onsetDate}`,
+                "intervention":`${formData.intervention}`,
+                "observation":`${formData.observation}`,
+                "quantity":`${formData.quantity}`,
+                "medicineId":`${formData.medicineId}`,
+                "price":`${formula}/${response.length}`,
+                // "record_transaction":`${formData.record_transaction}`,
+                "animalId":response[i]
+                
+            }
+            console.log("check bunch",bunchSickBay)
+            // await createSickBay(bunchSickBay);
+        
+          }
+      
+          return res.status(200).json({message:"sickbay created!",data})
+      
+        }
       }
 
-      if(resource_name==='animal'){
+      else if(resource_name==='animal'){
         const checking = await getAnimalById(resource_id)
-        // console.log("check farmId",checking)
         const hello =checking.dataValues.farm_id
         formData.animalId= resource_id
-        // const data = await createSickBay(formData);
-
+        const item= await getMedicineById(formData.medicineId)
+        const itemData=item.dataValues
+        formData.medicine_name=itemData.name;
+        const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
+        formData.price=formula
+        formData.measurement = itemData.measurement
+        
+        const data = await createSickBay(formData);
         if(formData.record_transaction === true){
           await createTransaction({
             id:uuidv4(),
@@ -83,9 +111,8 @@ export default class SickBayController {
             vendor: " ",
             category:`Veterinary, breeding, and medicine`,
             check_number:"",
-            ref_Id: `${resource_id}`,
+            // groupId: `${resource_id}`,
             farmId:`${hello}`,
-            ref_type: `${resource_name}`,
             reporting_year:new Date().getFullYear(),
             keywords: "",
             description: `${formData.description}`
@@ -94,7 +121,7 @@ export default class SickBayController {
           })
         //  console.log("mbpaaa",formData.description)
         }
-        const data = await createSickBay(formData);
+        // const data = await createSickBay(formData);
         
         return res.status(200).json({ message: "SickBay created!", data });
   
@@ -128,7 +155,7 @@ export default class SickBayController {
         const data = await getAllSickBayAnimal(resource_id);
         return res.status(200).json({ message: "All sickbays", data });
       }
-      else if(resource_name==="livestock_animal"){
+      else if(resource_name==="livestock_group"){
         const data = await getAllSickBayGroup(resource_id);
         return res.status(200).json({ message: "All sickbays", data });
       }
@@ -180,3 +207,24 @@ export default class SickBayController {
  
 
 }
+    
+        // if(formData.record_transaction === true){
+        //  await createTransaction({
+        //     id:uuidv4(),
+        //     type: "expense",
+        //     amount:`${formData.cost}`,
+        //     date: `${formData.date}`,
+        //     vendor: " ",
+        //     category:`Veterinary, breeding, and medicine`,
+        //     check_number:"",
+        //     ref_Id: `${resource_id}`,
+        //     farmId:`${hello}`,
+        //     ref_type: `${resource_name}`,
+        //     reporting_year:new Date().getFullYear(),
+        //     keywords: "",
+        //     description: `${formData.description}`
+      
+        //   })
+       
+        // }
+       

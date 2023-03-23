@@ -6,7 +6,6 @@ const {
   getAllVaccinatingProcessGroup,
   updateVaccinatingProcessById,
   deleteVaccinatingProcessById,
-  searchingzz
 } = VaccinatingService;
 
 import calculationHelper from "../utils/calculationHelper"
@@ -57,26 +56,46 @@ export default class VaccinatingController {
        
         formData.groupId= resource_id
         const data = await createVaccinatingProcess(formData);
-        if(formData.record_transaction === true){
-          await createTransaction({
-            id:uuidv4(),
-            type: "expense",
-            amount:`${formData.cost}`,
-            date: `${formData.date}`,
-            vendor: " ",
-            category:`Veterinary, breeding, and medicine`,
-            check_number:"",
-            ref_Id: `${resource_id}`,
-            farmId:`${hello}`,
-            ref_type: `${resource_name}`,
-            reporting_year:new Date().getFullYear(),
-            keywords: "",
-            description: `${formData.description}`
-      
-          })
-        }
-      
+        if(formData.per_head){
+          //means i have to divide
+          for (let i = 0; i < response.length; i++) {
+            bunchVaccinating={
+              "id":uuidv4(),
+              "onsetDate":`${formData.onsetDate}`,
+              "description":`${formData.description}`,
+              "vaccinationId":`${formData.vaccinationId}`,
+              "quantity":`${formData.quantity}/${response.length}`,
+              "nextAppointment":`${formData.nextAppointment}`,
+              "record_transaction":`${formData.record_transaction}`,
+              "price":`${formula}/${$response.length}`,
+              "animalId":response[i]
+              
+          }
+          await createVaccinatingProcess(bunchVaccinating);
+            
+            return res.status(200).json({message:"hello sweetie!"})
+          }
+  
+        }else{
+          //send as it is 
+          
+          for (let i = 0; i < response.length; i++) {
+            bunchVaccinating={
+                "id":uuidv4(),
+                "onsetDate":`${formData.onsetDate}`,
+                "description":`${formData.description}`,
+                "vaccinationId":`${formData.vaccinationId}`,
+                "quantity":`${formData.quantity}`,
+                "nextAppointment":`${formData.nextAppointment}`,
+                "record_transaction":`${formData.record_transaction}`,
+                "price":`${formula}`,
+                "animalId":response[i]
+                
+            }
+            await createVaccinatingProcess(bunchVaccinating);
         
+          }
+      
         return res.status(200).json({ message: "vaccinating created!", data });
   
       }
@@ -104,9 +123,9 @@ export default class VaccinatingController {
       
           })
         }
-
-
-      return res.status(200).json({ message: "a Vaccinating Process created!", data });
+        return res.status(200).json({ message: "a Vaccinating Process created!", data });
+      }
+      
       }
      
       await createEvent({

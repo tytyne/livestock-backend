@@ -61,12 +61,14 @@ export default class GroupAnimalController {
 
 
       const data = await getAllGroupAnimals(req.user.id);
+      console.log("check dataaaa",data)
       for (let index = 0; index < data.length; index++) {
     
         const checking = await countingAnimals(data[index].id)
+        console.log("checkinggg",checking)
         data[index] = data[index].toJSON();
         // if(checking){
-        console.log("checking data",checking)
+        // console.log("checking data",checking)
           data[index].group_qty = checking;
         // }
 
