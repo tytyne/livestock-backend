@@ -101,8 +101,6 @@ class AnimalService {
     }
 
     
-
-
     // update father
 
     static async updateAnimalFather(ressource_id,fatherId){
@@ -223,6 +221,13 @@ class AnimalService {
         return data
     }
 
+    static async animalLikeGroup(){
+        let data = await Animal.findAll({where:{is_group:true},
+        attributes: ['name','group_qty'],
+        })
+        return data 
+    }
+    
 
 }
 export default AnimalService

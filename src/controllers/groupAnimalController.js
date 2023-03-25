@@ -10,7 +10,7 @@ const {
   searchGroupAnimals
 
 } = GroupAnimalService;
-const {updateAnimalByGroupId,createAnimal,countingAnimals} = AnimalService
+const {updateAnimalByGroupId,createAnimal,countingAnimals,animalLikeGroup} = AnimalService
 
 import CalculationHelper from "../utils/calculationHelper";
 const{calculateDays,calculateWeeks,calculateMonths,calculateYears}=CalculationHelper
@@ -60,20 +60,28 @@ export default class GroupAnimalController {
     try {
 
 
-      const data = await getAllGroupAnimals(req.user.id);
-      console.log("check dataaaa",data)
-      for (let index = 0; index < data.length; index++) {
+      const datat = await getAllGroupAnimals(req.user.id);
+      console.log("check dataaaa",datat)
+      for (let index = 0; index < datat.length; index++) {
     
-        const checking = await countingAnimals(data[index].id)
+        const checking = await countingAnimals(datat[index].id)
         console.log("checkinggg",checking)
-        data[index] = data[index].toJSON();
+        datat[index] = datat[index].toJSON();
         // if(checking){
         // console.log("checking data",checking)
-          data[index].group_qty = checking;
+          datat[index].group_qty = checking;
         // }
 
 
       }
+      const  animalGroup = await animalLikeGroup()
+      for (let index = 0; index < animalGroup.length; index++) {
+        animalGroup[index] = animalGroup[index].toJSON();
+        animalGroup[index].type =`set`
+      }
+
+      console.log("animal grpup",animalGroup)
+      const data = [...animalGroup,...datat]
 
 
       res.status(200).json({ message: "All GroupAnimals", data });
