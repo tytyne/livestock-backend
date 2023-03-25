@@ -223,7 +223,7 @@ class AnimalService {
 
     static async animalLikeGroup(){
         let data = await Animal.findAll({where:{is_group:true},
-        attributes: ['name','group_qty'],
+        attributes: ['id','name','group_qty'],
         })
         return data 
     }
