@@ -200,13 +200,17 @@ class AnimalService {
         return animal
 
     }
-    static async getAllFemaleanimals() {
-        let animal = await Animal.findAll({where:{gender:"female",status:"active"}})
+    static async getAllFemaleAnimals() {
+        let animal = await Animal.findAll({where:{ gender: {
+            [Op.like]: 'female%'
+          }}})
         return animal
 
     }
-    static async getAllMaleanimals() {
-        let animal = await Animal.findAll({where:{gender:"male",status:"active"}})
+    static async getAllMaleAnimals() {
+        let animal = await Animal.findAll({where:{ gender: {
+            [Op.like]: 'male%'
+          }}})
         return animal
 
     }

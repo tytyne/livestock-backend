@@ -18,5 +18,7 @@ router.put("/:id/:add_group",checkAuthorisation,animalController.EditGroupAnimal
 router.post("/new",checkAuthorisation,animalController.addingParenting)
 router.get("/:id/ancestory",checkAuthorisation,animalController.getAnceStory)
 router.get("/:id/offstring",checkAuthorisation,animalController.getOffstring)
+router.get("/females/all",animalController.femaleAnimals)
+router.get("/males/all",animalController.maleAnimals)
 
 export default router

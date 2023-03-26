@@ -12,7 +12,9 @@ const {
   updateAnimalFather,
   updateAnimalMother,
   getAllAncentors,
-  getAllOffstrings
+  getAllOffstrings,
+  getAllFemaleAnimals,
+  getAllMaleAnimals
   
 } = AnimalService;
 import CalculationHelper from "../utils/calculationHelper";
@@ -269,9 +271,31 @@ static async getAnceStory(req,res,next){
   catch(e){
     return next(new Error(e))
   }
+}
+//females
+static async femaleAnimals(req,res,next){
+  try{
+    const data = await getAllFemaleAnimals()
+    return res.status(200).json({message:"females are",data})
 
+  }
+  catch(e){
+    return next(new Error(e))
+  }
+  
 
 }
 
+//males
+static async maleAnimals(req,res,next){
+  try{
+    const data = await getAllMaleAnimals()
+    return res.status(200).json({message:"males are",data})
+  }
+  catch(e){
+    return next(new Error(e))
+  }
+
+}
 
 }
