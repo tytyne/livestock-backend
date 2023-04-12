@@ -78,6 +78,23 @@ class TreatmentService{
         return data
     }
 
+    static async  selectTreatments(){
+
+        const data = await Treatment.findAll({
+           
+            include:[
+                {
+                    model:Models.Animal,
+                    as:"animal"
+                
+                }    
+            
+            ]
+        });
+        
+        return data
+    }
+
     static async searchTreatment(sss){
         let data = await Treatment.findAll({  where: {
             [Op.or]: [

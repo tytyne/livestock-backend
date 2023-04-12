@@ -216,7 +216,10 @@ class AnimalService {
     }
 
     static async searchAnimals(sss){
-        let data = await Animal.findAll({ where: { name: sss,status:"active" } })
+        let data = await Animal.findAll({ where: {group_id: {
+            // "$eq" changes to "[Op.eq]"
+            [Op.eq]: null
+          },name: sss,status:"active" } })
         return data
     }
 
