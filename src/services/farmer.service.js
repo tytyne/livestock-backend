@@ -68,6 +68,11 @@ class FarmerService{
     return farmer
 
 }
+//search farmer
+static async searchFarm(sss){
+    let data = await Farmer.findAll({ where: { firstname: sss } })
+    return data
+}
 
     
 
