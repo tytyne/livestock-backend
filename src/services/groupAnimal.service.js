@@ -1,6 +1,6 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
-const{GroupAnimal} = models;
+const{GroupAnimal,Animal} = models;
 const { Op,sequelize,literal,fn} = require("sequelize");
 
 /**
@@ -72,12 +72,15 @@ class GroupAnimalService{
     }
 
     static async searchGroupAnimals(sss){
-        let data = await GroupAnimal.findAll({ where: { name: sss } })
+        let animals = await Animal.findAll({where:{is_group:true,name: sss },
+            attributes: ['id','name','group_qty'],
+            })
+        let group = await GroupAnimal.findAll({ where: { name: sss } })
+        let data = [...animals,...group]
         return data
     }
 
     // update records
-
     static async PushRecords(records,farm_id){
         let trial = await GroupAnimal.update(
             {
@@ -92,28 +95,14 @@ class GroupAnimalService{
         return trial 
     }
 
-    // static async pushingNewRecords(newdata,fid){
-
-    //     var newrev = JSON.stringify({data: newdata, created: new Date() });
-    //     let data = await GroupAnimal.upsert({
-    //         records: models.sequelize.fn( 'array_append',  models.sequelize.col('records'), newrev ,{where: {
-    //             id:fid
-    //     }})
-    //     })
-
-    //     return data
-    // }
-
-
+   
     static async addNewRecords(newdata,gid){
        ;
         let data = await GroupAnimal.update({ records: models.sequelize.literal(`'${JSON.stringify(newdata)}'::jsonb|| records`) }, { where: { id:gid} });
 
         return data
     }
-
-    
-  
+ 
 
 }
 export default GroupAnimalService

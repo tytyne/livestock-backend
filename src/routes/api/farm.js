@@ -16,5 +16,6 @@ router.get("/check/all",checkAuthorisation,farmController.getFarming)
 router.put("/:id",checkAuthorisation,checkFarmOwner,farmController.updateFarm)
 router.delete("/:id",checkAuthorisation,checkFarmOwner,farmController.deleteFarm)
 router.get("/count/all",checkAuthorisation,farmController.countingFarms)
+router.get("/",checkAuthorisation,farmController.searchingFarm)
 
 export default router

@@ -20,5 +20,7 @@ router.get("/:id/ancestory",checkAuthorisation,animalController.getAnceStory)
 router.get("/:id/offstring",checkAuthorisation,animalController.getOffstring)
 router.get("/females/all",animalController.femaleAnimals)
 router.get("/males/all",animalController.maleAnimals)
+router.get("/search/animals/",checkAuthorisation,animalController.searchingForAnimals)
+
 
 export default router

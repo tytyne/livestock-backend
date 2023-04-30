@@ -67,12 +67,8 @@ export default class GroupAnimalController {
         const checking = await countingAnimals(datat[index].id)
         console.log("checkinggg",checking)
         datat[index] = datat[index].toJSON();
-        // if(checking){
-        // console.log("checking data",checking)
           datat[index].group_qty = checking;
-        // }
-
-
+        
       }
       const  animalGroup = await animalLikeGroup()
       for (let index = 0; index < animalGroup.length; index++) {

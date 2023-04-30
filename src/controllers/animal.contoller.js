@@ -8,6 +8,7 @@ const {
   deleteById,
   countAnimals,
   searchAnimals,
+  searchAnimal,
   updateAnimalByGroupId,
   updateAnimalFather,
   updateAnimalMother,
@@ -178,6 +179,19 @@ static async searchingAnimal(req,res,next){
     const data = await searchAnimals(name);
     console.log(data)
     return res.status(200).json({ message: "searched animals",data});
+  }
+  catch(e){
+    return next(new Error(e));
+  }
+}
+
+static async searchingForAnimals(req,res,next){
+
+  try{
+    const {name} = req.query;
+    const data = await searchAnimal(name);
+    console.log(data)
+    return res.status(200).json({ message: "searched animals!",data});
   }
   catch(e){
     return next(new Error(e));

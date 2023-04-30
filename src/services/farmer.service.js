@@ -50,10 +50,23 @@ class FarmerService{
     }
 
 
-    static async searchFarmer(sss){
-        let data = await Farmer.findAll({ where: {firstname: sss } })
-        return data
-    }
+    // static async searchFarmer(sss){
+    //     let data  = await Farmer.findAll({
+    //                 where: {
+    //                   [Op.or]: [
+    //                     firstname: {
+    //                            [Op.like]:sss
+    //                     },
+    //                    lastname{
+    //                           [Op.like]:sss
+    //                       }
+    //                   ]
+    //                 }
+    //               });
+    //     return data
+    // }
+
+
     static async farmerGroupByDistrictReports(){
         let farmer = await Farmer.findAll({ attributes: ["district","gender",[Models.sequelize.fn("COUNT",Models.sequelize.col("nid")),'farmers',
      
@@ -69,8 +82,12 @@ class FarmerService{
 
 }
 //search farmer
-static async searchFarm(sss){
-    let data = await Farmer.findAll({ where: { firstname: sss } })
+static async searchFarmer(sss){
+    let data = await Farmer.findAll({ where: {
+        firstname: {
+            [Op.like]:sss
+        }
+        } })
     return data
 }
 

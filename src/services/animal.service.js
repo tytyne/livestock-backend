@@ -234,7 +234,11 @@ class AnimalService {
         })
         return data 
     }
-    
+    //search animal
+    static async searchAnimal(sss){
+        let data = await Animal.findAll({ where: {name: sss,status:"active" } })
+        return data
+    }
 
 }
 export default AnimalService
