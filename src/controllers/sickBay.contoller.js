@@ -10,6 +10,7 @@ const {
   getAllSickBayGroup,
   updateSickBayById,
   deleteSickBayById,
+  searchSickbay
 } = SickBayService;
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
@@ -18,6 +19,7 @@ const{getAnimalById}=AnimalService
 import  GroupAnimalService from "../services/groupAnimal.service"
 const{getGroupAnimalById}=GroupAnimalService
 const { v4: uuidv4 } = require('uuid');
+
 
 export default class SickBayController {
   //save an SickBay
@@ -57,12 +59,58 @@ export default class SickBayController {
               "animalId":response[i]
               
           }
-          console.log("check bunch",bunchSickBay)
-          // await createSickBay(bunchSickBay);
+          if(formData.record_transaction === true){
+            const checking = await getGroupAnimalById(resource_id)
+            const hello =checking.dataValues.farm_id
+            formData.animalId= resource_id
+            await createTransaction({
+              id:uuidv4(),
+              type: "expense",
+              amount:`${formData.cost}`,
+              date: `${formData.date}`,
+              vendor: " ",
+              category:`Veterinary, breeding, and medicine`,
+              check_number:"",
+              ref_Id: `${resource_id}`,
+              farmId:`${hello}`,
+              ref_type: `${resource_name}`,
+              reporting_year:new Date().getFullYear(),
+              keywords: "",
+              description: `${formData.description}`
+        
+            })
+          }
+          if(formData.retreat_date){
+            await createEvent({
+              id:uuidv4(),
+              title: `Retreat ${formData.type}`,
+              description: `${formData.type}`,
+              start_time: `${formData.retreat_date}`,
+              end_time: `${formData.retreat_date}`,
+              assigned_to_id: `${req.user.id}`,
+              animal_id:`${resource_id}`,
+              reference_id:`${resource_id}`,
+        
+            })
+            
+          }
+          if(formData.withdrawal_date){
+          await createEvent({
+            id:uuidv4(),
+            title: `Withdrawal ${formData.type}`,
+            description: `${formData.type}`,
+            start_time: `${formData.date}`,
+            end_time: `${formData.retreat_date}`,
+            assigned_to_id: `${req.user.id}`,
+            animal_id:`${resource_id}`,
+            reference_id:`${resource_id}`,
+      
+          })
+        }
             
             
           }
-          return res.status(200).json({message:"hello sweetie!"})
+          return res.status(200).json({message:"Sickbay created!"})
         }
         else{
           //send as it is 
@@ -80,8 +128,54 @@ export default class SickBayController {
                 "animalId":response[i]
                 
             }
-            console.log("check bunch",bunchSickBay)
-            // await createSickBay(bunchSickBay);
+            if(formData.record_transaction === true){
+              const checking = await getGroupAnimalById(resource_id)
+              const hello =checking.dataValues.farm_id
+              formData.animalId= resource_id
+              await createTransaction({
+                id:uuidv4(),
+                type: "expense",
+                amount:`${formData.cost}`,
+                date: `${formData.date}`,
+                vendor: " ",
+                category:`Veterinary, breeding, and medicine`,
+                check_number:"",
+                ref_Id: `${resource_id}`,
+                farmId:`${hello}`,
+                ref_type: `${resource_name}`,
+                reporting_year:new Date().getFullYear(),
+                keywords: "",
+                description: `${formData.description}`
+          
+              })
+            }
+            if(formData.retreat_date){
+              await createEvent({
+                id:uuidv4(),
+                title: `Retreat ${formData.type}`,
+                description: `${formData.type}`,
+                start_time: `${formData.retreat_date}`,
+                end_time: `${formData.retreat_date}`,
+                assigned_to_id: `${req.user.id}`,
+                animal_id:`${resource_id}`,
+                reference_id:`${resource_id}`,
+          
+              })
+              
+            }
+            if(formData.withdrawal_date){
+            await createEvent({
+              id:uuidv4(),
+              title: `Withdrawal ${formData.type}`,
+              description: `${formData.type}`,
+              start_time: `${formData.date}`,
+              end_time: `${formData.retreat_date}`,
+              assigned_to_id: `${req.user.id}`,
+              animal_id:`${resource_id}`,
+              reference_id:`${resource_id}`,
+        
+            })
+          }
         
           }
       
@@ -203,7 +297,17 @@ export default class SickBayController {
       return next(new Error(e));
     }
   }
+  static async searchingSickay(req,res,next){
 
+    try{
+      const {name} = req.query;
+      const data = await searchSickbay(name);
+      return res.status(200).json({ message: "searched sickbays",data});
+    }
+    catch(e){
+      return next(new Error(e));
+    }
+}
  
 
 }

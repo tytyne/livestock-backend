@@ -62,10 +62,10 @@ class TransactionService{
         return data
     }
 
-    static async searchTransactions(sss){
-        let data = await Transaction.findAll({ where: {description: sss } })
-        return data
-    }
+    // static async searchTransactions(sss){
+    //     let data = await Transaction.findAll({ where: {description: sss } })
+    //     return data
+    // }
   
     static async getExpenseFarm(farm_id){
     
@@ -177,6 +177,24 @@ static async TransactionsCategories(){
 group:["category"] , })
 return data
 
+}
+static async searchTransactions(sss){
+  let data  = await Transaction.findAll({
+              where: {
+                [Op.or]: [
+                  {
+                      type: { [Op.like]: `%${sss}%` },
+                    },
+                  {
+                      vendor: { [Op.like]: `%${sss}%` },
+                  },
+                  {
+                    category: { [Op.like]: `%${sss}%` },
+                  }
+                ]
+              }
+            });
+  return data
 }
 
 }

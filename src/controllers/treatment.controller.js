@@ -1,6 +1,6 @@
 import TreatmentService from "../services/treatment.service"
 const{createTreatment,getTreatmentById,getAllTreatmentsAnimal,getAllTreatmentsGroup,
-  updateTreatmentById,deleteTreatmentById,upcomingTreatments,createBulkTreatment
+  updateTreatmentById,deleteTreatmentById,upcomingTreatments,createBulkTreatment,searchTreatment
 }=TreatmentService
 import TransactionService from "../services/transaction.service"
 const {createTransaction}=TransactionService
@@ -11,6 +11,8 @@ const{getAnimalById}=AnimalService
 import  GroupAnimalService from "../services/groupAnimal.service"
 const{getGroupAnimalById}=GroupAnimalService
 const { v4: uuidv4 } = require('uuid');
+
+
 
 export default class TreatmentController{
 //save Treatment
@@ -52,15 +54,61 @@ try{
             "animalId":response[i]
             
         }
+        if(formData.record_transaction === true){
+          const checking = await getGroupAnimalById(resource_id)
+          const hello =checking.dataValues.farm_id
+          formData.animalId= resource_id
+          await createTransaction({
+            id:uuidv4(),
+            type: "expense",
+            amount:`${parseFloat(formData.cost)/response.length}`,
+            date: `${formData.date}`,
+            vendor: " ",
+            category:`Veterinary, breeding, and medicine`,
+            check_number:"",
+            ref_Id: response[i],
+            farmId:`${hello}`,
+            reporting_year:new Date().getFullYear(),
+            keywords: "",
+            description: `${formData.description}`
+      
+          })
+        }
+        if(formData.retreat_date){
+          await createEvent({
+            id:uuidv4(),
+            title: `Retreat ${formData.type}`,
+            description: `${formData.type}`,
+            start_time: `${formData.retreat_date}`,
+            end_time: `${formData.retreat_date}`,
+            assigned_to_id: `${req.user.id}`,
+            // animal_id:`${resource_id}`,
+            reference_id:`${resource_id}`,
+      
+          })
+          
+        }
+        if(formData.withdrawal_date)
+        await createEvent({
+          id:uuidv4(),
+          title: `Withdrawal ${formData.type}`,
+          description: `${formData.type}`,
+          start_time: `${formData.date}`,
+          end_time: `${formData.retreat_date}`,
+          assigned_to_id: `${req.user.id}`,
+          // animal_id:`${resource_id}`,
+          reference_id:`${resource_id}`,
+    
+        })
         await createTreatment(bunchTreatment);
         console.log("check bunch",bunchTreatment)
           
          
         }
-         return res.status(200).json({message:"hello sweetie!",bunchTreatment})
+         return res.status(200).json({message:"treatment created!",bunchTreatment})
 
       }else{
-        //send as it is 
+        
         
         for (let i = 0; i < response.length; i++) {
           bunchTreatment={
@@ -81,6 +129,54 @@ try{
               "animalId":response[i]
               
           }
+          if(formData.record_transaction === true){
+            const checking = await getGroupAnimalById(resource_id)
+            const hello =checking.dataValues.farm_id
+            formData.animalId= resource_id
+            await createTransaction({
+              id:uuidv4(),
+              type: "expense",
+              amount:`${formData.cost}`,
+              date: `${formData.date}`,
+              vendor: " ",
+              category:`Veterinary, breeding, and medicine`,
+              check_number:"",
+              ref_Id: `${resource_id}`,
+              farmId:`${hello}`,
+              ref_type: `${resource_name}`,
+              reporting_year:new Date().getFullYear(),
+              keywords: "",
+              description: `${formData.description}`
+        
+            })
+          }
+          if(formData.retreat_date){
+            await createEvent({
+              id:uuidv4(),
+              title: `Retreat ${formData.type}`,
+              description: `${formData.type}`,
+              start_time: `${formData.retreat_date}`,
+              end_time: `${formData.retreat_date}`,
+              assigned_to_id: `${req.user.id}`,
+              animal_id:`${resource_id}`,
+              reference_id:`${resource_id}`,
+        
+            })
+            
+          }
+          if(formData.withdrawal_date){
+          await createEvent({
+            id:uuidv4(),
+            title: `Withdrawal ${formData.type}`,
+            description: `${formData.type}`,
+            start_time: `${formData.date}`,
+            end_time: `${formData.retreat_date}`,
+            assigned_to_id: `${req.user.id}`,
+            animal_id:`${resource_id}`,
+            reference_id:`${resource_id}`,
+      
+          })
+        }
           await createTreatment(bunchTreatment);
       
         }
@@ -120,15 +216,30 @@ try{
 
     return res.status(200).json({message:"Treatment created!",data})
     }
+    if(formData.retreat_date){
+      await createEvent({
+        id:uuidv4(),
+        title: `Retreat ${formData.type}`,
+        description: `${formData.type}`,
+        start_time: `${formData.retreat_date}`,
+        end_time: `${formData.retreat_date}`,
+        assigned_to_id: `${req.user.id}`,
+        // animal_id:`${resource_id}`,
+        reference_id:`${resource_id}`,
   
+      })
+      
+    }
+    if(formData.withdrawal_date)
     await createEvent({
       id:uuidv4(),
-      title: `treat ${resource_id}`,
+      title: `Withdrawal ${formData.type}`,
       description: `${formData.type}`,
       start_time: `${formData.date}`,
       end_time: `${formData.retreat_date}`,
       assigned_to_id: `${req.user.id}`,
-      animal_id:`${resource_id}`
+      // animal_id:`${resource_id}`,
+      reference_id:`${resource_id}`,
 
     })
 
@@ -196,5 +307,17 @@ static async deleteTreatment(req,res,next){
     catch (e) {
         return next(new Error(e));
       }
+}
+
+static async searchingTreatments(req,res,next){
+
+  try{
+    const {name} = req.query;
+    const data = await searchTreatment(name);
+    return res.status(200).json({ message: "searched treatments",data});
+  }
+  catch(e){
+    return next(new Error(e));
+  }
 }
 }

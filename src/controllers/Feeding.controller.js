@@ -13,6 +13,7 @@ import  GroupAnimalService from "../services/groupAnimal.service"
 const{getGroupAnimalById}=GroupAnimalService
 const { v4: uuidv4 } = require('uuid');
 
+
 export default class FeedingController {
   //save an AnimalFeed
   static async storeFeeding(req, res, next) {
@@ -49,15 +50,17 @@ export default class FeedingController {
               "measurement":`${itemData.measurement}`,
               "animalId":response[i]
               
-          }
-          console.log("check bunchhhh",bunchFeeding)
+            }
+            // if(formData.repeat_until_date){
+                
+            // }
+         
           await createOneFeeding(bunchFeeding);
               
           }
           return res.status(200).json({message:"feeding created!",data})
   
         }else{
-          //send as it is 
           
           for (let i = 0; i < response.length; i++) {
             bunchFeeding={
@@ -72,6 +75,9 @@ export default class FeedingController {
               "animalId":response[i]
                 
             }
+            // if(formData.repeat_until_date){
+              
+            // }
             
             await createOneFeeding(bunchFeeding);
         
@@ -94,26 +100,26 @@ export default class FeedingController {
         const hello =checking.dataValues.farm_id
         formData.animalId= resource_id
       
-        if(formData.record_transaction === true){
-          await createTransaction({
-            id:uuidv4(),
-            type: "expense",
-            amount:`${formData.cost}`,
-            date: `${formData.date}`,
-            vendor: " ",
-            category:`Veterinary, breeding, and medicine`,
-            check_number:"",
-            ref_Id: `${resource_id}`,
-            farmId:`${hello}`,
-            ref_type: `${resource_name}`,
-            reporting_year:new Date().getFullYear(),
-            keywords: "",
-            description: `${formData.description}`
+        // if(formData.record_transaction === true){
+        //   await createTransaction({
+        //     id:uuidv4(),
+        //     type: "expense",
+        //     amount:`${formData.cost}`,
+        //     date: `${formData.date}`,
+        //     vendor: " ",
+        //     category:`Veterinary, breeding, and medicine`,
+        //     check_number:"",
+        //     ref_Id: `${resource_id}`,
+        //     farmId:`${hello}`,
+        //     ref_type: `${resource_name}`,
+        //     reporting_year:new Date().getFullYear(),
+        //     keywords: "",
+        //     description: `${formData.description}`
            
       
-          })
-        //  console.log("mbpaaa",formData.description)
-        }
+        //   })
+        // //  console.log("mbpaaa",formData.description)
+        // }
         const data = await createOneFeeding(formData);
         
         return res.status(200).json({ message: "Feeding created!", data });

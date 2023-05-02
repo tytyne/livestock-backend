@@ -1,5 +1,5 @@
 import TransactionService from "../services/transaction.service"
-const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById}=TransactionService
+const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,searchTransactions}=TransactionService
 const { v4: uuidv4 } = require('uuid');
 
 export default class TransactionController{
@@ -63,5 +63,16 @@ static async deleteTransaction(req,res,next){
     catch (e) {
         return next(new Error(e));
       }
+}
+static async searchingTransaction(req,res,next){
+
+    try{
+      const {name} = req.query;
+      const data = await searchTransactions(name);
+      return res.status(200).json({ message: "searched transactions",data});
+    }
+    catch(e){
+      return next(new Error(e));
+    }
 }
 }

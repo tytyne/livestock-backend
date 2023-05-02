@@ -57,7 +57,12 @@ class EventService{
         return event
     }
     static async searchEvents(sss){
-        let data = await Event.findAll({ where: { title: sss } })
+        let data = await Event.findAll({
+          where:{
+            title: { [Op.like]: `%${sss}%` },
+         }
+          
+        })
         return data
     }
 

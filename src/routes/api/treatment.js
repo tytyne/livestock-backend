@@ -11,5 +11,6 @@ router.get("/:resource_name/:resource_id/:id",checkAuthorisation,treatmentContro
 router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,treatmentController.getTreatments)
 router.put("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,treatmentController.updateTreatment)
 router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,treatmentController.deleteTreatment)
+router.get("/",checkAuthorisation,treatmentController.searchingTreatments)
 
 export default router

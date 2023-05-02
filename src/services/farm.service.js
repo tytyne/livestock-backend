@@ -80,8 +80,13 @@ class FarmService{
   }
 
 //search farm
-  static async searchFarm(sss){
-    let data = await Farm.findAll({ where: { name: sss } })
+static async searchFarm(sss){
+    let data = await Farm.findAll({
+      where:{
+        name: { [Op.like]: `%${sss}%` },
+     }
+      
+    })
     return data
 }
 

@@ -11,5 +11,6 @@ router.get("/:resource_name/:resource_id/:id",checkAuthorisation,vaccinatingCont
 router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,vaccinatingController.getVaccinatings)
 router.put("/:resource_name/:resource_id/:id",checkAuthorisation,vaccinatingController.updateVaccinating)
 router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,vaccinatingController.deleteVaccinating)
+router.get("/",checkAuthorisation,vaccinatingController.searchingVaccinating)
 
 export default router

@@ -1,6 +1,7 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{Vaccinating} = models;
+const { Op,sequelize ,literal} = require("sequelize");
 
 /**
  * @description This model deals with vaccinating model
@@ -88,8 +89,14 @@ class VaccinatingService{
         let data = await Vaccinating.destroy({where:{id:id}})
         return data
     }
+   
     static async searchVaccinating(sss){
-        let data = await Vaccinating.findAll({ where: {description: sss } })
+        let data = await Vaccinating.findAll(
+          {
+            description: { [Op.like]: `%${sss}%` },
+         }
+          
+          )
         return data
     }
   

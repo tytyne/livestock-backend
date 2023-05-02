@@ -11,5 +11,6 @@ router.get("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwne
 router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,sickBayController.getSickBays)
 router.put("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,sickBayController.updateSickBay)
 router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,sickBayController.deleteSickBay)
+router.get("/",checkAuthorisation,sickBayController.searchingSickay)
 
 export default router

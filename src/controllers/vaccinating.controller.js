@@ -6,6 +6,7 @@ const {
   getAllVaccinatingProcessGroup,
   updateVaccinatingProcessById,
   deleteVaccinatingProcessById,
+  searchVaccinating
 } = VaccinatingService;
 
 import calculationHelper from "../utils/calculationHelper"
@@ -27,6 +28,7 @@ const {createTransaction}=TransactionService
 import AnimalService from "../services/animal.service";
 const{getAnimalById}=AnimalService
 const { v4: uuidv4 } = require('uuid');
+
 
 
 
@@ -71,6 +73,54 @@ export default class VaccinatingController {
               "animalId":response[i]
               
           }
+          if(formData.record_transaction === true){
+            const checking = await getGroupAnimalById(resource_id)
+            const hello =checking.dataValues.farm_id
+            formData.animalId= resource_id
+            await createTransaction({
+              id:uuidv4(),
+              type: "expense",
+              amount:`${formData.cost}`,
+              date: `${formData.date}`,
+              vendor: " ",
+              category:`Veterinary, breeding, and medicine`,
+              check_number:"",
+              ref_Id: `${resource_id}`,
+              farmId:`${hello}`,
+              ref_type: `${resource_name}`,
+              reporting_year:new Date().getFullYear(),
+              keywords: "",
+              description: `${formData.description}`
+        
+            })
+          }
+          if(formData.retreat_date){
+            await createEvent({
+              id:uuidv4(),
+              title: `Retreat ${formData.type}`,
+              description: `${formData.type}`,
+              start_time: `${formData.retreat_date}`,
+              end_time: `${formData.retreat_date}`,
+              assigned_to_id: `${req.user.id}`,
+              animal_id:`${resource_id}`,
+              reference_id:`${resource_id}`,
+        
+            })
+            
+          }
+          if(formData.withdrawal_date){
+          await createEvent({
+            id:uuidv4(),
+            title: `Withdrawal ${formData.type}`,
+            description: `${formData.type}`,
+            start_time: `${formData.date}`,
+            end_time: `${formData.retreat_date}`,
+            assigned_to_id: `${req.user.id}`,
+            animal_id:`${resource_id}`,
+            reference_id:`${resource_id}`,
+      
+          })
+        }
           await createVaccinatingProcess(bunchVaccinating);
             
             return res.status(200).json({message:"hello sweetie!"})
@@ -92,6 +142,54 @@ export default class VaccinatingController {
                 "animalId":response[i]
                 
             }
+            if(formData.record_transaction === true){
+              const checking = await getGroupAnimalById(resource_id)
+              const hello =checking.dataValues.farm_id
+              formData.animalId= resource_id
+              await createTransaction({
+                id:uuidv4(),
+                type: "expense",
+                amount:`${formData.cost}`,
+                date: `${formData.date}`,
+                vendor: " ",
+                category:`Veterinary, breeding, and medicine`,
+                check_number:"",
+                ref_Id: `${resource_id}`,
+                farmId:`${hello}`,
+                ref_type: `${resource_name}`,
+                reporting_year:new Date().getFullYear(),
+                keywords: "",
+                description: `${formData.description}`
+          
+              })
+            }
+            if(formData.retreat_date){
+              await createEvent({
+                id:uuidv4(),
+                title: `Retreat ${formData.type}`,
+                description: `${formData.type}`,
+                start_time: `${formData.retreat_date}`,
+                end_time: `${formData.retreat_date}`,
+                assigned_to_id: `${req.user.id}`,
+                animal_id:`${resource_id}`,
+                reference_id:`${resource_id}`,
+          
+              })
+              
+            }
+            if(formData.withdrawal_date){
+            await createEvent({
+              id:uuidv4(),
+              title: `Withdrawal ${formData.type}`,
+              description: `${formData.type}`,
+              start_time: `${formData.date}`,
+              end_time: `${formData.retreat_date}`,
+              assigned_to_id: `${req.user.id}`,
+              animal_id:`${resource_id}`,
+              reference_id:`${resource_id}`,
+        
+            })
+          }
             await createVaccinatingProcess(bunchVaccinating);
         
           }
@@ -154,13 +252,6 @@ export default class VaccinatingController {
     try {
       const id = req.params.id;
       const data = await getVaccinatingProcessById(id);
-      // for (let index = 0; index < data.length; index++) {
-
-      //   data[index].createdBy = `holla`;
-      //   data[index].createdBy = `holla`;
-      //   data[index].createdBy = `holla`;
-
-      // }
       res.status(200).json({ message: "get Vaccinating Process by Id", data });
     } catch (e) {
       return next(new Error(e));
@@ -232,8 +323,8 @@ export default class VaccinatingController {
   static async searchingVaccinating(req,res,next){
 
     try{
-      const {description} = req.query;
-      const data = await searchGroupAnimals(description);
+      const {name} = req.query;
+      const data = await searchVaccinating(name);
       console.log(data)
       return res.status(200).json({ message: "searched vaccinating",data});
     }

@@ -11,6 +11,7 @@ router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,EventCont
 router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,checkEventOwner,EventController.deleteEvent)
 router.get("/:resource_name/:resource_id/:id",checkAuthorisation,EventController.getEvent)
 router.put("/:resource_name/:resource_id/:id",checkAuthorisation,checkEventOwner,EventValidation.save,EventController.updateEvent)
+router.get("/",checkAuthorisation,EventController.searchingEvent)
 
 
 export default router

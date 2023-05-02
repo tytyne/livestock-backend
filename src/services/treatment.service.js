@@ -95,15 +95,15 @@ class TreatmentService{
         return data
     }
 
-    static async searchTreatment(sss){
-        let data = await Treatment.findAll({  where: {
-            [Op.or]: [
-              { type: sss },
-              { product: sss }
-            ]
-          } })
-        return data
-    }
+    // static async searchTreatment(sss){
+    //     let data = await Treatment.findAll({  where: {
+    //         [Op.or]: [
+    //           { type: sss },
+    //           { product: sss }
+    //         ]
+    //       } })
+    //     return data
+    // }
     
     static async AllTreatmentsReports(startDate,endDate){
         let data = await Treatment.findAll({ 
@@ -143,6 +143,22 @@ class TreatmentService{
     group:["type"] , })
     return data
 
+    }
+
+    static async searchTreatment(sss){
+        let data  = await Treatment.findAll({
+                    where: {
+                      [Op.or]: [
+                        {
+                            type: { [Op.like]: `%${sss}%` },
+                          },
+                        {
+                            mode: { [Op.like]: `%${sss}%` },
+                        }
+                      ]
+                    }
+                  });
+        return data
     }
 
 

@@ -1,6 +1,7 @@
 import models from "../database/models/index"
 import "regenerator-runtime/runtime";
 const{SickBay} = models;
+const { Op,sequelize ,literal} = require("sequelize");
 
 /**
  * @description This model deals with SickBay model
@@ -41,7 +42,12 @@ class SickBayService{
     }
 
     static async searchSickbay(sss){
-        let data = await SickBay.findAll({ where: {interventions: sss } })
+        let data = await SickBay.findAll({
+          where:{
+            intervention: { [Op.like]: `%${sss}%` },
+         }
+          
+        })
         return data
     }
   

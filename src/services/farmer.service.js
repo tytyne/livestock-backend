@@ -50,21 +50,21 @@ class FarmerService{
     }
 
 
-    // static async searchFarmer(sss){
-    //     let data  = await Farmer.findAll({
-    //                 where: {
-    //                   [Op.or]: [
-    //                     firstname: {
-    //                            [Op.like]:sss
-    //                     },
-    //                    lastname{
-    //                           [Op.like]:sss
-    //                       }
-    //                   ]
-    //                 }
-    //               });
-    //     return data
-    // }
+    static async searchFarmer(sss){
+        let data  = await Farmer.findAll({
+                    where: {
+                      [Op.or]: [
+                        {
+                            firstname: { [Op.like]: `%${sss}%` },
+                          },
+                        {
+                            lastname: { [Op.like]: `%${sss}%` },
+                        }
+                      ]
+                    }
+                  });
+        return data
+    }
 
 
     static async farmerGroupByDistrictReports(){
@@ -82,14 +82,14 @@ class FarmerService{
 
 }
 //search farmer
-static async searchFarmer(sss){
-    let data = await Farmer.findAll({ where: {
-        firstname: {
-            [Op.like]:sss
-        }
-        } })
-    return data
-}
+// static async searchFarmer(sss){
+//     let data = await Farmer.findAll({ 
+//         where: {
+//             firstname: { [Op.like]: `%${sss}%` },
+//           }
+//     })
+//     return data
+// }
 
     
 

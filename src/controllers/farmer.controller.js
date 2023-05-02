@@ -78,8 +78,6 @@ static async searchingFarmer(req,res,next){
     try{
       const {name} = req.query;
       const data = await searchFarmer(name);
-      
-      console.log("ddddd",data)
       return res.status(200).json({ message: "searched farmers",data});
     }
     catch(e){
