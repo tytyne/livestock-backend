@@ -46,6 +46,7 @@ export default class UserControllers {
       const textPassword = formData.password;
       formData.password = hashPassword(textPassword);
       formData.role = "vet";
+      formData.isVerified=true;
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);
 

@@ -1,13 +1,13 @@
 {
   "name": "livestock-bank",
   "version": "1.0.0",
-  "description": "",
+  "description": "[![Coverage Status](https://coveralls.io/repos/github/tytyne/fimboo/badge.svg?branch=Develop)](https://coveralls.io/github/tytyne/fimboo?branch=Develop) [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com) ![Integration Tests CI](https://github.com/tytyne/fimboo/workflows/Integration%20Tests%20CI/badge.svg) [![deepcode](https://www.deepcode.ai/api/gh/badge?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwbGF0Zm9ybTEiOiJnaCIsIm93bmVyMSI6InR5dHluZSIsInJlcG8xIjoiZmltYm9vIiwiaW5jbHVkZUxpbnQiOmZhbHNlLCJhdXRob3JJZCI6MjYwMzksImlhdCI6MTYwODI3NTYxMn0.MqIXT8M2K6iQeRGNgriKcgsPzeOho7kz3yk1lWFYYt8)](https://www.deepcode.ai/app/gh/tytyne/fimboo/_/dashboard?utm_content=gh%2Ftytyne%2Ffimboo)",
   "main": "index.js",
   "scripts": {
     "prestart": "npm run migrations",
     "build": "babel src/index.js -d dist",
-    "start": "nodemon --exec src/index.js",
-    "dev": "nodemon --exec babel-node  src/index.js",
+    "start": "nodemon --exec src/app.js",
+    "dev": "nodemon --exec babel-node  src/app.js",
     "create-db": "npx sequelize-cli db:create",
     "drop-db": "npx sequelize-cli db:drop",
     "migrations": "npx sequelize-cli db:migrate",
@@ -21,6 +21,9 @@
   "keywords": [],
   "author": "Dusabeyezu Florentine (tytyne)",
   "license": "ISC",
+  "bin" : {
+    "execute" : "src/app.js"
+  }, 
   "dependencies": {
     "@babel/cli": "^7.18.6",
     "@babel/preset-env": "^7.18.6",
@@ -41,7 +44,7 @@
     "node-schedule": "^2.1.0",
     "nodemailer": "^6.7.7",
     "nodemailer-sendgrid": "^1.0.3",
-    "nodemon": "^2.0.19",
+    "nodemon": "^2.0.22",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "qr": "^0.2.4",
@@ -67,5 +70,9 @@
     "mocha-lcov-reporter": "^1.3.0",
     "node-mocks-http": "^1.11.0",
     "nyc": "^15.1.0"
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "test"
   }
 }
