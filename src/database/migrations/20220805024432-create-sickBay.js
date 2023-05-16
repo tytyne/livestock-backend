@@ -11,9 +11,9 @@ module.exports = {
       onsetDate: {
         type: Sequelize.DATE
       },
-      medicineId: {
-        type: Sequelize.INTEGER,
-      },
+      // medicineId: {
+      //   type: Sequelize.INTEGER,
+      // },
       farmId: {
         type: Sequelize.STRING,
       },
@@ -41,9 +41,12 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
-      withdrawal_date: {
-        type: Sequelize.DATE
+      total: {
+        type: Sequelize.DECIMAL
       },
+      // withdrawal_date: {
+      //   type: Sequelize.DATE
+      // },
       measurement: {
         type: Sequelize.STRING
       },

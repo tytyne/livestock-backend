@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     feed_name: DataTypes.STRING,
     quantity: DataTypes.DECIMAL,
     price: DataTypes.DECIMAL,
+    total: DataTypes.DECIMAL,
     measurement:DataTypes.STRING,
+    details:DataTypes.STRING,
     repeat_until_date:DataTypes.DATE,
     // shared:DataTypes.BOOLEAN,
     per_head: {
@@ -16,11 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     
   }, { });
   Feeding.associate = function(models) {
-  Feeding.belongsTo(models.Feed, {
-    foreignKey: 'feedId',
-    as: 'feed',
-    onDelete: 'CASCADE',
-  })
+  // Feeding.belongsTo(models.Feed, {
+  //   foreignKey: 'feedId',
+  //   as: 'feed',
+  //   onDelete: 'CASCADE',
+  // })
 
   Feeding.belongsTo(models.Animal, {
     foreignKey: 'animalId',

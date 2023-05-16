@@ -49,21 +49,21 @@ export default class UserControllers {
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);
 
-      const mail = new Mailer({
-        to: `${user.username} <${user.email}>`,
-        header: "Confirm your email",
-        messageHeader: `Hi, <strong>${user.firstname}!</strong>`,
-        messageBody:
-          "You are requesting to confirm your email, Click the following Button to confirm your email.",
-        optionLink: `${process.env.APP_URL}/api/${process.env.API_VERSION}/user/confirmation/${token}`,
-        browserMessage: `If that doesn't work, copy and paste this link into your browser`,
-        Button: true,
-      });
-      mail.InitButton({
-        text: "Confirm Your Email",
-        link: `${process.env.FRONTEND_URL}/api/${process.env.API_VERSION}/confirmEmail?email=${user.email}&token=${token} `,
-      });
-      await mail.sendMail();
+      // const mail = new Mailer({
+      //   to: `${user.username} <${user.email}>`,
+      //   header: "Confirm your email",
+      //   messageHeader: `Hi, <strong>${user.firstname}!</strong>`,
+      //   messageBody:
+      //     "You are requesting to confirm your email, Click the following Button to confirm your email.",
+      //   optionLink: `${process.env.APP_URL}/api/${process.env.API_VERSION}/user/confirmation/${token}`,
+      //   browserMessage: `If that doesn't work, copy and paste this link into your browser`,
+      //   Button: true,
+      // });
+      // mail.InitButton({
+      //   text: "Confirm Your Email",
+      //   link: `${process.env.FRONTEND_URL}/api/${process.env.API_VERSION}/confirmEmail?email=${user.email}&token=${token} `,
+      // });
+      // await mail.sendMail();
 
       return successResponse(res, created, token, signedup, user);
     } catch (e) {

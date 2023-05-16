@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     medicine_name:DataTypes.STRING,
     quantity: DataTypes.DECIMAL,
     price: DataTypes.DECIMAL,
-    withdrawal_date: DataTypes.DATE,
+    total: DataTypes.DECIMAL,
+    // withdrawal_date: DataTypes.DATE,
     measurement:DataTypes.STRING,
     // animalId:DataTypes.STRING,
     record_transaction:{
@@ -22,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
   }, { });
   SickBay.associate = function(models) {
 
-  SickBay.belongsTo(models.Medicine, {
-    foreignKey: 'medicineId',
-    as: 'medicine',
-    onDelete: 'CASCADE',
-  })
+  // SickBay.belongsTo(models.Medicine, {
+  //   foreignKey: 'medicineId',
+  //   as: 'medicine',
+  //   onDelete: 'CASCADE',
+  // })
 
   SickBay.belongsTo(models.Animal, {
     foreignKey: 'animalId',

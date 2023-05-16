@@ -11,8 +11,8 @@ const {
 
 import calculationHelper from "../utils/calculationHelper"
 const { calculatePrice } = calculationHelper
-import VaccinationService from "../services/vaccination.services"
-const { getVaccinationById } = VaccinationService
+// import VaccinationService from "../services/vaccination.services"
+// const { getVaccinationById } = VaccinationService
 import GroupAnimalService from "../services/groupAnimal.service";
 const {
 
@@ -36,23 +36,23 @@ const { v4: uuidv4 } = require('uuid');
 export default class VaccinatingController {
   //save an vaccinating animal or group-animal
 
-  static async storeVaccinating(req, res, next) {
-    // try {
+  static async storeVaccinating(req,res,next){
+    try{
+
       const {resource_name,resource_id}= req.params
       const formData = req.body;
-      console.log(req.user.id)
+      // console.log(req.user.id)
       formData.id = uuidv4()
       formData.createdBy = req.user.id;
-    
-
-      const item = await getVaccinationById(formData.vaccinationId)
-      const itemData = item.dataValues
-      formData.name = itemData.name;
-      formData.measurement = itemData.measurement;
-      const formula = await calculatePrice(itemData.price, formData.quantity, itemData.unit);
-      formData.price = formula
-
-      if(resource_name==='livestock_group'){
+      // const item = await getVaccinationById(formData.vaccinationId)
+      // const itemData = item.dataValues
+      // formData.name = itemData.name;
+      // formData.measurement = itemData.measurement;
+      const formula = await calculatePrice(formData.quantity, formData.price);
+      formData.total
+       = formula
+      
+       if(resource_name==='livestock_group'){
         const checking = await getGroupAnimalById(resource_id)
         const hello=checking.dataValues.farm_id
        
@@ -60,16 +60,16 @@ export default class VaccinatingController {
         const data = await createVaccinatingProcess(formData);
         if(formData.per_head){
           //means i have to divide
-          for (let i = 0; i < response.length; i++) {
-            bunchVaccinating={
+              bunchVaccinating={
               "id":uuidv4(),
               "onsetDate":`${formData.onsetDate}`,
               "description":`${formData.description}`,
-              "vaccinationId":`${formData.vaccinationId}`,
+              // "vaccinationId":`${formData.vaccinationId}`,
               "quantity":`${formData.quantity}/${response.length}`,
               "nextAppointment":`${formData.nextAppointment}`,
               "record_transaction":`${formData.record_transaction}`,
-              "price":`${formula}/${$response.length}`,
+              "price":`${formData.price}/${$response.length}`,
+              "total":`${formula}/${$response.length}`,
               "animalId":response[i]
               
           }
@@ -94,51 +94,51 @@ export default class VaccinatingController {
         
             })
           }
-          if(formData.retreat_date){
+            if(formData.retreat_date){
+              await createEvent({
+                id:uuidv4(),
+                title: `Retreat ${formData.type}`,
+                description: `${formData.type}`,
+                start_time: `${formData.retreat_date}`,
+                end_time: `${formData.retreat_date}`,
+                assigned_to_id: `${req.user.id}`,
+                animal_id:`${resource_id}`,
+                reference_id:`${resource_id}`,
+          
+              })
+              
+            }
+            if(formData.withdrawal_date){
             await createEvent({
               id:uuidv4(),
-              title: `Retreat ${formData.type}`,
+              title: `Withdrawal ${formData.type}`,
               description: `${formData.type}`,
-              start_time: `${formData.retreat_date}`,
+              start_time: `${formData.date}`,
               end_time: `${formData.retreat_date}`,
               assigned_to_id: `${req.user.id}`,
               animal_id:`${resource_id}`,
               reference_id:`${resource_id}`,
         
             })
-            
           }
-          if(formData.withdrawal_date){
-          await createEvent({
-            id:uuidv4(),
-            title: `Withdrawal ${formData.type}`,
-            description: `${formData.type}`,
-            start_time: `${formData.date}`,
-            end_time: `${formData.retreat_date}`,
-            assigned_to_id: `${req.user.id}`,
-            animal_id:`${resource_id}`,
-            reference_id:`${resource_id}`,
-      
-          })
-        }
           await createVaccinatingProcess(bunchVaccinating);
             
-            return res.status(200).json({message:"hello sweetie!"})
-          }
-  
-        }else{
+          return res.status(200).json({message:"vaccination created!"})
+        }
+        else{
           //send as it is 
           
           for (let i = 0; i < response.length; i++) {
-            bunchVaccinating={
+              bunchVaccinating={
                 "id":uuidv4(),
                 "onsetDate":`${formData.onsetDate}`,
                 "description":`${formData.description}`,
-                "vaccinationId":`${formData.vaccinationId}`,
+                // "vaccinationId":`${formData.vaccinationId}`,
                 "quantity":`${formData.quantity}`,
                 "nextAppointment":`${formData.nextAppointment}`,
                 "record_transaction":`${formData.record_transaction}`,
-                "price":`${formula}`,
+                "price":`${formData}`,
+                "total":`${formula}`,
                 "animalId":response[i]
                 
             }
@@ -190,25 +190,24 @@ export default class VaccinatingController {
         
             })
           }
-            await createVaccinatingProcess(bunchVaccinating);
-        
+          await createVaccinatingProcess(bunchVaccinating);
           }
-      
-        return res.status(200).json({ message: "vaccinating created!", data });
-  
-      }
-
-      if(resource_name==='animal'){
-        const checking = await getAnimalById(resource_id)
+        return res.status(200).json({message:"vacinnating created"})
+        }
+       }
+       else if(resource_name==='animal'){
+       const checking = await getAnimalById(resource_id)
         const hello =checking.dataValues.farm_id
         formData.animalId= resource_id
+        const formula= await calculatePrice(formData.quantity,formData.price);
+        formData.total=formula
         const data = await createVaccinatingProcess(formData);
         if(formData.record_transaction === true){
           await createTransaction({
             id:uuidv4(),
             type: "expense",
-            amount:`${formData.cost}`,
-            date: `${formData.date}`,
+            amount:`${formula}`,
+            date: `${formData.onsetDate}`,
             vendor: " ",
             category:`Veterinary, breeding, and medicine`,
             check_number:"",
@@ -220,12 +219,9 @@ export default class VaccinatingController {
             description: `${formData.description}`
       
           })
+       
         }
-        return res.status(200).json({ message: "a Vaccinating Process created!", data });
-      }
-      
-      }
-     
+        
       await createEvent({
         id:uuidv4(),
         title: `vaccinating ${resource_id}`,
@@ -236,15 +232,13 @@ export default class VaccinatingController {
         animal_id:`${resource_id}`
 
       })
+      return res.status(200).json({message:"animal vacinnating created",data})
 
-    
-    
-    // } 
-    
-    
-    // catch (e) {
-    //   return next(new Error(e));
-    // }
+       }
+    }
+    catch (e) {
+      return next(new Error(e));
+    }
   }
 
   //get an AnimalVaccination by Id
@@ -279,21 +273,21 @@ export default class VaccinatingController {
     try {
       const id = req.params.id;
       const formData = req.body;
-      const item = await getVaccinationById(formData.vaccinationId)
-      const itemData = item.dataValues
-      formData.name = itemData.name;
-      const formula = await calculatePrice(itemData.price, formData.quantity, itemData.unit);
+      // const item = await getVaccinationById(formData.vaccinationId)
+      // const itemData = item.dataValues
+      // formData.name = itemData.name;
+      const formula = await calculatePrice(formData.quantity, formData.unit);
       formData.price = formula
-      console.log(groupAnimalData);
+     
       const groupAnimalData = await getGroupAnimalById(formData.groupAnimalId)
-      console.log(groupAnimalData.dataValues)
+      
 
-      if (groupAnimalData.dataValues.purposeId === 2 && groupAnimalData.ageInWeeks > 25) {
-        return res.status(400).json({ message: "no vaccination needed!" });
-      }
-      if (groupAnimalData.dataValues.ageInWeeks > 23) {
-        return res.status(400).json({ message: "no vaccination needed!" });
-      }
+      // if (groupAnimalData.dataValues.purposeId === 2 && groupAnimalData.ageInWeeks > 25) {
+      //   return res.status(400).json({ message: "no vaccination needed!" });
+      // }
+      // if (groupAnimalData.dataValues.ageInWeeks > 23) {
+      //   return res.status(400).json({ message: "no vaccination needed!" });
+      // }
       await createEvent({
         title: "vaccinating chicken",
         description: `vaccinating chickens group ${formData.groupAnimalId}`,
@@ -325,7 +319,7 @@ export default class VaccinatingController {
     try{
       const {name} = req.query;
       const data = await searchVaccinating(name);
-      console.log(data)
+      // console.log(data)
       return res.status(200).json({ message: "searched vaccinating",data});
     }
     catch(e){

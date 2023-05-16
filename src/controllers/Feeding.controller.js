@@ -1,8 +1,8 @@
 
 import calculationHelper from "../utils/calculationHelper"
 const{calculatePrice,getDatesInRange}=calculationHelper
-import FeedService from "../services/feed.service"
-const{getFeedById} = FeedService
+// import FeedService from "../services/feed.service"
+// const{getFeedById} = FeedService
 import FeedingService from "../services/feeding.service";
 const{createOneFeeding,createBulkFeeding,getFeedingById,getAllFeedingAnimal,getAllFeedingGroup,updateFeedingById,deleteFeedingById}=FeedingService
 import TransactionService from "../services/transaction.service"
@@ -26,12 +26,12 @@ export default class FeedingController {
       let bunchFeeding;
 
       if(resource_name==="livestock_group"){
-        const item= await getFeedById(formData.feedId)
-        const itemData=item.dataValues
-        formData.feed_name=itemData.name;
-        const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-        formData.price=formula
-        formData.groupId= resource_id
+        // const item= await getFeedById(formData.feedId)
+        // const itemData=item.dataValues
+        // formData.feed_name=itemData.name;
+        const formula= await calculatePrice(formData.quantity,formData.unit);
+        formData.total=formula
+        // formData.groupId= resource_id
         const data = await createOneFeeding(formData);
         const checking = await getGroupAnimalById(resource_id)
         const allAnimals=checking.dataValues.records
@@ -43,11 +43,11 @@ export default class FeedingController {
               "id":uuidv4(),
               "onsetDate":`${formData.onsetDate}`,
               "quantity":`${parseFloat(formData.quantity)/response.length}`,
-              "feedId":`${formData.feedId}`,
               "description":`${formData.description}`,
-              "price":`${parseFloat(formula)/response.length}`,
+              "price":`${formData.price}`,
+              "total":`${parseFloat(formula)/response.length}`,
               // "repeat_until_date":`${formData.repeat_until_date}`,
-              "measurement":`${itemData.measurement}`,
+              "measurement":`${formData.measurement}`,
               "animalId":response[i]
               
             }
@@ -67,10 +67,10 @@ export default class FeedingController {
               "id":uuidv4(),
               "onsetDate":`${formData.onsetDate}`,
               "quantity":`${formData.quantity}`,
-              "feedId":`${formData.feedId}`,
               "description":`${formData.description}`,
-              "price":`${formula}`,
-              "measurement":`${itemData.measurement}`,
+              "price":`${formData.price}`,
+              "total":`${formula}`,
+              "measurement":`${formData.measurement}`,
               // "repeat_until_date":`${formData.repeat_until_date}`,
               "animalId":response[i]
                 
@@ -90,12 +90,12 @@ export default class FeedingController {
    
 
       else if(resource_name==='animal'){
-        const item= await getFeedById(formData.feedId)
-        const itemData=item.dataValues
-        formData.feed_name=itemData.name;
-        formData.measurement = itemData.measurement;
-        const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-        formData.price=formula
+        // const item= await getFeedById(formData.feedId)
+        // const itemData=item.dataValues
+        // formData.feed_name=itemData.name;
+        // formData.measurement = itemData.measurement;
+        const formula= await calculatePrice(formData.quantity,formData.price);
+        formData.total=formula
         const checking = await getAnimalById(resource_id)
         const hello =checking.dataValues.farm_id
         formData.animalId= resource_id
@@ -118,7 +118,6 @@ export default class FeedingController {
            
       
         //   })
-        // //  console.log("mbpaaa",formData.description)
         // }
         const data = await createOneFeeding(formData);
         
@@ -171,11 +170,11 @@ export default class FeedingController {
       if(resource_name==="animal"){
         formData.animalId= resource_id
       }
-      const item= await getFeedById(formData.feedId)
-      const itemData=item.dataValues
-      formData.feed_name=itemData.name;
-      const formula= await calculatePrice(itemData.price,formData.quantity,itemData.unit);
-      formData.price=formula   
+      // const item= await getFeedById(formData.feedId)
+      // const itemData=item.dataValues
+      // formData.feed_name=itemData.name;
+      const formula= await calculatePrice(formData.price,formData.quantity,formData.price);
+      formData.total=formula   
       const data = await updateFeedingById(formData, id);
       res.status(200).json({ message: "update an AnimalFeed!!", data });
 

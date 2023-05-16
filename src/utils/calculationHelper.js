@@ -2,9 +2,9 @@ import moment from "moment"
 
 class CalculationHelper {
 
-    static async calculatePrice(actual_price, new_unit, actual_unit) {
+    static async calculatePrice(actual_price, new_unit) {
 
-        const cost = parseInt((actual_price * new_unit) / actual_unit);
+        const cost = parseInt(actual_price * new_unit);
 
         return cost;
 

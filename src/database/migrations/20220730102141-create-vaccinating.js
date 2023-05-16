@@ -12,15 +12,13 @@ module.exports = {
       onsetDate: {
         type: Sequelize.DATE
       },
-      vaccinationId: {
-        type: Sequelize.INTEGER
-      },
+      // vaccinationId: {
+      //   type: Sequelize.INTEGER
+      // },
       farmId: {
         type: Sequelize.STRING
       },
-      treatmentMethodId: {
-        type: Sequelize.INTEGER
-      },
+  
       animalId: {
         type: Sequelize.UUID
       },
@@ -29,6 +27,9 @@ module.exports = {
       },
       createdBy: {
         type: Sequelize.UUID
+      },
+      vaccination_name: {
+        type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
@@ -39,9 +40,9 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
-      // unit: {
-      //   type: Sequelize.DECIMAL
-      // },
+      total: {
+        type: Sequelize.DECIMAL
+      },
       measurement: {
         type: Sequelize.STRING
       },

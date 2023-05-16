@@ -13,7 +13,6 @@ const{getGroupAnimalById}=GroupAnimalService
 const { v4: uuidv4 } = require('uuid');
 
 
-
 export default class TreatmentController{
 //save Treatment
 static async storeTreatment(req,res,next){
@@ -105,7 +104,7 @@ try{
           
          
         }
-         return res.status(200).json({message:"treatment created!",bunchTreatment})
+         return res.status(200).json({message:"treatment groupp created!",bunchTreatment})
 
       }else{
         
@@ -181,13 +180,13 @@ try{
       
         }
     
-        return res.status(200).json({message:"treatment created!",data})
+        return res.status(200).json({message:"treatment group created!",data})
     
       }
 
     }
 
-    if(resource_name==='animal'){
+    else if(resource_name==='animal'){
       const checking = await getAnimalById(resource_id)
       // console.log("check farmId",checking)
       formData.id = uuidv4()
@@ -202,7 +201,7 @@ try{
           amount:`${formData.cost}`,
           date: `${formData.date}`,
           vendor: " ",
-          category:`Veterinary, breeding, and medicine`,
+          category:`Veterinary, breeding, and medicine kekekke`,
           check_number:"",
           ref_Id: `${resource_id}`,
           farmId:`${hello}`,
@@ -213,35 +212,36 @@ try{
     
         })
       }
-
-    return res.status(200).json({message:"Treatment created!",data})
-    }
-    if(formData.retreat_date){
+      if(formData.retreat_date){
+        await createEvent({
+          id:uuidv4(),
+          title: `Retreat ${formData.type}`,
+          description: `${formData.type}`,
+          start_time: `${formData.retreat_date}`,
+          end_time: `${formData.retreat_date}`,
+          assigned_to_id: `${req.user.id}`,
+          // animal_id:`${resource_id}`,
+          reference_id:`${resource_id}`,
+    
+        })
+        
+      }
+      if(formData.withdrawal_date)
       await createEvent({
         id:uuidv4(),
-        title: `Retreat ${formData.type}`,
+        title: `Withdrawal ${formData.type}`,
         description: `${formData.type}`,
-        start_time: `${formData.retreat_date}`,
+        start_time: `${formData.date}`,
         end_time: `${formData.retreat_date}`,
         assigned_to_id: `${req.user.id}`,
         // animal_id:`${resource_id}`,
         reference_id:`${resource_id}`,
   
       })
-      
-    }
-    if(formData.withdrawal_date)
-    await createEvent({
-      id:uuidv4(),
-      title: `Withdrawal ${formData.type}`,
-      description: `${formData.type}`,
-      start_time: `${formData.date}`,
-      end_time: `${formData.retreat_date}`,
-      assigned_to_id: `${req.user.id}`,
-      // animal_id:`${resource_id}`,
-      reference_id:`${resource_id}`,
 
-    })
+    return res.status(200).json({message:"Animal Treatment created!",data})
+    }
+
 
 
 }

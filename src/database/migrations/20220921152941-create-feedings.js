@@ -12,9 +12,9 @@ module.exports = {
       onsetDate: {
         type: Sequelize.DATE
       },
-      feedId: {
-        type: Sequelize.INTEGER,
-      },
+      // feedId: {
+      //   type: Sequelize.INTEGER,
+      // },
       createdBy: {
         type: Sequelize.UUID
       },
@@ -38,6 +38,12 @@ module.exports = {
       },
       price: {
         type: Sequelize.DECIMAL
+      },
+      total: {
+        type: Sequelize.DECIMAL
+      },
+      details: {
+        type: Sequelize.STRING
       },
       repeat_until_date: {
         type: Sequelize.DATE

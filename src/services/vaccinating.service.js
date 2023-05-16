@@ -51,12 +51,12 @@ class VaccinatingService{
     static async getAllVaccinatingProcessGroup(animal_id){
         let data = await Vaccinating.findAll({where:{groupId:animal_id},
             include: [
-                {
-                    model: models.Vaccination,
-                    as: "vaccination",
-                    attributes: ['name'],
+            //     {
+            //         model: models.Vaccination,
+            //         as: "vaccination",
+            //         attributes: ['name'],
                 
-            },
+            // },
             {
                 model: models.User,
                 as: "user",
@@ -72,7 +72,7 @@ class VaccinatingService{
             ],
             // attributes: [{ exclude: "createdBy","vaccinationId" }]
             attributes: { exclude: "createdBy" },
-            attributes: { exclude: "vaccinationId" },
+            // attributes: { exclude: "vaccinationId" },
             attributes: { exclude: "animalId" },
         })
         return data
