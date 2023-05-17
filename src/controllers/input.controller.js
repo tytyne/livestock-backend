@@ -137,7 +137,7 @@ static async getInputs(req,res,next){
           const data = await getAllInputsAnimal(resource_id);
           return res.status(200).json({ message: "All Inputs", data });
         }
-        else if(resource_name==="livestock_animal"){
+        else if(resource_name==="livestock_group"){
           const data = await getAllInputsGroup(resource_id);
           return res.status(200).json({ message: "All Inputs", data });
         }

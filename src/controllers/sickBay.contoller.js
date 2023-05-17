@@ -37,7 +37,7 @@ export default class SickBayController {
         // const item= await getMedicineById(formData.feedId)
         // const itemData=item.dataValues
         // formData.feed_name=itemData.name;
-        const formula= await calculatePrice(formData.quantity,formData.unit);
+        const formula= await calculatePrice(formData.quantity,formData.price);
         formData.price=formula
         formData.groupId= resource_id
         const data = await createSickBay(formData);
@@ -263,7 +263,7 @@ export default class SickBayController {
       // const item= await getMedicineById(formData.medicineId)
       // const itemData=item.dataValues
       // formData.medicine_name=itemData.name;
-      const formula= await calculatePrice(formData.quantity,formData.unit);
+      const formula= await calculatePrice(formData.quantity,formData.price);
       formData.price=formula
       // formData.measurement = itemData.measurement
 

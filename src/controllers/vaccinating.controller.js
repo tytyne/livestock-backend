@@ -260,7 +260,7 @@ export default class VaccinatingController {
         const data = await getAllVaccinatingProcessAnimal(resource_id);
         return res.status(200).json({ message: "All vaccinatting", data });
       }
-      else if(resource_name==="livestock_animal"){
+      else if(resource_name==="livestock_group"){
         const data = await getAllVaccinatingProcessGroup(resource_id);
         return res.status(200).json({ message: "All vaccinattings", data });
       }
@@ -276,7 +276,7 @@ export default class VaccinatingController {
       // const item = await getVaccinationById(formData.vaccinationId)
       // const itemData = item.dataValues
       // formData.name = itemData.name;
-      const formula = await calculatePrice(formData.quantity, formData.unit);
+      const formula = await calculatePrice(formData.quantity, formData.price);
       formData.price = formula
      
       const groupAnimalData = await getGroupAnimalById(formData.groupAnimalId)
