@@ -38,7 +38,7 @@ export default class SickBayController {
         // const itemData=item.dataValues
         // formData.feed_name=itemData.name;
         const formula= await calculatePrice(formData.quantity,formData.price);
-        formData.price=formula
+        formData.total=formula
         formData.groupId= resource_id
         const data = await createSickBay(formData);
         const checking = await getGroupAnimalById(resource_id)
@@ -52,9 +52,11 @@ export default class SickBayController {
               "onsetDate":`${formData.onsetDate}`,
               "intervention":`${formData.intervention}`,
               "observation":`${formData.observation}`,
-              "quantity":`${parseFloat(formData.quantinty)/response.length}`,
+              "quantity":`${parseFloat(formData.quantity)/response.length}`,
+              "price":`${parseFloat(formData.price)/response.length}`,
               // "medicineId":`${formData.medicineId}`,
-              "price":`${parseFloat(formula)/response.length}`,
+              "total":`${parseFloat(formula)/response.length}`,
+              "total":6000,
               // "record_transaction":`${formData.record_transaction}`,
               "animalId":response[i]
               
@@ -66,51 +68,25 @@ export default class SickBayController {
             await createTransaction({
               id:uuidv4(),
               type: "expense",
-              amount:`${formData.cost}`,
-              date: `${formData.date}`,
+              amount:`${parseFloat(formula)/response.length}`,
+             date: `${formData.onsetDate}`,
               vendor: " ",
               category:`Veterinary, breeding, and medicine`,
               check_number:"",
-              ref_Id: `${resource_id}`,
+              ref_Id:response[i],
               farmId:`${hello}`,
-              ref_type: `${resource_name}`,
+              ref_type:"",
               reporting_year:new Date().getFullYear(),
               keywords: "",
               description: `${formData.description}`
         
             })
           }
-        //   if(formData.retreat_date){
-        //     await createEvent({
-        //       id:uuidv4(),
-        //       title: `Retreat ${formData.type}`,
-        //       description: `${formData.type}`,
-        //       start_time: `${formData.retreat_date}`,
-        //       end_time: `${formData.retreat_date}`,
-        //       assigned_to_id: `${req.user.id}`,
-        //       animal_id:`${resource_id}`,
-        //       reference_id:`${resource_id}`,
-        
-        //     })
+    
             
-        //   }
-        //   if(formData.withdrawal_date){
-        //   await createEvent({
-        //     id:uuidv4(),
-        //     title: `Withdrawal ${formData.type}`,
-        //     description: `${formData.type}`,
-        //     start_time: `${formData.date}`,
-        //     end_time: `${formData.retreat_date}`,
-        //     assigned_to_id: `${req.user.id}`,
-        //     animal_id:`${resource_id}`,
-        //     reference_id:`${resource_id}`,
-      
-        //   })
-        // }
-            
-            
+        await createSickBay( bunchSickBay);
           }
-          return res.status(200).json({message:"Sickbay created!"})
+          return res.status(200).json({message:"Sickbay created!",data})
         }
         else{
           //send as it is 
@@ -122,9 +98,7 @@ export default class SickBayController {
                 "intervention":`${formData.intervention}`,
                 "observation":`${formData.observation}`,
                 "quantity":`${formData.quantity}`,
-                // "medicineId":`${formData.medicineId}`,
-                "price":`${formula}/${response.length}`,
-                // "record_transaction":`${formData.record_transaction}`,
+                "price":`${formData.price}`,
                 "animalId":response[i]
                 
             }
@@ -135,48 +109,22 @@ export default class SickBayController {
               await createTransaction({
                 id:uuidv4(),
                 type: "expense",
-                amount:`${formData.cost}`,
-                date: `${formData.date}`,
+                amount:`${formula}`,
+                date: `${formData.onsetDate}`,
                 vendor: " ",
                 category:`Veterinary, breeding, and medicine`,
                 check_number:"",
-                ref_Id: `${resource_id}`,
+                ref_Id:response[i],
                 farmId:`${hello}`,
-                ref_type: `${resource_name}`,
+                ref_type:"",
                 reporting_year:new Date().getFullYear(),
                 keywords: "",
                 description: `${formData.description}`
           
               })
             }
-          //   if(formData.retreat_date){
-          //     await createEvent({
-          //       id:uuidv4(),
-          //       title: `Retreat ${formData.type}`,
-          //       description: `${formData.type}`,
-          //       start_time: `${formData.retreat_date}`,
-          //       end_time: `${formData.retreat_date}`,
-          //       assigned_to_id: `${req.user.id}`,
-          //       animal_id:`${resource_id}`,
-          //       reference_id:`${resource_id}`,
-          
-          //     })
-              
-          //   }
-          //   if(formData.withdrawal_date){
-          //   await createEvent({
-          //     id:uuidv4(),
-          //     title: `Withdrawal ${formData.type}`,
-          //     description: `${formData.type}`,
-          //     start_time: `${formData.date}`,
-          //     end_time: `${formData.retreat_date}`,
-          //     assigned_to_id: `${req.user.id}`,
-          //     animal_id:`${resource_id}`,
-          //     reference_id:`${resource_id}`,
-        
-          //   })
-          // }
-        
+     
+          await createSickBay( bunchSickBay);
           }
       
           return res.status(200).json({message:"sickbay created!",data})
@@ -264,7 +212,7 @@ export default class SickBayController {
       // const itemData=item.dataValues
       // formData.medicine_name=itemData.name;
       const formula= await calculatePrice(formData.quantity,formData.price);
-      formData.price=formula
+      formData.total=formula
       // formData.measurement = itemData.measurement
 
       const data = await updateSickBayById(formData, id);

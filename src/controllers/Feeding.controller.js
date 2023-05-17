@@ -26,12 +26,9 @@ export default class FeedingController {
       let bunchFeeding;
 
       if(resource_name==="livestock_group"){
-        // const item= await getFeedById(formData.feedId)
-        // const itemData=item.dataValues
-        // formData.feed_name=itemData.name;
+        
         const formula= await calculatePrice(formData.quantity,formData.price);
         formData.total=formula
-        // formData.groupId= resource_id
         formData.groupId=resource_id;
         const data = await createOneFeeding(formData);
         const checking = await getGroupAnimalById(resource_id)

@@ -140,9 +140,9 @@ try{
               vendor: " ",
               category:`Veterinary, breeding, and medicine`,
               check_number:"",
-              ref_Id: `${resource_id}`,
+              ref_Id:response[i],
               farmId:`${hello}`,
-              ref_type: `${resource_name}`,
+              ref_type:"",
               reporting_year:new Date().getFullYear(),
               keywords: "",
               description: `${formData.description}`

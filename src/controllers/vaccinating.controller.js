@@ -39,25 +39,22 @@ export default class VaccinatingController {
   static async storeVaccinating(req,res,next){
     try{
 
+     
       const {resource_name,resource_id}= req.params
       const formData = req.body;
-      // console.log(req.user.id)
       formData.id = uuidv4()
       formData.createdBy = req.user.id;
-      // const item = await getVaccinationById(formData.vaccinationId)
-      // const itemData = item.dataValues
-      // formData.name = itemData.name;
-      // formData.measurement = itemData.measurement;
-      const formula = await calculatePrice(formData.quantity, formData.price);
-      formData.total
-       = formula
+      let bunchVaccinating;
       
        if(resource_name==='livestock_group'){
-        const checking = await getGroupAnimalById(resource_id)
-        const hello=checking.dataValues.farm_id
-       
-        formData.groupId= resource_id
+        const formula= await calculatePrice(formData.quantity,formData.price);
+        formData.total=formula
+        formData.groupId=resource_id;
         const data = await createVaccinatingProcess(formData);
+        const checking = await getGroupAnimalById(resource_id)
+        // formData.groupId=resource_id;
+        const allAnimals=checking.dataValues.records
+        const response = allAnimals.map(s=>s.id)
         if(formData.per_head){
           //means i have to divide
               bunchVaccinating={
@@ -68,26 +65,26 @@ export default class VaccinatingController {
               "quantity":`${formData.quantity}/${response.length}`,
               "nextAppointment":`${formData.nextAppointment}`,
               "record_transaction":`${formData.record_transaction}`,
-              "price":`${formData.price}/${$response.length}`,
-              "total":`${formula}/${$response.length}`,
+              "price":`${formData.price}/${response.length}`,
+              "total":`${formula}/${response.length}`,
               "animalId":response[i]
               
           }
           if(formData.record_transaction === true){
             const checking = await getGroupAnimalById(resource_id)
             const hello =checking.dataValues.farm_id
-            formData.animalId= resource_id
+            formData.groupId= resource_id
             await createTransaction({
               id:uuidv4(),
               type: "expense",
-              amount:`${formData.cost}`,
-              date: `${formData.date}`,
+              amount:`${formula}/${response.length}`,
+              date: `${formData.onsetDate}`,
               vendor: " ",
               category:`Veterinary, breeding, and medicine`,
               check_number:"",
-              ref_Id: `${resource_id}`,
+              ref_Id:response[i],
               farmId:`${hello}`,
-              ref_type: `${resource_name}`,
+              ref_type:"",
               reporting_year:new Date().getFullYear(),
               keywords: "",
               description: `${formData.description}`
@@ -102,7 +99,7 @@ export default class VaccinatingController {
                 start_time: `${formData.retreat_date}`,
                 end_time: `${formData.retreat_date}`,
                 assigned_to_id: `${req.user.id}`,
-                animal_id:`${resource_id}`,
+                animal_id:`${response[i]}`,
                 reference_id:`${resource_id}`,
           
               })
@@ -116,17 +113,22 @@ export default class VaccinatingController {
               start_time: `${formData.date}`,
               end_time: `${formData.retreat_date}`,
               assigned_to_id: `${req.user.id}`,
-              animal_id:`${resource_id}`,
+              animal_id:`${response[i]}`,
               reference_id:`${resource_id}`,
         
             })
           }
           await createVaccinatingProcess(bunchVaccinating);
             
-          return res.status(200).json({message:"vaccination created!"})
+          return res.status(200).json({message:"vaccination created!",data})
         }
         else{
           //send as it is 
+          const data = await createVaccinatingProcess(formData);
+          const checking = await getGroupAnimalById(resource_id)
+          formData.groupId=resource_id;
+          const allAnimals=checking.dataValues.records
+          const response = allAnimals.map(s=>s.id)
           
           for (let i = 0; i < response.length; i++) {
               bunchVaccinating={
@@ -137,7 +139,7 @@ export default class VaccinatingController {
                 "quantity":`${formData.quantity}`,
                 "nextAppointment":`${formData.nextAppointment}`,
                 "record_transaction":`${formData.record_transaction}`,
-                "price":`${formData}`,
+                "price":`${formData.price}`,
                 "total":`${formula}`,
                 "animalId":response[i]
                 
@@ -145,18 +147,18 @@ export default class VaccinatingController {
             if(formData.record_transaction === true){
               const checking = await getGroupAnimalById(resource_id)
               const hello =checking.dataValues.farm_id
-              formData.animalId= resource_id
+              formData.groupId= resource_id
               await createTransaction({
                 id:uuidv4(),
                 type: "expense",
-                amount:`${formData.cost}`,
-                date: `${formData.date}`,
+                amount:`${formula}`,
+                date: `${formData.onsetDate}`,
                 vendor: " ",
                 category:`Veterinary, breeding, and medicine`,
                 check_number:"",
-                ref_Id: `${resource_id}`,
+                ref_Id:response[i],
                 farmId:`${hello}`,
-                ref_type: `${resource_name}`,
+                ref_type:"",
                 reporting_year:new Date().getFullYear(),
                 keywords: "",
                 description: `${formData.description}`
@@ -172,7 +174,7 @@ export default class VaccinatingController {
                 end_time: `${formData.retreat_date}`,
                 assigned_to_id: `${req.user.id}`,
                 animal_id:`${resource_id}`,
-                reference_id:`${resource_id}`,
+                // reference_id:`${resource_id}`,
           
               })
               
@@ -186,13 +188,13 @@ export default class VaccinatingController {
               end_time: `${formData.retreat_date}`,
               assigned_to_id: `${req.user.id}`,
               animal_id:`${resource_id}`,
-              reference_id:`${resource_id}`,
+              // reference_id:`${resource_id}`,
         
             })
           }
           await createVaccinatingProcess(bunchVaccinating);
           }
-        return res.status(200).json({message:"vacinnating created"})
+        return res.status(200).json({message:"vacinnating created",data})
         }
        }
        else if(resource_name==='animal'){
@@ -236,6 +238,7 @@ export default class VaccinatingController {
 
        }
     }
+
     catch (e) {
       return next(new Error(e));
     }
