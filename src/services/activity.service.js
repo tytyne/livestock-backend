@@ -26,12 +26,12 @@ class ActivityService{
     }
     
     static async getAllActivitiesByAnimal(animal_id){
-        let data = await Activity.findAll({where:{ref_Id:animal_id}})
+        let data = await Activity.findAll({where:{ref_id:animal_id}})
         return data
 
     }
     static async getAllActivitiesByGroup_animal(group_id){
-        let data = await Activity.findAll({where:{ref_Id:group_id}})
+        let data = await Activity.findAll({where:{ref_id:group_id}})
         return data
   
     }
