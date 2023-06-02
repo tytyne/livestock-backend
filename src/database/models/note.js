@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     category:DataTypes.STRING,
     keywords:DataTypes.STRING,
     assigned_to_id: DataTypes.STRING,
+    add_to_calendar:{
+      type:DataTypes.BOOLEAN,
+      defaultValue:false
+    },
    
    
   }, { });

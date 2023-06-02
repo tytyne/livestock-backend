@@ -10,6 +10,8 @@ import AnimalService from "../services/animal.service";
 const{getAnimalById}=AnimalService
 import  GroupAnimalService from "../services/groupAnimal.service"
 const{getGroupAnimalById}=GroupAnimalService
+import ActivityService from "../services/activity.service";
+const{createActivity}=ActivityService
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -53,6 +55,7 @@ try{
             "animalId":response[i]
             
         }
+
         if(formData.record_transaction === true){
           const checking = await getGroupAnimalById(resource_id)
           const hello =checking.dataValues.farm_id
@@ -82,7 +85,7 @@ try{
             end_time: `${formData.retreat_date}`,
             assigned_to_id: `${req.user.id}`,
             // animal_id:`${resource_id}`,
-            reference_id:`${resource_id}`,
+            reference_id:response[i],
       
           })
           
@@ -96,15 +99,22 @@ try{
           end_time: `${formData.retreat_date}`,
           assigned_to_id: `${req.user.id}`,
           // animal_id:`${resource_id}`,
-          reference_id:`${resource_id}`,
+          reference_id:response[i],
     
         })
         await createTreatment(bunchTreatment);
         console.log("check bunch",bunchTreatment)
+        await createActivity({
+          id:uuidv4(),
+          category: `${resource_name}`,
+          description: `${formData.description}`,
+          date: `${formData.date}`,
+          ref_id:response[i],
+        })
           
          
         }
-         return res.status(200).json({message:"treatment groupp created!",bunchTreatment})
+         return res.status(200).json({message:"treatment group created!",bunchTreatment})
 
       }else{
         
@@ -177,6 +187,13 @@ try{
           })
         }
           await createTreatment(bunchTreatment);
+          await createActivity({
+            id:uuidv4(),
+            category: `${resource_name}`,
+            description: `${formData.description}`,
+            date: `${formData.date}`,
+            ref_id:response[i],
+          })
       
         }
     
@@ -194,6 +211,14 @@ try{
       formData.animalId= resource_id
       console.log("check ",formData)
       const data = await createTreatment(formData);
+      await createActivity({
+        id:uuidv4(),
+        category: `${resource_name}`,
+        description: `${formData.description}`,
+        date: `${formData.date}`,
+        ref_id:`${resource_id}`,
+      })
+      
       if(formData.record_transaction === true){
         await createTransaction({
           id:uuidv4(),
@@ -238,6 +263,7 @@ try{
         reference_id:`${resource_id}`,
   
       })
+
 
     return res.status(200).json({message:"Animal Treatment created!",data})
     }

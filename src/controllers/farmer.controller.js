@@ -31,7 +31,7 @@ static async getFarmer(req,res,next){
 //get all farmers
 static async getFarmers(req,res,next){
     try{
-        const data = await getAllFarmers(req.user.id)
+        const data = await getAllFarmers()
         res.status(200).json({message:"All farmers",data})
     }
     catch (e) {

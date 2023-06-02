@@ -37,25 +37,25 @@ export default class VaccinatingController {
   //save an vaccinating animal or group-animal
 
   static async storeVaccinating(req,res,next){
-    try{
 
-     
-      const {resource_name,resource_id}= req.params
-      const formData = req.body;
-      formData.id = uuidv4()
-      formData.createdBy = req.user.id;
-      let bunchVaccinating;
-      
-       if(resource_name==='livestock_group'){
-        const formula= await calculatePrice(formData.quantity,formData.price);
-        formData.total=formula
-        formData.groupId=resource_id;
-        const data = await createVaccinatingProcess(formData);
-        const checking = await getGroupAnimalById(resource_id)
-        // formData.groupId=resource_id;
-        const allAnimals=checking.dataValues.records
-        const response = allAnimals.map(s=>s.id)
-        if(formData.per_head){
+      try {
+        const {resource_name,resource_id}= req.params
+        const formData = req.body;
+        console.log("formdata",formData)
+        formData.id = uuidv4()
+        formData.createdBy = req.user.id;
+        let bunchVaccinating;
+  
+       
+        if(resource_name==='livestock_group'){
+          const formula= await calculatePrice(formData.quantity,formData.price);
+          formData.total=formula
+          formData.groupId= resource_id
+          const data = await createVaccinatingProcess(formData);
+          const checking = await getGroupAnimalById(resource_id)
+          const allAnimals=checking.dataValues.records
+          const response = allAnimals.map(s=>s.id)
+          if(formData.per_head){
           //means i have to divide
               bunchVaccinating={
               "id":uuidv4(),

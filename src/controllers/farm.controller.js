@@ -40,7 +40,7 @@ export default class FarmController {
 //get all farms
 static async getFarming(req,res,next){
     try{
-        const data = await getAllFarms(req.user.id)
+        const data = await getAllFarms()
         return res.status(200).json({message:"All farms",data})
     }
     catch (e) {

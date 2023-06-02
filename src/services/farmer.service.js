@@ -20,8 +20,8 @@ class FarmerService{
         return farmer  
 
     }
-    static async getAllFarmers(userId){
-        let farmer = await Farmer.findAll({include:'user'},{where:{createdBy:userId}})
+    static async getAllFarmers(){
+        let farmer = await Farmer.findAll({include:'user'},)
         return farmer
 
     }

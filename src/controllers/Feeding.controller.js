@@ -11,6 +11,8 @@ import AnimalService from "../services/animal.service";
 const{getAnimalById}=AnimalService
 import  GroupAnimalService from "../services/groupAnimal.service"
 const{getGroupAnimalById}=GroupAnimalService
+import ActivityService from "../services/activity.service";
+const{createActivity}=ActivityService
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -51,11 +53,15 @@ export default class FeedingController {
 
               
             }
-            // if(formData.repeat_until_date){
-                
-            // }
          
           await createOneFeeding(bunchFeeding);
+          await createActivity({
+            id:uuidv4(),
+            category: `${resource_name}`,
+            description: `${formData.description}`,
+            date: `${formData.onsetDate}`,
+            ref_id:response[i],
+          })
               
           }
           return res.status(200).json({message:"feeding created!!",data})
@@ -76,11 +82,15 @@ export default class FeedingController {
               "animalId":response[i]
                 
             }
-            // if(formData.repeat_until_date){
-              
-            // }
             
             await createOneFeeding(bunchFeeding);
+            await createActivity({
+              id:uuidv4(),
+              category: `${resource_name}`,
+              description: `${formData.description}`,
+              date: `${formData.onsetDate}`,
+              ref_id:response[i],
+            })
         
           }
       
@@ -91,36 +101,19 @@ export default class FeedingController {
    
 
       else if(resource_name==='animal'){
-        // const item= await getFeedById(formData.feedId)
-        // const itemData=item.dataValues
-        // formData.feed_name=itemData.name;
-        // formData.measurement = itemData.measurement;
         const formula= await calculatePrice(formData.quantity,formData.price);
         formData.total=formula
         const checking = await getAnimalById(resource_id)
         const hello =checking.dataValues.farm_id
         formData.animalId= resource_id
-      
-        // if(formData.record_transaction === true){
-        //   await createTransaction({
-        //     id:uuidv4(),
-        //     type: "expense",
-        //     amount:`${formData.cost}`,
-        //     date: `${formData.date}`,
-        //     vendor: " ",
-        //     category:`Veterinary, breeding, and medicine`,
-        //     check_number:"",
-        //     ref_Id: `${resource_id}`,
-        //     farmId:`${hello}`,
-        //     ref_type: `${resource_name}`,
-        //     reporting_year:new Date().getFullYear(),
-        //     keywords: "",
-        //     description: `${formData.description}`
-           
-      
-        //   })
-        // }
         const data = await createOneFeeding(formData);
+        await createActivity({
+          id:uuidv4(),
+          category: `${resource_name}`,
+          description: `${formData.description}`,
+          date: `${formData.onsetDate}`,
+          ref_id:`${resource_id}`,
+        })
         
         return res.status(200).json({ message: "Feeding created!", data });
   

@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     ref_type:DataTypes.STRING,
     check_number:DataTypes.STRING,
     keywords:DataTypes.STRING,
+    payment_system:DataTypes.STRING,
     description:DataTypes.STRING,
    
    

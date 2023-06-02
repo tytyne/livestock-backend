@@ -1,16 +1,26 @@
 import TransactionService from "../services/transaction.service"
-const{createTransaction,getTransactionById,getAllTransactions,updateTransactionById,deleteTransactionById,searchTransactions}=TransactionService
+const{createTransaction,getTransactionById,updateTransactionById,deleteTransactionById,searchTransactions,getAllTransactionsByAnimal,getAllTransactionsByGroup_animal}=TransactionService
+import ActivityService from "../services/activity.service";
+const{createActivity}=ActivityService
 const { v4: uuidv4 } = require('uuid');
 
 export default class TransactionController{
 //save Transaction
 static async storeTransaction(req,res,next){
 try{
+    const {resource_name,resource_id}= req.params
     const formData = req.body;
     formData.id = uuidv4()
     formData.createdBy = req.user.id;
     console.log("data",formData)
     const data = await createTransaction(formData)
+    await createActivity({
+        id:uuidv4(),
+        category: `${resource_name}`,
+        description: `${formData.description}`,
+        date: `${formData.date}`,
+        ref_id:`${resource_id}`,
+      })
     res.status(200).json({message:"Transaction created!",data})
 }
 catch (e) {
@@ -32,8 +42,16 @@ static async getTransaction(req,res,next){
 //get all Transaction
 static async getTransactions(req,res,next){
     try{
-        const data = await getAllTransactions()
-        res.status(200).json({message:"All Transactions",data})
+        const {resource_name,resource_id}= req.params
+        if(resource_name==="animal"){
+            const data = await getAllTransactionsByAnimal(resource_id);
+            return res.status(200).json({ message: "All Transactions", data });
+          }
+          else if(resource_name==="livestock_group"){
+            const data = await getAllTransactionsByGroup_animal(resource_id);
+            return res.status(200).json({ message: "All Transactions", data });
+          }
+      
     }
     catch (e) {
         return next(new Error(e));

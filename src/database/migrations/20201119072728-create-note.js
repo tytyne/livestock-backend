@@ -24,6 +24,10 @@ module.exports = {
       assigned_to_id: {
         type: Sequelize.UUID,
       },
+      add_to_calendar:{
+        type: Sequelize.BOOLEAN,
+        defaultValue:false
+      },
       createdBy: {
         type: Sequelize.UUID
       },

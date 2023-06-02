@@ -18,6 +18,8 @@ import AnimalService from "../services/animal.service";
 const{getAnimalById}=AnimalService
 import  GroupAnimalService from "../services/groupAnimal.service"
 const{getGroupAnimalById}=GroupAnimalService
+import ActivityService from "../services/activity.service";
+const{createActivity}=ActivityService
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -34,9 +36,6 @@ export default class SickBayController {
 
      
       if(resource_name==='livestock_group'){
-        // const item= await getMedicineById(formData.feedId)
-        // const itemData=item.dataValues
-        // formData.feed_name=itemData.name;
         const formula= await calculatePrice(formData.quantity,formData.price);
         formData.total=formula
         formData.groupId= resource_id
@@ -82,9 +81,17 @@ export default class SickBayController {
         
             })
           }
-    
-            
+      
         await createSickBay( bunchSickBay);
+        await createActivity({
+          id:uuidv4(),
+          category: `${resource_name}`,
+          description: `${formData.description}`,
+          date: `${formData.onsetDate}`,
+          ref_id:response[i],
+        })
+
+
           }
           return res.status(200).json({message:"Sickbay created!",data})
         }
@@ -125,6 +132,14 @@ export default class SickBayController {
             }
      
           await createSickBay( bunchSickBay);
+          
+          await createActivity({
+            id:uuidv4(),
+            category: `${resource_name}`,
+            description: `${formData.description}`,
+            date: `${formData.onsetDate}`,
+            ref_id:response[i],
+          })
           }
       
           return res.status(200).json({message:"sickbay created!",data})
@@ -157,8 +172,16 @@ export default class SickBayController {
            
       
           })
+          
         }
         
+        await createActivity({
+          id:uuidv4(),
+          category: `${resource_name}`,
+          description: `${formData.description}`,
+          date: `${formData.onsetDate}`,
+          ref_id:`${resource_id}`,
+        })
         return res.status(200).json({ message: "SickBay created!", data });
   
       }

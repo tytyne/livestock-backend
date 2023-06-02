@@ -1,6 +1,9 @@
 import NoteService from "../services/note.service"
 const{createNote,getNoteById,getAllNotes,updateNoteById,deleteNoteById}=NoteService
-import TransactionService from "../services/transaction.service"
+import EventService from "../services/event.service";
+const { createEvent } = EventService
+import ActivityService from "../services/activity.service";
+const{createActivity}=ActivityService
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -14,11 +17,30 @@ try{
     formData.createdBy = req.user.id;
     if(resource_name==="animal"){
       formData.animalId= resource_id
+      if(formData.add_to_calendar){
+        await createEvent({
+          id:uuidv4(),
+          title: `${formData.keywords}`,
+          description: `${formData.description}`,
+          start_time: `${formData.date}`,
+          assigned_to_id: `${req.user.id}`,
+          reference_id:`${resource_id}`,
+    
+        })
+      }
+      
     }
-    else if(resource_name==="animal_group"){
+    else if(resource_name==="livestock_group"){
       formData.groupAnimalId= resource_id
     }
     const data = await createNote(formData)
+    await createActivity({
+      id:uuidv4(),
+      category: `${resource_name}`,
+      description: `${formData.description}`,
+      date: `${formData.date}`,
+      ref_id:`${resource_id}`,
+    })
  
 
     res.status(200).json({message:"Note created!",data})

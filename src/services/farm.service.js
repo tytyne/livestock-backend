@@ -31,7 +31,7 @@ class FarmService{
         return farm  
 
     }
-    static async getAllFarms(userID){
+    static async getAllFarms(){
         let farms = await Farm.findAll({include: [
             {
               model: models.Farmer,
@@ -41,7 +41,7 @@ class FarmService{
               model: models.User,
               as: "user"
             }
-          ],where:{createdBy:userID}})
+          ]})
         return farms
 
     }

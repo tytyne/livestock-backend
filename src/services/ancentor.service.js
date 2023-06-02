@@ -37,3 +37,5 @@ class AncentorService {
         return animal
       }
 }
+
+export default AncentorService

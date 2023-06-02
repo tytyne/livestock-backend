@@ -44,6 +44,9 @@ module.exports = {
       keywords: {
         type: Sequelize.STRING
       },
+      payment_system:{
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.STRING
       },
