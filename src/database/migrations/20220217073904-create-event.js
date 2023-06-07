@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
      },
       hours_spent: {
         type: Sequelize.INTEGER

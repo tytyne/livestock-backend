@@ -104,13 +104,15 @@ try{
         })
         await createTreatment(bunchTreatment);
         console.log("check bunch",bunchTreatment)
+        
         await createActivity({
           id:uuidv4(),
-          category: `${resource_name}`,
-          description: `${formData.description}`,
+          category: `treatment`,
+          description: `${formData.amount}`,
           date: `${formData.date}`,
           ref_id:response[i],
         })
+      
           
          
         }
@@ -187,13 +189,15 @@ try{
           })
         }
           await createTreatment(bunchTreatment);
+         
           await createActivity({
             id:uuidv4(),
-            category: `${resource_name}`,
-            description: `${formData.description}`,
+            category: `treatment`,
+            description: `${formData.amount}`,
             date: `${formData.date}`,
             ref_id:response[i],
           })
+        
       
         }
     
@@ -211,14 +215,15 @@ try{
       formData.animalId= resource_id
       console.log("check ",formData)
       const data = await createTreatment(formData);
+      
       await createActivity({
         id:uuidv4(),
-        category: `${resource_name}`,
-        description: `${formData.description}`,
+        category: `treatment`,
+        description: `${formData.amount}`,
         date: `${formData.date}`,
         ref_id:`${resource_id}`,
       })
-      
+    
       if(formData.record_transaction === true){
         await createTransaction({
           id:uuidv4(),

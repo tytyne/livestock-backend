@@ -14,13 +14,15 @@ try{
     formData.createdBy = req.user.id;
     console.log("data",formData)
     const data = await createTransaction(formData)
+    
     await createActivity({
         id:uuidv4(),
-        category: `${resource_name}`,
-        description: `${formData.description}`,
+        category: `transaction`,
         date: `${formData.date}`,
+        description: `${formData.amount}`,
         ref_id:`${resource_id}`,
       })
+    
     res.status(200).json({message:"Transaction created!",data})
 }
 catch (e) {

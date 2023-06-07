@@ -7,10 +7,12 @@ const{checkEventOwner}= checkOwnership
 
 const router = express.Router()
 router.post("/:resource_name/:resource_id/create",checkAuthorisation,EventValidation.save,EventController.storeEventWithResource)
+router.post("/create",checkAuthorisation,EventValidation.save,EventController.storeEvent)
 router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,EventController.getEvents)
-router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,checkEventOwner,EventController.deleteEvent)
+router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,EventController.deleteEvent)
 router.get("/:resource_name/:resource_id/:id",checkAuthorisation,EventController.getEvent)
-router.put("/:resource_name/:resource_id/:id",checkAuthorisation,checkEventOwner,EventValidation.save,EventController.updateEvent)
+router.put("/:resource_name/:resource_id/:id",checkAuthorisation,EventValidation.save,EventController.updateEventWithResource)
+router.put("/:id",checkAuthorisation,EventValidation.save,EventController.updateEvent)
 router.get("/",checkAuthorisation,EventController.searchingEvent)
 
 

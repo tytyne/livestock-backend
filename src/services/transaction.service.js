@@ -110,7 +110,7 @@ class TransactionService{
   static async getIncomeExpenseAnimalTotal(animal_id){
     
     let animal =Transaction.findAll({
-      // group: [models.sequelize.fn('date_trunc', 'day',models.sequelize.col('createdAt'))],
+      where:{ref_Id:animal_id},
       attributes: [
          
           [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 
@@ -122,7 +122,7 @@ class TransactionService{
          
       ],   
       
-  },{where:{ref_Id:animal_id}});
+  });
 
       return animal
     }

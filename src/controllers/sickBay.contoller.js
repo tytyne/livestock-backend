@@ -83,13 +83,15 @@ export default class SickBayController {
           }
       
         await createSickBay( bunchSickBay);
+        
         await createActivity({
           id:uuidv4(),
-          category: `${resource_name}`,
-          description: `${formData.description}`,
+          category: `sickbay`,
+          description: `${formData.price}`,
           date: `${formData.onsetDate}`,
           ref_id:response[i],
         })
+      
 
 
           }
@@ -132,15 +134,16 @@ export default class SickBayController {
             }
      
           await createSickBay( bunchSickBay);
-          
+         
           await createActivity({
             id:uuidv4(),
-            category: `${resource_name}`,
-            description: `${formData.description}`,
+            category: `sickbay`,
+            description: `${formData.price}`,
             date: `${formData.onsetDate}`,
             ref_id:response[i],
           })
           }
+        
       
           return res.status(200).json({message:"sickbay created!",data})
       
@@ -177,11 +180,12 @@ export default class SickBayController {
         
         await createActivity({
           id:uuidv4(),
-          category: `${resource_name}`,
-          description: `${formData.description}`,
+          category: `sickbay`,
+          description: `${formData.price}`,
           date: `${formData.onsetDate}`,
           ref_id:`${resource_id}`,
         })
+      
         return res.status(200).json({ message: "SickBay created!", data });
   
       }

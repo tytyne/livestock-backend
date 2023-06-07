@@ -1,5 +1,7 @@
 import AnimalService from "../services/animal.service"
 const{updateAnimalMother,updateAnimalFather,createAnimal,getAnimalById,getAllanimals,updateById,deleteById}=AnimalService
+import ActivityService from "../services/activity.service";
+const{createActivity}=ActivityService
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -15,14 +17,29 @@ try{
     if(gender ==="Female"){
       const data = await createAnimal(formData)
       console.log("check dataaaaa",data)
-
-      // return res.status(200).json({message:"animal created!",data})
+      
+        await createActivity({
+          id:uuidv4(),
+          category: `genealogy`,
+          description: `${formData.name}`,
+          date: `${formData.birth_date}`,
+          ref_id:resource_id,
+        })
+      
 
     }
     else if(gender==="Male"){
       const data = await createAnimal(formData)
       console.log("check dataaaaa",data)
-    //  return  res.status(200).json({message:"animal created!",data})
+      
+        await createActivity({
+          id:uuidv4(),
+          category: `genealogy`,
+          description: `${formData.name}`,
+          date: `${formData.birth_date}`,
+          ref_id:resource_id,
+        })
+      
      
     }
     

@@ -55,14 +55,15 @@ export default class FeedingController {
             }
          
           await createOneFeeding(bunchFeeding);
+         
           await createActivity({
             id:uuidv4(),
-            category: `${resource_name}`,
-            description: `${formData.description}`,
+            category: `feeding`,
+            description: `${formData.total}`,
             date: `${formData.onsetDate}`,
             ref_id:response[i],
           })
-              
+            
           }
           return res.status(200).json({message:"feeding created!!",data})
   
@@ -84,13 +85,15 @@ export default class FeedingController {
             }
             
             await createOneFeeding(bunchFeeding);
+            
             await createActivity({
               id:uuidv4(),
-              category: `${resource_name}`,
-              description: `${formData.description}`,
+              category: `feeding`,
+              description: `${formData.total}`,
               date: `${formData.onsetDate}`,
               ref_id:response[i],
             })
+          
         
           }
       
@@ -109,7 +112,7 @@ export default class FeedingController {
         const data = await createOneFeeding(formData);
         await createActivity({
           id:uuidv4(),
-          category: `${resource_name}`,
+          category: `feeding`,
           description: `${formData.description}`,
           date: `${formData.onsetDate}`,
           ref_id:`${resource_id}`,

@@ -34,13 +34,16 @@ try{
       formData.groupAnimalId= resource_id
     }
     const data = await createNote(formData)
-    await createActivity({
-      id:uuidv4(),
-      category: `${resource_name}`,
-      description: `${formData.description}`,
-      date: `${formData.date}`,
-      ref_id:`${resource_id}`,
-    })
+    
+      await createActivity({
+        id:uuidv4(),
+        category: `note`,
+        description: `${formData.description}`,
+        date: `${formData.date}`,
+        ref_id:`${resource_id}`,
+      })
+    
+   
  
 
     res.status(200).json({message:"Note created!",data})

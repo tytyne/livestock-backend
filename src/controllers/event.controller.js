@@ -4,6 +4,8 @@ import UserService from "../services/user.service"
 const{getUserByIdOrEmail}=UserService
 const{createEvent,updateEventById,getAllEventsWithReference,deleteEventById,getEventById,searchEvents}=EventService
 const { v4: uuidv4 } = require('uuid');
+import ActivityService from "../services/activity.service";
+const{createActivity}=ActivityService
 
 export default class EventController{
 
@@ -22,9 +24,23 @@ export default class EventController{
         // formData.created_by= `${name.dataValues.firstname} ${name.dataValues.lastname}`
         if(resource_name==="animal"){
           formData.reference_id= resource_id
+          await createActivity({
+            id:uuidv4(),
+            category: `task`,
+            description: `${formData.description}`,
+            date: `${formData.start_time}`,
+            ref_id:resource_id,
+          })
         }
-        else if(resource_name==="animal_group"){
+        else if(resource_name==="livestock_group"){
           formData.reference_id= resource_id
+          await createActivity({
+            id:uuidv4(),
+            category: `task`,
+            description: `${formData.description}`,
+            date: `${formData.start_time}`,
+            ref_id:resource_id,
+          })
         }
         const textStart=formData.start_time
         const textEnd = formData.end_time
@@ -46,8 +62,6 @@ export default class EventController{
          const formData = req.body;
          formData.id = uuidv4()
          formData.created_by_id = req.user.id;
-         const name = await getUserByIdOrEmail(req.user.id)
-         formData.created_by= `${name.dataValues.firstname} ${name.dataValues.lastname}`
          const textStart=formData.start_time
          const textEnd = formData.end_time
          formData.start_time = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
@@ -57,6 +71,7 @@ export default class EventController{
          }
          formData.userId=req.user.id
          const data = await createEvent(formData)
+
          return  res.status(200).json({message:"task created",data})
         }
         catch (e) {
@@ -88,14 +103,43 @@ export default class EventController{
 
     //update event by Id
 
-    static async updateEvent(req,res,next){
+    static async updateEventWithResource(req,res,next){
         try{
             const id = req.params.id
-            const formData = req.body
+            const formData = req.body;
+            const {resource_name,resource_id}= req.params
+            formData.id = uuidv4()
             const textStart=formData.start
             const textEnd = formData.end
             formData.start = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
             formData.end = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
+            if(resource_name==="animal"){
+              
+              // await createActivity({
+              //   id:uuidv4(),
+              //   category: `task`,
+              //   description: `${formData.description}`,
+              //   date: `${formData.createdAt}`,
+              //   ref_id:resource_id,
+              // })
+              const data = await updateEventById(formData,id)
+            return  res.status(200).json({message:"event updated",data})
+            }
+            else if(resource_name==="livestock_group"){
+              
+              // await createActivity({
+              //   id:uuidv4(),
+              //   category: `task`,
+              //   description: `${formData.description}`,
+              //   date: `${formData.createdAt}`,
+              //   ref_id:resource_id,
+              // })
+              const data = await updateEventById(formData,id)
+            return  res.status(200).json({message:"event updated",data})
+
+              
+            }
+            
             const data = await updateEventById(formData,id)
             return  res.status(200).json({message:"event updated",data})
         }
@@ -103,6 +147,22 @@ export default class EventController{
          return next(new Error(e));
      }
     }
+    static async updateEvent(req,res,next){
+      try{
+          const id = req.params.id
+          const formData = req.body;
+          formData.id = uuidv4()
+          const textStart=formData.start
+          const textEnd = formData.end
+          formData.start = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
+          formData.end = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
+          const data = await updateEventById(formData,id)
+          return  res.status(200).json({message:"event updated",data})
+      }
+      catch (e) {
+       return next(new Error(e));
+   }
+  }
     //delete event by Id
 
     static async deleteEvent(req,res,next){
