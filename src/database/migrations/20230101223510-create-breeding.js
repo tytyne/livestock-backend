@@ -12,6 +12,9 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      farm_id:{
+        type:Sequelize.UUID,
+      },
       update_animal_status: {
         type: Sequelize.STRING
       },

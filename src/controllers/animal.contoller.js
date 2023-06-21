@@ -28,11 +28,13 @@ export default class AnimalController {
   //save an animal
   static async storeAnimal(req, res, next) {
     try {
+      const {farmId}=req.params
       const formData = req.body;
       // formData.harvest_label="lbs";
       formData.id = uuidv4()
       formData.electronic_id = await electronicId(formData.earring_num);
       formData.createdBy = req.user.id;
+      formData.farm_id= farmId;
       const data = await createAnimal(formData);
       res.status(200).json({ message: "an animal created!", data });
     } catch (e) {
@@ -43,7 +45,7 @@ export default class AnimalController {
   //get an animal by Id
   static async getAnimal(req, res, next) {
     try {
-      const id = req.params.id;
+      const {id,farmId}= req.params;
       const checkdata = await getAnimalById(id);
       const data = checkdata.dataValues
 
@@ -95,6 +97,7 @@ export default class AnimalController {
   //get all animals
   static async getAnimals(req, res, next) {
   try {
+    const {farmId}= req.params;
     const data = await getAllanimals(req.user.id);
    
     for (let index = 0; index < data.length; index++) {
@@ -140,7 +143,7 @@ export default class AnimalController {
   // update an animal
   static async updateAnimal(req, res, next) {
   try {
-    const id = req.params.id;
+    const {id,farmId}= req.params;
     const formData = req.body;
     const data = await updateById(formData, id);
     res.status(200).json({ message: "update an animal!!", data });

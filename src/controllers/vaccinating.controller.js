@@ -39,11 +39,12 @@ export default class VaccinatingController {
   static async storeVaccinating(req,res,next){
 
       try {
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId} = req.params
         const formData = req.body;
         console.log("formdata",formData)
         formData.id = uuidv4()
         formData.createdBy = req.user.id;
+        formData.farm_id=farmId;
         let bunchVaccinating;
   
        
@@ -83,7 +84,7 @@ export default class VaccinatingController {
               category:`Veterinary, breeding, and medicine`,
               check_number:"",
               ref_Id:response[i],
-              farmId:`${hello}`,
+              farm_id:`${hello}`,
               ref_type:"",
               reporting_year:new Date().getFullYear(),
               keywords: "",
@@ -157,7 +158,7 @@ export default class VaccinatingController {
                 category:`Veterinary, breeding, and medicine`,
                 check_number:"",
                 ref_Id:response[i],
-                farmId:`${hello}`,
+                farm_id:`${hello}`,
                 ref_type:"",
                 reporting_year:new Date().getFullYear(),
                 keywords: "",
@@ -214,7 +215,7 @@ export default class VaccinatingController {
             category:`Veterinary, breeding, and medicine`,
             check_number:"",
             ref_Id: `${resource_id}`,
-            farmId:`${hello}`,
+            farm_id:`${hello}`,
             ref_type: `${resource_name}`,
             reporting_year:new Date().getFullYear(),
             keywords: "",
@@ -258,7 +259,7 @@ export default class VaccinatingController {
   //get all AnimalVaccinations
   static async getVaccinatings(req, res, next) {
     try {
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId} = req.params
       if(resource_name==="animal"){
         const data = await getAllVaccinatingProcessAnimal(resource_id);
         return res.status(200).json({ message: "All vaccinatting", data });

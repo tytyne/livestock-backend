@@ -11,14 +11,14 @@ export default class InputController{
 static async storeInput(req,res,next){
     try{
         const formData = req.body;
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         let bunchInput;
         formData.id = uuidv4()
         formData.createdBy = req.user.id;
-       
+        formData.farm_id = farmId;
         if(resource_name==='livestock_group'){
           const checking = await getGroupAnimalById(resource_id)
-          // console.log("check farmId",checking)
+          // console.log("check farm_id",checking)
           const hello=checking.dataValues.farm_id
          
           formData.groupId= resource_id
@@ -73,7 +73,7 @@ static async storeInput(req,res,next){
     
         if(resource_name==='animal'){
           const checking = await getAnimalById(resource_id)
-          // console.log("check farmId",checking)
+          // console.log("check farm_id",checking)
           const hello =checking.dataValues.farm_id
           formData.animalId= resource_id
           const data = await createInput(formData);
@@ -87,7 +87,7 @@ static async storeInput(req,res,next){
               category:`Veterinary, breeding, and medicine`,
               check_number:"",
               ref_Id: `${resource_id}`,
-              farmId:`${hello}`,
+              farm_id:`${hello}`,
               ref_type: `${resource_name}`,
               reporting_year:new Date().getFullYear(),
               keywords: "",
@@ -120,7 +120,7 @@ static async storeInput(req,res,next){
 //get a Input by Id
 static async getTreatment(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const data = await getInputById(id)
         res.status(200).json({message:"get Input by Id",data})
@@ -132,7 +132,7 @@ static async getTreatment(req,res,next){
 //get all Input
 static async getInputs(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
         if(resource_name==="animal"){
           const data = await getAllInputsAnimal(resource_id);
           return res.status(200).json({ message: "All Inputs", data });
@@ -150,6 +150,7 @@ static async getInputs(req,res,next){
 // update Input
 static async updateInput(req,res,next){
     try{
+      const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const formData = req.body
         const dbResponse = await updateInputById(formData,id)
@@ -164,6 +165,7 @@ static async updateInput(req,res,next){
 
 static async deleteInput(req,res,next){
     try{
+        const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const data = await deleteInputById(id)
         res.status(200).json({message:"Input deleted succesfully!"})

@@ -11,11 +11,8 @@ module.exports = {
       onsetDate: {
         type: Sequelize.DATE
       },
-      // medicineId: {
-      //   type: Sequelize.INTEGER,
-      // },
-      farmId: {
-        type: Sequelize.STRING,
+      farm_id: {
+        type: Sequelize.UUID,
       },
       createdBy: {
         type: Sequelize.UUID
@@ -44,9 +41,6 @@ module.exports = {
       total: {
         type: Sequelize.DECIMAL
       },
-      // withdrawal_date: {
-      //   type: Sequelize.DATE
-      // },
       measurement: {
         type: Sequelize.STRING
       },

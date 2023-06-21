@@ -8,10 +8,11 @@ export default class TransactionController{
 //save Transaction
 static async storeTransaction(req,res,next){
 try{
-    const {resource_name,resource_id}= req.params
+  const {resource_name,resource_id,farmId} = req.params
     const formData = req.body;
     formData.id = uuidv4()
     formData.createdBy = req.user.id;
+    formData.farm_id=farmId;
     console.log("data",formData)
     const data = await createTransaction(formData)
     
@@ -44,7 +45,7 @@ static async getTransaction(req,res,next){
 //get all Transaction
 static async getTransactions(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId} = req.params
         if(resource_name==="animal"){
             const data = await getAllTransactionsByAnimal(resource_id);
             return res.status(200).json({ message: "All Transactions", data });

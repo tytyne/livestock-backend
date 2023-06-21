@@ -12,9 +12,10 @@ module.exports = {
       onsetDate: {
         type: Sequelize.DATE
       },
-      // feedId: {
-      //   type: Sequelize.INTEGER,
-      // },
+      
+      farm_id:{
+        type:Sequelize.UUID,
+      },
       createdBy: {
         type: Sequelize.UUID
       },
@@ -51,10 +52,6 @@ module.exports = {
       measurement: {
         type: Sequelize.STRING
       },
-      // shared: {
-      //   type: Sequelize.BOOLEAN,
-      //   defaultValue:true
-      // },
       per_head: {
         type: Sequelize.BOOLEAN,
         defaultValue:false

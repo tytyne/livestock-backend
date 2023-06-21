@@ -6,11 +6,11 @@ import checkOwnership from "../../middlewares/chekOwnership"
 const {checkAnimalOwner}=checkOwnership
 const router = express.Router()
 
-router.post("/:resource_name/:resource_id/create",checkAuthorisation,treatmentController.storeTreatment)
-router.get("/:resource_name/:resource_id/:id",checkAuthorisation,treatmentController.getTreatment)
-router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,treatmentController.getTreatments)
-router.put("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,treatmentController.updateTreatment)
-router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,treatmentController.deleteTreatment)
-router.get("/",checkAuthorisation,treatmentController.searchingTreatments)
+router.post("/:farmId/:resource_name/:resource_id/create",checkAuthorisation,treatmentController.storeTreatment)
+router.get("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,treatmentController.getTreatment)
+router.get("/:farmId/:resource_name/:resource_id/check/all",checkAuthorisation,treatmentController.getTreatments)
+router.put("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,treatmentController.updateTreatment)
+router.delete("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,treatmentController.deleteTreatment)
+router.get("/:farmId/",checkAuthorisation,treatmentController.searchingTreatments)
 
 export default router

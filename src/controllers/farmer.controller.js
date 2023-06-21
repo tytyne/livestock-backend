@@ -6,8 +6,10 @@ export default class FarmerController{
 //save a farmer
 static async storeFarmer(req,res,next){
 try{
+    const {id,farmId}=req.params
     const formData = req.body;
     formData.id = uuidv4()
+    formData.farm_id= farmId;
     formData.createdBy =req.user.id
     const data = await createFarmer(formData)
     res.status(200).json({message:"a farmer created!",data})
@@ -20,7 +22,7 @@ catch (e) {
 //get a farmer by Id
 static async getFarmer(req,res,next){
     try{
-        const id=req.params.id
+        const {id,farmId}=req.params
         const data = await getFarmerById(id)
         return res.status(200).json({message:"get farmer by Id",data})
     }
@@ -31,6 +33,7 @@ static async getFarmer(req,res,next){
 //get all farmers
 static async getFarmers(req,res,next){
     try{
+        const {id,farmId}=req.params
         const data = await getAllFarmers()
         res.status(200).json({message:"All farmers",data})
     }
@@ -41,7 +44,7 @@ static async getFarmers(req,res,next){
 // update a farmer
 static async updateFarmer(req,res,next){
     try{
-        const id=req.params.id
+        const {id,farmId}=req.params
         const formData = req.body
         const data = await updateById(formData,id)
         return res.status(200).json({message:"update a farmer!!",data})
@@ -55,7 +58,7 @@ static async updateFarmer(req,res,next){
 
 static async deleteFarmer(req,res,next){
     try{
-        const id=req.params.id
+        const {id,farmId}=req.params
         const data = await deleteById(id)
         res.status(200).json({message:"delete a farmer"})
     }

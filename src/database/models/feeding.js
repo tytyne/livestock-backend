@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
     as: 'user',
     onDelete: 'CASCADE',
   })
+  Feeding.belongsTo(models.Farm, {
+    foreignKey: 'farm_id',
+    as: 'farm',
+    onDelete: 'CASCADE',
+  })
 
   };
   

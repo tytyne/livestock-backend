@@ -26,6 +26,12 @@ module.exports = (sequelize, DataTypes) => {
     as: 'user',
     onDelete: 'CASCADE',
   })
+  
+  Note.belongsTo(models.Farm, {
+    foreignKey: 'farm_id',
+    as: 'farm',
+    onDelete: 'CASCADE',
+  })
  
  
 };

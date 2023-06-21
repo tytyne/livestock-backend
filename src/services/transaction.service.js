@@ -44,7 +44,7 @@ class TransactionService{
     }
 
     static async getAllTransactionByFarm(farm_id){
-      let data = await Transaction.findAll({where:{farmId:farm_id},
+      let data = await Transaction.findAll({where:{farm_id:farm_id},
         attributes:['date','vendor','category','description','type','amount'],
       })
       return data
@@ -70,7 +70,7 @@ class TransactionService{
     static async getExpenseFarm(farm_id){
     
         let farm = await Transaction.findAll({ 
-       where: {farmId:farm_id,type:'expense'},
+       where: {farm_id:farm_id,type:'expense'},
        group: ['category','type'],
       
       attributes: ["category",'type',[models.sequelize.fn("SUM",models.sequelize.col("amount")),'amount',]],
@@ -83,7 +83,7 @@ class TransactionService{
 
   static async getIncomeFarm(farm_id){
     let farm = await Transaction.findAll({ 
-      where: {farmId:farm_id,type:'income'},
+      where: {farm_id:farm_id,type:'income'},
       group: ['category','type'],
      
      attributes: ["category",'type',[models.sequelize.fn("SUM",models.sequelize.col("amount")),'amount',]],
@@ -95,7 +95,7 @@ class TransactionService{
 
   static async getIncomeExpenseFarmTotal(farm_id){
       let farm =Transaction.findAll({
-        where:{farmId:farm_id},
+        where:{farm_id:farm_id},
         attributes: [
            
             [models.sequelize.fn('SUM', models.sequelize.literal(`CASE WHEN type = 'income'  THEN amount ELSE 0 END`)), 'income_amount'], 

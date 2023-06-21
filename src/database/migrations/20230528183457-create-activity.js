@@ -9,6 +9,9 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
+      farm_id:{
+        type:Sequelize.UUID,
+      },
       date: {
         type: Sequelize.DATE
       },

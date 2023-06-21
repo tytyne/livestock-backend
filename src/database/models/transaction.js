@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     })
 
     Transaction.belongsTo(models.Farm, {
-      foreignKey: 'farmId',
+      foreignKey: 'farm_id',
       as: 'farm',
       onDelete: 'CASCADE',
     })

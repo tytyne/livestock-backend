@@ -8,6 +8,12 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
+      farm_id:{
+        type:Sequelize.UUID,
+      },
+      createdBy: {
+        type: Sequelize.UUID,
+      },
       assigned_to_id: {
         type: Sequelize.UUID
       },
@@ -55,12 +61,6 @@ module.exports = {
       },
       reference_type: {
         type: Sequelize.INTEGER
-      },
-      created_by: {
-        type: Sequelize.STRING
-      },
-      created_by_id: {
-        type: Sequelize.UUID
       },
       complete:{
         type: Sequelize.BOOLEAN,

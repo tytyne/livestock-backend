@@ -11,6 +11,9 @@ module.exports = {
       condition_score: {
         type: Sequelize.INTEGER
       },
+      farm_id:{
+        type:Sequelize.UUID,
+      },
       date: {
         type: Sequelize.DATE
       },

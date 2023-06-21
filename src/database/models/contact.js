@@ -12,5 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     description:DataTypes.STRING,
   
   }, { });
+
+  Contact.associate = function(models) {
+    Contact.belongsTo(models.Farm, {
+      foreignKey: 'farm_id',
+      as: 'farm',
+      onDelete: 'CASCADE',
+    })
+  }
   return Contact;
 }

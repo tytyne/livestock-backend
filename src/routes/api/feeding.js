@@ -6,10 +6,10 @@ import checkOwnership from "../../middlewares/chekOwnership"
 const {checkAnimalOwner}=checkOwnership
 const router = express.Router()
 
-router.post("/:resource_name/:resource_id/create",checkAuthorisation,feedingController.storeFeeding)
-router.get("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,feedingController.getFeeding)
-router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,feedingController.getFeedings)
-router.put("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,feedingController.updateFeeding)
-router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,feedingController.deleteFeeding)
+router.post("/:farmId/:resource_name/:resource_id/create",checkAuthorisation,feedingController.storeFeeding)
+router.get("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,feedingController.getFeeding)
+router.get("/:farmId/:resource_name/:resource_id/check/all",checkAuthorisation,feedingController.getFeedings)
+router.put("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,feedingController.updateFeeding)
+router.delete("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,checkAnimalOwner,feedingController.deleteFeeding)
 
 export default router

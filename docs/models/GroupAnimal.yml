@@ -2,7 +2,7 @@ definitions:
   GroupAnimal:
     type: "object"
     properties:
-      farmId:
+      farm_id:
         type: "number"
       animalCategoryId:
         type: "number"

@@ -9,8 +9,11 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-     
       createdBy: {
+        type: Sequelize.UUID
+      },
+
+      farm_id:{
         type: Sequelize.UUID
       },
       firstname: {
@@ -53,8 +56,6 @@ module.exports = {
       others: {
         type: Sequelize.STRING
       },
-     
-     
       status:{
         type: Sequelize.DataTypes.ENUM('active','unactive'),
         defaultValue: 'active',

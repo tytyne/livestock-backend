@@ -6,14 +6,14 @@ import checkOwnership from "../../middlewares/chekOwnership"
 const{checkEventOwner}= checkOwnership
 
 const router = express.Router()
-router.post("/:resource_name/:resource_id/create",checkAuthorisation,EventValidation.save,EventController.storeEventWithResource)
-router.post("/create",checkAuthorisation,EventValidation.save,EventController.storeEvent)
-router.get("/:resource_name/:resource_id/check/all",checkAuthorisation,EventController.getEvents)
-router.delete("/:resource_name/:resource_id/:id",checkAuthorisation,EventController.deleteEvent)
-router.get("/:resource_name/:resource_id/:id",checkAuthorisation,EventController.getEvent)
-router.put("/:resource_name/:resource_id/:id",checkAuthorisation,EventValidation.save,EventController.updateEventWithResource)
-router.put("/:id",checkAuthorisation,EventValidation.save,EventController.updateEvent)
-router.get("/",checkAuthorisation,EventController.searchingEvent)
+router.post("/:farmId/:resource_name/:resource_id/create",checkAuthorisation,EventValidation.save,EventController.storeEventWithResource)
+router.post("/:farmId/create",checkAuthorisation,EventValidation.save,EventController.storeEvent)
+router.get("/:farmId/:resource_name/:resource_id/check/all",checkAuthorisation,EventController.getEvents)
+router.delete("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,EventController.deleteEvent)
+router.get("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,EventController.getEvent)
+router.put("/:farmId/:resource_name/:resource_id/:id",checkAuthorisation,EventValidation.save,EventController.updateEventWithResource)
+router.put("/:farmId/:id",checkAuthorisation,EventValidation.save,EventController.updateEvent)
+router.get("/:farmId/",checkAuthorisation,EventController.searchingEvent)
 
 
 export default router

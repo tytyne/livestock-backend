@@ -11,6 +11,9 @@ module.exports = {
       createdBy: {
         type: Sequelize.UUID,
       },
+      farm_id: {
+        type: Sequelize.UUID
+      },
       type: {
         type: Sequelize.STRING
       },
@@ -28,9 +31,6 @@ module.exports = {
       },
       category: {
         type: Sequelize.STRING
-      },
-      farmId: {
-        type: Sequelize.UUID
       },
       ref_Id: {
         type: Sequelize.UUID

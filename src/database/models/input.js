@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
       as: 'user',
       onDelete: 'CASCADE',
     })
+    Input.belongsTo(models.Farm, {
+      foreignKey: 'farm_id',
+      as: 'farm',
+      onDelete: 'CASCADE',
+    })
   }
  
   return Input;

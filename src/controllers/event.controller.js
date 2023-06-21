@@ -13,10 +13,11 @@ export default class EventController{
     static async storeEventWithResource(req,res,next){
        try{
 
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const formData = req.body;
         formData.id = uuidv4()
-        formData.created_by_id = req.user.id;
+        formData.createdBy = req.user.id;
+        formData.farm_id=farmId;
         // console.log("userrrr",req.user.id)
         
         const name = await getUserByIdOrEmail(req.user.id)
@@ -61,7 +62,7 @@ export default class EventController{
  
          const formData = req.body;
          formData.id = uuidv4()
-         formData.created_by_id = req.user.id;
+         formData.createdBy = req.user.id;
          const textStart=formData.start_time
          const textEnd = formData.end_time
          formData.start_time = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
@@ -81,7 +82,7 @@ export default class EventController{
     //get all events
     static async getEvents(req,res,next){
         try{
-            const {resource_name,resource_id}= req.params
+            const {resource_name,resource_id,farmId}= req.params
             const data = await getAllEventsWithReference(resource_id)
             return  res.status(200).json({message:"get all events",data})
         }
@@ -107,7 +108,7 @@ export default class EventController{
         try{
             const id = req.params.id
             const formData = req.body;
-            const {resource_name,resource_id}= req.params
+            const {resource_name,resource_id,farmId}= req.params
             formData.id = uuidv4()
             const textStart=formData.start
             const textEnd = formData.end

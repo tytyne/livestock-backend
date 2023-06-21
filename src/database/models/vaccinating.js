@@ -44,6 +44,11 @@ module.exports = (sequelize, DataTypes) => {
     as: 'group',
     onDelete: 'CASCADE',
   })
+  Vaccinating.belongsTo(models.Farm, {
+    foreignKey: 'farm_id',
+    as: 'farm',
+    onDelete: 'CASCADE',
+  })
   }
   
  

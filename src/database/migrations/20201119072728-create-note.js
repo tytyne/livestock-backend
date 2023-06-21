@@ -31,6 +31,9 @@ module.exports = {
       createdBy: {
         type: Sequelize.UUID
       },
+      farm_id: {
+        type: Sequelize.UUID
+      },
       animalId: {
         type: Sequelize.UUID
       },

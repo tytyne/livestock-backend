@@ -18,7 +18,7 @@ class EventValidation{
         description: Joi.string().messages(),
         reference_type: Joi.string().messages(),
         created_by: Joi.string().messages(),
-        created_by_id: Joi.string().messages(),
+        createdBy: Joi.string().messages(),
         complete: Joi.boolean().messages(),
 
          })

@@ -17,11 +17,7 @@ module.exports = (sequelize, DataTypes) => {
    
   }, { });
   Farm.associate = function(models) {
-  Farm.belongsTo(models.Farmer, {
-    foreignKey: 'farmerId',
-    as: 'farmer',
-    onDelete: 'CASCADE',
-  })
+    
   Farm.belongsTo(models.User, {
     foreignKey: 'createdBy',
     as: 'user',

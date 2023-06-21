@@ -19,12 +19,6 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
       })
      
-      // GroupAnimal.hasMany(models.Animal, {
-      //   foreignKey: 'group_id',
-      //   as: 'records',
-      //   onDelete: 'CASCADE',
-      // });
-      
       GroupAnimal.belongsTo(models.User, {
         foreignKey: 'createdBy',
         as: 'user',

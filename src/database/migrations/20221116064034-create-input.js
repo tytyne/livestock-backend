@@ -11,8 +11,14 @@ module.exports = {
       animal_id: {
         type: Sequelize.UUID,
       },
+      farm_id: {
+        type: Sequelize.UUID,
+      },
       createdBy: {
         type: Sequelize.UUID
+      },
+      farm_id:{
+        type:Sequelize.UUID,
       },
       amount: {
         type: Sequelize.DECIMAL

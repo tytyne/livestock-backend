@@ -12,11 +12,8 @@ module.exports = {
       onsetDate: {
         type: Sequelize.DATE
       },
-      // vaccinationId: {
-      //   type: Sequelize.INTEGER
-      // },
-      farmId: {
-        type: Sequelize.STRING
+      farm_id: {
+        type: Sequelize.UUID
       },
   
       animalId: {

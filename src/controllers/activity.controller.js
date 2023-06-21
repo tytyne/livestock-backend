@@ -9,10 +9,11 @@ export default class ActivityController{
     //save Activity
 static async storeActivity(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const formData = req.body;
         formData.id = uuidv4()
-        // formData.createdBy = req.user.id;
+        formData.createdBy = req.user.id;
+        formData.farm_id=farmId;
         console.log("data",formData)
         formData.ref_id=resource_id
         const data = await createActivity(formData)
@@ -26,7 +27,7 @@ static async storeActivity(req,res,next){
 //get an activity by Id
 static async getActivity(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         formData.id = uuidv4()
         const id=req.params.id
         const data = await getActivityById(id)
@@ -39,7 +40,7 @@ static async getActivity(req,res,next){
 //get all activities
 static async getActivities(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const data = await getAllActivitiesByAnimal(resource_id)
         res.status(200).json({message:"All Activities",data})
     }
@@ -50,7 +51,7 @@ static async getActivities(req,res,next){
 // // update Transaction
 // static async updateActivity(req,res,next){
 //     try{
-//         const {resource_name,resource_id}= req.params
+//         const {resource_name,resource_id,farmId}= req.params
 //         const id=req.params.id
 //         const formData = req.body
 //         const dbResponse = await updateTransactionById(formData,id)
@@ -65,7 +66,7 @@ static async getActivities(req,res,next){
 
 // static async deleteActivity(req,res,next){
 //     try{
-//         const {resource_name,resource_id}= req.params
+//         const {resource_name,resource_id,farmId}= req.params
 //         const id=req.params.id
 //         const data = await deleteTransactionById(id)
 //         res.status(200).json({message:" activity deleted succesfully!"})

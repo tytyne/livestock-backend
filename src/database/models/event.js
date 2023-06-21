@@ -19,28 +19,34 @@ module.exports = (sequelize, DataTypes) => {
     reference_id: DataTypes.STRING,
     reference_type: DataTypes.INTEGER,
     per_head: DataTypes.BOOLEAN,
-    created_by: DataTypes.STRING,
-    created_by_id: DataTypes.STRING,
+    createdBy: DataTypes.STRING,
     complete: DataTypes.BOOLEAN,
 
    
   }, { });
   Event.associate = function(models) {
-  Event.belongsTo(models.User, {
-    foreignKey: 'assigned_to_id',
-    as: 'user',
-    onDelete: 'CASCADE',
-  })
+  // Event.belongsTo(models.User, {
+  //   foreignKey: 'assigned_to_id',
+  //   as: 'user',
+  //   onDelete: 'CASCADE',
+  // })
   Event.belongsTo(models.Priority, {
     foreignKey: 'priority_id',
     as: 'priority',
     onDelete: 'CASCADE',
   })
-  // Event.belongsTo(models.Animal, {
-  //   foreignKey: 'reference_id',
-  //   as: 'animal',
-  //   onDelete: 'CASCADE',
-  // })
+  Event.belongsTo(models.User, {
+    foreignKey: 'createdBy',
+    as: 'user',
+    onDelete: 'CASCADE',
+  })
+
+  Event.belongsTo(models.Farm, {
+    foreignKey: 'farm_id',
+    as: 'farm',
+    onDelete: 'CASCADE',
+  })
+  
   
 };
 

@@ -2,7 +2,7 @@ definitions:
   Animal:
     type: "object"
     properties:
-      farmId:
+      farm_id:
         type: "number"
       earring_num:
         type: "string"

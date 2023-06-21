@@ -12,9 +12,10 @@ export default class NoteController{
 static async storeNote(req,res,next){
 try{
     const formData = req.body;
-    const {resource_name,resource_id}= req.params
+    const {resource_name,resource_id,farmId}= req.params
     formData.id = uuidv4()
     formData.createdBy = req.user.id;
+    formData.farm_id=farmId;
     if(resource_name==="animal"){
       formData.animalId= resource_id
       if(formData.add_to_calendar){
@@ -56,7 +57,7 @@ catch (e) {
 //get a Note by Id
 static async getNote(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const data = await getNoteById(id)
         res.status(200).json({message:"get Note by Id",data})
@@ -68,7 +69,7 @@ static async getNote(req,res,next){
 //get all Note
 static async getNotes(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const data = await getAllNotes(resource_id)
         res.status(200).json({message:"All Notes",data})
     }
@@ -79,7 +80,7 @@ static async getNotes(req,res,next){
 // update Note
 static async updateNote(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const formData = req.body
         const dbResponse = await updateNoteById(formData,id)
@@ -94,7 +95,7 @@ static async updateNote(req,res,next){
 
 static async deleteNote(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const data = await deleteNoteById(id)
         res.status(200).json({message:"Note deleted succesfully!"})

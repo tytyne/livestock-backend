@@ -38,7 +38,7 @@ class ActivityService{
   
    
     static async getAllActivitiesByFarm(farm_id){
-        let data = await Activity.findAll({where:{farmId:farm_id},
+        let data = await Activity.findAll({where:{farm_id:farm_id},
          
         })
         return data

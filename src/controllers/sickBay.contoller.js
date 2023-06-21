@@ -27,11 +27,12 @@ export default class SickBayController {
   //save an SickBay
   static async storeSickBay(req, res, next) {
     try {
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
       const formData = req.body;
       console.log("formdata",formData)
       formData.id = uuidv4()
       formData.createdBy = req.user.id;
+      formData.farm_id=farmId
       let bunchSickBay;
 
      
@@ -73,7 +74,7 @@ export default class SickBayController {
               category:`Veterinary, breeding, and medicine`,
               check_number:"",
               ref_Id:response[i],
-              farmId:`${hello}`,
+              farm_id:`${hello}`,
               ref_type:"",
               reporting_year:new Date().getFullYear(),
               keywords: "",
@@ -124,7 +125,7 @@ export default class SickBayController {
                 category:`Veterinary, breeding, and medicine`,
                 check_number:"",
                 ref_Id:response[i],
-                farmId:`${hello}`,
+                farm_id:`${hello}`,
                 ref_type:"",
                 reporting_year:new Date().getFullYear(),
                 keywords: "",
@@ -168,7 +169,7 @@ export default class SickBayController {
             category:`Veterinary, breeding, and medicine`,
             check_number:"",
             ref_Id: `${resource_id}`,
-            farmId:`${hello}`,
+            farm_id:`${hello}`,
             reporting_year:new Date().getFullYear(),
             keywords: "",
             description: `${formData.description}`
@@ -200,7 +201,7 @@ export default class SickBayController {
   //get an SickBay by Id
   static async getSickBay(req, res, next) {
     try {
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
       const id = req.params.id;
       const data = await getSickBayById(id);
       res.status(200).json({ message: "get SickBay by Id", data });
@@ -213,7 +214,7 @@ export default class SickBayController {
   static async getSickBays(req, res, next) {
     try {
   
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
       if(resource_name==="animal"){
         const data = await getAllSickBayAnimal(resource_id);
         return res.status(200).json({ message: "All sickbays", data });
@@ -230,17 +231,13 @@ export default class SickBayController {
   static async updateSickBay(req, res, next) {
     try {
 
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
 
       const id = req.params.id;
       const formData = req.body;
-
-      // const item= await getMedicineById(formData.medicineId)
-      // const itemData=item.dataValues
-      // formData.medicine_name=itemData.name;
       const formula= await calculatePrice(formData.quantity,formData.price);
       formData.total=formula
-      // formData.measurement = itemData.measurement
+      
 
       const data = await updateSickBayById(formData, id);
       res.status(200).json({ message: "update an SickBay!!", data });
@@ -252,7 +249,7 @@ export default class SickBayController {
 
   static async deleteSickBay(req, res, next) {
     try {
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
       if(resource_name ==="animal"){
         formData.animalId= resource_id
       }
@@ -281,23 +278,5 @@ export default class SickBayController {
 
 }
     
-        // if(formData.record_transaction === true){
-        //  await createTransaction({
-        //     id:uuidv4(),
-        //     type: "expense",
-        //     amount:`${formData.cost}`,
-        //     date: `${formData.date}`,
-        //     vendor: " ",
-        //     category:`Veterinary, breeding, and medicine`,
-        //     check_number:"",
-        //     ref_Id: `${resource_id}`,
-        //     farmId:`${hello}`,
-        //     ref_type: `${resource_name}`,
-        //     reporting_year:new Date().getFullYear(),
-        //     keywords: "",
-        //     description: `${formData.description}`
-      
-        //   })
-       
-        // }
+
        

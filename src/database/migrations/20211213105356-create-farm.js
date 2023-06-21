@@ -11,9 +11,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      farmerId: {
-        type: Sequelize.UUID,
-      },
       createdBy: {
         type: Sequelize.UUID
       },

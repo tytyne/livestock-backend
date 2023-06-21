@@ -20,9 +20,11 @@ export default class GroupAnimalController {
   //save an GroupAnimal
   static async storeGroupAnimal(req, res, next) {
     try {
+      const {farmId} = req.params
       const formData = req.body;
       formData.id = uuidv4()
       formData.createdBy = req.user.id;
+      formData.farm_id=farmId;
      if (formData.type ==='set')
      {
       formData.is_group=true;
@@ -46,6 +48,7 @@ export default class GroupAnimalController {
   //get an GroupAnimal by Id
   static async getGroupAnimalIdCheck(req, res, next) {
     try {
+      const {farmId} = req.params
       const id = req.params.id;
       const data = await getGroupAnimalById(id);
       // console.log("records",JSON.parse(data.dataValues.records))
@@ -59,7 +62,7 @@ export default class GroupAnimalController {
   static async getGroupAnimals(req, res, next) {
     try {
 
-
+      const {farmId} = req.params
       const datat = await getAllGroupAnimals(req.user.id);
       console.log("check dataaaa",datat)
       for (let index = 0; index < datat.length; index++) {
@@ -88,6 +91,7 @@ export default class GroupAnimalController {
   // update an GroupAnimal
   static async updateGroupAnimal(req, res, next) {
     try {
+      const {farmId} = req.params
       const id = req.params.id;
       
       const formData = req.body;
@@ -102,6 +106,7 @@ export default class GroupAnimalController {
 
   static async deleteGroupAnimal(req, res, next) {
     try {
+      const {farmId} = req.params
       const id = req.params.id;
       const data = await deleteGroupAnimalById(id);
       return res.status(200).json({ message: "delete a GroupAnimal" });
@@ -114,7 +119,7 @@ export default class GroupAnimalController {
 
   static async  EditGroupAnimal(req,res,next){
     try{
-      
+      const {farmId} = req.params
       const {add_group,id}=req.params
      
       const data  = await updateAnimalByGroupId(add_group,id)
@@ -129,6 +134,7 @@ export default class GroupAnimalController {
   static async searchingGroupAnimal(req,res,next){
 
     try{
+      const {farmId} = req.params
       const {name} = req.query;
       const data = await searchGroupAnimals(name);
       console.log(data)

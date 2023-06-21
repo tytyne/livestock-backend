@@ -21,10 +21,11 @@ export default class FeedingController {
   static async storeFeeding(req, res, next) {
     try {
 
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
       const formData = req.body;
       formData.id = uuidv4()
       formData.createdBy = req.user.id;
+      formData.farm_id = farmId;
       let bunchFeeding;
 
       if(resource_name==="livestock_group"){
@@ -144,7 +145,7 @@ export default class FeedingController {
   //get all AnimalFeeds
   static async getFeedings(req, res, next) {
     try {
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
       if(resource_name==="animal"){
         const data = await getAllFeedingAnimal(resource_id);
         return res.status(200).json({ message: "All AnimalFeeds by animal", data });
@@ -163,7 +164,7 @@ export default class FeedingController {
     try {
       const id = req.params.id;
       const formData = req.body;
-      const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
       if(resource_name==="animal"){
         formData.animalId= resource_id
       }
@@ -183,6 +184,7 @@ export default class FeedingController {
 
   static async deleteFeeding(req, res, next) {
     try {
+      const {resource_name,resource_id,farmId}= req.params
       const id = req.params.id;
       const data = await deleteFeedingById(id);
       res.status(200).json({ message: "delete a AnimalFeed" });

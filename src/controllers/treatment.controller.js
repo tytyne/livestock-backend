@@ -20,10 +20,11 @@ export default class TreatmentController{
 static async storeTreatment(req,res,next){
 try{
     const formData = req.body;
-    const {resource_name,resource_id}= req.params
+    const {resource_name,resource_id,farmId}= req.params
     let bunchTreatment;
     formData.id = uuidv4()
     formData.createdBy = req.user.id;
+    formData.farm_id=farmId;
    
     if(resource_name==='livestock_group'){
       const checking = await getGroupAnimalById(resource_id)
@@ -69,7 +70,7 @@ try{
             category:`Veterinary, breeding, and medicine`,
             check_number:"",
             ref_Id: response[i],
-            farmId:`${hello}`,
+            farm_id:`${hello}`,
             reporting_year:new Date().getFullYear(),
             keywords: "",
             description: `${formData.description}`
@@ -153,7 +154,7 @@ try{
               category:`Veterinary, breeding, and medicine`,
               check_number:"",
               ref_Id:response[i],
-              farmId:`${hello}`,
+              farm_id:`${hello}`,
               ref_type:"",
               reporting_year:new Date().getFullYear(),
               keywords: "",
@@ -209,7 +210,7 @@ try{
 
     else if(resource_name==='animal'){
       const checking = await getAnimalById(resource_id)
-      // console.log("check farmId",checking)
+      // console.log("check farm_id",checking)
       formData.id = uuidv4()
       const hello =checking.dataValues.farm_id
       formData.animalId= resource_id
@@ -234,7 +235,7 @@ try{
           category:`Veterinary, breeding, and medicine kekekke`,
           check_number:"",
           ref_Id: `${resource_id}`,
-          farmId:`${hello}`,
+          farm_id:`${hello}`,
           ref_type: `${resource_name}`,
           reporting_year:new Date().getFullYear(),
           keywords: "",
@@ -284,7 +285,7 @@ catch (e) {
 //get a Treatment by Id
 static async getTreatment(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const data = await getTreatmentById(id)
         res.status(200).json({message:"get Treatment by Id",data})
@@ -296,7 +297,7 @@ static async getTreatment(req,res,next){
 //get all Treatment
 static async getTreatments(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
         if(resource_name==="animal"){
           const data = await getAllTreatmentsAnimal(resource_id);
           return res.status(200).json({ message: "All treatments", data });
@@ -315,7 +316,7 @@ static async getTreatments(req,res,next){
 // update Treatment
 static async updateTreatment(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+      const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const formData = req.body
         const dbResponse = await updateTreatmentById(formData,id)
@@ -330,7 +331,7 @@ static async updateTreatment(req,res,next){
 
 static async deleteTreatment(req,res,next){
     try{
-        const {resource_name,resource_id}= req.params
+        const {resource_name,resource_id,farmId}= req.params
         const id=req.params.id
         const data = await deleteTreatmentById(id)
         res.status(200).json({message:"Treatment deleted succesfully!"})

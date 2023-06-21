@@ -46,6 +46,12 @@ module.exports = (sequelize, DataTypes) => {
     as: 'user',
     onDelete: 'CASCADE',
   })
+  
+  SickBay.belongsTo(models.Farm, {
+    foreignKey: 'farm_id',
+    as: 'farm',
+    onDelete: 'CASCADE',
+  })
  
  
 };
