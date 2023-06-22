@@ -10,6 +10,7 @@ export default class AccountingController{
 //save Transaction
 static async storeTransaction(req,res,next){
 try{
+    const{farmId}=req.params;
     const formData = req.body;
     formData.id = uuidv4()
     const {ressource_name,ressource_id}= req.params
