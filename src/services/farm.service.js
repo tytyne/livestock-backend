@@ -20,10 +20,6 @@ class FarmService{
     static async getFarmById(id){
         let farm = await Farm.findOne({include: [
             {
-              model: models.Farmer,
-              as: "farmer"
-            },
-            {
               model: models.User,
               as: "user"
             }
@@ -33,10 +29,6 @@ class FarmService{
     }
     static async getAllFarms(){
         let farms = await Farm.findAll({include: [
-            {
-              model: models.Farmer,
-              as: "farmer"
-            },
             {
               model: models.User,
               as: "user"
@@ -65,7 +57,7 @@ class FarmService{
     }
   
     static async getAllFarmReports(){
-      let farmer = await Farm.findAll({ attributes: ["farmerId",[models.sequelize.fn("COUNT",models.sequelize.col("id")),'count_farm',
+      let farm = await Farm.findAll({ attributes: ["farmId",[models.sequelize.fn("COUNT",models.sequelize.col("id")),'count_farm',
      
     
     ], 
@@ -73,8 +65,8 @@ class FarmService{
            
     
     ],
-    group:["farmerId"] , })
-    return farmer
+    group:["farmId"] , })
+    return farm
      
 
   }

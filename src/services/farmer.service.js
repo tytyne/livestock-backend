@@ -20,8 +20,8 @@ class FarmerService{
         return farmer  
 
     }
-    static async getAllFarmers(){
-        let farmer = await Farmer.findAll({include:'user'},)
+    static async getAllFarmers(farm_id){
+        let farmer = await Farmer.findAll({include:'user'},{where:{farm_id:farm_id}})
         return farmer
 
     }
@@ -44,13 +44,13 @@ class FarmerService{
         let farmer = await Farmer.destroy({where:{id:id}})
         return farmer
     }
-    static async countFarmers(userID){
-        let farmer = await Farmer.count({where:{createdBy:userID}})
+    static async countFarmers(farm_id){
+        let farmer = await Farmer.count({where:{farm_id:farm_id}})
         return farmer
     }
 
 
-    static async searchFarmer(sss){
+    static async searchFarmer(sss,farm_id){
         let data  = await Farmer.findAll({
                     where: {
                       [Op.or]: [
@@ -62,7 +62,7 @@ class FarmerService{
                         }
                       ]
                     }
-                  });
+                  },{where:{farm_id:farm_id}});
         return data
     }
 
@@ -81,17 +81,6 @@ class FarmerService{
     return farmer
 
 }
-//search farmer
-// static async searchFarmer(sss){
-//     let data = await Farmer.findAll({ 
-//         where: {
-//             firstname: { [Op.like]: `%${sss}%` },
-//           }
-//     })
-//     return data
-// }
-
-    
 
 
 }

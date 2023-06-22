@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     keywords:DataTypes.STRING,
     payment_system:DataTypes.STRING,
     description:DataTypes.STRING,
+    paid:DataTypes.BOOLEAN,
+    customer:DataTypes.STRING,
    
    
   }, { });
@@ -30,12 +32,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'farm',
       onDelete: 'CASCADE',
     })
-    // Transaction.belongsTo(models.Animal, {
-    //   foreignKey: 'ref_Id',
-    //   as: 'reference',
-    //   onDelete: 'CASCADE',
-    // })
-   
    
   };
  

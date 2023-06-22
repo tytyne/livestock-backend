@@ -47,8 +47,15 @@ module.exports = {
       payment_system:{
         type: Sequelize.STRING
       },
+      customer:{
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.STRING
+      },
+      paid: {
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
       },
       createdAt: {
         allowNull: false,

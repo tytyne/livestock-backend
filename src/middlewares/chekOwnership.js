@@ -21,19 +21,23 @@ const checkFarmerOwner= async (req,res,next)=>{
     
     return next();
 };
+
+
 const checkFarmOwner= async (req,res,next)=>{
     const farm = await getFarmById(req.params.id)
    
     if(farm==null){
         return res.status(401).json({message:"This do not exist"})
     }
-    else if (farm.createdBy!=req.user.id)
+    else if (farm.createdBy!==req.user.id || farm.assignTo!==req.user.id)
     {
         return res.status(403).json({message:"you are not allowed to see this"})
     }
     
     return next();
 };
+
+
 const checkAnimalOwner= async (req,res,next)=>{
     const animal = await getAnimalById(req.params.id)
    

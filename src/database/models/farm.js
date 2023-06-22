@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     as: 'user',
     onDelete: 'CASCADE',
   })
+  Farm.belongsTo(models.User, {
+    foreignKey: 'assignedTo',
+    as: 'other-user',
+    onDelete: 'CASCADE',
+  })
  
  
 };

@@ -34,7 +34,7 @@ static async getFarmer(req,res,next){
 static async getFarmers(req,res,next){
     try{
         const {id,farmId}=req.params
-        const data = await getAllFarmers()
+        const data = await getAllFarmers(farmId)
         res.status(200).json({message:"All farmers",data})
     }
     catch (e) {
@@ -68,7 +68,8 @@ static async deleteFarmer(req,res,next){
 }
 static async countingFarmers(req,res,next){
     try{
-        const data = await countFarmers(req.user.id)
+        const {farmId}=req.params
+        const data = await countFarmers(farmId)
         res.status(200).json({message:"number of farmers",data})
     }
     catch(e){
@@ -79,8 +80,9 @@ static async countingFarmers(req,res,next){
 static async searchingFarmer(req,res,next){
 
     try{
+    const {farmId}=req.params
       const {name} = req.query;
-      const data = await searchFarmer(name);
+      const data = await searchFarmer(name,farmId);
       return res.status(200).json({ message: "searched farmers",data});
     }
     catch(e){

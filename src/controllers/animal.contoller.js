@@ -88,6 +88,7 @@ export default class AnimalController {
   static async getAnimalEaring(req, res, next) {
   try {
     const input = req.query;
+    const {farmId}=req.params
     const data = await getAnimalByEarring(input);
     res.status(200).json({ message: "get animal by earring number", data });
   } catch (e) {
@@ -155,6 +156,7 @@ export default class AnimalController {
 
   static async deleteAnimal(req, res, next) {
   try {
+    const {farmId}=req.params
     const id = req.params.id;
     const data = await deleteById(id);
     res.status(200).json({ message: "delete a animal" });
@@ -167,6 +169,7 @@ export default class AnimalController {
   
   static async countingAnimals(req, res, next) {
   try {
+    const {farmId}=req.params
     const data = await countAnimals(req.user.id);
     res.status(200).json({ message: "number of animals", data });
   } catch (e) {
@@ -178,6 +181,7 @@ export default class AnimalController {
 static async searchingAnimal(req,res,next){
 
   try{
+    const {farmId}=req.params
     const {name} = req.query;
     const data = await searchAnimals(name);
     console.log(data)
@@ -191,6 +195,7 @@ static async searchingAnimal(req,res,next){
 static async searchingForAnimals(req,res,next){
 
   try{
+    const {farmId}=req.params
     const {name} = req.query;
     const data = await searchAnimal(name);
     console.log(data)
@@ -204,6 +209,7 @@ static async searchingForAnimals(req,res,next){
 static async  EditGroupAnimal(req,res,next){
   try{
     // const id = req.params.id
+    const {farmId}=req.params
     const {id,add_group}=req.params
    
     const animal = await getAnimalById(id)
@@ -230,6 +236,7 @@ static async  EditGroupAnimal(req,res,next){
 // adding mother or father
 static async addingParenting(req,res,next){
   try{
+    const {farmId}=req.params
     const{gender,parent_of} = req.query
     if(gender=="male"){
       const formData = req.body;
@@ -268,7 +275,8 @@ static async addingParenting(req,res,next){
 //view offstring
 static async getOffstring(req,res,next){
   try{
-    const{id}=req.params
+    const {farmId,id}=req.params
+    // const{id}=req.params
     const data = await getAllOffstrings(id)
     return res.status(200).json({message:"offstrings are",data})
   }
@@ -281,7 +289,8 @@ static async getOffstring(req,res,next){
 // view ancestory
 static async getAnceStory(req,res,next){
   try{
-    const{id}=req.params
+    // const{id}=req.params
+    const {farmId,id}=req.params
     const data = await getAllAncentors(id)
     return res.status(200).json({message:"ancestory are",data})
   }
@@ -292,6 +301,7 @@ static async getAnceStory(req,res,next){
 //females
 static async femaleAnimals(req,res,next){
   try{
+    const {farmId}=req.params
     const data = await getAllFemaleAnimals()
     return res.status(200).json({message:"females are",data})
 
@@ -306,6 +316,7 @@ static async femaleAnimals(req,res,next){
 //males
 static async maleAnimals(req,res,next){
   try{
+    const {farmId}=req.params
     const data = await getAllMaleAnimals()
     return res.status(200).json({message:"males are",data})
   }
