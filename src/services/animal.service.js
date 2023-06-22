@@ -31,8 +31,8 @@ class AnimalService {
         return animal
 
     }
-    static async getAllanimals(vetId) {
-        let animal = await Animal.findAll({ where: { createdBy: vetId,status:"active" } })
+    static async getAllanimals(farm_id) {
+        let animal = await Animal.findAll({ where: { farm_id:farm_id } })
         return animal
 
     }
@@ -127,8 +127,8 @@ class AnimalService {
         let animal = await Animal.destroy({ where: { id: id } })
         return animal
     }
-    static async countAnimals(vetId) {
-        let animal = await Animal.count({ where: { createdBy: vetId,status:"active"} })
+    static async countAnimals(farm_id) {
+        let animal = await Animal.count({ where: {farm_id:farm_id} })
         return animal
     }
 
@@ -186,6 +186,7 @@ class AnimalService {
                         attributes: { exclude: ['password', 'occupation', 'adminId', 'username', 'email', 'role', 'isVerified', 'status', 'createdAt', 'updatedAt'] },
 
                     },
+                    
 
                 ]
             }
@@ -195,48 +196,51 @@ class AnimalService {
 
     }
 
-    static async getAllanimalss() {
-        let animal = await Animal.findAll({where:{status:"active"}})
+    static async getAllanimalss(farm_id) {
+        let animal = await Animal.findAll({where:{status:"active",farm_id:farm_id}})
         return animal
 
     }
-    static async getAllFemaleAnimals() {
+    static async getAllFemaleAnimals(farm_id) {
         let animal = await Animal.findAll({where:{ gender: {
             [Op.like]: 'female%'
-          }}})
+          }},farm_id:farm_id})
         return animal
 
     }
-    static async getAllMaleAnimals() {
+    static async getAllMaleAnimals(farm_id) {
         let animal = await Animal.findAll({where:{ gender: {
             [Op.like]: 'male%'
-          }}})
+          }},farm_id:farm_id})
         return animal
 
     }
 
-    static async searchAnimals(sss){
+    static async searchAnimals(sss,farm_id){
         let data = await Animal.findAll({ where: {group_id: {
             // "$eq" changes to "[Op.eq]"
             [Op.eq]: null
-          },name: sss,status:"active" } })
+          },name: sss,status:"active",farm_id:farm_id} })
         return data
     }
 
-    static async countingAnimals(number){
-        let data = await Animal.count({ where: { group_id: number} })
+    static async countingAnimals(number,farm_id){
+        let data = await Animal.count({ where: { group_id: number,farm_id:farm_id} })
         return data
     }
 
     static async animalLikeGroup(){
-        let data = await Animal.findAll({where:{is_group:true},
+        let data = await Animal.findAll({where:{is_group:true,farm_id:farm_id},
         attributes: ['id','name','group_qty'],
         })
         return data 
     }
     //search animal
     static async searchAnimal(sss){
-        let data = await Animal.findAll({ where: {name: sss,status:"active" } })
+        let data = await Animal.findAll({ where: {group_id: {
+            // "$eq" changes to "[Op.eq]"
+            [Op.eq]: null
+          },name: sss} })
         return data
     }
 
