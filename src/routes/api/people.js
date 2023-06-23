@@ -6,5 +6,5 @@ const router = express.Router()
 
 router.post("/:farmId/create",checkAuthorisation,peopleController.signup)
 router.get("/:farmId/check/all",checkAuthorisation,peopleController.getAllPeople)
-
+router.get("/:farmId/:id",checkAuthorisation,peopleController.getOnePerson)
 export default router

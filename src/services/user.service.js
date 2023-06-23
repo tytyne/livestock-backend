@@ -78,6 +78,11 @@ export default class UserServices {
     return data
 
   }
+  static async gettingUser(id){
+    let data = await User.findAll({where:{id:id}})
+    return data
+
+  }
 
   static async updatePassword(hash, decoded) {
     const users = await User.update(
@@ -108,5 +113,6 @@ export default class UserServices {
         users = await User.findOne({ where: { email: value }});
 
       return users;
-    }
+  }
+
 }

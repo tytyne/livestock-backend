@@ -9,7 +9,7 @@ import { jwtToken } from "../utils/jwt.utils.js";
 const { hashPassword, decryptPassword } = helper;
 const { v4: uuidv4 } = require('uuid');
 
-const { createUser, getUserByIdOrEmail, updateUser ,gettingUsersPerFarm} = UserService;
+const { createUser, getUserByIdOrEmail, updateUser ,gettingUsersPerFarm,gettingUser} = UserService;
 const {
   signedup,
   accountVerified,
@@ -48,7 +48,6 @@ export default class PeopleControllers {
       formData.assignedTo = farmId;
       const textPassword = formData.password;
       formData.password = hashPassword(textPassword);
-      formData.role = "admin";
       formData.isVerified=true;
       const user = await createUser(formData);
       const token = jwtToken.createToken(user);
@@ -87,6 +86,21 @@ static async getAllPeople(req,res,next){
       return next(new Error(e));
     }
 }
+
+static async getOnePerson(req,res,next){
+  try{
+    const {farmId,id} = req.params
+    const data = await gettingUser(id);
+    return res.status(200).json({message:"all people",data})
+    
+  }
+  catch (e) {
+      return next(new Error(e));
+    }
+}
+
+
+
 
 }
 
