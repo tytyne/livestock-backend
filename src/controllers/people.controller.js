@@ -9,7 +9,7 @@ import { jwtToken } from "../utils/jwt.utils.js";
 const { hashPassword, decryptPassword } = helper;
 const { v4: uuidv4 } = require('uuid');
 
-const { createUser, getUserByIdOrEmail, updateUser } = UserService;
+const { createUser, getUserByIdOrEmail, updateUser ,gettingUsersPerFarm} = UserService;
 const {
   signedup,
   accountVerified,
@@ -74,4 +74,19 @@ export default class PeopleControllers {
       return next(new Error(e));
     }
   }
+
+//get all people
+static async getAllPeople(req,res,next){
+  try{
+    const {farmId} = req.params
+    const data = await gettingUsersPerFarm(farmId);
+    return res.status(200).json({message:"all people",data})
+    
+  }
+  catch (e) {
+      return next(new Error(e));
+    }
 }
+
+}
+

@@ -14,9 +14,9 @@ module.exports = {
       createdBy: {
         type: Sequelize.UUID
       },
-      assignedTo: {
-        type: Sequelize.UUID
-      },
+      // assignedTo: {
+      //   type: Sequelize.UUID
+      // },
       province: {
         type: Sequelize.STRING,
       },

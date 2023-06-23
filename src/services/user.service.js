@@ -73,22 +73,11 @@ export default class UserServices {
   }
 
 
+  static async gettingUsersPerFarm(farm_id){
+    let data = await User.findAll({where:{assignedTo:farm_id}})
+    return data
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  }
 
   static async updatePassword(hash, decoded) {
     const users = await User.update(

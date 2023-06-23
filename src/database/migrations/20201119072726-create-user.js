@@ -31,6 +31,9 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
+      assignedTo: {
+        type: Sequelize.UUID
+      },
       password: {
         type: Sequelize.STRING
       },

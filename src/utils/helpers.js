@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 
+
 const hashPassword = (password) => {
   const hash = bcrypt.hashSync(password, 15);
   return hash;
@@ -28,8 +29,11 @@ const oauthCallback = (refreshToken, accessToken, profile, cb) => {
   }
 };
 
+
+
 export default {
   hashPassword,
   decryptPassword,
   oauthCallback,
+ 
 };

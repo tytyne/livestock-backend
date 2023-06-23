@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     role:DataTypes.STRING,
     password:DataTypes.STRING,
     isVerified:DataTypes.BOOLEAN,
-    status:DataTypes.STRING
+    status:DataTypes.STRING,
+    assignedTo:DataTypes.UUID,
    
   
   }, { });
