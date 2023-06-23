@@ -3,6 +3,7 @@ import FarmerService from "../services/farmer.service"
 import FarmService from "../services/farm.service"
 import EventService from "../services/event.service";
 import AnimalService from "../services/animal.service"
+import { response } from "express";
 const{getFarmerById}=FarmerService
 const {getAnimalById}=AnimalService
 const {getFarmById,getAllFarms}=FarmService
@@ -47,22 +48,13 @@ const checkFarmerOwner= async (req,res,next)=>{
         
     };
 
-    const scopedFarmsOwner= async (req,res)=>{
+    const scopedFarmsOwner= async (req,res,next)=>{
         
         const farms =  await getAllFarms()
-        console.log("check user",req.user.id)
-        const data=farms.filter(farm => farm.createdBy === req.user.id)
-        const dataAssigned=farms.filter(farm => farm.id === req.user.assignedTo)
-        console.log("data assigned to ",dataAssigned)
-
+        const data=farms.filter(farm => farm.createdBy === req.user.id||farm.id===req.user.assignedTo)
         if(data){
-            return res.status(200).json({message:"all farms",data})
+           return res.status(200).json({message:"all farms",data})
         }  
-        // else 
-        // if(dataAssigned){
-        //     return res.status(200).json({message:"all farms",dataAssigned})
-        // }
-
           
     };
 
