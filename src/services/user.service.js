@@ -108,11 +108,20 @@ export default class UserServices {
   );
     return users
   }
+
   static async getUserByEmail(value) {
     let users;
         users = await User.findOne({ where: { email: value }});
 
       return users;
+  }
+
+
+  static async deletingUser(id) {
+    
+      let  user = await User.destroy({where: {id:id}});
+
+      return user;
   }
 
 }
