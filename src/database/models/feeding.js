@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     }
     
-  }, { });
+  }, { 
+    paranoid: true
+  });
   Feeding.associate = function(models) {
   // Feeding.belongsTo(models.Feed, {
   //   foreignKey: 'feedId',

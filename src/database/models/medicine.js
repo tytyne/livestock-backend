@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
 
  
   
-  }, { });
+  }, { 
+    paranoid: true
+  });
   // Medicine.associate = function(models) {
 
   // }

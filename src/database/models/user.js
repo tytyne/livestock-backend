@@ -16,7 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     assignedTo:DataTypes.UUID,
    
   
-  }, { });
+  }, { 
+    paranoid: true
+  });
  
   User.associate = function(models) {
     // associations can be defined here

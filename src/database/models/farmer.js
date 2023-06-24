@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     },
  
    
-  }, { });
+  }, { 
+    paranoid: true
+  });
   Farmer.associate = function(models) {
   Farmer.belongsTo(models.User, {
     foreignKey: 'createdBy',

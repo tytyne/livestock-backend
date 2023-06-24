@@ -23,7 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     complete: DataTypes.BOOLEAN,
 
    
-  }, { });
+  }, {
+    paranoid: true
+   });
   Event.associate = function(models) {
   // Event.belongsTo(models.User, {
   //   foreignKey: 'assigned_to_id',

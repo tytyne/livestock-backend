@@ -98,8 +98,3 @@ class EventService{
 }
 
 export default EventService
-
-
-// let farm = await Transaction.findAll({ 
-//     where: {farm_id:farm_id,type:'expense'},
-//     group: ['category','type'],

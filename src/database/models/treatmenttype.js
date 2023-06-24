@@ -7,7 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: false,
     updatedAt: false,
    
-  }, { });
+  }, { 
+    paranoid: true
+  });
  
   return TreatmentType;
 };

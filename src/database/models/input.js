@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     }
   
-  }, { });
+  }, { 
+    paranoid: true
+  });
 
   Input.associate = function(models) {
     Input.belongsTo(models.Animal, {

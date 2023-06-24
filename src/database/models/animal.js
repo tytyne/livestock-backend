@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
     // hierarchyLevel:DataTypes.INTEGER
   
   }, { 
-  
+    paranoid: true
   });
   Animal.associate = function(models) {
  

@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     cost:DataTypes.STRING,
     description:DataTypes.STRING
    
-  }, { });
+  }, { 
+    paranoid: true
+  });
   Breeding.associate = function(models) {
   Breeding.belongsTo(models.Animal, {
     foreignKey: 'animalId',

@@ -7,7 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     col_id:DataTypes.UUID,
     description:DataTypes.STRING,
   
-  }, { });
+  }, {
+    paranoid: true
+   });
  
   return Activity;
 };

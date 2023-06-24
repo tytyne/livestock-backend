@@ -18,7 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     customer:DataTypes.STRING,
    
    
-  }, { });
+  }, { 
+    paranoid: true
+  });
   Transaction.associate = function(models) {
 
     Transaction.belongsTo(models.User, {

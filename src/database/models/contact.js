@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     tin:DataTypes.STRING,
     description:DataTypes.STRING,
   
-  }, { });
+  }, {
+    paranoid: true
+   });
 
   Contact.associate = function(models) {
     Contact.belongsTo(models.Farm, {

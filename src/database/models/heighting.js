@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
 
     updatedAt: false,
    
-  }, { });
+  }, { 
+    paranoid: true
+  });
  
   return Heighting;
 };

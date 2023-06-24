@@ -224,12 +224,12 @@ class AnimalService {
         return data
     }
 
-    static async countingAnimals(number,farm_id){
-        let data = await Animal.count({ where: { group_id: number,farm_id:farm_id} })
+    static async countingAnimals(number){
+        let data = await Animal.count({ where: { group_id: number} })
         return data
     }
 
-    static async animalLikeGroup(){
+    static async animalLikeGroup(farm_id){
         let data = await Animal.findAll({where:{is_group:true,farm_id:farm_id},
         attributes: ['id','name','group_qty'],
         })

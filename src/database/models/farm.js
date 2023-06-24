@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     // createdBy: DataTypes.INTEGER,
    
-  }, { });
+  }, {
+    paranoid: true
+   });
   Farm.associate = function(models) {
     
   Farm.belongsTo(models.User, {

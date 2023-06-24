@@ -25,7 +25,9 @@ module.exports = (sequelize, DataTypes) => {
     }
    
    
-  }, { });
+  }, {
+    paranoid: true
+   });
   Treatment.associate = function(models) {
   
     Treatment.belongsTo(models.User, {

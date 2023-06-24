@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     
 
-  }, { });
+  }, { 
+    paranoid: true
+  });
   GroupAnimal.associate = function(models) {
       GroupAnimal.belongsTo(models.Farm, {
         foreignKey: 'farm_id',

@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     isVerified:DataTypes.BOOLEAN,
    
   
-  }, { });
+  }, { 
+    paranoid: true
+  });
   Admin.associate = function(models) {
   
     Admin.hasMany(models.User, {

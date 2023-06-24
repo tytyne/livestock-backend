@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     }
    
-  }, { });
+  }, { 
+    paranoid: true
+  });
   SickBay.associate = function(models) {
 
   // SickBay.belongsTo(models.Medicine, {

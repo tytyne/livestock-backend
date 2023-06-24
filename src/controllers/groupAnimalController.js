@@ -63,7 +63,7 @@ export default class GroupAnimalController {
     try {
 
       const {farmId} = req.params
-      const datat = await getAllGroupAnimals(req.user.id);
+      const datat = await getAllGroupAnimals(farmId);
       console.log("check dataaaa",datat)
       for (let index = 0; index < datat.length; index++) {
     
@@ -73,7 +73,7 @@ export default class GroupAnimalController {
           datat[index].group_qty = checking;
         
       }
-      const  animalGroup = await animalLikeGroup()
+      const  animalGroup = await animalLikeGroup(farmId)
       for (let index = 0; index < animalGroup.length; index++) {
         animalGroup[index] = animalGroup[index].toJSON();
         animalGroup[index].type =`set`
@@ -136,7 +136,7 @@ export default class GroupAnimalController {
     try{
       const {farmId} = req.params
       const {name} = req.query;
-      const data = await searchGroupAnimals(name);
+      const data = await searchGroupAnimals(name,farmId);
       console.log(data)
       return res.status(200).json({ message: "searched group animals",data});
     }

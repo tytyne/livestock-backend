@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     shortcode: DataTypes.STRING
  
   
-  }, { });
+  }, {
+    paranoid: true
+   });
  
   return AnimalCategory;
 };

@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     }
 
-  }, { });
+  }, {
+    paranoid: true
+   });
   Vaccinating.associate = function(models) {
   // Vaccinating.belongsTo(models.Vaccination, {
   //   foreignKey: 'vaccinationId',

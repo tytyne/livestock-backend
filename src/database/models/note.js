@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     },
    
    
-  }, { });
+  }, { 
+    paranoid: true
+  });
   Note.associate = function(models) {
   Note.belongsTo(models.Animal, {
     foreignKey: 'animalId',

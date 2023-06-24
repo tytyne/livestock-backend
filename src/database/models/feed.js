@@ -11,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
 
  
   
-  }, { });
+  }, { 
+    paranoid: true
+  });
   // Feed.associate = function(models) {
  
   // }

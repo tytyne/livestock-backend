@@ -7,7 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     temp:DataTypes.STRING,
     weight:DataTypes.STRING
 
-  }, { });
+  }, { 
+    paranoid: true
+  });
 
   Measurement.associate = function(models) {
     Measurement.belongsTo(models.Animal, {
