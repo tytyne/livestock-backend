@@ -2,7 +2,9 @@ import moment from "moment"
 import EventService from "../services/event.service"
 import UserService from "../services/user.service"
 const{getUserByIdOrEmail}=UserService
-const{createEvent,updateEventById,getAllEventsWithReference,deleteEventById,getEventById,searchEvents}=EventService
+const{createEvent,updateEventById,getAllEventsWithReference,deleteEventById,
+  getEventById,searchEvents,getAllEvents,
+  makeEventComplete,eventsByStatus,eventsByStatusWithRessource}=EventService
 const { v4: uuidv4 } = require('uuid');
 import ActivityService from "../services/activity.service";
 const{createActivity}=ActivityService
@@ -65,6 +67,7 @@ export default class EventController{
          formData.createdBy = req.user.id;
          const textStart=formData.start_time
          const textEnd = formData.end_time
+         formData.status ='ToDo',
          formData.start_time = moment(textStart).format("YYYY-MM-DD HH:mm:ss")
          formData.end_time = moment(textEnd).format("YYYY-MM-DD HH:mm:ss")
          if(formData.end_time==null){
@@ -79,7 +82,7 @@ export default class EventController{
          return next(new Error(e));
      }
     }
-    //get all events
+    //get all with ressource
     static async getEvents(req,res,next){
         try{
             const {resource_name,resource_id,farmId}= req.params
@@ -90,9 +93,24 @@ export default class EventController{
          return next(new Error(e));
      }
     }
+
+
+    //get all my events
+    static async getMyEvents(req,res,next){
+      try{
+          
+          const data = await getAllEvents()
+          return  res.status(200).json({message:"get all events",data})
+      }
+      catch (e) {
+        return next(new Error(e));
+    }
+  }
+
     //get event by Id
     static async getEvent(req,res,next){
         try{
+            const{farmId}=req.params
             const id=req.params.id
             const data = await getEventById(id)
             return  res.status(200).json({message:"get event by Id",data})
@@ -164,6 +182,19 @@ export default class EventController{
        return next(new Error(e));
    }
   }
+
+      //make event complete 
+
+      static async makingEventComplete(req,res,next){
+        try{
+            const id=req.params.id
+            const data= await makeEventComplete(id)
+            return  res.status(200).json({message:"event completed successfully!",data})
+        }
+        catch (e) {
+        return next(new Error(e));
+    }
+    }
     //delete event by Id
 
     static async deleteEvent(req,res,next){
@@ -176,10 +207,38 @@ export default class EventController{
          return next(new Error(e));
      }
     }
+     
+    
+    //make event complete 
+
+     static async makingEventCompleteWithRessource(req,res,next){
+      try{
+        const {resource_name,resource_id,farmId}= req.params
+          const id=req.params.id
+          const data= await makeEventComplete(id)
+          return  res.status(200).json({message:"event completed successfully!",data})
+      }
+      catch (e) {
+       return next(new Error(e));
+   }
+  }
+
+
+  static async GroupEventsWithRessource(req,res,next){
+    try{
+      const {resource_name,resource_id,farmId}= req.params
+       const  data= await eventsByStatusWithRessource(resource_id)
+        return  res.status(200).json({message:"events by group!",data})
+    }
+    catch (e) {
+     return next(new Error(e));
+ }
+}
 
     static async searchingEvent(req,res,next){
 
         try{
+          const{farmId}=req.params
           const {title} = req.query;
           const data = await searchEvents(title);
           return res.status(200).json({ message: "searched event",data});

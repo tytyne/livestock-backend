@@ -30,6 +30,7 @@ import Note from "./note"
 import Breeding from "./breeding"
 import Contact from "./contact"
 import People from "./people"
+import Agenda from "./agenda"
 
 
 const router = express.Router();
@@ -65,5 +66,7 @@ router.use("/notes",Note)
 router.use("/breeding",Breeding)
 router.use("/contact",Contact)
 router.use("/people",People)
+router.use("/agenda",Agenda)
+
 
 export default router;

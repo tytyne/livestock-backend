@@ -19,8 +19,8 @@ class EventService{
         let event= await Event.create(value)
         return event
     }
-    static async getAllEvents(userId){
-        let event = await Event.findAll({where:{userId:userId}})
+    static async getAllEvents(){
+        let event = await Event.findAll()
         return event
     }
 
@@ -66,6 +66,40 @@ class EventService{
         return data
     }
 
+    static async makeEventComplete(id) {
+        const event = await Event.update(
+          {status: 'complete' },
+          {
+            where: {id:id},
+            returning: true,
+            plain: true,
+          }
+        );
+        return event;
+    }
+
+    static async eventsByStatusWithRessource(animal_id){
+        let data = await Event.findAll({
+                    where:{reference_id:animal_id},
+                group: [,'status']
+            })
+        return data
+    }
+
+    static async eventsByStatus(){
+        let data = await Event.findAll({
+            group: ['id','status']
+          
+        })
+        return data
+    }
+
+
 }
 
 export default EventService
+
+
+// let farm = await Transaction.findAll({ 
+//     where: {farm_id:farm_id,type:'expense'},
+//     group: ['category','type'],
