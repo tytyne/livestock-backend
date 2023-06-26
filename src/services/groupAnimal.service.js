@@ -71,11 +71,11 @@ class GroupAnimalService{
 
     }
 
-    static async searchGroupAnimals(sss){
-        let animals = await Animal.findAll({where:{is_group:true,name: sss },
+    static async searchGroupAnimals(sss,farm_id){
+        let animals = await Animal.findAll({where:{is_group:true,name: sss,farm_id:farm_id },
             attributes: ['id','name','group_qty'],
             })
-        let group = await GroupAnimal.findAll({ where: { name: sss } })
+        let group = await GroupAnimal.findAll({ where: { name: sss,farm_id:farm_id } })
         let data = [...animals,...group]
         return data
     }

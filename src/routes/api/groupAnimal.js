@@ -11,6 +11,6 @@ router.get("/:farmId/:id",checkAuthorisation,groupAnimalController.getGroupAnima
 router.get("/:farmId/check/all",checkAuthorisation,groupAnimalController.getGroupAnimals)
 router.put("/:farmId/:id",checkAuthorisation,checkAnimalOwner,groupAnimalController.updateGroupAnimal)
 router.delete("/:farmId/:id",checkAuthorisation,checkAnimalOwner,groupAnimalController.deleteGroupAnimal)
-// router.put("/:farmId/:add_animal/:id",checkAuthorisation,groupAnimalController.EditGroupAnimal)
+router.put("/:farmId/:add_animal/:id",checkAuthorisation,groupAnimalController.EditGroupAnimal)
 
 export default router

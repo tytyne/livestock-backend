@@ -224,13 +224,21 @@ class AnimalService {
         return data
     }
 
-    static async countingAnimals(number){
-        let data = await Animal.count({ where: { group_id: number} })
+    static async countingAnimalsy(number,farm_id){
+        let data = await Animal.count({ where: { group_id: number,farm_id:farm_id} })
+        // console.log("chekkk dataaa",data)
+        let date = await Animal.findAll({ where: { group_id: number,farm_id:farm_id} })
+        console.log("chekkk dataaa",date)
         return data
     }
+    static async countingAnimals(group_id) {
+        let animal = await Animal.count({ where: {group_id:group_id } })
+        return animal
 
-    static async animalLikeGroup(farm_id){
-        let data = await Animal.findAll({where:{is_group:true,farm_id:farm_id},
+    }
+
+    static async animalLikeGroup(){
+        let data = await Animal.findAll({where:{is_group:true},
         attributes: ['id','name','group_qty'],
         })
         return data 

@@ -64,22 +64,23 @@ export default class GroupAnimalController {
 
       const {farmId} = req.params
       const datat = await getAllGroupAnimals(farmId);
-      console.log("check dataaaa",datat)
+      // console.log("check dataaaa",datat)
       for (let index = 0; index < datat.length; index++) {
     
         const checking = await countingAnimals(datat[index].id)
-        console.log("checkinggg",checking)
+        console.log("checkinggg",datat[index].id)
+        console.log("numberrr",checking)
         datat[index] = datat[index].toJSON();
           datat[index].group_qty = checking;
         
       }
-      const  animalGroup = await animalLikeGroup(farmId)
+      const  animalGroup = await animalLikeGroup()
       for (let index = 0; index < animalGroup.length; index++) {
         animalGroup[index] = animalGroup[index].toJSON();
         animalGroup[index].type =`set`
       }
 
-      console.log("animal grpup",animalGroup)
+      // console.log("animal grpup",animalGroup)
       const data = [...animalGroup,...datat]
 
 

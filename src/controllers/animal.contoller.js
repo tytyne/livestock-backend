@@ -170,7 +170,7 @@ export default class AnimalController {
   static async countingAnimals(req, res, next) {
   try {
     const {farmId}=req.params
-    const data = await countAnimals(farmId);
+    const data = await countAnimals();
     res.status(200).json({ message: "number of animals", data });
   } catch (e) {
     return next(new Error(e));
@@ -223,8 +223,8 @@ static async  EditGroupAnimal(req,res,next){
     console.log("check records",records)
     // console.log("check group ",add_group)
    
-    const koko = await addNewRecords(records.animalData,add_group)
-    console.log("check koko",koko)
+    const updatedAnimal = await addNewRecords(records.animalData,add_group)
+    console.log("check animalll",updatedAnimal)
     const data  = await updateAnimalByGroupId(id,add_group)
     return res.status(200).json({message:"animal updated!",data})
 
