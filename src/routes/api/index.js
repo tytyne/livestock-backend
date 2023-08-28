@@ -31,6 +31,8 @@ import Breeding from "./breeding"
 import Contact from "./contact"
 import People from "./people"
 import Agenda from "./agenda"
+import Inventory from "./inventory"
+import Warehouse from "./warehouse.js"
 
 
 const router = express.Router();
@@ -67,6 +69,8 @@ router.use("/breeding",Breeding)
 router.use("/contact",Contact)
 router.use("/people",People)
 router.use("/agenda",Agenda)
+router.use("/inventory",Inventory)
+router.use("/warehouse",Warehouse)
 
 
 export default router;

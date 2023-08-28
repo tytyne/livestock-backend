@@ -39,6 +39,18 @@ class CalculationHelper {
         return data
       
       }
+    
+    static async AddingToInventory(existingStock,newStock){
+      const remainingStock = existingStock+newStock
+      return remainingStock
+
+    }
+
+    static async RemoveToInventory(existingStock,removeStock){
+      const remainingStock = existingStock - removeStock
+      return remainingStock
+
+    }
       
 
 
