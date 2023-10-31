@@ -33,6 +33,11 @@ class InventoryService{
         return inventory
     }
 
+    static async searchInventory(sss,farmId){
+          //search inventory
+        let data = await Stocking.findAll({where:{name:sss,farm_id:farmId}})
+        return data
+    }
 
 }
 export default InventoryService

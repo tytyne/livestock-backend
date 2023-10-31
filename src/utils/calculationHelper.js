@@ -41,13 +41,18 @@ class CalculationHelper {
       }
     
     static async AddingToInventory(existingStock,newStock){
-      const remainingStock = existingStock+newStock
+      const remainingStock = parseFloat(existingStock +newStock)
       return remainingStock
 
     }
 
     static async RemoveToInventory(existingStock,removeStock){
-      const remainingStock = existingStock - removeStock
+      const remainingStock = parseFloat(existingStock - removeStock)
+      return remainingStock
+
+    }
+    static async ManualToInventory(existingStock,removeStock){
+      const remainingStock = parseFloat(existingStock - removeStock)
       return remainingStock
 
     }
